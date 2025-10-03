@@ -1,0 +1,33 @@
+/* recipick-base.css: 모든 HTML 페이지가 참조하는 공통 스타일 */
+
+/* Inter 폰트 정의 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* 색상 변수 및 레이아웃 조정 */
+:root {
+    /* recipick.html에서 사용된 핵심 색상 변수 */
+    --primary-color: #FF6347; /* 토마토 레드 */
+    --secondary-color: #FFEC99; /* Recipick 시그니처 파스텔 노랑 */
+}
+
+/* 모든 페이지의 기본 폰트와 배경 */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+}
+
+/* 페이지 콘텐츠 영역의 최소 높이 및 패딩을 통일 */
+.page-container {
+    min-height: 80vh; 
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* 네비게이션 링크의 기본 스타일 설정 */
+.nav-link {
+    transition: 0.15s;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
