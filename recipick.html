@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>레시피 공유 앱 와이어프레임</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <style>
+      /* 사용자 정의 스타일 */
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f8f8;
+      }
+      .page-content {
+        padding-top: 64px; /* 네비게이션 바 높이 고려 */
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'primary-color': '#FF6347' /* 토마토 레드 */,
+              'secondary-color': '#FFEC99' /* Recipick 시그니처 파스텔 노랑 */,
+            },
+          },
+        },
+      };
+
+      // 페이지 라우팅을 위한 간단한 스크립트
+      let currentPage = 'main';
+
+      const pages = {
+        main: renderMainPage,
+        detail: renderDetailPage,
+        submit: renderSubmitPage,
+        ranking: renderRankingPage,
+        mypage: renderMyPage,
+      };
+
+      /** 페이지를 렌더링하고 URL 해시를 업데이트합니다. */
+      function updatePage(pageName) {
+        currentPage = pageName;
+        const contentDiv = document.getElementById('app-content');
+        if (pages[pageName]) {
+          contentDiv.innerHTML = pages[pageName]();
+        } else {
+          contentDiv.innerHTML = `<div class="p-8 text-center text-gray-500">페이지를 찾을 수 없습니다.</div>`;
+        }
+        window.scrollTo(0, 0); // 페이지 상단으로 스크롤
+        // 네비게이션 활성화 상태 업데이트
+        document.querySelectorAll('.nav-link').forEach((link) => {
+          if (link.dataset.page === pageName) {
+            link.classList.add(
+              'text-primary-color',
+              'font-bold',
+              'border-b-2',
+              'border-primary-color'
+            );
+            link.classList.remove(
+              'text-gray-600',
+              'hover:text-primary-color/80'
+            );
+          } else {
+            link.classList.remove(
+              'text-primary-color',
+              'font-bold',
+              'border-b-2',
+              'border-primary-color'
+            );
+            link.classList.add('text-gray-600', 'hover:text-primary-color/80');
+          }
+        });
+      }
+
+      /**
+       * 1. 메인 페이지 (카테고리 중심) - AI 배너 및 기능 제거됨
+       */
+      function renderMainPage() {
+        const categories = [
+          {
+            name: '한식',
+            icon: 'rice-bowl',
+            color: 'bg-red-500',
+            img: 'https://placehold.co/600x400/FF6347/ffffff?text=KOREAN',
+          },
+          {
+            name: '양식',
+            icon: 'pizza-slice',
+            color: 'bg-blue-500',
+            img: 'https://placehold.co/600x400/4169E1/ffffff?text=WESTERN',
+          },
+          {
+            name: '중식',
+            icon: 'utensils',
+            color: 'bg-yellow-500',
+            img: 'https://placehold.co/600x400/FFD700/000000?text=CHINESE',
+          },
+          {
+            name: '디저트',
+            icon: 'ice-cream',
+            color: 'bg-pink-500',
+            img: 'https://placehold.co/600x400/FFB6C1/000000?text=DESSERT',
+          },
+          {
+            name: '음료',
+            icon: 'mug-hot',
+            color: 'bg-green-500',
+            img: 'https://placehold.co/600x400/3CB371/ffffff?text=DRINK',
+          },
+        ];
+
+        const categoryCards = categories
+          .map(
+            (cat) => `
+                <div class="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer" onclick="updatePage('detail')">
+                    <!-- 시각 포인트: 큰 음식 사진 -->
+                    <img src="${cat.img}" alt="${cat.name} 이미지" class="w-full h-48 object-cover transition duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                        <!-- 카테고리 버튼 -->
+                        <button class="${cat.color} text-white font-bold py-3 px-6 rounded-full text-lg shadow-xl hover:bg-opacity-90 transition duration-300">
+                            <i class="fas fa-${cat.icon} mr-2"></i> ${cat.name}
+                        </button>
+                    </div>
+                </div>
+            `
+          )
+          .join('');
+
+        return `
+                <div class="container mx-auto px-4 py-8">
+                    
+                    <!-- 새로운 슬로건 배너: '오늘 뭐 먹지?'를 상단에 간단히 배치 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl mb-8 text-center border-b-4 border-primary-color/50">
+                        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
+                            오늘 뭐 먹지? 🤔 <span class="text-primary-color">Recipick</span>에서 골라보세요!
+                        </h1>
+                    </div>
+
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-3">카테고리별 레시피 탐색</h2>
+                    
+                    <!-- 카테고리별 대표 카드 그리드 -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        ${categoryCards}
+                    </div>
+
+                    <div class="mt-12 text-center">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">인기 레시피</h3>
+                        <!-- 인기 레시피 썸네일 (메인 페이지에선 간단히) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                            ${Array(4)
+                              .fill(0)
+                              .map(
+                                (_, i) => `
+                                <div class="bg-white rounded-xl shadow-md p-3 hover:shadow-lg transition cursor-pointer" onclick="updatePage('detail')">
+                                    <img src="https://placehold.co/400x300/4682B4/ffffff?text=Recipe+${
+                                      i + 1
+                                    }" alt="레시피 썸네일 ${
+                                  i + 1
+                                }" class="w-full h-32 object-cover rounded-lg mb-2">
+                                    <p class="font-medium text-gray-800 truncate">달콤한 허니 버터 갈릭 쉬림프</p>
+                                    <div class="text-yellow-500 text-sm">★★★★☆ (4.5)</div>
+                                </div>
+                            `
+                              )
+                              .join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      /**
+       * 2. 레시피 상세 페이지
+       */
+      function renderDetailPage() {
+        const ratingStars = '★★★★★'; // 별점 표시
+        const ingredients = [
+          '새우 (중하) 200g',
+          '마늘 5톨',
+          '버터 50g',
+          '꿀 2스푼',
+          '파슬리 약간',
+          '올리브 오일 1스푼',
+        ];
+        const steps = [
+          '새우는 깨끗하게 씻어 물기를 제거하고, 마늘은 편으로 썰어 준비합니다.',
+          '프라이팬에 올리브 오일과 버터를 녹이고 편 마늘을 넣어 노릇하게 볶아줍니다.',
+          '새우를 넣고 중불에서 붉은색이 돌 때까지 볶아줍니다.',
+          '새우가 익으면 꿀 2스푼과 파슬리를 넣고 센 불에서 빠르게 섞어 마무리합니다.',
+          '따뜻한 접시에 담아 맛있게 즐깁니다.',
+        ];
+
+        return `
+                <div class="container mx-auto px-4 py-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-4 sm:p-8">
+                        <h1 class="text-4xl font-extrabold mb-4 text-gray-900">달콤한 허니 버터 갈릭 쉬림프</h1>
+                        
+                        <div class="flex items-center mb-6 border-b pb-4 text-gray-600">
+                            <span class="mr-3 text-lg font-semibold">작성자: 요리천사👼</span>
+                            <div class="text-secondary-color text-2xl mr-4">${ratingStars}</div>
+                            <span class="text-sm">(총 125명 참여)</span>
+                        </div>
+
+                        <!-- 시각 포인트: 큰 이미지 -->
+                        <img src="https://placehold.co/1200x600/FFB6C1/000000?text=Recipe+Detail+Image" alt="대표 이미지" class="w-full h-64 sm:h-96 object-cover rounded-xl mb-8 shadow-md">
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            
+                            <!-- 재료 리스트 -->
+                            <div class="lg:col-span-1 bg-gray-50 p-6 rounded-xl shadow-inner">
+                                <h2 class="text-2xl font-bold mb-4 text-primary-color border-b border-primary-color/50 pb-2"><i class="fas fa-carrot mr-2"></i> 재료 리스트</h2>
+                                <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                                    ${ingredients
+                                      .map((item) => `<li>${item}</li>`)
+                                      .join('')}
+                                </ul>
+                            </div>
+                            
+                            <!-- 조리 순서 -->
+                            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                                <h2 class="text-2xl font-bold mb-4 text-primary-color border-b border-primary-color/50 pb-2"><i class="fas fa-blender-phone mr-2"></i> 조리 순서</h2>
+                                <!-- 시각 포인트: 단계별 조리법 박스 -->
+                                <ol class="space-y-6">
+                                    ${steps
+                                      .map(
+                                        (step, index) => `
+                                        <li class="p-4 bg-yellow-50 rounded-lg shadow-sm hover:bg-yellow-100 transition duration-200">
+                                            <span class="inline-flex items-center justify-center w-8 h-8 mr-3 text-white ${
+                                              index % 2 === 0
+                                                ? 'bg-primary-color'
+                                                : 'bg-secondary-color/80'
+                                            } rounded-full text-lg font-bold">${
+                                          index + 1
+                                        }</span>
+                                            <span class="text-gray-800 text-lg">${step}</span>
+                                        </li>
+                                    `
+                                      )
+                                      .join('')}
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- 후기/댓글 영역 (단순 레이아웃) -->
+                        <div class="mt-12 pt-8 border-t border-gray-200">
+                            <h2 class="text-2xl font-bold mb-6 text-gray-800">후기 및 댓글 (34)</h2>
+                            <div class="space-y-4">
+                                <!-- 댓글 폼 -->
+                                <div class="bg-gray-100 p-4 rounded-xl shadow-inner">
+                                    <textarea class="w-full p-3 rounded-lg border focus:border-primary-color resize-none" rows="3" placeholder="나만의 소중한 후기를 남겨주세요..."></textarea>
+                                    <div class="text-right mt-2">
+                                        <button class="bg-primary-color text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-color/90 transition">댓글 등록</button>
+                                    </div>
+                                </div>
+                                <!-- 댓글 목록 예시 -->
+                                <div class="flex space-x-4">
+                                    <img src="https://placehold.co/40x40/4682B4/ffffff?text=U1" class="w-10 h-10 rounded-full object-cover self-start">
+                                    <div class="flex-1 bg-white p-3 rounded-lg shadow-sm">
+                                        <p class="font-semibold text-gray-800">미식가김씨 <span class="text-sm text-gray-500 font-normal ml-2">2024.10.02</span></p>
+                                        <p class="text-gray-700 mt-1">이 레시피 덕분에 근사한 저녁 식사를 했어요! 꿀팁 감사합니다! 👍</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      /**
+       * 3. 레시피 등록 페이지
+       */
+      function renderSubmitPage() {
+        return `
+                <div class="container mx-auto px-4 py-8 max-w-3xl">
+                    <h1 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">나만의 레시피 등록하기 📝</h1>
+                    
+                    <!-- 시각 포인트: 깔끔한 폼 디자인 -->
+                    <form class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl space-y-6">
+                        
+                        <!-- 레시피 제목 -->
+                        <div>
+                            <label for="recipe-title" class="block text-xl font-semibold mb-2 text-gray-700">레시피 제목</label>
+                            <input type="text" id="recipe-title" placeholder="예: 초간단 5분 김치볶음밥" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color focus:border-primary-color transition" required>
+                        </div>
+
+                        <!-- 대표 이미지 업로드 -->
+                        <div>
+                            <label class="block text-xl font-semibold mb-2 text-gray-700">대표 이미지</label>
+                            <div class="w-full h-48 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center bg-gray-50 hover:bg-gray-100 transition cursor-pointer">
+                                <button type="button" class="text-primary-color font-medium py-2 px-4 rounded-lg border border-primary-color hover:bg-primary-color hover:text-white transition">
+                                    <i class="fas fa-cloud-upload-alt mr-2"></i> 이미지 업로드 (버튼 모양만)
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 재료 입력칸 -->
+                        <div>
+                            <label for="ingredients" class="block text-xl font-semibold mb-2 text-gray-700">재료 리스트 (줄바꿈으로 구분)</label>
+                            <textarea id="ingredients" rows="6" placeholder="예시)&#10;돼지고기 200g&#10;김치 1/4 포기&#10;밥 1공기" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color focus:border-primary-color resize-none" required></textarea>
+                        </div>
+                        
+                        <!-- 조리 순서 입력칸 -->
+                        <div>
+                            <label for="steps" class="block text-xl font-semibold mb-2 text-gray-700">조리 순서 (단계별 줄바꿈으로 구분)</label>
+                            <textarea id="steps" rows="8" placeholder="예시)&#10;1. 팬에 식용유를 두르고 돼지고기를 볶습니다.&#10;2. 김치를 넣고 2분간 더 볶습니다.&#10;3. 밥과 양념을 넣고 잘 섞어줍니다." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color focus:border-primary-color resize-none" required></textarea>
+                        </div>
+
+                        <!-- "등록하기" 버튼 -->
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-primary-color text-white text-xl font-bold py-4 rounded-xl shadow-lg hover:bg-primary-color/90 transition duration-300 transform hover:scale-[1.01]">
+                                레시피 등록하기
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+      }
+
+      /**
+       * 4. 레시피 랭킹 페이지
+       */
+      function renderRankingPage() {
+        const topRecipes = [
+          {
+            rank: 1,
+            title: '초간단 5분 김치볶음밥',
+            author: '요리뚝딱이',
+            score: '35.4K 좋아요',
+            color: 'bg-secondary-color',
+            icon: 'trophy',
+          },
+          {
+            rank: 2,
+            title: '겉바속촉 에어프라이어 통삼겹',
+            author: '고기사랑',
+            score: '28.1K 좋아요',
+            color: 'bg-gray-400',
+            icon: 'medal',
+          },
+          {
+            rank: 3,
+            title: '달콤한 허니 버터 갈릭 쉬림프',
+            author: '요리천사👼',
+            score: '19.5K 좋아요',
+            color: 'bg-yellow-800',
+            icon: 'medal',
+          },
+          {
+            rank: 4,
+            title: '매콤 칼칼 순두부찌개 황금 레시피',
+            author: '집밥의여왕',
+            score: '15.2K 좋아요',
+            color: 'bg-gray-100',
+          },
+          {
+            rank: 5,
+            title: '10분 완성! 뚝배기 계란찜',
+            author: '간단한식',
+            score: '13.9K 좋아요',
+            color: 'bg-gray-100',
+          },
+          {
+            rank: 6,
+            title: '오븐 없이 만드는 초코 브라우니',
+            author: '디저트홀릭',
+            score: '10.1K 좋아요',
+            color: 'bg-gray-100',
+          },
+          {
+            rank: 7,
+            title: '단짠단짠 마약 옥수수 레시피',
+            author: '간식연구소',
+            score: '9.8K 좋아요',
+            color: 'bg-gray-100',
+          },
+          {
+            rank: 8,
+            title: '겨울 필수! 얼그레이 밀크티',
+            author: '카페인중독',
+            score: '8.5K 좋아요',
+            color: 'bg-gray-100',
+          },
+          {
+            rank: 9,
+            title: '프랑스식 양파 수프 정석',
+            author: '미식가김씨',
+            score: '7.3K 좋아요',
+            color: 'bg-gray-100',
+          },
+          {
+            rank: 10,
+            title: '아보카도 명란 비빔밥',
+            author: '건강식단',
+            score: '6.9K 좋아요',
+            color: 'bg-gray-100',
+          },
+        ];
+
+        const rankingList = topRecipes
+          .map(
+            (recipe) => `
+                <div class="flex items-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 cursor-pointer border-l-4 ${
+                  recipe.rank <= 3 ? 'border-primary-color' : 'border-gray-200'
+                }" onclick="updatePage('detail')">
+                    
+                    <!-- 랭킹 번호/아이콘 -->
+                    <div class="w-12 h-12 flex flex-col items-center justify-center rounded-lg font-extrabold text-xl mr-4 ${
+                      recipe.color === 'bg-gray-100'
+                        ? 'text-gray-700 bg-gray-100'
+                        : 'text-gray-900 ' + recipe.color
+                    }">
+                        ${
+                          recipe.icon
+                            ? `<i class="fas fa-${recipe.icon} text-3xl"></i>`
+                            : `<span class="text-3xl">${recipe.rank}</span>`
+                        }
+                    </div>
+
+                    <!-- 레시피 정보 -->
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xl font-bold text-gray-900 truncate">${
+                          recipe.title
+                        }</p>
+                        <p class="text-sm text-gray-500">작성자: ${
+                          recipe.author
+                        }</p>
+                    </div>
+
+                    <!-- 점수/좋아요 수 -->
+                    <div class="text-right ml-4 flex items-center">
+                        <i class="fas fa-heart text-red-500 mr-2 text-xl"></i> 
+                        <p class="text-xl font-extrabold text-primary-color">${
+                          recipe.score
+                        }</p>
+                    </div>
+                </div>
+            `
+          )
+          .join('');
+
+        return `
+                <div class="container mx-auto px-4 py-8 max-w-4xl">
+                    <h1 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2 flex items-center">
+                        <i class="fas fa-trophy mr-2 text-primary-color"></i> 레시피 랭킹 ✨ (인기 TOP 10)
+                    </h1>
+                    
+                    <div class="space-y-4">
+                        ${rankingList}
+                    </div>
+
+                    <div class="mt-8 text-center text-gray-500 text-sm">
+                        * 이 랭킹은 좋아요, 조회수 등을 종합하여 매일 업데이트됩니다. (Mock Data)
+                    </div>
+                </div>
+            `;
+      }
+
+      /**
+       * 5. 마이페이지
+       */
+      function renderMyPage() {
+        const registeredRecipes = [
+          {
+            title: '매콤 돼지갈비찜',
+            img: 'https://placehold.co/300x200/4682B4/ffffff?text=Recipe+A',
+          },
+          {
+            title: '바삭 감자전',
+            img: 'https://placehold.co/300x200/20B2AA/ffffff?text=Recipe+B',
+          },
+          {
+            title: '토마토 카프레제',
+            img: 'https://placehold.co/300x200/FF6347/ffffff?text=Recipe+C',
+          },
+          {
+            title: '간단 닭가슴살 샐러드',
+            img: 'https://placehold.co/300x200/9ACD32/000000?text=Recipe+D',
+          },
+        ];
+
+        const recipeThumbnails = registeredRecipes
+          .map(
+            (recipe) => `
+                <!-- 레시피 썸네일 카드 -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition cursor-pointer overflow-hidden group" onclick="updatePage('detail')">
+                    <img src="${recipe.img}" alt="${recipe.title} 썸네일" class="w-full h-32 object-cover transition duration-300 group-hover:scale-105">
+                    <p class="p-3 font-semibold text-gray-800 text-center truncate">${recipe.title}</p>
+                </div>
+            `
+          )
+          .join('');
+
+        return `
+                <div class="container mx-auto px-4 py-8 max-w-4xl">
+                    <h1 class="text-3xl font-bold mb-8 text-gray-800 border-b pb-2">마이페이지 👋</h1>
+
+                    <!-- 시각 포인트: 프로필 카드 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-2xl mb-10 flex flex-col sm:flex-row items-center space-y-6 sm:space-y-0 sm:space-x-8">
+                        
+                        <!-- 프로필 사진 + 닉네임 -->
+                        <div class="text-center">
+                            <img src="https://placehold.co/120x120/FFD700/000000?text=My+Pic" alt="프로필 사진" class="w-32 h-32 rounded-full object-cover mx-auto border-4 border-primary-color shadow-md">
+                            <p class="text-2xl font-bold mt-3 text-gray-900">요리마스터chef</p>
+                        </div>
+
+                        <!-- 본인 소개 글 + 팔로잉/팔로워 수 -->
+                        <div class="flex-1 text-center sm:text-left">
+                            <p class="text-lg font-medium text-gray-700 mb-4 border-b pb-2">나를 소개합니다</p>
+                            <p class="text-gray-600 mb-6 italic">"건강하고 맛있는 요리로 모두가 행복한 세상을 꿈꿉니다. 레시피는 정성! 잘 부탁드려요! :)"</p>
+                            
+                            <div class="flex justify-center sm:justify-start space-x-8 text-center">
+                                <div>
+                                    <p class="text-3xl font-extrabold text-primary-color">150</p>
+                                    <p class="text-sm font-semibold text-gray-500">팔로잉</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-extrabold text-primary-color">4.2K</p>
+                                    <p class="text-sm font-semibold text-gray-500">팔로워</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 버튼 -->
+                        <div class="flex flex-col space-y-3 w-full sm:w-auto">
+                            <button class="bg-secondary-color text-gray-900 font-semibold py-2 px-6 rounded-lg hover:bg-secondary-color/80 transition shadow">
+                                <i class="fas fa-user-edit mr-2"></i> 프로필 수정
+                            </button>
+                            <button class="bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg hover:bg-gray-300 transition shadow">
+                                <i class="fas fa-sign-out-alt mr-2"></i> 로그아웃
+                            </button>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">📝 내가 등록한 레시피 (총 4개)</h2>
+                    
+                    <!-- 레시피 썸네일 그리드 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        ${recipeThumbnails}
+                    </div>
+                </div>
+            `;
+      }
+
+      // 초기 로딩 시 페이지 렌더링
+      window.onload = function () {
+        updatePage('main');
+      };
+    </script>
+  </head>
+  <body>
+    <!-- 상단 네비게이션 바 (고정) -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- 로고/홈 (요청하신 이미지 디자인을 SVG로 구현) -->
+          <div class="flex-shrink-0">
+            <button onclick="updatePage('main')" class="p-1 -ml-1">
+              <!-- Recipick 로고 (SVG 이미지) -->
+              <svg
+                viewBox="0 0 160 35"
+                width="140"
+                height="28"
+                class="inline-block align-middle"
+              >
+                <!-- Rounded Rectangle Background (Pastel Yellow) -->
+                <rect
+                  x="0"
+                  y="0"
+                  rx="6"
+                  ry="6"
+                  width="135"
+                  height="30"
+                  fill="#FFEC99"
+                  style="filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15))"
+                />
+
+                <!-- Icon Group: Chef Hat and Whisk/Spatula (Outline Red) -->
+                <g
+                  transform="translate(10, 5) scale(0.35)"
+                  fill="none"
+                  stroke="#FF6347"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <!-- Chef Hat -->
+                  <path
+                    d="M50 8 C 70 8, 70 25, 90 25 L 90 70 L 10 70 L 10 25 C 30 25, 30 8, 50 8 Z M 20 70 L 80 70"
+                  />
+                  <!-- Whisk -->
+                  <path
+                    d="M105 35 L 125 55 M 105 40 L 125 60 M 110 45 L 125 65"
+                  />
+                </g>
+
+                <!-- Text: recipick (Orange/Red) -->
+                <text
+                  x="35"
+                  y="24"
+                  font-family="Inter, sans-serif"
+                  font-weight="900"
+                  font-size="20"
+                  fill="#FF6347"
+                  transform="scale(1.1)"
+                >
+                  recipick
+                </text>
+
+                <!-- Checkmark (from image) -->
+                <circle cx="125" cy="18" r="4" fill="#FF6347" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- 메뉴 링크 -->
+          <div class="flex space-x-4 sm:space-x-8 text-base">
+            <button
+              data-page="main"
+              class="nav-link text-gray-600 hover:text-primary-color/80 transition duration-150 py-1"
+              onclick="updatePage('main')"
+            >
+              홈
+            </button>
+            <button
+              data-page="detail"
+              class="nav-link text-gray-600 hover:text-primary-color/80 transition duration-150 py-1"
+              onclick="updatePage('detail')"
+            >
+              레시피
+            </button>
+            <button
+              data-page="submit"
+              class="nav-link text-gray-600 hover:text-primary-color/80 transition duration-150 py-1"
+              onclick="updatePage('submit')"
+            >
+              등록
+            </button>
+            <!-- '커뮤니티'를 '랭킹'으로 변경 -->
+            <button
+              data-page="ranking"
+              class="nav-link text-gray-600 hover:text-primary-color/80 transition duration-150 py-1"
+              onclick="updatePage('ranking')"
+            >
+              랭킹
+            </button>
+            <button
+              data-page="mypage"
+              class="nav-link text-gray-600 hover:text-primary-color/80 transition duration-150 py-1"
+              onclick="updatePage('mypage')"
+            >
+              마이페이지
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 페이지 콘텐츠 영역 -->
+    <main id="app-content" class="page-content min-h-screen">
+      <!-- JS에 의해 여기에 페이지 내용이 로드됩니다. -->
+    </main>
+
+    <!-- 간단한 푸터 -->
+    <footer class="bg-gray-800 text-white p-4 mt-12">
+      <div class="container mx-auto text-center text-sm">
+        &copy; 2024 Recipick Wireframe. All rights reserved. (Mock UI)
+      </div>
+    </footer>
+  </body>
+</html>
