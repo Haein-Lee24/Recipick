@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipick - 레시피 등록</title>
+
+  <!-- Tailwind & 팀 공통 CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="recipick-base.css">
+</head>
+<body class="bg-gray-50">
+
+  <!-- 상단 네비게이션 -->
+  <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex-shrink-0">
+          <a href="11_인공띠용지능_main.html" class="p-1 -ml-1">
+            <svg viewBox="0 0 160 35" width="140" height="28" class="inline-block align-middle">
+              <rect x="0" y="0" rx="6" ry="6" width="135" height="30" fill="var(--secondary-color)" style="filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));" />
+              <g transform="translate(10, 5) scale(0.35)" fill="none" stroke="var(--primary-color)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M50 8 C 70 8, 70 25, 90 25 L 90 70 L 10 70 L 10 25 C 30 25, 30 8, 50 8 Z M 20 70 L 80 70"/>
+                <path d="M105 35 L 125 55 M 105 40 L 125 60 M 110 45 L 125 65" />
+              </g>
+              <text x="35" y="24" font-family="Inter, sans-serif" font-weight="900" font-size="20" fill="var(--primary-color)" transform="scale(1.1)">recipick</text>
+              <circle cx="125" cy="18" r="4" fill="var(--primary-color)" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="flex space-x-4 sm:space-x-8 text-base">
+          <a href="11_인공띠용지능_main.html" class="nav-link text-gray-600 hover:text-[var(--primary-color)]/80 py-1">홈</a>
+          <a href="11_인공띠용지능_list.html" class="nav-link text-gray-600 hover:text-[var(--primary-color)]/80 py-1">레시피</a>
+          <a href="11_인공띠용지능_register.html" class="nav-link text-[var(--primary-color)] font-bold border-b-2 border-[var(--primary-color)] py-1">등록</a>
+          <a href="11_인공띠용지능_mypage.html" class="nav-link text-gray-600 hover:text-[var(--primary-color)]/80 py-1">마이페이지</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 본문 -->
+  <main class="min-h-screen pt-8">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl border-b-4 border-[var(--primary-color)]/50 mb-8 text-center">
+        <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
+          🍳 나만의 레시피 등록하기
+        </h1>
+        <p class="text-gray-500 mt-2 text-sm">입력 후 등록 버튼을 눌러주세요.</p>
+      </div>
+
+      <!-- 실제 제출 기능 있음 -->
+      <form action="11_인공띠용지능_submit.html" method="post" enctype="multipart/form-data"
+            class="bg-white p-6 sm:p-8 rounded-2xl shadow-md space-y-6">
+        <!-- 레시피 제목 -->
+        <div>
+          <label for="title" class="block font-semibold mb-2">레시피 제목</label>
+          <input id="title" name="title" type="text" required
+                 placeholder="예: 부드러운 크림 파스타"
+                 class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30"/>
+        </div>
+
+        <!-- 이미지 업로드 -->
+        <div>
+          <label for="image" class="block font-semibold mb-2">대표 이미지 업로드</label>
+          <input id="image" name="image" type="file" accept="image/*" required
+                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 focus:outline-none"/>
+        </div>
+
+        <!-- 재료 -->
+        <div>
+          <label for="ingredients" class="block font-semibold mb-2">재료</label>
+          <textarea id="ingredients" name="ingredients" rows="4" required
+                    placeholder="예: 스파게티면 200g, 생크림 1컵, 베이컨 3줄..."
+                    class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30"></textarea>
+        </div>
+
+        <!-- 조리 순서 -->
+        <div>
+          <label for="steps" class="block font-semibold mb-2">조리 순서</label>
+          <textarea id="steps" name="steps" rows="6" required
+                    placeholder="1) 면을 삶는다.&#10;2) 베이컨과 마늘을 볶는다.&#10;3) 생크림을 넣고 졸인다."
+                    class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30"></textarea>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <div class="text-center pt-4">
+          <button type="submit"
+                  class="bg-[var(--primary-color)] text-white font-bold px-8 py-3 rounded-xl shadow-lg hover:bg-opacity-90 transition">
+            등록하기
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="bg-gray-800 text-white p-4 mt-12">
+    <div class="container mx-auto text-center text-sm">
+      &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
+    </div>
+  </footer>
+
+</body>
+</html>
