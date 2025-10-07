@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipick - 레시피 목록</title>
+
+  <!-- Tailwind & 공통 CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="Recipick_style.css">
+  <style>
+    html{scroll-behavior:smooth;}
+    .card-title small{display:inline-block;margin-left:.5rem;color:#6b7280;font-weight:500;}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- 상단 네비 -->
+  <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <a href="11_인공띠용지능_main.html" class="flex items-center space-x-2">
+            <img src="Recipick_logo.png" alt="Recipick 로고" class="h-10 w-auto rounded-md">
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="11_인공띠용지능_main.html" class="text-gray-700 hover:text-[var(--primary-color)]">홈</a>
+          <a href="11_인공띠용지능_menulist.html#korean" class="font-semibold text-[var(--primary-color)]">레시피</a>
+          <a href="11_인공띠용지능_register.html" class="text-gray-700 hover:text-[var(--primary-color)]">등록</a>
+          <a href="11_인공띠용지능_rank.html#ranking" class="text-gray-700 hover:text-[var(--primary-color)]">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="text-gray-700 hover:text-[var(--primary-color)]">마이페이지</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 상단 카테고리 탭(해시 링크) -->
+  <header class="bg-white border-b">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex gap-2 flex-wrap">
+        <a href="#korean"  class="px-4 py-2 rounded-full bg-red-100 text-red-700 text-sm font-semibold">한식</a>
+        <a href="#western" class="px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold">양식</a>
+        <a href="#chinese" class="px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-sm font-semibold">중식</a>
+        <a href="#dessert" class="px-4 py-2 rounded-full bg-pink-100 text-pink-700 text-sm font-semibold">디저트</a>
+        <a href="#drink"   class="px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">음료</a>
+      </div>
+    </div>
+  </header>
+
+  <span id="top"></span>
+
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ===================== 한식 ===================== -->
+    <section id="korean" class="mb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">한식 레시피 <span class="text-sm text-gray-500">(총 200개)</span></h2>
+        <div class="flex items-center gap-3"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title font-semibold text-gray-800">KIMCHI JJIGAE <small>(김치찌개)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 집밥여왕 · 조회수: 10.5K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.8)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BIBIMBAP <small>(비빔밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 건강식단 · 조회수: 8.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BULGOGI <small>(불고기)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 요리연습 · 조회수: 15.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.9)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">JAPCHAE <small>(잡채)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 한식연구소 · 조회수: 6.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">TTEOKBOKKI <small>(떡볶이)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 분식천재 · 조회수: 21.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">SUNDUBU JJIGAE <small>(순두부찌개)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 따끈국물 · 조회수: 5.7K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">DOENJANG JJIGAE <small>(된장찌개)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 시골밥상 · 조회수: 12.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">KIMBAP <small>(김밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 도시락장인 · 조회수: 9.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">GAMJATANG <small>(감자탕)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 국물요정 · 조회수: 4.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.1)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">SAMGYEOPSAL <small>(삼겹살)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 고기장인 · 조회수: 18.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.9)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">GALBIJJIM <small>(갈비찜)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 명절요리 · 조회수: 7.7K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.8)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">HAEMUL PAJEON <small>(해물파전)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 전굽는날 · 조회수: 6.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">NAENGMYEON <small>(냉면)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 시원한집 · 조회수: 11.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">KIMCHI FRIED RICE <small>(김치볶음밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 한그릇 · 조회수: 22.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">DAKGALBI <small>(닭갈비)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 춘천맛집 · 조회수: 9.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <!-- 16번째 카드: 메뉴 더보기 -->
+        <a href="11_인공띠용지능_list_korean.html#top" class="flex items-center justify-center bg-white rounded-xl border-2 border-dashed border-gray-300 hover:border-[var(--primary-color)] hover:shadow-lg transition overflow-hidden min-h-[184px]">
+          <div class="text-center">
+          <div class="text-2xl font-extrabold text-[var(--primary-color)]">메뉴 더보기</div>
+          <div class="mt-1 text-xs text-gray-500">한식 레시피 전체 보기</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== 양식 ===================== -->
+    <section id="western" class="mb-12">
+      <div class="flex items-end justify-between mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">양식 레시피<span class="text-sm text-gray-500">(총 160개)</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CLASSIC CARBONARA <small>(정통 까르보나라)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 파스타장인 · 조회수: 12.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.9)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">GARLIC SHRIMP PASTA <small>(갈릭 쉬림프 파스타)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 쉬운요리 · 조회수: 9.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MARGHERITA PIZZA <small>(마르게리타 피자)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 화덕의정석 · 조회수: 14.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.8)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BOLOGNESE <small>(볼로네제 파스타)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 미트소스러버 · 조회수: 8.7K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">ALFREDO <small>(알프레도 크림파스타)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 크리미 · 조회수: 7.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">STEAK <small>(스테이크)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 미디움레어 · 조회수: 16.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.8)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">LASAGNA <small>(라자냐)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 오븐요리 · 조회수: 6.5K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">RISOTTO <small>(버섯 리소토)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 이탈리안홈 · 조회수: 5.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">GREEK SALAD <small>(그릭 샐러드)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 샐러디스트 · 조회수: 7.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">FISH & CHIPS <small>(피시앤칩스)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 브리티시홈 · 조회수: 4.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.1)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BURGER <small>(수제 버거)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 그릴마스터 · 조회수: 13.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CLAM CHOWDER <small>(클램 차우더)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 보스턴가정식 · 조회수: 3.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">PENNE ARRABBIATA <small>(펜네 아라비아따)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 매콤한파스타 · 조회수: 7.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CHICKEN PARMIGIANA <small>(치킨 파르미지아나)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 오븐마스터 · 조회수: 10.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('pasta.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">SHRIMP SCAMPI <small>(쉬림프 스캄피)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 씨푸드러버 · 조회수: 8.6K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_list_western.html#top" class="flex items-center justify-center bg-white rounded-xl border-2 border-dashed border-gray-300 hover:border-[var(--primary-color)] hover:shadow-lg transition overflow-hidden min-h-[184px]">
+          <div class="text-center">
+          <div class="text-2xl font-extrabold text-[var(--primary-color)]">메뉴 더보기</div>
+          <div class="mt-1 text-xs text-gray-500">양식 레시피 전체 보기</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== 중식 ===================== -->
+    <section id="chinese" class="mb-12">
+      <div class="flex items-end justify-between mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">중식 레시피 <span class="text-sm text-gray-500">(총 150개)</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MAPO TOFU <small>(마파두부)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 사천요리 · 조회수: 9.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">KUNG PAO CHICKEN <small>(궁보계정)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 웍마스터 · 조회수: 8.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">SWEET & SOUR PORK <small>(탕수육)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 중식의달인 · 조회수: 20.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">YANGZHOU FRIED RICE <small>(양주 볶음밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 웍불맛 · 조회수: 11.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CHOW MEIN <small>(차우면)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 면요리연구소 · 조회수: 6.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">DAN DAN NOODLES <small>(탄탄면)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 사천미식 · 조회수: 5.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">HOT & SOUR SOUP <small>(산라탕)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 국물장인 · 조회수: 4.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.1)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">XIAOLONGBAO <small>(샤오롱바오)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 상하이키친 · 조회수: 7.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">PEKING DUCK <small>(베이징 덕)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 북경요리 · 조회수: 3.6K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">EGGPLANT WITH GARLIC SAUCE <small>(어향가지)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 가지요리 · 조회수: 5.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">WONTON SOUP <small>(운툰탕)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 담백중식 · 조회수: 4.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MA LA XIANG GUO <small>(마라샹궈)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 마라의정석 · 조회수: 10.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BEEF & BROCCOLI <small>(소고기 브로콜리 볶음)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 웍장인 · 조회수: 7.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">EGG FRIED RICE <small>(계란볶음밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 간단중식 · 조회수: 12.5K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('chinese.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">JJAJANGMYEON <small>(짜장면)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 면달인 · 조회수: 15.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_list_chinese.html#top" class="flex items-center justify-center bg-white rounded-xl border-2 border-dashed border-gray-300 hover:border-[var(--primary-color)] hover:shadow-lg transition overflow-hidden min-h-[184px]">
+          <div class="text-center">
+          <div class="text-2xl font-extrabold text-[var(--primary-color)]">메뉴 더보기</div>
+          <div class="mt-1 text-xs text-gray-500">중식 레시피 전체 보기</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== 디저트 ===================== -->
+    <section id="dessert" class="mb-12">
+      <div class="flex items-end justify-between mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">디저트 레시피 <span class="text-sm text-gray-500">(총 90개)</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BLONDIE <small>(블론디)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 베이킹러버 · 조회수: 5.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CHOCOLATE BROWNIE <small>(초코 브라우니)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 초코중독 · 조회수: 18.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.8)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CHEESECAKE <small>(치즈케이크)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 뉴욕베이커리 · 조회수: 9.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">TIRAMISU <small>(티라미수)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 디저트소믈리에 · 조회수: 7.6K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MACARON <small>(마카롱)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 프렌치디저트 · 조회수: 12.7K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">APPLE PIE <small>(애플파이)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 홈베이킹 · 조회수: 6.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">LEMON TART <small>(레몬 타르트)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 시트러스러버 · 조회수: 4.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">PANNA COTTA <small>(판나코타)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 이탈리안디저트 · 조회수: 3.5K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.1)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CRÈME BRÛLÉE <small>(크렘 브륄레)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 파리지앵 · 조회수: 5.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CHOCOLATE CHIP COOKIES <small>(초코칩 쿠키)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 쿠키하우스 · 조회수: 19.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.8)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BANANA BREAD <small>(바나나 브레드)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 구움과자 · 조회수: 8.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">DONUT <small>(도넛)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 글레이즈 · 조회수: 13.5K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BLUEBERRY MUFFIN <small>(블루베리 머핀)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 모닝베이커리 · 조회수: 11.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MATCHA ROLL CAKE <small>(말차 롤케이크)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 그린디저트 · 조회수: 6.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('snack.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">RED VELVET CUPCAKE <small>(레드벨벳 컵케이크)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 스윗스토리 · 조회수: 9.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_list_dessert.html#top" class="flex items-center justify-center bg-white rounded-xl border-2 border-dashed border-gray-300 hover:border-[var(--primary-color)] hover:shadow-lg transition overflow-hidden min-h-[184px]">
+          <div class="text-center">
+          <div class="text-2xl font-extrabold text-[var(--primary-color)]">메뉴 더보기</div>
+          <div class="mt-1 text-xs text-gray-500">디저트 레시피 전체 보기</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== 음료 ===================== -->
+    <section id="drink" class="mb-12">
+      <div class="flex items-end justify-between mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">음료 레시피 <span class="text-sm text-gray-500">(총 45개)</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">STRAWBERRY ADE <small>(딸기 에이드)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 홈카페 · 조회수: 3.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">ICED AMERICANO <small>(아이스 아메리카노)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 카페인러버 · 조회수: 22.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">LATTE <small>(라떼)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 라떼아트 · 조회수: 9.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CAPPUCCINO <small>(카푸치노)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 홈바리스타 · 조회수: 6.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">LEMONADE <small>(레모네이드)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 상큼상큼 · 조회수: 8.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MANGO SMOOTHIE <small>(망고 스무디)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 스무디왕 · 조회수: 12.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">CHOCOLATE MILKSHAKE <small>(초코 밀크셰이크)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 달달카페 · 조회수: 10.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BUBBLE TEA <small>(버블티)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 타피오카 · 조회수: 18.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MOJITO (NON-ALC) <small>(논알콜 모히또)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 민트사랑 · 조회수: 4.6K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">HOT CHOCOLATE <small>(핫초코)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 겨울간식 · 조회수: 7.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">PEACH ICED TEA <small>(복숭아 아이스티)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 티메이커 · 조회수: 6.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">MATCHA LATTE <small>(말차 라떼)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 말차러버 · 조회수: 9.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.7)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">HIBISCUS TEA <small>(히비스커스 티)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 허브티 ・ 조회수: 6.6K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">VANILLA LATTE <small>(바닐라 라떼)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 라떼아트 · 조회수: 13.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.8)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('drink.png')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">ESPRESSO TONIC <small>(에스프레소 토닉)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 홈카페 · 조회수: 5.7K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.6)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_list_drink.html#top" class="flex items-center justify-center bg-white rounded-xl border-2 border-dashed border-gray-300 hover:border-[var(--primary-color)] hover:shadow-lg transition overflow-hidden min-h-[184px]">
+          <div class="text-center">
+          <div class="text-2xl font-extrabold text-[var(--primary-color)]">메뉴 더보기</div>
+          <div class="mt-1 text-xs text-gray-500">음료 레시피 전체 보기</div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <a href="11_인공띠용지능_main.html#korean" aria-label="메인화면으로 돌아가기"
+      class="fixed bottom-4 left-4 z-50
+             flex items-center gap-2
+             px-3 py-2 rounded-full shadow-lg
+             bg-white/90 border border-gray-300 text-gray-800
+             backdrop-blur-sm
+             hover:bg-white hover:border-gray-400">
+    <i class="fas fa-arrow-left"></i>
+    <span class="text-sm">뒤로가기</span>
+  </a>
+
+  <a href="#top"
+    class="fixed bottom-4 right-4 bg-gray-800 text-white px-3 py-2 rounded-full shadow-lg text-sm opacity-80 hover:opacity-100 z-50">
+  맨 위로 ↑
+    </a>
+
+  <footer class="bg-gray-800 text-white p-4 mt-12">
+    <div class="container mx-auto text-center text-sm">
+      &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
+    </div>
+  </footer>
+
+</body>
+</html>
