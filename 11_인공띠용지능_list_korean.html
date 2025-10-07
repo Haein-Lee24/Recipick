@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipick - 한식 레시피 전체</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="Recipick_style.css">
+  <style>
+    html{scroll-behavior:smooth;}
+    .card-title small{display:inline-block;margin-left:.5rem;color:#6b7280;font-weight:500;}
+  </style>
+</head>
+<body class="bg-gray-50">
+  <span id="top"></span>
+
+  <!-- 네비 -->
+  <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="11_인공띠용지능_main.html" class="flex items-center space-x-2">
+          <img src="Recipick_logo.png" alt="Recipick 로고" class="h-10 w-auto rounded-md">
+        </a>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="11_인공띠용지능_main.html" class="text-gray-700 hover:text-[var(--primary-color)]">홈</a>
+          <a href="11_인공띠용지능_menulist.html#korean" aria-current="page" class="font-semibold text-[var(--primary-color)]">레시피</a>
+          <a href="11_인공띠용지능_register.html" class="text-gray-700 hover:text-[var(--primary-color)]">등록</a>
+          <a href="11_인공띠용지능_rank.html#ranking" class="text-gray-700 hover:text-[var(--primary-color)]">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="text-gray-700 hover:text-[var(--primary-color)]">마이페이지</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 헤더(정렬 + 개수) -->
+  <header class="bg-white border-b">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-800">
+        한식 레시피 전체 <span class="text-sm text-gray-500 align-middle">(총 200개)</span>
+      </h1>
+      <div class="flex items-center gap-3">
+        <label class="text-sm text-gray-500">정렬</label>
+        <select class="text-sm border border-gray-300 rounded-lg px-2 py-1 bg-white">
+          <option>별점순</option>
+          <option>최신등록순</option>
+          <option>조회순</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 카드 그리드 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <!-- ===== 카드 템플릿 샘플 ===== -->
+      <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title font-semibold text-gray-800">KIMCHI JJIGAE <small>(김치찌개)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 집밥여왕 · 조회수: 10.5K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.8)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BIBIMBAP <small>(비빔밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 건강식단 · 조회수: 8.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">BULGOGI <small>(불고기)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 요리연습 · 조회수: 15.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.9)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">JAPCHAE <small>(잡채)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 한식연구소 · 조회수: 6.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail.html" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">TTEOKBOKKI <small>(떡볶이)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 분식천재 · 조회수: 21.4K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">SUNDUBU JJIGAE <small>(순두부찌개)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 따끈국물 · 조회수: 5.7K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">DOENJANG JJIGAE <small>(된장찌개)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 시골밥상 · 조회수: 12.1K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">KIMBAP <small>(김밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 도시락장인 · 조회수: 9.3K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.2)</div>
+          </div>
+        </a>
+
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">GAMJATANG <small>(감자탕)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 국물요정 · 조회수: 4.8K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.1)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">SAMGYEOPSAL <small>(삼겹살)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 고기장인 · 조회수: 18.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.9)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">GALBIJJIM <small>(갈비찜)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 명절요리 · 조회수: 7.7K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★★ (4.8)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">HAEMUL PAJEON <small>(해물파전)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 전굽는날 · 조회수: 6.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.3)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">NAENGMYEON <small>(냉면)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 시원한집 · 조회수: 11.2K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.4)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">KIMCHI FRIED RICE <small>(김치볶음밥)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 한그릇 · 조회수: 22.0K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.5)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">DAKGALBI <small>(닭갈비)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자: 춘천맛집 · 조회수: 9.9K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+        <a href="#" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+          <div class="h-32 bg-[url('kimchi.jpg')] bg-cover bg-center"></div>
+          <div class="p-4">
+            <h3 class="card-title">... <small>(...)</small></h3>
+            <p class="text-xs text-gray-500 mt-1">작성자:... · 조회수: ...K</p>
+            <div class="text-yellow-500 text-sm mt-1">★★★★☆ (4.6)</div>
+          </div>
+        </a>
+    </div>
+  </main>
+
+  <a href="11_인공띠용지능_menulist.html#korean" aria-label="카테고리 목록으로 돌아가기"
+      class="fixed bottom-4 left-4 z-50
+             flex items-center gap-2
+             px-3 py-2 rounded-full shadow-lg
+             bg-white/90 border border-gray-300 text-gray-800
+             backdrop-blur-sm
+             hover:bg-white hover:border-gray-400">
+    <i class="fas fa-arrow-left"></i>
+    <span class="text-sm">뒤로가기</span>
+  </a>
+
+  <a href="#top"
+     class="fixed bottom-4 right-4 bg-gray-800 text-white px-3 py-2 rounded-full shadow-lg text-sm opacity-80 hover:opacity-100 z-50">
+    맨 위로 ↑
+  </a>
+
+  <footer class="bg-gray-800 text-white p-4 mt-12">
+    <div class="container mx-auto text-center text-sm">
+      &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
+    </div>
+  </footer>
+</body>
+</html>
