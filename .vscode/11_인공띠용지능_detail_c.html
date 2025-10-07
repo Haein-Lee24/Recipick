@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipick - 집에서 즐기는 마라탕</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #ff6347; /* Recipick의 메인 색상 (Tomato Red) */
+      }
+      body {
+        background-color: #f7f7f7;
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- 좌측: 로고 -->
+          <div class="flex items-center space-x-3">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="flex items-center space-x-2"
+            >
+              <img
+                src="https://placehold.co/100x40/ff6347/ffffff?text=Recipick"
+                alt="Recipick 로고"
+                class="h-10 w-auto rounded-md"
+              />
+            </a>
+          </div>
+
+          <div class="flex space-x-4 sm:space-x-8 text-base">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >홈</a
+            >
+            <a
+              href="11_인공띠용지능_menulist.html#korean"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >레시피</a
+            >
+            <a
+              href="11_인공띠용지능_register.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >등록</a
+            >
+            <a
+              href="11_인공띠용지능_rank.html#ranking"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >랭킹</a
+            >
+            <a
+              href="11_인공띠용지능_mypage.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >마이페이지</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="min-h-screen pt-8">
+      <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- 레시피 헤더 섹션 -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl mb-8">
+          <h1 class="text-4xl font-extrabold text-gray-800 mb-3">
+            집에서 즐기는 마라탕 🌶️
+          </h1>
+          <div class="flex items-center justify-between border-b pb-4 mb-4">
+            <div class="flex items-center space-x-4">
+              <span class="text-yellow-500 text-2xl">★★★★☆</span>
+              <span class="text-gray-600 text-lg font-semibold"
+                >(4.3점, 1,800개 리뷰)</span
+              >
+            </div>
+            <div class="text-right">
+              <p class="text-gray-700 text-lg">
+                작성자:
+                <span class="font-bold text-[var(--primary-color)]"
+                  >얼얼이</span
+                >
+              </p>
+              <p class="text-sm text-gray-500">
+                조회수: 78,500회 | 등록일: 2024.08.25
+              </p>
+            </div>
+          </div>
+
+          <img
+            src="chinese.png"
+            alt="마라탕 메인 이미지"
+            onerror="this.onerror=null; this.src='https://placehold.co/700x500/8b4513/ffffff?text=MALATANG';"
+            class="w-full h-auto object-cover rounded-xl shadow-lg mb-6"
+          />
+
+          <p
+            class="text-gray-700 text-lg leading-relaxed mt-4 p-4 bg-gray-50 rounded-lg"
+          >
+            이젠 집에서도 마라탕을 즐기세요! 마라 소스만 있다면 원하는 재료를
+            듬뿍 넣어 나만의 마라탕을 만들 수 있습니다. 얼얼한 맛의 정도도 조절
+            가능해서 좋아요! 🔥
+          </p>
+        </div>
+
+        <!-- 재료 및 조리법 섹션 -->
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <!-- 재료 목록 -->
+          <div
+            class="md:col-span-1 bg-white p-6 rounded-2xl shadow-xl h-fit border-l-4 border-yellow-500"
+          >
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+              <i class="fas fa-list-ul mr-2 text-yellow-500"></i> 필수 재료
+              (2인분)
+            </h2>
+            <ul class="space-y-3 text-lg text-gray-700">
+              <li class="flex justify-between border-b pb-1">
+                시판 마라 소스 <span class="font-semibold">100g</span>
+              </li>
+              <li class="flex justify-between border-b pb-1">
+                사골 육수 <span class="font-semibold">800ml</span>
+              </li>
+              <li class="flex justify-between border-b pb-1">
+                청경채, 배추 <span class="font-semibold">적당량</span>
+              </li>
+              <li class="flex justify-between border-b pb-1">
+                푸주, 옥수수면 <span class="font-semibold">적당량</span>
+              </li>
+              <li class="flex justify-between border-b pb-1">
+                소고기 (샤브샤브용) <span class="font-semibold">100g</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 조리 과정 -->
+          <div
+            class="md:col-span-2 bg-white p-6 rounded-2xl shadow-xl border-l-4 border-[var(--primary-color)]"
+          >
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+              <i class="fas fa-hat-chef mr-2 text-[var(--primary-color)]"></i>
+              조리 과정
+            </h2>
+            <ol class="space-y-6 text-gray-700">
+              <li class="flex items-start">
+                <span
+                  class="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary-color)] text-white flex items-center justify-center font-bold mr-3"
+                  >1</span
+                >
+                <p class="text-lg">
+                  모든 채소와 부재료를 먹기 좋은 크기로 손질하고 씻어
+                  준비합니다.
+                </p>
+              </li>
+              <li class="flex items-start">
+                <span
+                  class="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary-color)] text-white flex items-center justify-center font-bold mr-3"
+                  >2</span
+                >
+                <p class="text-lg">
+                  냄비에 사골 육수와 시판 마라 소스를 넣고 잘 풀어 끓입니다.
+                </p>
+              </li>
+              <li class="flex items-start">
+                <span
+                  class="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary-color)] text-white flex items-center justify-center font-bold mr-3"
+                  >3</span
+                >
+                <p class="text-lg">
+                  소스가 끓기 시작하면 익는 시간이 오래 걸리는 재료(푸주, 버섯
+                  등)부터 먼저 넣고 끓입니다.
+                </p>
+              </li>
+              <li class="flex items-start">
+                <span
+                  class="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary-color)] text-white flex items-center justify-center font-bold mr-3"
+                  >4</span
+                >
+                <p class="text-lg">
+                  채소와 소고기, 면 등을 차례로 넣고 소고기가 익을 때까지
+                  끓여줍니다.
+                </p>
+              </li>
+              <li class="flex items-start">
+                <span
+                  class="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary-color)] text-white flex items-center justify-center font-bold mr-3"
+                  >5</span
+                >
+                <p class="text-lg">
+                  간을 확인하고, 매운맛을 추가하고 싶으면 라유나 고추기름을
+                  추가하여 완성합니다.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 리뷰 섹션 (정적) -->
+        <div id="reviews" class="bg-white p-6 rounded-2xl shadow-xl">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <i class="fas fa-comment-dots mr-2 text-gray-600"></i> 사용자 리뷰
+            (1,800개 Mock)
+          </h2>
+
+          <!-- 리뷰 작성 폼 (Mock) -->
+          <div class="border p-4 rounded-lg mb-6 bg-gray-50">
+            <textarea
+              class="w-full p-3 border rounded-lg focus:outline-none focus:border-[var(--primary-color)] transition"
+              rows="3"
+              placeholder="솔직한 리뷰를 남겨주세요!"
+            ></textarea>
+            <div class="flex justify-between items-center mt-2">
+              <div class="text-xl text-yellow-400">
+                <i class="far fa-star cursor-pointer hover:text-yellow-500"></i>
+                <i class="far fa-star cursor-pointer hover:text-yellow-500"></i>
+                <i class="far fa-star cursor-pointer hover:text-yellow-500"></i>
+                <i class="far fa-star cursor-pointer hover:text-yellow-500"></i>
+                <i class="far fa-star cursor-pointer hover:text-yellow-500"></i>
+              </div>
+              <button
+                class="bg-[var(--primary-color)] text-white px-5 py-2 rounded-full font-semibold hover:bg-[var(--primary-color)]/90 transition"
+              >
+                리뷰 등록
+              </button>
+            </div>
+          </div>
+
+          <!-- 개별 리뷰 목록 -->
+          <div class="space-y-4">
+            <div class="border-b pb-4">
+              <div class="flex justify-between items-center mb-1">
+                <p class="font-semibold">마라러버</p>
+                <span class="text-yellow-500">★★★★☆</span>
+              </div>
+              <p class="text-gray-700">
+                마라 소스 양 조절 팁이 좋았어요! 덕분에 제 입맛에 딱 맞는 맵기로
+                만들었습니다.
+              </p>
+              <span class="text-sm text-gray-400">2024.08.26</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-12">
+      <div class="container mx-auto text-center text-sm">
+        &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
+      </div>
+    </footer>
+  </body>
+</html>

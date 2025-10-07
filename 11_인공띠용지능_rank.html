@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipick - 레시피 랭킹</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- 외부 Recipick_style.css 파일 참조 -->
+    <link rel="stylesheet" href="Recipick_style.css" />
+
+    <!-- 랭킹 메달 색상만 인라인 정의 (외부 CSS와 충돌 방지) -->
+    <style>
+      .rank-1 {
+        background-color: gold;
+        color: #333;
+      }
+      .rank-2 {
+        background-color: silver;
+        color: #333;
+      }
+      .rank-3 {
+        background-color: #cd7f32;
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- 좌측: 로고 (Recipick_logo.png로 수정 완료) -->
+          <div class="flex items-center space-x-3">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="flex items-center space-x-2"
+            >
+              <img
+                src="Recipick_logo.png"
+                alt="Recipick 로고"
+                class="h-10 w-auto rounded-md"
+              />
+            </a>
+          </div>
+
+          <div class="flex space-x-4 sm:space-x-8 text-base">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >홈</a
+            >
+            <a
+              href="11_인공띠용지능_menulist.html#korean"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >레시피</a
+            >
+            <a
+              href="11_인공띠용지능_register.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >등록</a
+            >
+            <!-- 랭킹 페이지는 활성화 표시 (nav-active 클래스가 Recipick_style.css에 정의되어 있음) -->
+            <a
+              href="11_인공띠용지능_rank.html#ranking"
+              class="font-semibold text-[var(--primary-color)] transition nav-link nav-active"
+              >랭킹</a
+            >
+            <a
+              href="11_인공띠용지능_mypage.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >마이페이지</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="min-h-screen pt-8">
+      <div id="ranking" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div
+          class="bg-white p-6 rounded-2xl shadow-xl mb-8 text-center border-b-4 border-yellow-500/50"
+        >
+          <h1
+            class="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight flex items-center justify-center space-x-3"
+          >
+            <i class="fas fa-trophy text-yellow-500 text-3xl"></i>
+            <span class="text-[var(--primary-color)]">Recipick</span> 주간 인기
+            레시피 랭킹
+          </h1>
+          <p class="text-gray-500 mt-2">
+            최근 7일간의 조회수와 평점을 기반으로 선정되었습니다. 🏆
+          </p>
+        </div>
+
+        <!-- 랭킹 리스트 컨테이너 -->
+        <div class="space-y-6">
+          <!-- 1위: 김치볶음밥 (detail_k.html로 연결) -->
+          <a
+            href="11_인공띠용지능_detail_k.html"
+            class="group flex items-center bg-white p-4 rounded-2xl shadow-lg border-2 border-yellow-500 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center font-extrabold text-2xl rounded-full mr-4 flex-shrink-0 rank-1 shadow-md"
+            >
+              1
+            </div>
+            <img
+              src="kimchi.jpg"
+              alt="1위 레시피 이미지"
+              onerror="this.onerror=null; this.src='https://placehold.co/120x90/ffcc00/000000?text=이미지+없음';"
+              class="w-24 h-20 object-cover rounded-xl mr-4 flex-shrink-0 border-2 border-gold transition duration-300 group-hover:scale-105"
+            />
+
+            <div class="flex-grow">
+              <h2
+                class="text-xl font-bold text-gray-800 group-hover:text-[var(--primary-color)] transition"
+              >
+                김치볶음밥 (황금 레시피)
+              </h2>
+              <p class="text-sm text-gray-600 truncate mt-1">
+                실패 없는 황금 비율! 밥알이 살아있는 볶음밥!
+              </p>
+            </div>
+
+            <div class="text-right flex-shrink-0 ml-4">
+              <div class="text-yellow-500 font-bold text-lg">
+                <i class="fas fa-star"></i> 4.8점
+              </div>
+              <p class="text-sm text-gray-500">조회수 120,450회</p>
+            </div>
+          </a>
+
+          <!-- 2위: 까르보나라 (detail_w.html로 연결) -->
+          <a
+            href="11_인공띠용지능_detail_w.html"
+            class="group flex items-center bg-white p-4 rounded-2xl shadow-lg border-2 border-gray-300 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center font-extrabold text-2xl rounded-full mr-4 flex-shrink-0 rank-2 shadow-md"
+            >
+              2
+            </div>
+            <img
+              src="pasta.jpg"
+              alt="2위 레시피 이미지"
+              onerror="this.onerror=null; this.src='https://placehold.co/120x90/c0c0c0/000000?text=이미지+없음';"
+              class="w-24 h-20 object-cover rounded-xl mr-4 flex-shrink-0 border-2 border-silver transition duration-300 group-hover:scale-105"
+            />
+
+            <div class="flex-grow">
+              <h2
+                class="text-xl font-bold text-gray-800 group-hover:text-[var(--primary-color)] transition"
+              >
+                꾸덕한 정통 까르보나라
+              </h2>
+              <p class="text-sm text-gray-600 truncate mt-1">
+                계란 노른자와 치즈의 완벽한 조화!
+              </p>
+            </div>
+
+            <div class="text-right flex-shrink-0 ml-4">
+              <div class="text-yellow-500 font-bold text-lg">
+                <i class="fas fa-star"></i> 4.9점
+              </div>
+              <p class="text-sm text-gray-500">조회수 98,760회</p>
+            </div>
+          </a>
+
+          <!-- 3위: 마라탕 (detail_c.html로 연결) -->
+          <a
+            href="11_인공띠용지능_detail_c.html"
+            class="group flex items-center bg-white p-4 rounded-2xl shadow-lg border-2 border-[#cd7f32] hover:shadow-2xl transition duration-300 transform hover:-translate-y-1"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center font-extrabold text-2xl rounded-full mr-4 flex-shrink-0 rank-3 shadow-md"
+            >
+              3
+            </div>
+            <img
+              src="chinese.png"
+              alt="3위 레시피 이미지"
+              onerror="this.onerror=null; this.src='https://placehold.co/120x90/8b4513/ffffff?text=이미지+없음';"
+              class="w-24 h-20 object-cover rounded-xl mr-4 flex-shrink-0 border-2 border-bronze transition duration-300 group-hover:scale-105"
+            />
+
+            <div class="flex-grow">
+              <h2
+                class="text-xl font-bold text-gray-800 group-hover:text-[var(--primary-color)] transition"
+              >
+                집에서 즐기는 마라탕
+              </h2>
+              <p class="text-sm text-gray-600 truncate mt-1">
+                원하는 재료로 얼얼하게!
+              </p>
+            </div>
+
+            <div class="text-right flex-shrink-0 ml-4">
+              <div class="text-yellow-500 font-bold text-lg">
+                <i class="fas fa-star"></i> 4.3점
+              </div>
+              <p class="text-sm text-gray-500">조회수 72,110회</p>
+            </div>
+          </a>
+
+          <!-- 4위: 아몬드 쿠키 (detail_d.html로 연결) -->
+          <a
+            href="11_인공띠용지능_detail_d.html"
+            class="group flex items-center bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center font-extrabold text-xl text-gray-600 rounded-full mr-4 flex-shrink-0"
+            >
+              4
+            </div>
+            <img
+              src="snack.jpg"
+              alt="4위 레시피 이미지"
+              onerror="this.onerror=null; this.src='https://placehold.co/120x90/F08080/ffffff?text=이미지+없음';"
+              class="w-24 h-20 object-cover rounded-xl mr-4 flex-shrink-0 transition duration-300 group-hover:scale-105"
+            />
+
+            <div class="flex-grow">
+              <h2
+                class="text-lg font-bold text-gray-800 group-hover:text-[var(--primary-color)] transition"
+              >
+                바삭 고소한 아몬드 쿠키
+              </h2>
+              <p class="text-sm text-gray-500 truncate mt-1">
+                버터 없이 만드는 건강 베이킹!
+              </p>
+            </div>
+            <div class="text-right flex-shrink-0 ml-4">
+              <div class="text-yellow-500 text-base">
+                <i class="fas fa-star"></i> 4.5점
+              </div>
+              <p class="text-sm text-gray-500">조회수 55,900회</p>
+            </div>
+          </a>
+
+          <!-- 5위: 자몽 에이드 (detail_dr.html로 연결) -->
+          <a
+            href="11_인공띠용지능_detail_dr.html"
+            class="group flex items-center bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300"
+          >
+            <div
+              class="w-12 h-12 flex items-center justify-center font-extrabold text-xl text-gray-600 rounded-full mr-4 flex-shrink-0"
+            >
+              5
+            </div>
+            <img
+              src="drink.png"
+              alt="5위 레시피 이미지"
+              onerror="this.onerror=null; this.src='https://placehold.co/120x90/98FB98/000000?text=이미지+없음';"
+              class="w-24 h-20 object-cover rounded-xl mr-4 flex-shrink-0 transition duration-300 group-hover:scale-105"
+            />
+
+            <div class="flex-grow">
+              <h2
+                class="text-lg font-bold text-gray-800 group-hover:text-[var(--primary-color)] transition"
+              >
+                상큼 시원 자몽 에이드
+              </h2>
+              <p class="text-sm text-gray-500 truncate mt-1">
+                카페 퀄리티의 청량함!
+              </p>
+            </div>
+            <div class="text-right flex-shrink-0 ml-4">
+              <div class="text-yellow-500 text-base">
+                <i class="fas fa-star"></i> 4.7점
+              </div>
+              <p class="text-sm text-gray-500">조회수 48,200회</p>
+            </div>
+          </a>
+        </div>
+        <!-- 랭킹 리스트 컨테이너 종료 -->
+
+        <div class="mt-10 p-6 bg-gray-100 rounded-xl text-center shadow-inner">
+          <p class="text-lg font-semibold text-gray-700">
+            더 많은 레시피를 보고 싶으신가요? 😋
+          </p>
+          <a
+            href="11_인공띠용지능_menulist.html#all"
+            class="mt-3 inline-block bg-[var(--primary-color)] text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-[var(--primary-color)]/90 transition shadow-md"
+          >
+            전체 레시피 목록 보러가기 <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-12">
+      <div class="container mx-auto text-center text-sm">
+        &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
+      </div>
+    </footer>
+  </body>
+</html>
