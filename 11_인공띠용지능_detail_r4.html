@@ -3,84 +3,171 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>고급진 부채살 스테이크 레시피</title>
+    <title>Recipick - 고급진 부채살 스테이크</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <style>
-      body {
-        font-family: 'Noto Sans KR', sans-serif;
-        background-color: #f8f8f8;
-      }
-      .recipe-title {
-        color: #4a4a4a;
-      }
-      .recipe-section {
-        border-bottom: 1px solid #e0e0e0;
-      }
-      .rating-star {
-        color: #ffd700;
-      }
-    </style>
+    <link rel="stylesheet" href="Recipick_style.css" />
   </head>
-  <body class="p-6">
-    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-      <h1 class="text-3xl font-bold mb-4 recipe-title">
-        고급진 부채살 스테이크 🥩
-      </h1>
-      <div class="flex items-center text-xl mb-6 text-gray-600">
-        <span class="rating-star">★★★★★</span>
-        <span class="ml-2">(4.8)</span>
+  <body class="bg-gray-50">
+    <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-3">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="flex items-center space-x-2"
+            >
+              <img
+                src="Recipick_logo.png"
+                alt="Recipick 로고"
+                class="h-10 w-auto rounded-md"
+              />
+            </a>
+          </div>
+          <div class="hidden md:flex items-center space-x-6">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >홈</a
+            >
+            <a
+              href="11_인공띠용지능_menulist.html#korean"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >레시피</a
+            >
+            <a
+              href="11_인공띠용지능_register.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >등록</a
+            >
+            <a
+              href="11_인공띠용지능_rank.html#ranking"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >랭킹</a
+            >
+            <a
+              href="11_인공띠용지능_mypage.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >마이페이지</a
+            >
+          </div>
+        </div>
       </div>
+    </nav>
 
-      <img
-        src="https://placehold.co/800x600/FFD700/000000?text=Beef+Steak"
-        alt="부채살 스테이크 이미지"
-        class="w-full h-auto rounded-xl mb-6"
-      />
-
-      <div class="recipe-section pb-6 mb-6">
-        <h2 class="text-2xl font-semibold mb-3">📝 재료</h2>
-        <ul class="list-disc list-inside space-y-2 text-gray-700">
-          <li>부채살 스테이크용 소고기 200g</li>
-          <li>올리브 오일 2큰술</li>
-          <li>버터 1조각</li>
-          <li>로즈마리, 통마늘 약간 (선택)</li>
-          <li>소금, 후추 약간</li>
-        </ul>
-      </div>
-
-      <div class="recipe-section pb-6 mb-6">
-        <h2 class="text-2xl font-semibold mb-3">👩‍🍳 만드는 법</h2>
-        <ol class="list-decimal list-inside space-y-4 text-gray-700">
-          <li>
-            소고기는 키친타월로 핏물을 제거하고, 올리브 오일, 소금, 후추로
-            마리네이드 해줍니다.
-          </li>
-          <li>
-            팬을 강불로 달군 뒤, 마리네이드 한 소고기를 올리고 한 면당 1분
-            30초씩 구워줍니다.
-          </li>
-          <li>
-            버터와 통마늘, 로즈마리를 넣고 녹은 버터를 스푼으로 스테이크 위에
-            끼얹어가며 구워줍니다.
-          </li>
-          <li>
-            원하는 굽기로 구운 뒤, 불을 끄고 2분 정도 레스팅(휴지) 시켜줍니다.
-          </li>
-          <li>먹기 좋은 크기로 썰어 접시에 담아냅니다.</li>
-        </ol>
-      </div>
-
-      <div class="mt-6 text-center text-gray-500">
-        <a
-          href="javascript:history.back()"
-          class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition"
-          >뒤로가기</a
+    <main class="min-h-screen pt-4">
+      <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <section
+          class="bg-white p-6 rounded-2xl shadow-xl mb-8 border-b-4 border-[var(--primary-color)]/50"
         >
-      </div>
-    </div>
-  </body>
-</html>
+          <div class="flex flex-col lg:flex-row gap-6">
+            <img
+              src="https://placehold.co/400x300/FFD700/000000?text=Beef+Steak"
+              alt="부채살 스테이크 이미지"
+              class="w-full lg:w-1/2 aspect-video object-cover rounded-xl shadow-md"
+            />
+            <div class="w-full lg:w-1/2">
+              <h1 class="text-4xl font-extrabold text-gray-800 mb-2">
+                고급진 부채살 스테이크 🥩🥂
+              </h1>
+              <p class="text-lg text-gray-600 mb-4">
+                집에서도 레스토랑 퀄리티의 스테이크를 즐겨보세요!
+              </p>
+
+              <div class="flex items-center gap-4 text-sm mb-4">
+                <span
+                  class="bg-red-100 text-red-700 font-semibold px-3 py-1 rounded-full"
+                  >서양식</span
+                >
+                <span class="text-gray-600"
+                  >난이도:
+                  <strong class="text-gray-800">보통 (★★☆)</strong></span
+                >
+                <span class="text-gray-600"
+                  >조리 시간: <strong class="text-gray-800">25분</strong></span
+                >
+              </div>
+
+              <div class="text-yellow-500 text-2xl mb-4">
+                ★★★★★ (4.8점 / 250개 리뷰)
+              </div>
+
+              <div class="flex gap-3">
+                <button
+                  class="bg-[var(--primary-color)] text-white font-bold px-6 py-2 rounded-xl shadow-md hover:bg-opacity-90 transition"
+                >
+                  <i class="fas fa-heart mr-2"></i> 저장하기
+                </button>
+                <button
+                  class="bg-gray-200 text-gray-700 font-bold px-6 py-2 rounded-xl shadow-md hover:bg-gray-300 transition"
+                >
+                  <i class="fas fa-share-alt mr-2"></i> 공유
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <section
+            class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-md h-fit"
+          >
+            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
+              필수 재료
+            </h2>
+            <ul class="space-y-3">
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>부채살 소고기</span> <strong class="text-gray-800">200g</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>올리브 오일</span> <strong class="text-gray-800">2큰술</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>버터</span>
+                <strong class="text-gray-800">1조각</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>통마늘</span> <strong class="text-gray-800">3-4개</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>로즈마리</span>
+                <strong class="text-gray-800">1줄기</strong>
+              </li>
+            </ul>
+            <h3 class="text-lg font-bold text-gray-800 mt-6 mb-3 border-b pb-2">
+              양념
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>소금, 후추</span>
+                <strong class="text-gray-800">약간</strong>
+              </li>
+            </ul>
+          </section>
+
+          <section class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-md">
+            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
+              조리 과정
+            </h2>
+            <ol class="space-y-6">
+              <li class="flex items-start">
+                <div
+                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
+                >
+                  1
+                </div>
+                <div>
+                  <h3 class="font-semibold text-lg text-gray-800 mb-1">
+                    스테이크 밑간하기
+                  </h3>
+                  <p class="text-gray-700">
+                    소고기는 키친타월로 핏물을 제거하고, 올리브 오일, 소금, 후추로 마리네이드 해줍니다.
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="bg-[var(--primary-color

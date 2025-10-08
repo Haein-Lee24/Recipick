@@ -3,80 +3,301 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>달콤한 허니 버터 갈릭 쉬림프 레시피</title>
+    <title>Recipick - 달콤한 허니 버터 갈릭 쉬림프</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <style>
-      body {
-        font-family: 'Noto Sans KR', sans-serif;
-        background-color: #f8f8f8;
-      }
-      .recipe-title {
-        color: #4a4a4a;
-      }
-      .recipe-section {
-        border-bottom: 1px solid #e0e0e0;
-      }
-      .rating-star {
-        color: #ffd700;
-      }
-    </style>
+    <link rel="stylesheet" href="Recipick_style.css" />
   </head>
-  <body class="p-6">
-    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-      <h1 class="text-3xl font-bold mb-4 recipe-title">
-        달콤한 허니 버터 갈릭 쉬림프 🍤
-      </h1>
-      <div class="flex items-center text-xl mb-6 text-gray-600">
-        <span class="rating-star">★★★★☆</span>
-        <span class="ml-2">(4.5)</span>
+  <body class="bg-gray-50">
+    <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-3">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="flex items-center space-x-2"
+            >
+              <img
+                src="Recipick_logo.png"
+                alt="Recipick 로고"
+                class="h-10 w-auto rounded-md"
+              />
+            </a>
+          </div>
+          <div class="hidden md:flex items-center space-x-6">
+            <a
+              href="11_인공띠용지능_main.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >홈</a
+            >
+            <a
+              href="11_인공띠용지능_menulist.html#korean"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >레시피</a
+            >
+            <a
+              href="11_인공띠용지능_register.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >등록</a
+            >
+            <a
+              href="11_인공띠용지능_rank.html#ranking"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >랭킹</a
+            >
+            <a
+              href="11_인공띠용지능_mypage.html"
+              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
+              >마이페이지</a
+            >
+          </div>
+        </div>
       </div>
+    </nav>
 
-      <img
-        src="https://placehold.co/800x600/4682B4/ffffff?text=Honey+Butter+Garlic+Shrimp"
-        alt="허니 버터 갈릭 쉬림프 이미지"
-        class="w-full h-auto rounded-xl mb-6"
-      />
-
-      <div class="recipe-section pb-6 mb-6">
-        <h2 class="text-2xl font-semibold mb-3">📝 재료</h2>
-        <ul class="list-disc list-inside space-y-2 text-gray-700">
-          <li>새우 (대하) 20마리</li>
-          <li>버터 50g</li>
-          <li>다진 마늘 3큰술</li>
-          <li>꿀 2큰술 (또는 올리고당)</li>
-          <li>파슬리 가루 약간</li>
-          <li>소금, 후추 약간</li>
-        </ul>
-      </div>
-
-      <div class="recipe-section pb-6 mb-6">
-        <h2 class="text-2xl font-semibold mb-3">👩‍🍳 만드는 법</h2>
-        <ol class="list-decimal list-inside space-y-4 text-gray-700">
-          <li>
-            새우는 껍질을 벗기고 깨끗하게 씻어 물기를 제거한 뒤, 소금과 후추로
-            밑간을 해줍니다.
-          </li>
-          <li>
-            프라이팬에 버터를 녹이고 다진 마늘을 넣어 중약불에서 볶아 마늘 향을
-            내줍니다.
-          </li>
-          <li>마늘이 노릇해지면 밑간한 새우를 넣고 볶습니다.</li>
-          <li>새우가 붉게 익으면 꿀을 넣고 빠르게 섞어줍니다.</li>
-          <li>마지막으로 파슬리 가루를 뿌려 완성합니다.</li>
-        </ol>
-      </div>
-
-      <div class="mt-6 text-center text-gray-500">
-        <a
-          href="javascript:history.back()"
-          class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition"
-          >뒤로가기</a
+    <main class="min-h-screen pt-4">
+      <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <section
+          class="bg-white p-6 rounded-2xl shadow-xl mb-8 border-b-4 border-[var(--primary-color)]/50"
         >
+          <div class="flex flex-col lg:flex-row gap-6">
+            <img
+              src="https://placehold.co/400x300/4682B4/ffffff?text=Honey+Butter+Garlic+Shrimp"
+              alt="허니 버터 갈릭 쉬림프 이미지"
+              class="w-full lg:w-1/2 aspect-video object-cover rounded-xl shadow-md"
+            />
+            <div class="w-full lg:w-1/2">
+              <h1 class="text-4xl font-extrabold text-gray-800 mb-2">
+                달콤한 허니 버터 갈릭 쉬림프 🍯🍤
+              </h1>
+              <p class="text-lg text-gray-600 mb-4">
+                단짠단짠, 톡톡 터지는 식감이 일품인 초간단 새우 요리!
+              </p>
+
+              <div class="flex items-center gap-4 text-sm mb-4">
+                <span
+                  class="bg-blue-100 text-blue-700 font-semibold px-3 py-1 rounded-full"
+                  >서양식</span
+                >
+                <span class="text-gray-600"
+                  >난이도:
+                  <strong class="text-gray-800">쉬움 (★☆☆)</strong></span
+                >
+                <span class="text-gray-600"
+                  >조리 시간: <strong class="text-gray-800">15분</strong></span
+                >
+              </div>
+
+              <div class="text-yellow-500 text-2xl mb-4">
+                ★★★★☆ (4.5점 / 150개 리뷰)
+              </div>
+
+              <div class="flex gap-3">
+                <button
+                  class="bg-[var(--primary-color)] text-white font-bold px-6 py-2 rounded-xl shadow-md hover:bg-opacity-90 transition"
+                >
+                  <i class="fas fa-heart mr-2"></i> 저장하기
+                </button>
+                <button
+                  class="bg-gray-200 text-gray-700 font-bold px-6 py-2 rounded-xl shadow-md hover:bg-gray-300 transition"
+                >
+                  <i class="fas fa-share-alt mr-2"></i> 공유
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <section
+            class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-md h-fit"
+          >
+            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
+              필수 재료
+            </h2>
+            <ul class="space-y-3">
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>새우 (대하)</span>
+                <strong class="text-gray-800">20마리</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>버터</span> <strong class="text-gray-800">50g</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>다진 마늘</span>
+                <strong class="text-gray-800">3큰술</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>꿀/올리고당</span>
+                <strong class="text-gray-800">2큰술</strong>
+              </li>
+            </ul>
+            <h3 class="text-lg font-bold text-gray-800 mt-6 mb-3 border-b pb-2">
+              양념
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>소금, 후추</span>
+                <strong class="text-gray-800">약간</strong>
+              </li>
+              <li class="flex justify-between border-b border-dashed pb-1">
+                <span>파슬리 가루</span>
+                <strong class="text-gray-800">약간</strong>
+              </li>
+            </ul>
+          </section>
+
+          <section class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-md">
+            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
+              조리 과정
+            </h2>
+            <ol class="space-y-6">
+              <li class="flex items-start">
+                <div
+                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
+                >
+                  1
+                </div>
+                <div>
+                  <h3 class="font-semibold text-lg text-gray-800 mb-1">
+                    새우 밑간하기
+                  </h3>
+                  <p class="text-gray-700">
+                    새우는 껍질을 벗기고 깨끗하게 씻어 물기를 제거한 뒤, 소금과
+                    후추로 밑간을 해줍니다.
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
+                >
+                  2
+                </div>
+                <div>
+                  <h3 class="font-semibold text-lg text-gray-800 mb-1">
+                    마늘 향내기
+                  </h3>
+                  <p class="text-gray-700">
+                    프라이팬에 버터를 녹이고 다진 마늘을 넣어 중약불에서 볶아
+                    마늘 향을 내줍니다.
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
+                >
+                  3
+                </div>
+                <div>
+                  <h3 class="font-semibold text-lg text-gray-800 mb-1">
+                    새우와 꿀 넣기
+                  </h3>
+                  <p class="text-gray-700">
+                    마늘이 노릇해지면 밑간한 새우를 넣고 볶습니다. 새우가 붉게
+                    익으면 꿀을 넣고 빠르게 섞어줍니다.
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
+                >
+                  4
+                </div>
+                <div>
+                  <h3 class="font-semibold text-lg text-gray-800 mb-1">완성</h3>
+                  <p class="text-gray-700">
+                    마지막으로 파슬리 가루를 뿌려 완성합니다.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </section>
+        </div>
+
+        <section class="bg-white p-6 rounded-2xl shadow-md mt-8">
+          <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
+            리뷰 (150)
+          </h2>
+          <div class="space-y-4">
+            <div class="border p-4 rounded-xl bg-gray-50">
+              <textarea
+                placeholder="이 레시피에 대한 당신의 리뷰를 남겨주세요!"
+                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30 mb-2"
+              ></textarea>
+              <div class="flex justify-between items-center">
+                <div class="text-yellow-500 text-xl space-x-1">
+                  <i
+                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
+                  ></i>
+                  <i
+                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
+                  ></i>
+                  <i
+                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
+                  ></i>
+                  <i
+                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
+                  ></i>
+                  <i
+                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
+                  ></i>
+                </div>
+                <button
+                  class="bg-gray-800 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-700 transition"
+                >
+                  리뷰 등록
+                </button>
+              </div>
+            </div>
+
+            <div class="border-t pt-4 space-y-4">
+              <article class="p-3 border rounded-lg bg-white shadow-sm">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-semibold text-gray-800">요리왕김모씨</span>
+                  <span class="text-sm text-yellow-500">★★★★★</span>
+                </div>
+                <p class="text-gray-700 text-sm">
+                  꿀이랑 버터의 조합이 정말 최고예요! 손님 초대 요리로도 완벽할
+                  것 같아요!
+                </p>
+                <span class="text-xs text-gray-500 block mt-2">2024.10.08</span>
+              </article>
+              <article class="p-3 border rounded-lg bg-white shadow-sm">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-semibold text-gray-800">새우조아</span>
+                  <span class="text-sm text-yellow-500">★★★★☆</span>
+                </div>
+                <p class="text-gray-700 text-sm">
+                  만들기 쉽고 맛도 좋네요! 다만 마늘을 조금 더 많이 넣었더니
+                  훨씬 풍미가 좋았습니다.
+                </p>
+                <span class="text-xs text-gray-500 block mt-2">2024.10.06</span>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
+
+    <a
+      href="11_인공띠용지능_menulist.html#all"
+      aria-label="레시피 목록으로 돌아가기"
+      class="fixed bottom-4 left-4 z-50 flex items-center gap-2 px-3 py-2 rounded-full shadow-lg bg-white/90 border border-gray-300 text-gray-800 backdrop-blur-sm hover:bg-white hover:border-gray-400"
+    >
+      <i class="fas fa-arrow-left"></i>
+      <span class="text-sm">뒤로가기</span>
+    </a>
+
+    <footer class="bg-gray-800 text-white p-4 mt-12">
+      <div class="container mx-auto text-center text-sm">
+        &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
+      </div>
+    </footer>
   </body>
 </html>
