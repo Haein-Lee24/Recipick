@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="Recipick_style.css">
 
-  <!-- CSS -->
   <style>
     .modal {position:fixed;inset:0;display:none;background:rgba(0,0,0,.45);padding:24px;z-index:60;}
     .modal:target {display:block;}
@@ -43,14 +42,19 @@
 
   <!-- 본문 -->
   <main class="min-h-screen pt-8">
-    <div class="container mx-auto px-4 py-8 max-w-3xl">
-      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl border-b-4 border-[var(--primary-color)]/50 mb-8 text-center">
-        <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">🍳 나만의 레시피 등록하기</h1>
+    <div id="register" class="container mx-auto px-4 py-8 max-w-5xl">
+      <!-- 헤더 -->
+      <div class="bg-white p-6 rounded-2xl shadow-xl mb-8 text-center border-b-4 border-[var(--primary-color)]/50">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight flex items-center justify-center space-x-2">
+          <i class="fas fa-pen-nib text-[var(--primary-color)] text-3xl"></i>
+          <span>나만의 레시피 등록하기</span>
+        </h1>
         <p class="text-gray-500 mt-2 text-sm">입력 후 등록 또는 임시저장을 눌러주세요.</p>
       </div>
 
+      <!-- 폼 -->
       <form action="11_인공띠용지능_submit.html" method="post" enctype="multipart/form-data"
-            class="bg-white p-6 sm:p-8 rounded-2xl shadow-md space-y-6">
+            class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 space-y-6">
 
         <!-- 제목 -->
         <div>
@@ -60,33 +64,33 @@
                  class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30"/>
         </div>
 
-        <!-- 카테고리 (라디오 버튼) -->
+        <!-- 카테고리 -->
         <div>
           <span class="block font-semibold mb-2">요리 카테고리 (1개 선택)</span>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
             <label class="flex items-center gap-2">
-              <input type="radio" name="category" value="한식" required class="h-4 w-4"> <span>한식</span>
+              <input type="radio" name="category" value="한식" required class="h-4 w-4 accent-[var(--primary-color)]"> <span>한식</span>
             </label>
             <label class="flex items-center gap-2">
-              <input type="radio" name="category" value="양식" class="h-4 w-4"> <span>양식</span>
+              <input type="radio" name="category" value="양식" class="h-4 w-4 accent-[var(--primary-color)]"> <span>양식</span>
             </label>
             <label class="flex items-center gap-2">
-              <input type="radio" name="category" value="중식" class="h-4 w-4"> <span>중식</span>
+              <input type="radio" name="category" value="중식" class="h-4 w-4 accent-[var(--primary-color)]"> <span>중식</span>
             </label>
             <label class="flex items-center gap-2">
-              <input type="radio" name="category" value="디저트" class="h-4 w-4"> <span>디저트</span>
+              <input type="radio" name="category" value="디저트" class="h-4 w-4 accent-[var(--primary-color)]"> <span>디저트</span>
             </label>
             <label class="flex items-center gap-2">
-              <input type="radio" name="category" value="음료" class="h-4 w-4"> <span>음료</span>
+              <input type="radio" name="category" value="음료" class="h-4 w-4 accent-[var(--primary-color)]"> <span>음료</span>
             </label>
           </div>
         </div>
 
-        <!-- 이미지 업로드 -->
+        <!-- 이미지 -->
         <div>
           <label for="image" class="block font-semibold mb-2">대표 이미지 업로드</label>
           <input id="image" name="image" type="file" accept="image/*" required
-                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 focus:outline-none"/>
+                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30"/>
         </div>
 
         <!-- 재료 -->
@@ -108,10 +112,10 @@
         <!-- 버튼 -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
           <button type="submit"
-                  class="bg-[var(--primary-color)] text-white font-bold px-8 py-3 rounded-xl shadow-lg hover:bg-opacity-90 transition">
+                  class="bg-[var(--primary-color)] text-white font-bold px-10 py-3 rounded-xl shadow-lg hover:bg-opacity-90 transition">
             등록하기
           </button>
-          <a href="#draft" class="px-6 py-3 rounded-xl font-semibold border border-gray-300 bg-white hover:bg-gray-50 shadow-sm">
+          <a href="#draft" class="px-8 py-3 rounded-xl font-semibold border border-gray-300 bg-white hover:bg-gray-50 shadow-sm">
             임시저장
           </a>
         </div>
@@ -132,7 +136,7 @@
     </div>
   </footer>
 
-  <!-- 🔹 깔끔한 임시저장 안내 모달 -->
+  <!-- 모달 -->
   <div id="draft" class="modal" role="dialog" aria-labelledby="draft-title" aria-modal="true">
     <div class="modal-card">
       <div class="p-6 sm:p-8">
