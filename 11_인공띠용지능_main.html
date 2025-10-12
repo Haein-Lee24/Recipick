@@ -4,120 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Recipick - 메인 페이지</title>
-
-  <!-- 내부 스타일시트 (외부 프레임워크/JS 없음) -->
-  <style>
-    /* ===== 기본 세팅 ===== */
-    :root{
-      --primary-color:#FF6347; /* Tomato */
-      --text:#222; --muted:#666;
-      --card-bg:#fff; --page-bg:#fafafa; --border:#e5e7eb;
-      --shadow:0 8px 24px rgba(0,0,0,.08);
-      --shadow-lg:0 16px 40px rgba(0,0,0,.15);
-      --radius-lg:16px; --radius-xl:20px; --radius-full:999px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;
-      color:var(--text); background:var(--page-bg); line-height:1.6;
-    }
-    a{color:inherit; text-decoration:none}
-
-    /* ===== 컨테이너 ===== */
-    .container{width:100%; max-width:1080px; margin:0 auto; padding:0 16px;}
-
-    /* ===== 네비게이션 (flex) ===== */
-    nav.site-nav{position:sticky; top:0; left:0; right:0; background:#fff; box-shadow:var(--shadow); z-index:50;}
-    .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px;}
-    .logo-area{display:flex; align-items:center; gap:12px;}
-    .logo{height:40px; width:auto; border-radius:8px; display:block;}
-    .menu{display:flex; gap:20px;}
-    .menu a{font-weight:600; color:#444; padding:6px 2px; transition:color .2s;}
-    .menu a:hover{color:var(--primary-color);}
-    .menu a.active{color:var(--primary-color);}
-
-    /* ===== 히어로 ===== */
-    .hero{
-      background:#fff; padding:24px; border-radius:var(--radius-xl);
-      box-shadow:var(--shadow); border-bottom:4px solid rgba(255,99,71,.5);
-      text-align:center;
-    }
-    .hero h1{margin:0; font-size:clamp(24px,3.5vw,32px); font-weight:800; letter-spacing:-.3px;}
-    .hero .brand{color:var(--primary-color);}
-
-    /* ===== 섹션 타이틀 ===== */
-    .section-title{
-      margin:80px 0 16px; font-size:24px; font-weight:800; color:#1f2937;
-      padding-bottom:12px; border-bottom:1px solid #e5e7eb; letter-spacing:-.2px;
-    }
-
-    /* ===== 카테고리 그리드 (CSS Grid) ===== */
-    .cat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
-    @media(min-width:780px){.cat-grid{grid-template-columns:repeat(3,1fr)}}
-    @media(min-width:1040px){.cat-grid{grid-template-columns:repeat(5,1fr)}}
-
-    .cat-card{
-      position:relative; overflow:hidden; border-radius:14px;
-      box-shadow:var(--shadow); transform:translateY(0);
-      transition:transform .25s ease, box-shadow .25s ease; background:#000; cursor:pointer;
-    }
-    .cat-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg);}
-    .cat-card img{width:100%; height:192px; object-fit:cover; display:block; opacity:.9; transition:transform .45s ease, opacity .3s;}
-    .cat-card:hover img{transform:scale(1.05); opacity:1;}
-    .cat-overlay{
-      position:absolute; inset:0; background:rgba(0,0,0,.35);
-      display:flex; align-items:center; justify-content:center; padding:12px;
-    }
-    .cat-btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      background:var(--primary-color); color:#fff; font-weight:800;
-      padding:12px 20px; border-radius:var(--radius-full);
-      box-shadow:0 8px 24px rgba(255,99,71,.35); transition:opacity .2s; border:0;
-    }
-    .cat-card:hover .cat-btn{opacity:.95}
-    .cat-emoji{font-size:18px;}
-
-    /* ===== 재료 검색 ===== */
-    .search-wrap{margin:60px auto 0; max-width:640px; position:relative; display:flex; align-items:center; justify-content:center;}
-    .search-input{
-      width:100%; padding:14px 56px 14px 44px; font-size:18px;
-      border:2px solid #d1d5db; border-radius:var(--radius-full);
-      box-shadow:var(--shadow); outline:none; transition:border-color .2s; background:#fff;
-    }
-    .search-input:focus{border-color:var(--primary-color)}
-    .search-icon{position:absolute; left:14px; font-size:20px; color:#6b7280; user-select:none;}
-    .search-btn{
-      position:absolute; right:6px; background:var(--primary-color); color:#fff;
-      font-weight:800; border:0; padding:10px 18px; border-radius:var(--radius-full); cursor:pointer; transition:opacity .2s;
-    }
-    .search-btn:hover{opacity:.92}
-
-    /* ===== 인기 레시피 카드 ===== */
-    .card-grid{margin-top:20px; display:grid; gap:20px; grid-template-columns:1fr;}
-    @media(min-width:640px){.card-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:920px){.card-grid{grid-template-columns:repeat(4,1fr)}}
-
-    .card{background:var(--card-bg); border-radius:14px; box-shadow:var(--shadow); padding:12px; transition:transform .2s, box-shadow .2s;}
-    .card:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg);}
-    .thumb{width:100%; height:132px; object-fit:cover; border-radius:10px; display:block; margin-bottom:8px;}
-    .card-title{font-weight:700; color:#111; margin:0 0 4px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
-    .rating{color:#f59e0b; font-size:14px;}
-
-    .more-btn{
-      display:inline-block; margin-top:16px; background:var(--primary-color); color:#fff; font-weight:800;
-      padding:12px 24px; border-radius:var(--radius-full); box-shadow:var(--shadow); transition:opacity .2s;
-    }
-    .more-btn:hover{opacity:.92}
-
-    /* ===== 맨 위로 / 푸터 ===== */
-    .to-top{
-      position:fixed; right:16px; bottom:16px; background:#111; color:#fff;
-      padding:10px 14px; border-radius:var(--radius-full); box-shadow:var(--shadow); font-size:14px; opacity:.85; transition:opacity .2s;
-    }
-    .to-top:hover{opacity:1}
-    footer{background:#111827; color:#fff; margin-top:48px; padding:18px; font-size:13px; text-align:center;}
-  </style>
+  <link rel="stylesheet" href="Recipick_style.css">
 </head>
 <body>
 
@@ -130,16 +17,16 @@
         </a>
       </div>
       <div class="menu" role="navigation" aria-label="주요 메뉴">
-        <a class="active" href="11_인공띠용지능_main.html">홈</a>
-        <a href="11_인공띠용지능_menulist.html#korean">레시피</a>
-        <a href="11_인공띠용지능_register.html">등록</a>
-        <a href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-        <a href="11_인공띠용지능_mypage.html">마이페이지</a>
+        <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+        <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
+        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
       </div>
     </div>
   </nav>
 
-  <main class="container" style="padding:32px 16px 24px;">
+  <main class="container page-pad">
     <!-- 히어로 -->
     <section class="hero" aria-label="메인 인트로">
       <h1>오늘 뭐 먹지? 🤔 <span class="brand">Recipick</span>에서 골라보세요!</h1>
@@ -152,22 +39,18 @@
         <img src="kimchi.jpg" alt="김치 등 한식 이미지">
         <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🍚</span> 한식</span></div>
       </a>
-
       <a class="cat-card" href="11_인공띠용지능_menulist.html#western" aria-label="양식 카테고리로 이동">
         <img src="pasta.jpg" alt="파스타 등 양식 이미지">
         <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🍕</span> 양식</span></div>
       </a>
-
       <a class="cat-card" href="11_인공띠용지능_menulist.html#chinese" aria-label="중식 카테고리로 이동">
         <img src="chinese.png" alt="짜장/짬뽕 등 중식 이미지">
         <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🥢</span> 중식</span></div>
       </a>
-
       <a class="cat-card" href="11_인공띠용지능_menulist.html#dessert" aria-label="디저트 카테고리로 이동">
         <img src="snack.jpg" alt="아이스크림 등 디저트 이미지">
         <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🍰</span> 디저트</span></div>
       </a>
-
       <a class="cat-card" href="11_인공띠용지능_menulist.html#drink" aria-label="음료 카테고리로 이동">
         <img src="drink.png" alt="커피 등 음료 이미지">
         <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">☕</span> 음료</span></div>
@@ -175,8 +58,8 @@
     </div>
 
     <!-- 재료 검색 -->
-    <section style="margin-top:60px;" aria-label="재료 검색">
-      <h2 class="section-title" style="margin-top:0;">원하는 재료로 레시피를 발견하세요!</h2>
+    <section class="mt-60" aria-label="재료 검색">
+      <h2 class="section-title mt-0">원하는 재료로 레시피를 발견하세요!</h2>
       <div class="search-wrap">
         <span class="search-icon" aria-hidden="true">🔍</span>
         <input type="text" class="search-input" placeholder="예: 김치, 계란, 파스타면..." aria-label="재료명으로 레시피 검색">
@@ -185,8 +68,8 @@
     </section>
 
     <!-- 인기 레시피 -->
-    <section style="margin-top:60px;" aria-label="인기 레시피">
-      <h3 style="text-align:center; font-size:20px; font-weight:700; color:#374151; margin:0 0 16px;">인기 레시피</h3>
+    <section class="mt-60" aria-label="인기 레시피">
+      <h3 class="center text-gray-deep" style="font-size:20px;font-weight:700;margin:0 0 16px;">인기 레시피</h3>
       <div class="card-grid">
         <a href="11_인공띠용지능_detail_r1.html" class="card" aria-label="달콤한 허니 버터 갈릭 쉬림프 상세로 이동">
           <img src="갈릭쉬림프.jpg" alt="갈릭 쉬림프 썸네일" class="thumb">
@@ -209,7 +92,7 @@
           <div class="rating">★★★★★ (4.8)</div>
         </a>
       </div>
-      <div style="text-align:center;">
+      <div class="center mt-20">
         <a href="11_인공띠용지능_rank.html" class="more-btn">더보기 →</a>
       </div>
     </section>

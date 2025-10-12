@@ -1,39 +1,159 @@
-/* ✅ Recipick_style.css — Tailwind 완전 제거 버전 */
+/* ===============================
+   Recipick_style.css — Single CSS
+   (No Tailwind / No framework)
+   =============================== */
+
+/* ---- Theme tokens ---- */
 :root{
   --primary-color:#FF6347;
+
   --yellow-soft:#F6E8C9; --yellow-deep:#6F5A2C;
   --green-soft:#E5F0E9;  --green-deep:#2F6B4F;
   --gray-light:#F3F4F6;  --gray-deep:#374151;
+
+  --text:#222; --muted:#666;
+  --card-bg:#fff; --page-bg:#fafafa; --border:#e5e7eb;
+  --shadow:0 8px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 16px 40px rgba(0,0,0,.15);
+  --radius-lg:16px; --radius-xl:20px; --radius-full:999px;
 }
 
+/* ---- Base ---- */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;
+  color:var(--text); background:var(--page-bg); line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+
+/* ---- Layout helpers ---- */
+.container{width:100%;max-width:1080px;margin:0 auto;padding:0 16px;}
+.page-pad{padding:32px 16px 24px;}
+.mt-0{margin-top:0} .mt-20{margin-top:20px} .mt-60{margin-top:60px} .mt-80{margin-top:80px}
+.center{text-align:center}
+
+/* ===============================
+   Global components (공통 스타일)
+   =============================== */
+
 /* 로고 */
-.logo-img{height:40px;width:auto;border-radius:8px;}
+.logo-img,.logo{height:40px;width:auto;border-radius:8px;display:block}
 
-/* 네비 */
-.nav-link{color:#444;text-decoration:none;transition:color .2s;}
-.nav-link:hover{color:var(--primary-color);}
-.nav-active{color:var(--primary-color);font-weight:600;}
+/* 네비 링크 (공통) */
+.nav-link{color:#444;transition:color .2s}
+.nav-link:hover{color:var(--primary-color)}
+.nav-active{color:var(--primary-color);font-weight:600}
 
-/* ▼ Tailwind 대체 색상 유틸 (새 클래스명) */
-.bg-yellow-soft{background-color:var(--yellow-soft);}
-.text-yellow-deep{color:var(--yellow-deep);}
-.hover-bg-yellow-soft:hover{background-color:#EADBB6;}
-
-.bg-green-soft{background-color:var(--green-soft);}
-.text-green-deep{color:var(--green-deep);}
-
-.bg-gray-light{background-color:var(--gray-light);}
-.text-gray-deep{color:var(--gray-deep);}
-
-/* 로그아웃 버튼 */
+/* 로그아웃 버튼 (예: 마이페이지) */
 .btn-logout{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   padding:12px 16px;border-radius:12px;border:1px solid #F3CAC9;
   background:#FFF7F6;color:#B43D3A;font-weight:600;
-  transition:background-color .2s ease,border-color .2s ease,opacity .2s ease;
+  transition:background-color .2s,border-color .2s,opacity .2s;
 }
-.btn-logout:hover{background:#FDEDEC;border-color:#F3B4B2;}
+.btn-logout:hover{background:#FDEDEC;border-color:#F3B4B2}
 
 /* 팔로잉/팔로워 카드 */
-.follow-card{border:1px solid #E5E7EB;border-radius:14px;padding:16px;background:#FAFAFA;}
-.follow-num{font-weight:800;font-size:1.5rem;color:var(--primary-color);}
+.follow-card{border:1px solid #E5E7EB;border-radius:14px;padding:16px;background:#FAFAFA}
+.follow-num{font-weight:800;font-size:1.5rem;color:var(--primary-color)}
+
+/* 색상 유틸(커스텀) */
+.bg-yellow-soft{background:var(--yellow-soft)} .text-yellow-deep{color:var(--yellow-deep)}
+.hover-bg-yellow-soft:hover{background:#EADBB6}
+.bg-green-soft{background:var(--green-soft)} .text-green-deep{color:var(--green-deep)}
+.bg-gray-light{background:var(--gray-light)} .text-gray-deep{color:var(--gray-deep)}
+
+/* ===============================
+   Main page specific (메인 전용)
+   =============================== */
+
+/* Nav (site-nav) */
+.site-nav{position:sticky;top:0;left:0;right:0;background:#fff;box-shadow:var(--shadow);z-index:50}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo-area{display:flex;align-items:center;gap:12px}
+.menu{display:flex;gap:20px}
+.menu a{font-weight:600;color:#444;padding:6px 2px;transition:color .2s}
+.menu a:hover{color:var(--primary-color)}
+.menu a.active{color:var(--primary-color)}
+
+/* Hero */
+.hero{
+  background:#fff;padding:24px;border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);border-bottom:4px solid rgba(255,99,71,.5);
+  text-align:center
+}
+.hero h1{margin:0;font-size:clamp(24px,3.5vw,32px);font-weight:800;letter-spacing:-.3px}
+.hero .brand{color:var(--primary-color)}
+
+/* Section title */
+.section-title{
+  margin:80px 0 16px;font-size:24px;font-weight:800;color:#1f2937;
+  padding-bottom:12px;border-bottom:1px solid #e5e7eb;letter-spacing:-.2px
+}
+
+/* Category grid */
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(min-width:780px){.cat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1040px){.cat-grid{grid-template-columns:repeat(5,1fr)}}
+
+.cat-card{
+  position:relative;overflow:hidden;border-radius:14px;
+  box-shadow:var(--shadow);transform:translateY(0);
+  transition:transform .25s,box-shadow .25s;background:#000;cursor:pointer
+}
+.cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.cat-card img{width:100%;height:192px;object-fit:cover;display:block;opacity:.9;transition:transform .45s,opacity .3s}
+.cat-card:hover img{transform:scale(1.05);opacity:1}
+.cat-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:12px}
+.cat-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--primary-color);color:#fff;font-weight:800;
+  padding:12px 20px;border-radius:var(--radius-full);
+  box-shadow:0 8px 24px rgba(255,99,71,.35);transition:opacity .2s;border:0
+}
+.cat-card:hover .cat-btn{opacity:.95}
+.cat-emoji{font-size:18px}
+
+/* Search */
+.search-wrap{margin:60px auto 0;max-width:640px;position:relative;display:flex;align-items:center;justify-content:center}
+.search-input{
+  width:100%;padding:14px 56px 14px 44px;font-size:18px;
+  border:2px solid #d1d5db;border-radius:var(--radius-full);
+  box-shadow:var(--shadow);outline:none;transition:border-color .2s;background:#fff
+}
+.search-input:focus{border-color:var(--primary-color)}
+.search-icon{position:absolute;left:14px;font-size:20px;color:#6b7280;user-select:none}
+.search-btn{
+  position:absolute;right:6px;background:var(--primary-color);color:#fff;
+  font-weight:800;border:0;padding:10px 18px;border-radius:var(--radius-full);cursor:pointer;transition:opacity .2s
+}
+.search-btn:hover{opacity:.92}
+
+/* Popular cards */
+.card-grid{margin-top:20px;display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:640px){.card-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:920px){.card-grid{grid-template-columns:repeat(4,1fr)}}
+
+.card{
+  background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);
+  padding:12px;transition:transform .2s,box-shadow .2s
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.thumb{width:100%;height:132px;object-fit:cover;border-radius:10px;display:block;margin-bottom:8px}
+.card-title{font-weight:700;color:#111;margin:0 0 4px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.rating{color:#f59e0b;font-size:14px}
+.more-btn{
+  display:inline-block;margin-top:16px;background:var(--primary-color);color:#fff;font-weight:800;
+  padding:12px 24px;border-radius:var(--radius-full);box-shadow:var(--shadow);transition:opacity .2s
+}
+.more-btn:hover{opacity:.92}
+
+/* To top + Footer */
+.to-top{
+  position:fixed;right:16px;bottom:16px;background:#111;color:#fff;
+  padding:10px 14px;border-radius:var(--radius-full);
+  box-shadow:var(--shadow);font-size:14px;opacity:.85;transition:opacity .2s
+}
+.to-top:hover{opacity:1}
+footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px;text-align:center}
