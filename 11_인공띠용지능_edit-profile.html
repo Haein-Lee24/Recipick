@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipick - 프로필 수정</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="Recipick_style.css">
+</head>
+<body class="bg-gray-50">
+
+  <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <a href="11_인공띠용지능_main.html" class="flex items-center space-x-2">
+            <img src="Recipick_logo.png" 
+                alt="Recipick 로고" 
+                class="h-10 w-auto rounded-md">
+          </a>
+        </div>
+
+        <div class="flex space-x-4 sm:space-x-8 text-base">
+          <a href="11_인공띠용지능_main.html" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">홈</a>
+          <a href="11_인공띠용지능_list.html#korean-list" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">레시피</a>
+          <a href="11_인공띠용지능_register.html" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">등록</a>
+          <a href="11_인공띠용지능_rank.html#ranking" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="font-semibold text-[var(--primary-color)]">마이페이지</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="min-h-screen pt-8">
+    <div class="container mx-auto px-4 py-8 max-w-3xl">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl border-b-4 border-[var(--primary-color)]/50 mb-8 text-center">
+        <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
+          📝 프로필 수정하기
+        </h1>
+        <p class="text-gray-500 mt-2 text-sm">변경할 정보를 입력하고 저장 버튼을 눌러주세요.</p>
+      </div>
+
+      <form action="11_인공띠용지능_mypage.html" method="post" enctype="multipart/form-data"
+            class="bg-white p-6 sm:p-8 rounded-2xl shadow-md space-y-6">
+        
+        <div class="flex items-center space-x-4">
+            <div class="w-20 h-20 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center bg-orange-100 text-3xl font-bold text-[var(--primary-color)] flex-shrink-0">
+              H
+            </div>
+            <div class="flex-grow">
+                <label for="profile_image" class="block font-semibold mb-2">프로필 이미지 변경</label>
+                <input id="profile_image" name="profile_image" type="file" accept="image/*"
+                      class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 focus:outline-none file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[var(--primary-color)]/10 file:text-[var(--primary-color)] hover:file:bg-[var(--primary-color)]/20"/>
+            </div>
+        </div>
+
+        <div>
+            <label for="background_image" class="block font-semibold mb-2">배경 이미지 변경</label>
+            <div class="h-32 rounded-lg bg-cover bg-center mb-2 border border-gray-200" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop')">
+                <div class="w-full h-full bg-black/30 flex items-center justify-center">
+                    <span class="text-white text-sm font-semibold">현재 배경 이미지</span>
+                </div>
+            </div>
+            <input id="background_image" name="background_image" type="file" accept="image/*"
+                   class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 focus:outline-none file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-200/80 file:text-gray-700 hover:file:bg-gray-300/80"/>
+        </div>
+        <div>
+          <label for="nickname" class="block font-semibold mb-2">닉네임</label>
+          <input id="nickname" name="nickname" type="text" required
+                value="Haein_Cook"
+                class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30"/>
+        </div>
+        
+        <div>
+          <label for="username" class="block font-semibold mb-2">사용자 아이디</label>
+          <input id="username" name="username" type="text" required
+                value="@haein_cook_vegan"
+                class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30"/>
+        </div>
+
+        <div>
+          <label for="bio" class="block font-semibold mb-2">자기소개</label>
+          <textarea id="bio" name="bio" rows="3" required
+                    placeholder="나를 표현하는 한 문장을 적어보세요."
+                    class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30">쉽고, 맛있는 요리를 합니다🌿</textarea>
+        </div>
+
+        <div class="text-center pt-4">
+          <button type="submit"
+                  class="bg-[var(--primary-color)] text-white font-bold px-8 py-3 rounded-xl shadow-lg hover:bg-opacity-90 transition">
+            저장하기
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="bg-gray-800 text-white p-4 mt-12">
+    <div class="container mx-auto text-center text-sm">
+      &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
+    </div>
+  </footer>
+
+</body>
+</html>
