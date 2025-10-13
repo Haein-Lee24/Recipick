@@ -4,292 +4,219 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipick - 상큼 시원 자몽 에이드</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="Recipick_style.css" />
   </head>
-  <body class="bg-gray-50">
-    <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center space-x-3">
-            <a
-              href="11_인공띠용지능_main.html"
-              class="flex items-center space-x-2"
-            >
-              <img
-                src="Recipick_logo.png"
-                alt="Recipick 로고"
-                class="h-10 w-auto rounded-md"
-              />
-            </a>
-          </div>
-          <div class="hidden md:flex items-center space-x-6">
-            <a
-              href="11_인공띠용지능_main.html"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >홈</a
-            >
-            <a
-              href="11_인공띠용지능_menulist.html#all"
-              class="font-semibold text-[var(--primary-color)] transition nav-link nav-active"
-              >레시피</a
-            >
-            <a
-              href="11_인공띠용지능_register.html"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >등록</a
-            >
-            <a
-              href="11_인공띠용지능_rank.html#ranking"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >랭킹</a
-            >
-            <a
-              href="11_인공띠용지능_mypage.html"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >마이페이지</a
-            >
-          </div>
+  <body>
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="11_인공띠용지능_main.html" class="logo">
+            <img src="Recipick_logo.png" alt="Recipick 로고" class="logo-img" />
+          </a>
+        </div>
+        <div class="menu">
+          <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
+          <a
+            href="11_인공띠용지능_menulist.html#all"
+            class="nav-link nav-active"
+            >레시피</a
+          >
+          <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
+          <a href="11_인공띠용지능_rank.html#ranking" class="nav-link">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
         </div>
       </div>
     </nav>
 
-    <main class="min-h-screen pt-4">
-      <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <section
-          class="bg-white p-6 rounded-2xl shadow-xl mb-8 border-b-4 border-[var(--primary-color)]/50"
-        >
-          <div class="flex flex-col lg:flex-row gap-6">
-            <img
-              src="drink.png"
-              alt="자몽 에이드 이미지"
-              class="w-full lg:w-1/2 aspect-video object-cover rounded-xl shadow-md"
-            />
-            <div class="w-full lg:w-1/2">
-              <h1 class="text-4xl font-extrabold text-gray-800 mb-2">
-                상큼 시원 자몽 에이드 🍊 (Grapefruit Ade)
-              </h1>
-              <p class="text-lg text-gray-600 mb-4">
-                집에서 즐기는 청량감! 달콤 쌉싸름한 자몽의 맛이 일품인 홈카페
-                레시피.
-              </p>
+    <main class="page-pad">
+      <div class="container">
+        <section class="hero">
+          <img
+            src="drink.png"
+            alt="자몽 에이드 이미지"
+            class="thumb"
+            style="aspect-ratio: 16 / 9; object-fit: cover; height: auto"
+          />
+          <div>
+            <h1 class="mt-20">상큼 시원 자몽 에이드</h1>
+            <p class="mt-20">
+              집에서 즐기는 청량감! 달콤 쌉싸름한 자몽의 맛이 일품인 홈카페
+              레시피.
+            </p>
 
-              <div class="flex items-center gap-4 text-sm mb-4">
-                <span
-                  class="bg-green-100 text-green-700 font-semibold px-3 py-1 rounded-full"
-                  >음료</span
-                >
-                <span class="text-gray-600"
-                  >난이도:
-                  <strong class="text-gray-800">매우 쉬움 (☆☆☆)</strong></span
-                >
-                <span class="text-gray-600"
-                  >조리 시간: <strong class="text-gray-800">5분</strong></span
-                >
-              </div>
+            <div class="mt-20">
+              <span class="badge-green">음료</span>
+              <span>난이도: <strong>매우 쉬움 (☆☆☆)</strong></span>
+              <span>조리 시간: <strong>5분</strong></span>
+            </div>
 
-              <div class="text-yellow-500 text-2xl mb-4">
-                ★★★★★ (4.7점 / 524개 리뷰)
-              </div>
+            <div class="rating">★★★★★ (4.7점 / 524개 리뷰)</div>
 
-              <div class="flex gap-3">
-                <button
-                  class="bg-[var(--primary-color)] text-white font-bold px-6 py-2 rounded-xl shadow-md hover:bg-opacity-90 transition"
-                >
-                  <i class="fas fa-heart mr-2"></i> 저장하기
-                </button>
-                <button
-                  class="bg-gray-200 text-gray-700 font-bold px-6 py-2 rounded-xl shadow-md hover:bg-gray-300 transition"
-                >
-                  <i class="fas fa-share-alt mr-2"></i> 공유
-                </button>
-              </div>
+            <div class="btn-row">
+              <button class="btn-solid">
+                <i class="fas fa-heart"></i> 저장하기
+              </button>
+              <button class="btn-outline">
+                <i class="fas fa-share-alt"></i> 공유
+              </button>
             </div>
           </div>
         </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <section
-            class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-md h-fit"
-          >
-            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
-              필수 재료
-            </h2>
-            <ul class="space-y-3">
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>자몽</span> <strong class="text-gray-800">1개</strong>
+        <div class="grid-2 gap-24 mt-80">
+          <section class="card-box">
+            <h2 class="card-title-lg">필수 재료</h2>
+            <ul class="list-v">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">자몽</div>
+                </div>
+                <strong>1개</strong>
               </li>
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>자몽 청 (또는 시럽)</span>
-                <strong class="text-gray-800">3T</strong>
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">자몽 청 (또는 시럽)</div>
+                </div>
+                <strong>3T</strong>
               </li>
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>탄산수</span> <strong class="text-gray-800">200ml</strong>
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">탄산수</div>
+                </div>
+                <strong>200ml</strong>
               </li>
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>얼음</span> <strong class="text-gray-800">적당량</strong>
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">얼음</div>
+                </div>
+                <strong>적당량</strong>
               </li>
             </ul>
-            <h3 class="text-lg font-bold text-gray-800 mt-6 mb-3 border-b pb-2">
-              선택 재료
-            </h3>
-            <ul class="space-y-3">
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>민트 잎</span> <strong class="text-gray-800">약간</strong>
+            <h3 class="section-title mt-20">선택 재료</h3>
+            <ul class="list-v">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">민트 잎</div>
+                </div>
+                <strong>약간</strong>
               </li>
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>레몬 슬라이스</span>
-                <strong class="text-gray-800">1조각</strong>
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">레몬 슬라이스</div>
+                </div>
+                <strong>1조각</strong>
               </li>
             </ul>
           </section>
 
-          <section class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-md">
-            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
-              조리 순서
-            </h2>
-            <ol class="space-y-4 text-gray-700">
-              <li class="flex items-start">
-                <div
-                  class="w-8 h-8 flex-shrink-0 bg-[var(--primary-color)] text-white font-bold rounded-full flex items-center justify-center mr-3"
-                >
-                  1
+          <section class="card-box">
+            <h2 class="card-title-lg">조리 순서</h2>
+            <ol class="list-v">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">1. 재료 준비</div>
+                  <div class="list-sub">
+                    자몽 1개 중 절반은 얇게 슬라이스하고, 나머지 절반은 즙을
+                    짜거나 작게 썰어 준비합니다.
+                  </div>
                 </div>
-                <p class="flex-1 pt-1">
-                  자몽 1개 중 절반은 얇게 슬라이스하고, 나머지 절반은 즙을
-                  짜거나 작게 썰어 준비합니다.
-                </p>
               </li>
-              <li class="flex items-start">
-                <div
-                  class="w-8 h-8 flex-shrink-0 bg-[var(--primary-color)] text-white font-bold rounded-full flex items-center justify-center mr-3"
-                >
-                  2
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">2. 청 넣기</div>
+                  <div class="list-sub">
+                    잔에 자몽 청 3큰술을 먼저 넣습니다. 자몽 즙이나 작게 썬
+                    과육을 추가하면 풍미가 더 좋아집니다.
+                  </div>
                 </div>
-                <p class="flex-1 pt-1">
-                  잔에 자몽 청 3큰술을 먼저 넣습니다. 자몽 즙이나 작게 썬 과육을
-                  추가하면 풍미가 더 좋아집니다.
-                </p>
               </li>
-              <li class="flex items-start">
-                <div
-                  class="w-8 h-8 flex-shrink-0 bg-[var(--primary-color)] text-white font-bold rounded-full flex items-center justify-center mr-3"
-                >
-                  3
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">3. 얼음 채우기</div>
+                  <div class="list-sub">얼음을 잔 가득 채워 넣습니다.</div>
                 </div>
-                <p class="flex-1 pt-1">얼음을 잔 가득 채워 넣습니다.</p>
               </li>
-              <li class="flex items-start">
-                <div
-                  class="w-8 h-8 flex-shrink-0 bg-[var(--primary-color)] text-white font-bold rounded-full flex items-center justify-center mr-3"
-                >
-                  4
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">4. 탄산수 붓고 장식하기</div>
+                  <div class="list-sub">
+                    탄산수 200ml를 천천히 부어줍니다. 슬라이스 한 자몽과 민트
+                    잎으로 장식하면 완성!
+                  </div>
                 </div>
-                <p class="flex-1 pt-1">
-                  탄산수 200ml를 천천히 부어줍니다. 슬라이스 한 자몽과 민트
-                  잎으로 장식하면 완성!
-                </p>
               </li>
             </ol>
           </section>
         </div>
 
-        <section class="mt-8 bg-white p-6 rounded-2xl shadow-md">
-          <h2 class="text-2xl font-bold text-gray-800 pb-3 mb-6">리뷰 (524)</h2>
-          <div class="space-y-4">
-            <form
-              action="#"
-              class="p-4 rounded-lg border border-gray-200 shadow-sm space-y-3"
-            >
+        <section class="card-box mt-80">
+          <h2 class="card-title-lg">리뷰 (524)</h2>
+          <div class="review-area">
+            <div class="review-input-box">
               <textarea
-                class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30 text-sm"
-                rows="3"
                 placeholder="이 레시피에 대한 당신의 리뷰를 남겨주세요!"
+                class="input-text"
               ></textarea>
-              <div class="flex justify-between items-center">
-                <div class="text-yellow-500 text-2xl space-x-1">
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
+              <div class="btn-row between">
+                <div class="rating-stars">
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
                 </div>
-                <button
-                  type="submit"
-                  class="bg-gray-800 text-white font-bold px-5 py-2 rounded-lg hover:bg-gray-700 transition"
-                >
-                  리뷰 등록
-                </button>
+                <button class="btn-solid">리뷰 등록</button>
               </div>
-            </form>
-
-            <div
-              class="border border-gray-200 p-4 rounded-lg bg-white shadow-sm"
-            >
-              <div class="flex justify-between items-center mb-2">
-                <span class="font-semibold text-gray-800">홈카페달인</span>
-                <span class="text-yellow-500 text-lg">★★★★★</span>
-              </div>
-              <p class="text-sm text-gray-700">
-                진짜 카페에서 파는 맛이에요! 자몽 청만 미리 준비해두면 순식간에
-                만들 수 있어서 좋습니다. 최고!
-              </p>
-              <span class="text-xs text-gray-400 block mt-2">2024.09.28</span>
             </div>
 
-            <div
-              class="border border-gray-200 p-4 rounded-lg bg-white shadow-sm"
-            >
-              <div class="flex justify-between items-center mb-2">
-                <span class="font-semibold text-gray-800">음료수덕후</span>
-                <span class="text-yellow-500 text-lg">★★★★☆</span>
-              </div>
-              <p class="text-sm text-gray-700">
-                쌉싸름한 맛이 적당해서 좋았어요. 다만 탄산수를 좀 더 넣는 게 제
-                취향이네요.
-              </p>
-              <span class="text-xs text-gray-400 block mt-2">2024.09.25</span>
-            </div>
-
-            <div
-              class="border border-gray-200 p-4 rounded-lg bg-white shadow-sm"
-            >
-              <div class="flex justify-between items-center mb-2">
-                <span class="font-semibold text-gray-800">새콤달콤매니아</span>
-                <span class="text-yellow-500 text-lg">★★★☆☆</span>
-              </div>
-              <p class="text-sm text-gray-700">
-                자몽을 즙으로 만들었는데 너무 씁쓸했어요 ㅠㅠ 자몽청을 좀 더
-                넣어야 할 것 같아요. 레시피는 간단합니다.
-              </p>
-              <span class="text-xs text-gray-400 block mt-2">2024.09.22</span>
+            <div class="review-list">
+              <article class="card">
+                <div class="bar between">
+                  <span class="card-title">홈카페달인</span>
+                  <span class="rating">★★★★★</span>
+                </div>
+                <p class="my-recipes card-sub">
+                  진짜 카페에서 파는 맛이에요! 자몽 청만 미리 준비해두면
+                  순식간에 만들 수 있어서 좋습니다. 최고!
+                </p>
+                <span class="my-recipes card-sub right">2024.09.28</span>
+              </article>
+              <article class="card">
+                <div class="bar between">
+                  <span class="card-title">음료수덕후</span>
+                  <span class="rating">★★★★☆</span>
+                </div>
+                <p class="my-recipes card-sub">
+                  쌉싸름한 맛이 적당해서 좋았어요. 다만 탄산수를 좀 더 넣는 게
+                  제 취향이네요.
+                </p>
+                <span class="my-recipes card-sub right">2024.09.25</span>
+              </article>
+              <article class="card">
+                <div class="bar between">
+                  <span class="card-title">새콤달콤매니아</span>
+                  <span class="rating">★★★☆☆</span>
+                </div>
+                <p class="my-recipes card-sub">
+                  자몽을 즙으로 만들었는데 너무 씁쓸했어요 ㅠㅠ 자몽청을 좀 더
+                  넣어야 할 것 같아요. 레시피는 간단합니다.
+                </p>
+                <span class="my-recipes card-sub right">2024.09.22</span>
+              </article>
             </div>
           </div>
         </section>
       </div>
     </main>
 
-    <a href="#top"
-     class="fixed bottom-4 right-4 bg-gray-800 text-white px-3 py-2 rounded-full shadow-lg text-sm opacity-80 hover:opacity-100 z-50">
-    맨 위로 ↑
-    </a>
+    <a href="#top" class="to-top">맨 위로 ↑</a>
 
-    <footer class="bg-gray-800 text-white p-4 mt-12">
-      <div class="container mx-auto text-center text-sm">
+    <footer>
+      <div class="container center">
         &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
       </div>
     </footer>

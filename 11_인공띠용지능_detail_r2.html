@@ -4,278 +4,195 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipick - 초간단 샐러드 파스타</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="Recipick_style.css" />
   </head>
-  <body class="bg-gray-50">
-    <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center space-x-3">
-            <a
-              href="11_인공띠용지능_main.html"
-              class="flex items-center space-x-2"
-            >
-              <img
-                src="Recipick_logo.png"
-                alt="Recipick 로고"
-                class="h-10 w-auto rounded-md"
-              />
-            </a>
-          </div>
-          <div class="hidden md:flex items-center space-x-6">
-            <a
-              href="11_인공띠용지능_main.html"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >홈</a
-            >
-            <a
-              href="11_인공띠용지능_menulist.html#korean"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >레시피</a
-            >
-            <a
-              href="11_인공띠용지능_register.html"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >등록</a
-            >
-            <a
-              href="11_인공띠용지능_rank.html#ranking"
-              class="font-semibold text-[var(--primary-color)] transition nav-link nav-active"
-              >랭킹</a
-            >
-            <a
-              href="11_인공띠용지능_mypage.html"
-              class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link"
-              >마이페이지</a
-            >
-          </div>
+  <body>
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="11_인공띠용지능_main.html" class="logo">
+            <img src="Recipick_logo.png" alt="Recipick 로고" class="logo-img" />
+          </a>
+        </div>
+        <div class="menu">
+          <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
+          <a href="11_인공띠용지능_menulist.html#korean" class="nav-link"
+            >레시피</a
+          >
+          <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
+          <a
+            href="11_인공띠용지능_rank.html#ranking"
+            class="nav-link nav-active"
+            >랭킹</a
+          >
+          <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
         </div>
       </div>
     </nav>
 
-    <main class="min-h-screen pt-4">
-      <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <section
-          class="bg-white p-6 rounded-2xl shadow-xl mb-8 border-b-4 border-[var(--primary-color)]/50"
-        >
-          <div class="flex flex-col lg:flex-row gap-6">
-            <img
-              src="샐러드파스타.jpg"
-              alt="샐러드 파스타 이미지"
-              class="w-full lg:w-1/2 aspect-video object-cover rounded-xl shadow-md"
-            />
-            <div class="w-full lg:w-1/2">
-              <h1 class="text-4xl font-extrabold text-gray-800 mb-2">
-                5분 완성! 초간단 샐러드 파스타 🥗
-              </h1>
-              <p class="text-lg text-gray-600 mb-4">
-                바쁜 일상 속 가볍게 즐기는 한 끼! 다이어트에도 좋아요!
-              </p>
+    <main class="page-pad">
+      <div class="container">
+        <section class="hero">
+          <img
+            src="샐러드파스타.jpg"
+            alt="샐러드 파스타 이미지"
+            class="thumb"
+            style="aspect-ratio: 16 / 9; object-fit: cover; height: auto"
+          />
+          <div>
+            <h1 class="mt-20">5분 완성! 초간단 샐러드 파스타</h1>
+            <p class="mt-20">
+              바쁜 일상 속 가볍게 즐기는 한 끼! 다이어트에도 좋아요!
+            </p>
 
-              <div class="flex items-center gap-4 text-sm mb-4">
-                <span
-                  class="bg-green-100 text-green-700 font-semibold px-3 py-1 rounded-full"
-                  >다이어트</span
-                >
-                <span class="text-gray-600"
-                  >난이도:
-                  <strong class="text-gray-800">매우 쉬움 (★☆☆)</strong></span
-                >
-                <span class="text-gray-600"
-                  >조리 시간: <strong class="text-gray-800">5분</strong></span
-                >
-              </div>
+            <div class="mt-20">
+              <span class="badge-green">다이어트</span>
+              <span>난이도: <strong>매우 쉬움 (★☆☆)</strong></span>
+              <span>조리 시간: <strong>5분</strong></span>
+            </div>
 
-              <div class="text-yellow-500 text-2xl mb-4">
-                ★★★★★ (4.9점 / 310개 리뷰)
-              </div>
+            <div class="rating">★★★★★ (4.9점 / 310개 리뷰)</div>
 
-              <div class="flex gap-3">
-                <button
-                  class="bg-[var(--primary-color)] text-white font-bold px-6 py-2 rounded-xl shadow-md hover:bg-opacity-90 transition"
-                >
-                  <i class="fas fa-heart mr-2"></i> 저장하기
-                </button>
-                <button
-                  class="bg-gray-200 text-gray-700 font-bold px-6 py-2 rounded-xl shadow-md hover:bg-gray-300 transition"
-                >
-                  <i class="fas fa-share-alt mr-2"></i> 공유
-                </button>
-              </div>
+            <div class="btn-row">
+              <button class="btn-solid">
+                <i class="fas fa-heart"></i> 저장하기
+              </button>
+              <button class="btn-outline">
+                <i class="fas fa-share-alt"></i> 공유
+              </button>
             </div>
           </div>
         </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <section
-            class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-md h-fit"
-          >
-            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
-              필수 재료
-            </h2>
-            <ul class="space-y-3">
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>파스타 (푸실리/펜네)</span>
-                <strong class="text-gray-800">150g</strong>
+        <div class="grid-2 gap-24 mt-80">
+          <section class="card-box">
+            <h2 class="card-title-lg">필수 재료</h2>
+            <ul class="list-v">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">파스타 (푸실리/펜네)</div>
+                </div>
+                <strong>150g</strong>
               </li>
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>어린잎 채소</span>
-                <strong class="text-gray-800">1줌</strong>
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">어린잎 채소</div>
+                </div>
+                <strong>1줌</strong>
               </li>
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>방울토마토</span>
-                <strong class="text-gray-800">10개</strong>
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">방울토마토</div>
+                </div>
+                <strong>10개</strong>
               </li>
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>오리엔탈 드레싱</span>
-                <strong class="text-gray-800">4큰술</strong>
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">오리엔탈 드레싱</div>
+                </div>
+                <strong>4큰술</strong>
               </li>
             </ul>
-            <h3 class="text-lg font-bold text-gray-800 mt-6 mb-3 border-b pb-2">
-              양념
-            </h3>
-            <ul class="space-y-3">
-              <li class="flex justify-between border-b border-dashed pb-1">
-                <span>파마산 치즈 가루</span>
-                <strong class="text-gray-800">약간</strong>
+            <h3 class="section-title mt-20">양념</h3>
+            <ul class="list-v">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">파마산 치즈 가루</div>
+                </div>
+                <strong>약간</strong>
               </li>
             </ul>
           </section>
 
-          <section class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-md">
-            <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
-              조리 과정
-            </h2>
-            <ol class="space-y-6">
-              <li class="flex items-start">
-                <div
-                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
-                >
-                  1
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-gray-800 mb-1">
-                    파스타 삶기
-                  </h3>
-                  <p class="text-gray-700">
+          <section class="card-box">
+            <h2 class="card-title-lg">조리 과정</h2>
+            <ol class="list-v">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">1. 파스타 삶기</div>
+                  <div class="list-sub">
                     끓는 물에 소금을 약간 넣고 파스타를 삶아줍니다. (봉투에 적힌
                     시간 참고)
-                  </p>
+                  </div>
                 </div>
               </li>
-              <li class="flex items-start">
-                <div
-                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
-                >
-                  2
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-gray-800 mb-1">
-                    재료 준비
-                  </h3>
-                  <p class="text-gray-700">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">2. 재료 준비</div>
+                  <div class="list-sub">
                     파스타가 다 익으면 찬물에 헹궈 열기를 식히고 물기를 완전히
                     빼줍니다. 깨끗이 씻은 어린잎 채소와 반으로 자른 방울토마토를
                     준비합니다.
-                  </p>
+                  </div>
                 </div>
               </li>
-              <li class="flex items-start">
-                <div
-                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
-                >
-                  3
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-gray-800 mb-1">
-                    모두 섞기
-                  </h3>
-                  <p class="text-gray-700">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">3. 모두 섞기</div>
+                  <div class="list-sub">
                     큰 볼에 삶은 파스타, 채소, 토마토를 넣고 오리엔탈 드레싱을
                     넣어 잘 버무려줍니다.
-                  </p>
+                  </div>
                 </div>
               </li>
-              <li class="flex items-start">
-                <div
-                  class="bg-[var(--primary-color)] text-white w-8 h-8 flex items-center justify-center rounded-full font-bold flex-shrink-0 mr-4"
-                >
-                  4
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-gray-800 mb-1">완성</h3>
-                  <p class="text-gray-700">
+              <li class="list-item">
+                <div class="list-text">
+                  <div class="list-ttl">4. 완성</div>
+                  <div class="list-sub">
                     접시에 담고 파마산 치즈 가루를 뿌려 완성합니다.
-                  </p>
+                  </div>
                 </div>
               </li>
             </ol>
           </section>
         </div>
 
-        <section class="bg-white p-6 rounded-2xl shadow-md mt-8">
-          <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 mb-4">
-            리뷰 (310)
-          </h2>
-          <div class="space-y-4">
-            <div class="border p-4 rounded-xl bg-gray-50">
+        <section class="card-box mt-80">
+          <h2 class="card-title-lg">리뷰 (310)</h2>
+          <div class="review-area">
+            <div class="review-input-box">
               <textarea
                 placeholder="이 레시피에 대한 당신의 리뷰를 남겨주세요!"
-                class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]/30 mb-2"
+                class="input-text"
               ></textarea>
-              <div class="flex justify-between items-center">
-                <div class="text-yellow-500 text-xl space-x-1">
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
-                  <i
-                    class="far fa-star cursor-pointer hover:text-yellow-400 transition"
-                  ></i>
+              <div class="btn-row between">
+                <div class="rating-stars">
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
                 </div>
-                <button
-                  class="bg-gray-800 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-700 transition"
-                >
-                  리뷰 등록
-                </button>
+                <button class="btn-solid">리뷰 등록</button>
               </div>
             </div>
 
-            <div class="border-t pt-4 space-y-4">
-              <article class="p-3 border rounded-lg bg-white shadow-sm">
-                <div class="flex justify-between items-center mb-1">
-                  <span class="font-semibold text-gray-800">다이어터김씨</span>
-                  <span class="text-sm text-yellow-500">★★★★★</span>
+            <div class="review-list">
+              <article class="card">
+                <div class="bar between">
+                  <span class="card-title">다이어터김씨</span>
+                  <span class="rating">★★★★★</span>
                 </div>
-                <p class="text-gray-700 text-sm">
+                <p class="my-recipes card-sub">
                   샐러드 드레싱만 바꿔가며 매일 먹고 있어요. 레시피 덕분에
                   질리지 않고 즐기고 있습니다!
                 </p>
-                <span class="text-xs text-gray-500 block mt-2">2024.10.07</span>
+                <span class="my-recipes card-sub right">2024.10.07</span>
               </article>
-              <article class="p-3 border rounded-lg bg-white shadow-sm">
-                <div class="flex justify-between items-center mb-1">
-                  <span class="font-semibold text-gray-800">급할땐이거</span>
-                  <span class="text-sm text-yellow-500">★★★★★</span>
+              <article class="card">
+                <div class="bar between">
+                  <span class="card-title">급할땐이거</span>
+                  <span class="rating">★★★★★</span>
                 </div>
-                <p class="text-gray-700 text-sm">
+                <p class="my-recipes card-sub">
                   진짜 5분이면 만들 수 있어서 점심시간에 최고예요. 남은 파스타
                   활용하기도 좋네요.
                 </p>
-                <span class="text-xs text-gray-500 block mt-2">2024.10.04</span>
+                <span class="my-recipes card-sub right">2024.10.04</span>
               </article>
             </div>
           </div>
@@ -283,13 +200,10 @@
       </div>
     </main>
 
-    <a href="#top"
-     class="fixed bottom-4 right-4 bg-gray-800 text-white px-3 py-2 rounded-full shadow-lg text-sm opacity-80 hover:opacity-100 z-50">
-    맨 위로 ↑
-    </a>
+    <a href="#top" class="to-top">맨 위로 ↑</a>
 
-    <footer class="bg-gray-800 text-white p-4 mt-12">
-      <div class="container mx-auto text-center text-sm">
+    <footer>
+      <div class="container center">
         &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
       </div>
     </footer>
