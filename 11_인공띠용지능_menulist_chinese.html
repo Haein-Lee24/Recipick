@@ -1,243 +1,380 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recipick - 중식 레시피 전체</title>
-  <style>
-    :root {
-      --primary-color: #f97316;
-      --bg-gray: #f9fafb;
-      --text-gray: #6b7280;
-      --text-dark: #1f2937;
-      --border-gray: #d1d5db;
-      --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipick - 중식 레시피 전체</title>
+    <style>
+      :root {
+        --primary-color: #f97316;
+        --bg-gray: #f9fafb;
+        --text-gray: #6b7280;
+        --text-dark: #1f2937;
+        --border-gray: #d1d5db;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
 
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Noto Sans KR", sans-serif;
-      background: var(--bg-gray);
-      color: var(--text-dark);
-    }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: 'Noto Sans KR', sans-serif;
+        background: var(--bg-gray);
+        color: var(--text-dark);
+      }
 
-    /* 네비게이션 */
-    nav {
-      position: sticky;
-      top: 0; left: 0; right: 0;
-      background: #fff;
-      box-shadow: var(--shadow);
-      z-index: 50;
-    }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 64px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--primary-color); }
-    .nav-links a.active { color: var(--primary-color); font-weight: 700; }
+      /* 네비게이션 */
+      nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        box-shadow: var(--shadow);
+        z-index: 50;
+      }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--primary-color);
+      }
+      .nav-links a.active {
+        color: var(--primary-color);
+        font-weight: 700;
+      }
 
-    /* 헤더 */
-    header {
-      background: #fff;
-      border-bottom: 1px solid var(--border-gray);
-    }
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.5rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .header-container h1 {
-      font-size: 1.8rem;
-      font-weight: 800;
-    }
-    .header-container span {
-      font-size: 0.9rem;
-      color: var(--text-gray);
-    }
-    select {
-      border: 1px solid var(--border-gray);
-      border-radius: 8px;
-      padding: 4px 8px;
-      font-size: 0.9rem;
-      background: white;
-    }
+      /* 헤더 */
+      header {
+        background: #fff;
+        border-bottom: 1px solid var(--border-gray);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header-container h1 {
+        font-size: 1.8rem;
+        font-weight: 800;
+      }
+      .header-container span {
+        font-size: 0.9rem;
+        color: var(--text-gray);
+      }
+      select {
+        border: 1px solid var(--border-gray);
+        border-radius: 8px;
+        padding: 4px 8px;
+        font-size: 0.9rem;
+        background: white;
+      }
 
-    /* 카드 그리드 */
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    @media (min-width: 640px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-      .grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (min-width: 1280px) {
-      .grid { grid-template-columns: repeat(4, 1fr); }
-    }
+      /* 카드 그리드 */
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      @media (min-width: 640px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (min-width: 1280px) {
+        .grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      text-decoration: none;
-      color: inherit;
-      transition: box-shadow 0.2s;
-    }
-    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    .card-thumb {
-      height: 130px;
-      background-size: cover;
-      background-position: center;
-    }
-    .card-body {
-      padding: 1rem;
-    }
-    .card-title {
-      font-weight: 700;
-      margin: 0;
-      font-size: 1.1rem;
-    }
-    .card-body p {
-      margin: 0.25rem 0 0;
-      font-size: 0.8rem;
-      color: var(--text-gray);
-    }
-    .rating {
-      margin-top: 0.3rem;
-      font-size: 0.9rem;
-      color: #facc15;
-    }
+      .card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        text-decoration: none;
+        color: inherit;
+        transition: box-shadow 0.2s;
+      }
+      .card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .card-thumb {
+        height: 130px;
+        background-size: cover;
+        background-position: center;
+      }
+      .card-body {
+        padding: 1rem;
+      }
+      .card-title {
+        font-weight: 700;
+        margin: 0;
+        font-size: 1.1rem;
+      }
+      .card-body p {
+        margin: 0.25rem 0 0;
+        font-size: 0.8rem;
+        color: var(--text-gray);
+      }
+      .rating {
+        margin-top: 0.3rem;
+        font-size: 0.9rem;
+        color: #facc15;
+      }
 
-    /* 고정 버튼 */
-    .back-btn, .top-btn {
-      position: fixed;
-      bottom: 16px;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 9999px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid var(--border-gray);
-      box-shadow: var(--shadow);
-      text-decoration: none;
-      color: var(--text-dark);
-      backdrop-filter: blur(4px);
-      font-size: 0.9rem;
-    }
-    .back-btn:hover { background: white; }
-    .back-btn::before {
-      content: "←";
-      font-size: 1rem;
-    }
-    .back-btn { left: 16px; }
+      /* 고정 버튼 */
+      .back-btn,
+      .top-btn {
+        position: fixed;
+        bottom: 16px;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid var(--border-gray);
+        box-shadow: var(--shadow);
+        text-decoration: none;
+        color: var(--text-dark);
+        backdrop-filter: blur(4px);
+        font-size: 0.9rem;
+      }
+      .back-btn:hover {
+        background: white;
+      }
+      .back-btn::before {
+        content: '←';
+        font-size: 1rem;
+      }
+      .back-btn {
+        left: 16px;
+      }
 
-    .top-btn {
-      right: 16px;
-      background: var(--text-dark);
-      color: white;
-      opacity: 0.85;
-    }
-    .top-btn:hover { opacity: 1; }
+      .top-btn {
+        right: 16px;
+        background: var(--text-dark);
+        color: white;
+        opacity: 0.85;
+      }
+      .top-btn:hover {
+        opacity: 1;
+      }
 
-    /* 푸터 */
-    footer {
-      background: var(--text-dark);
-      color: white;
-      padding: 1rem;
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 0.85rem;
-    }
-  </style>
-</head>
-<body>
-  <span id="top"></span>
+      /* 푸터 */
+      footer {
+        background: var(--text-dark);
+        color: white;
+        padding: 1rem;
+        margin-top: 3rem;
+        text-align: center;
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <span id="top"></span>
 
-  <!-- 네비 -->
-  <nav>
-    <div class="nav-container">
-      <a href="11_인공띠용지능_main.html">
-        <img src="Recipick_logo.png" alt="Recipick 로고" style="height:40px; border-radius:6px;">
-      </a>
-      <div class="nav-links">
-        <a href="11_인공띠용지능_main.html">홈</a>
-        <a href="11_인공띠용지능_menulist.html#chinese" class="active">레시피</a>
-        <a href="11_인공띠용지능_register.html">등록</a>
-        <a href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-        <a href="11_인공띠용지능_mypage.html">마이페이지</a>
+    <nav>
+      <div class="nav-container">
+        <a href="11_인공띠용지능_main.html">
+          <img
+            src="Recipick_logo.png"
+            alt="Recipick 로고"
+            style="height: 40px; border-radius: 6px"
+          />
+        </a>
+        <div class="nav-links">
+          <a href="11_인공띠용지능_main.html">홈</a>
+          <a href="11_인공띠용지능_menulist.html#chinese" class="active"
+            >레시피</a
+          >
+          <a href="11_인공띠용지능_register.html">등록</a>
+          <a href="11_인공띠용지능_rank.html#ranking">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html">마이페이지</a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- 헤더 -->
-  <header>
-    <div class="header-container">
-      <h1>중식 레시피 전체 <span>(총 11개)</span></h1>
-      <div class="sort">
-        <label style="font-size:0.9rem; color:var(--text-gray);">정렬</label>
-        <select>
-          <option>별점순</option>
-          <option>최신등록순</option>
-          <option>조회순</option>
-        </select>
+    <header>
+      <div class="header-container">
+        <h1>중식 레시피 전체 <span>(총 11개)</span></h1>
+        <div class="sort">
+          <label style="font-size: 0.9rem; color: var(--text-gray)">정렬</label>
+          <select>
+            <option>별점순</option>
+            <option>최신등록순</option>
+            <option>조회순</option>
+          </select>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- 본문 -->
-  <main>
-    <div class="grid">
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">마라탕</h3><p>작성자: 얼얼이 · 조회수: 78.5K</p><div class="rating">★★★★☆ (4.3)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">마파두부</h3><p>작성자: 사천요리 · 조회수: 9.1K</p><div class="rating">★★★★☆ (4.5)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">탕수육</h3><p>작성자: 중식의달인 · 조회수: 20.3K</p><div class="rating">★★★★☆ (4.6)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">차우면</h3><p>작성자: 면요리연구소 · 조회수: 6.2K</p><div class="rating">★★★★☆ (4.2)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">탄탄면</h3><p>작성자: 사천미식 · 조회수: 5.9K</p><div class="rating">★★★★☆ (4.3)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">산라탕</h3><p>작성자: 국물장인 · 조회수: 4.0K</p><div class="rating">★★★★☆ (4.1)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">샤오룽바오</h3><p>작성자: 상하이키친 · 조회수: 7.8K</p><div class="rating">★★★★★ (4.7)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">베이징덕</h3><p>작성자: 북경요리 · 조회수: 3.6K</p><div class="rating">★★★★☆ (4.2)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">어향가지</h3><p>작성자: 가지요리 · 조회수: 5.3K</p><div class="rating">★★★★☆ (4.3)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">마라샹궈</h3><p>작성자: 마라의정석 · 조회수: 10.2K</p><div class="rating">★★★★☆ (4.5)</div></div></a>
-      <a href="#" class="card"><div class="card-thumb" style="background-image:url('chinese.png')"></div><div class="card-body"><h3 class="card-title">계란볶음밥</h3><p>작성자: 간단중식 · 조회수: 12.5K</p><div class="rating">★★★★☆ (4.3)</div></div></a>
-    </div>
-  </main>
+    <main>
+      <div class="grid">
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">마라탕</h3>
+            <p>작성자: 얼얼이 · 조회수: 78.5K</p>
+            <div class="rating">★★★★☆ (4.3)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">마파두부</h3>
+            <p>작성자: 사천요리 · 조회수: 9.1K</p>
+            <div class="rating">★★★★☆ (4.5)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">탕수육</h3>
+            <p>작성자: 중식의달인 · 조회수: 20.3K</p>
+            <div class="rating">★★★★☆ (4.6)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">차우면</h3>
+            <p>작성자: 면요리연구소 · 조회수: 6.2K</p>
+            <div class="rating">★★★★☆ (4.2)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">탄탄면</h3>
+            <p>작성자: 사천미식 · 조회수: 5.9K</p>
+            <div class="rating">★★★★☆ (4.3)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">산라탕</h3>
+            <p>작성자: 국물장인 · 조회수: 4.0K</p>
+            <div class="rating">★★★★☆ (4.1)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">샤오룽바오</h3>
+            <p>작성자: 상하이키친 · 조회수: 7.8K</p>
+            <div class="rating">★★★★★ (4.7)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">베이징덕</h3>
+            <p>작성자: 북경요리 · 조회수: 3.6K</p>
+            <div class="rating">★★★★☆ (4.2)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">어향가지</h3>
+            <p>작성자: 가지요리 · 조회수: 5.3K</p>
+            <div class="rating">★★★★☆ (4.3)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">마라샹궈</h3>
+            <p>작성자: 마라의정석 · 조회수: 10.2K</p>
+            <div class="rating">★★★★☆ (4.5)</div>
+          </div></a
+        >
+        <a href="11_인공띠용지능_detail_c.html" class="card"
+          ><div
+            class="card-thumb"
+            style="background-image: url('chinese.png')"
+          ></div>
+          <div class="card-body">
+            <h3 class="card-title">계란볶음밥</h3>
+            <p>작성자: 간단중식 · 조회수: 12.5K</p>
+            <div class="rating">★★★★☆ (4.3)</div>
+          </div></a
+        >
+      </div>
+    </main>
 
-  <!-- 돌아가기 / 맨 위로 버튼 -->
-  <a href="11_인공띠용지능_menulist.html#chinese" class="back-btn">카테고리별 레시피 보기</a>
-  <a href="#top" class="top-btn">맨 위로 ↑</a>
+    <a href="11_인공띠용지능_menulist.html#chinese" class="back-btn"
+      >카테고리별 레시피 보기</a
+    >
+    <a href="#top" class="top-btn">맨 위로 ↑</a>
 
-  <!-- 푸터 -->
-  <footer>
-    &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
-  </footer>
-</body>
+    <footer>
+      &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
+    </footer>
+  </body>
 </html>
