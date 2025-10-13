@@ -1,223 +1,185 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" id="top">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Recipick - 마이페이지</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Tailwind, CDN 전부 제거 -->
   <link rel="stylesheet" href="Recipick_style.css">
 </head>
-<body class="bg-gray-50">
+<body>
 
-    <nav class="sticky top-0 left-0 right-0 bg-white shadow-lg z-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-        <div class="flex items-center space-x-3">
-            <a href="11_인공띠용지능_main.html" class="flex items-center space-x-2">
-            <img src="Recipick_logo.png" 
-                alt="Recipick 로고" 
-                class="h-10 w-auto rounded-md">
+  <!-- 공통 네비게이션 (메인과 동일 구조) -->
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <div class="logo-area">
+        <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
+          <img src="Recipick_logo.png" alt="Recipick 로고" class="logo">
+        </a>
+      </div>
+      <div class="menu" role="navigation" aria-label="주요 메뉴">
+        <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+        <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
+        <a class="active nav-link" href="11_인공띠용지능_mypage.html" aria-current="page">마이페이지</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container page-pad">
+    <!-- 프로필 헤더 -->
+    <section class="profile-header" aria-label="프로필 헤더">
+      <div class="profile-cover" role="img" aria-label="요리 관련 배경 이미지"></div>
+      <div class="profile-box">
+        <div class="avatar" aria-hidden="true">H</div>
+        <div class="profile-meta">
+          <h1 class="profile-name">Haein_Cook</h1>
+          <p class="profile-id">@haein_cook_vegan</p>
+          <p class="profile-bio">쉽고, 맛있는 요리를 합니다🌿</p>
+          <div class="profile-actions">
+            <a href="11_인공띠용지능_edit-profile.html" class="btn-outline">프로필 수정</a>
+          </div>
+        </div>
+      </div>
+      <div class="stat-bar" aria-label="프로필 통계">
+        <div class="stat">
+          <strong class="stat-num">12</strong>
+          <span class="stat-label">내 레시피</span>
+        </div>
+        <div class="stat">
+          <strong class="stat-num">125</strong>
+          <span class="stat-label">팔로잉</span>
+        </div>
+        <div class="stat">
+          <strong class="stat-num">238</strong>
+          <span class="stat-label">팔로워</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 저장/최근본 그리드 -->
+    <section class="grid-2 gap-24 mt-80">
+      <!-- 저장한 레시피 -->
+      <div class="card-box">
+        <h3 class="card-title-lg">저장한 레시피</h3>
+        <ul class="list-v">
+          <li>
+            <a href="11_인공띠용지능_detail_k.html" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">김치찌개</p>
+                <p class="list-sub">한식 · 집밥여왕 · 10.5K</p>
+              </div>
+              <span class="badge-green">저장됨</span>
             </a>
-        </div>
-
-        <div class="flex space-x-4 sm:space-x-8 text-base">
-            <a href="11_인공띠용지능_main.html" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">홈</a>
-          <a href="11_인공띠용지능_menulist.html#korean-list" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">레시피</a>
-          <a href="11_인공띠용지능_register.html" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">등록</a>
-          <a href="11_인공띠용지능_rank.html#ranking" class="text-gray-700 hover:text-[var(--primary-color)] transition nav-link">랭킹</a>
-          <a href="11_인공띠용지능_mypage.html" class="font-semibold text-[var(--primary-color)]">마이페이지</a>
-        </div>
-        </div>
-    </div>
-    </nav>
-
-
-  <main id="mypage" class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <section class="bg-white rounded-2xl shadow-lg mb-8 overflow-hidden">
-  <div class="h-32 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop')">
-  </div>
-  
-  <div class="p-6">
-    <div class="relative flex justify-center">
-      <div class="-mt-16 w-24 h-24 rounded-full border-4 border-white bg-orange-100 flex items-center justify-center text-3xl font-bold text-[var(--primary-color)]">
-        H
+          </li>
+          <li>
+            <a href="11_인공띠용지능_detail_w.html" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">마르게리타 피자</p>
+                <p class="list-sub">양식 · 화덕의정석 · 14.0K</p>
+              </div>
+              <span class="badge-green">저장됨</span>
+            </a>
+          </li>
+          <li>
+            <a href="11_인공띠용지능_detail_c.html" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">마라탕</p>
+                <p class="list-sub">중식 · 얼얼이 · 78.5K</p>
+              </div>
+              <span class="badge-green">저장됨</span>
+            </a>
+          </li>
+        </ul>
       </div>
-    </div>
-    
-    <div class="text-center mt-3">
-      <h1 class="text-2xl font-bold text-gray-800">Haein_Cook</h1>
-      <p class="text-sm text-gray-500">@haein_cook_vegan</p>
-      <p class="text-gray-600 text-sm mt-3 max-w-md mx-auto">
-        쉽고, 맛있는 요리를 합니다🌿
-      </p>
-    </div>
 
-    <div class="text-center mt-4">
-        <a href="11_인공띠용지능_edit-profile.html" class="inline-flex items-center px-5 py-2 rounded-lg bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition text-sm">
-          프로필 수정
-        </a>
-    </div>
-  </div>
-  
-  <div class="flex justify-around bg-gray-50 p-3 border-t border-gray-200">
-    <div class="text-center">
-      <strong class="block text-lg font-bold text-gray-800">12</strong>
-      <span class="text-xs text-gray-500">내 레시피</span>
-    </div>
-    <div class="text-center">
-      <strong class="block text-lg font-bold text-gray-800">125</strong>
-      <span class="text-xs text-gray-500">팔로잉</span>
-    </div>
-    <div class="text-center">
-      <strong class="block text-lg font-bold text-gray-800">238</strong>
-      <span class="text-xs text-gray-500">팔로워</span>
-    </div>
-  </div>
-</section>
+      <!-- 최근 본 레시피 -->
+      <div class="card-box">
+        <h3 class="card-title-lg">최근 본 레시피</h3>
+        <ul class="list-v">
+          <li>
+            <a href="11_인공띠용지능_detail_k.html" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">비빔밥</p>
+                <p class="list-sub">한식 · 12분 전</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="11_인공띠용지능_detail_k.html" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">떡볶이</p>
+                <p class="list-sub">한식 · 1시간 전</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="11_인공띠용지능_detail_w.html" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">볼로네제 파스타</p>
+                <p class="list-sub">양식 · 어제</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-
-
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-  <!-- ✅ 저장한 레시피 -->
-  <div class="bg-white rounded-2xl shadow-lg p-6">
-    <h3 class="text-lg font-semibold text-gray-800 mb-3">저장한 레시피</h3>
-    <ul class="space-y-3">
-      <li>
-        <a href="11_인공띠용지능_detail_k.html" 
-           class="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-          <div>
-            <p class="font-medium">김치찌개</p>
-            <p class="text-xs text-gray-500 mt-0.5">한식 · 집밥여왕 · 10.5K</p>
-          </div>
-          <span class="text-xs px-3 py-1 rounded-full bg-green-100 text-green-700">저장됨</span>
-        </a>
-      </li>
-      <li>
-        <a href="11_인공띠용지능_detail_w.html" 
-           class="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-          <div>
-            <p class="font-medium">마르게리타 피자</p>
-            <p class="text-xs text-gray-500 mt-0.5">양식 · 화덕의정석 · 14.0K</p>
-          </div>
-          <span class="text-xs px-3 py-1 rounded-full bg-green-100 text-green-700">저장됨</span>
-        </a>
-      </li>
-      <li>
-        <a href="11_인공띠용지능_detail_c.html" 
-           class="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-          <div>
-            <p class="font-medium">마라탕</p>
-            <p class="text-xs text-gray-500 mt-0.5">중식 · 얼얼이 · 78.5K</p>
-          </div>
-          <span class="text-xs px-3 py-1 rounded-full bg-green-100 text-green-700">저장됨</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <!-- ✅ 최근 본 레시피 -->
-  <div class="bg-white rounded-2xl shadow-lg p-6">
-    <h3 class="text-lg font-semibold text-gray-800 mb-3">최근 본 레시피</h3>
-    <ul class="space-y-3">
-      <li>
-        <a href="11_인공띠용지능_detail_k.html" 
-           class="block p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-          <p class="font-medium">비빔밥</p>
-          <p class="text-xs text-gray-500 mt-0.5">한식 · 12분 전</p>
-        </a>
-      </li>
-      <li>
-        <a href="11_인공띠용지능_detail_k.html" 
-           class="block p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-          <p class="font-medium">떡볶이</p>
-          <p class="text-xs text-gray-500 mt-0.5">한식 · 1시간 전</p>
-        </a>
-      </li>
-      <li>
-        <a href="11_인공띠용지능_detail_w.html" 
-           class="block p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
-          <p class="font-medium">볼로네제 파스타</p>
-          <p class="text-xs text-gray-500 mt-0.5">양식 · 어제</p>
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
-
-
-    <section class="bg-white rounded-2xl shadow-lg p-6">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold text-gray-800">내가 등록한 레시피</h3>
-        <div class="flex items-center gap-2">
-          <a href="11_인공띠용지능_register.html" class="inline-flex items-center px-4 py-2 rounded-lg bg-[var(--primary-color)] text-white text-sm font-semibold hover:opacity-90 transition">
-            새 레시피 등록
-          </a>
-          <a href="#manage" class="inline-flex items-center px-4 py-2 rounded-lg bg-yellow-100 text-yellow-800 text-sm font-semibold hover:bg-yellow-200 transition">
-            레시피 관리
-          </a>
+    <!-- 내가 등록한 레시피 -->
+    <section class="mt-80 card-box">
+      <div class="bar between">
+        <h3 class="card-title-lg">내가 등록한 레시피</h3>
+        <div class="btn-row">
+          <a href="11_인공띠용지능_register.html" class="btn-solid">새 레시피 등록</a>
+          <a href="#manage" class="btn-warn">레시피 관리</a>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <a href="11_인공띠용지능_detail_w.html" class="block border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
-          <img src="pasta.jpg" alt="정통 까르보나라" class="w-full aspect-[4/3] object-cover">
-          <!--레시피링크: https://www.10000recipe.com/recipe/6829720?srsltid=AfmBOorKhKLYYbgxj18ALTmGhTeOhiXrkkARXVmNRzDKxs3GTuSP6xbv#completeimgs-->
-          <div class="p-4">
-            <h4 class="font-semibold text-gray-800">정통 까르보나라</h4>
-            <p class="text-xs text-gray-500 mt-1">양식 · 파스타장인 · 조회수 12.3K</p>
+
+      <div class="card-grid my-recipes">
+        <a href="11_인공띠용지능_detail_w.html" class="card">
+          <img src="pasta.jpg" alt="정통 까르보나라" class="thumb">
+          <div>
+            <p class="card-title">정통 까르보나라</p>
+            <p class="card-sub">양식 · 파스타장인 · 조회수 12.3K</p>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_k.html" class="block border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
-          <img src="kimchi.jpg" alt="김치볶음밥" class="w-full aspect-[4/3] object-cover">
-          <!--레시피링크: https://www.10000recipe.com/recipe/6858110 -->
-          <div class="p-4">
-            <h4 class="font-semibold text-gray-800">김치볶음밥</h4>
-            <p class="text-xs text-gray-500 mt-1">한식 · 한그릇 · 조회수 22.0K</p>
+
+        <a href="11_인공띠용지능_detail_k.html" class="card">
+          <img src="kimchi.jpg" alt="김치볶음밥" class="thumb">
+          <div>
+            <p class="card-title">김치볶음밥</p>
+            <p class="card-sub">한식 · 한그릇 · 조회수 22.0K</p>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="block border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
-          <img src="snack.jpg" alt="블론디" class="w-full aspect-[4/3] object-cover">
-          <!--레시피링크: https://www.10000recipe.com/recipe/4014043#completeimgs-->
-          <div class="p-4">
-            <h4 class="font-semibold text-gray-800">블론디</h4>
-            <p class="text-xs text-gray-500 mt-1">디저트 · 베이킹러버 · 조회수 5.2K</p>
+
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <img src="snack.jpg" alt="블론디" class="thumb">
+          <div>
+            <p class="card-title">블론디</p>
+            <p class="card-sub">디저트 · 베이킹러버 · 조회수 5.2K</p>
           </div>
         </a>
       </div>
     </section>
 
-    <div class="mt-8 flex justify-end">
+    <!-- 로그아웃 -->
+    <div class="mt-20 right">
       <a href="#logout" class="btn-logout">
-        <i class="fas fa-right-from-bracket"></i>
         <span>로그아웃</span>
       </a>
     </div>
 
+    <!-- 플로팅 버튼들 -->
+    <a href="11_인공띠용지능_main.html#korean" aria-label="메인으로"
+       class="float-btn left-btn">← 뒤로가기</a>
+
+    <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
+
   </main>
 
-  <a href="11_인공띠용지능_main.html#korean" aria-label="메인화면으로 돌아가기"
-      class="fixed bottom-4 left-4 z-50
-             flex items-center gap-2
-             px-3 py-2 rounded-full shadow-lg
-             bg-white/90 border border-gray-300 text-gray-800
-             backdrop-blur-sm
-             hover:bg-white hover:border-gray-400">
-    <i class="fas fa-arrow-left"></i>
-    <span class="text-sm">뒤로가기</span>
-  </a>
-
-  <a href="#top"
-     class="fixed bottom-4 right-4 bg-gray-800 text-white px-3 py-2 rounded-full shadow-lg text-sm opacity-80 hover:opacity-100 z-50">
-    맨 위로 ↑
-  </a>
-  
-  <footer class="bg-gray-800 text-white p-4 mt-12">
-    <div class="container mx-auto text-center text-sm">
-      &copy; 2024 Recipick Wireframe. All rights reserved. (Static Mockup)
-    </div>
+  <footer>
+    &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
   </footer>
-
 </body>
-</html>
 </html>

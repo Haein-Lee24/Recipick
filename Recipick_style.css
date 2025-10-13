@@ -157,3 +157,152 @@ a{color:inherit;text-decoration:none}
 }
 .to-top:hover{opacity:1}
 footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px;text-align:center}
+
+/* mypage및 edit-profile 스타일*/
+
+.profile-header{background:#fff;border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+.profile-cover{
+  height:160px;background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop');
+  background-size:cover;background-position:center;border-bottom:1px solid var(--border)
+}
+.profile-box{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px}
+.avatar{
+  margin-top:-44px;width:88px;height:88px;border-radius:50%;
+  border:4px solid #fff;background:#FFE4DE;color:var(--primary-color);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:32px;
+  box-shadow:var(--shadow)
+}
+.profile-meta{text-align:center}
+.profile-name{font-size:24px;font-weight:800;color:#1f2937;margin-top:6px}
+.profile-id{font-size:13px;color:#6b7280}
+.profile-bio{font-size:14px;color:#374151;margin-top:10px}
+.profile-actions{margin-top:12px}
+.btn-outline{
+  display:inline-block;padding:10px 16px;border-radius:12px;border:1px solid var(--border);
+  background:#fff;font-weight:700;color:#374151;transition:background .2s,border-color .2s
+}
+.btn-outline:hover{background:#f9fafb;border-color:#d1d5db}
+
+/* 통계 바 */
+.stat-bar{
+  display:flex;align-items:center;justify-content:space-around;gap:12px;
+  background:#F9FAFB;border-top:1px solid var(--border);padding:12px 8px
+}
+.stat{text-align:center}
+.stat-num{display:block;color:#111;font-size:18px;font-weight:800}
+.stat-label{display:block;color:#6b7280;font-size:12px}
+
+/* 공용 카드 컨테이너 */
+.card-box{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:16px;box-shadow:var(--shadow)
+}
+.card-title-lg{font-size:18px;font-weight:800;color:#1f2937;margin-bottom:10px}
+
+/* 리스트(저장/최근본) */
+.list-v{list-style:none;display:flex;flex-direction:column;gap:10px}
+.list-item{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px;border:1px solid var(--border);border-radius:12px;background:#fff;transition:background .2s
+}
+.list-item:hover{background:#F9FAFB}
+.list-text{min-width:0}
+.list-ttl{font-weight:700;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list-sub{font-size:12px;color:#6b7280;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge-green{
+  font-size:12px;padding:6px 10px;border-radius:999px;background:#E5F7EE;color:#1B7A4A;font-weight:700;
+  border:1px solid #C8ECD9
+}
+
+/* 2열 그리드 */
+.grid-2{display:grid;grid-template-columns:1fr;align-items:start}
+@media (min-width: 980px){.grid-2{grid-template-columns:1fr 1fr}}
+.gap-24{gap:24px}
+
+/* 내 레시피 카드 보정 */
+.my-recipes .card-sub{font-size:12px;color:#6b7280}
+.bar{display:flex;align-items:center}
+.between{justify-content:space-between}
+.btn-row{display:flex;gap:8px}
+.btn-solid{
+  display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;
+  padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);transition:opacity .2s
+}
+.btn-solid:hover{opacity:.92}
+.btn-warn{
+  display:inline-block;background:#FFF7D6;color:#7C5A00;font-weight:800;
+  padding:10px 14px;border-radius:12px;border:1px solid #F3E5AB
+}
+.btn-warn:hover{background:#FFF1BF}
+
+/* 방향/여백 유틸 */
+.right{text-align:right}
+
+/* 플로팅 버튼 */
+.float-btn{
+  position:fixed;bottom:16px;left:16px;background:#fff;color:#111;border:1px solid #d1d5db;
+  padding:8px 12px;border-radius:999px;box-shadow:var(--shadow);font-size:14px;opacity:.9;transition:opacity .2s
+}
+.float-btn:hover{opacity:1}
+.left-btn{left:16px}
+
+.my-recipes .card:hover {
+  transform: none;        /* 둥실 효과 제거 */
+  box-shadow: var(--shadow-lg);
+}
+
+/* 각 입력 필드를 묶는 그룹 */
+.form-group {
+  margin-top: 24px;
+}
+
+/* 폼 레이블(설명) 스타일 */
+.form-label {
+  display: block; /* 줄바꿈 적용 */
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+/* 텍스트 입력 필드(input, textarea) 공통 스타일 */
+.input-text {
+  width: 100%; /* 너비를 100%로 설정해 여백 문제 해결 */
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background-color: #f9fafb;
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+}
+
+.input-text:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, .2); /* 포커스 시 강조 효과 */
+}
+
+/* 파일 업로드 필드 커스텀 스타일 */
+.input-file {
+  display: none; /* 기본 파일 선택 버튼 숨기기 */
+}
+
+.file-label {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: var(--gray-deep);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+
+.file-label:hover {
+  background-color: #1f2937;
+}
+
+/* 저장하기 버튼 크기 키우기 */
+.btn-solid {
+    padding: 14px 28px;
+    font-size: 16px;
+}
