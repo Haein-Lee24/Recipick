@@ -183,7 +183,7 @@ footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px
 }
 .btn-outline:hover{background:#f9fafb;border-color:#d1d5db}
 
-/* 통계 바 */
+
 .stat-bar{
   display:flex;align-items:center;justify-content:space-around;gap:12px;
   background:#F9FAFB;border-top:1px solid var(--border);padding:12px 8px
@@ -192,14 +192,14 @@ footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px
 .stat-num{display:block;color:#111;font-size:18px;font-weight:800}
 .stat-label{display:block;color:#6b7280;font-size:12px}
 
-/* 공용 카드 컨테이너 */
+
 .card-box{
   background:#fff;border:1px solid var(--border);border-radius:16px;
   padding:16px;box-shadow:var(--shadow)
 }
 .card-title-lg{font-size:18px;font-weight:800;color:#1f2937;margin-bottom:10px}
 
-/* 리스트(저장/최근본) */
+
 .list-v{list-style:none;display:flex;flex-direction:column;gap:10px}
 .list-item{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -214,12 +214,12 @@ footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px
   border:1px solid #C8ECD9
 }
 
-/* 2열 그리드 */
+
 .grid-2{display:grid;grid-template-columns:1fr;align-items:start}
 @media (min-width: 980px){.grid-2{grid-template-columns:1fr 1fr}}
 .gap-24{gap:24px}
 
-/* 내 레시피 카드 보정 */
+
 .my-recipes .card-sub{font-size:12px;color:#6b7280}
 .bar{display:flex;align-items:center}
 .between{justify-content:space-between}
@@ -235,10 +235,10 @@ footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px
 }
 .btn-warn:hover{background:#FFF1BF}
 
-/* 방향/여백 유틸 */
+
 .right{text-align:right}
 
-/* 플로팅 버튼 */
+
 .float-btn{
   position:fixed;bottom:16px;left:16px;background:#fff;color:#111;border:1px solid #d1d5db;
   padding:8px 12px;border-radius:999px;box-shadow:var(--shadow);font-size:14px;opacity:.9;transition:opacity .2s
@@ -247,26 +247,26 @@ footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px
 .left-btn{left:16px}
 
 .my-recipes .card:hover {
-  transform: none;        /* 둥실 효과 제거 */
+  transform: none;        
   box-shadow: var(--shadow-lg);
 }
 
-/* 각 입력 필드를 묶는 그룹 */
+
 .form-group {
   margin-top: 24px;
 }
 
-/* 폼 레이블(설명) 스타일 */
+
 .form-label {
-  display: block; /* 줄바꿈 적용 */
+  display: block; 
   font-weight: 700;
   color: #374151;
   margin-bottom: 8px;
 }
 
-/* 텍스트 입력 필드(input, textarea) 공통 스타일 */
+
 .input-text {
-  width: 100%; /* 너비를 100%로 설정해 여백 문제 해결 */
+  width: 100%; 
   padding: 12px 16px;
   font-size: 16px;
   border: 1px solid var(--border);
@@ -278,12 +278,12 @@ footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px
 
 .input-text:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(255, 99, 71, .2); /* 포커스 시 강조 효과 */
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, .2); 
 }
 
-/* 파일 업로드 필드 커스텀 스타일 */
+
 .input-file {
-  display: none; /* 기본 파일 선택 버튼 숨기기 */
+  display: none; 
 }
 
 .file-label {
@@ -305,4 +305,11 @@ footer{background:#111827;color:#fff;margin-top:48px;padding:18px;font-size:13px
 .btn-solid {
     padding: 14px 28px;
     font-size: 16px;
+}
+
+/* 내가 등록한 레시피 그리드 칸 수 조정 */
+@media (min-width: 920px) {
+  .my-recipes.card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
