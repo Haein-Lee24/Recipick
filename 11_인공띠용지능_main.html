@@ -1,109 +1,178 @@
 <!DOCTYPE html>
 <html lang="ko" id="top">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recipick - 메인 페이지</title>
-  <link rel="stylesheet" href="Recipick_style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipick - 메인 페이지</title>
+    <link rel="stylesheet" href="Recipick_style.css" />
+  </head>
+  <body>
+    <!-- 네비게이션 -->
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
+            <img src="Recipick_logo.png" alt="Recipick 로고" class="logo" />
+          </a>
+        </div>
+        <div class="menu" role="navigation" aria-label="주요 메뉴">
+          <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
+          <a class="nav-link" href="11_인공띠용지능_menulist.html#korean"
+            >레시피</a
+          >
+          <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+          <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
+          <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+        </div>
+      </div>
+    </nav>
 
-  <!-- 네비게이션 -->
-  <nav class="site-nav">
-    <div class="container nav-inner">
-      <div class="logo-area">
-        <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
-          <img src="Recipick_logo.png" alt="Recipick 로고" class="logo">
+    <main class="container page-pad">
+      <!-- 히어로 -->
+      <section class="hero" aria-label="메인 인트로">
+        <h1>
+          오늘 뭐 먹지? 🤔 <span class="brand">Recipick</span>에서 골라보세요!
+        </h1>
+      </section>
+
+      <!-- 카테고리 -->
+      <h2 class="section-title">카테고리별 레시피 탐색</h2>
+      <div class="cat-grid" aria-label="레시피 카테고리">
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist.html#korean"
+          aria-label="한식 카테고리로 이동"
+        >
+          <img src="kimchi.jpg" alt="김치 등 한식 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>한식</span>
+          </div>
+        </a>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist.html#western"
+          aria-label="양식 카테고리로 이동"
+        >
+          <img src="pasta.jpg" alt="파스타 등 양식 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>양식</span>
+          </div>
+        </a>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist.html#chinese"
+          aria-label="중식 카테고리로 이동"
+        >
+          <img src="chinese.png" alt="짜장/짬뽕 등 중식 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>중식</span>
+          </div>
+        </a>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist.html#dessert"
+          aria-label="디저트 카테고리로 이동"
+        >
+          <img src="snack.jpg" alt="아이스크림 등 디저트 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>디저트</span>
+          </div>
+        </a>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist.html#drink"
+          aria-label="음료 카테고리로 이동"
+        >
+          <img src="drink.png" alt="커피 등 음료 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>음료</span>
+          </div>
         </a>
       </div>
-      <div class="menu" role="navigation" aria-label="주요 메뉴">
-        <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
-        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
-        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-        <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
-      </div>
-    </div>
-  </nav>
 
-  <main class="container page-pad">
-    <!-- 히어로 -->
-    <section class="hero" aria-label="메인 인트로">
-      <h1>오늘 뭐 먹지? 🤔 <span class="brand">Recipick</span>에서 골라보세요!</h1>
-    </section>
+      <!-- 재료 검색 -->
+      <section class="mt-60" aria-label="재료 검색">
+        <h2 class="section-title mt-0">원하는 재료로 레시피를 발견하세요!</h2>
+        <div class="search-wrap">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="예: 김치, 계란, 파스타면..."
+            aria-label="재료명으로 레시피 검색"
+          />
+          <button class="search-btn" type="button" aria-label="검색 실행">
+            검색
+          </button>
+        </div>
+      </section>
 
-    <!-- 카테고리 -->
-    <h2 class="section-title">카테고리별 레시피 탐색</h2>
-    <div class="cat-grid" aria-label="레시피 카테고리">
-      <a class="cat-card" href="11_인공띠용지능_menulist.html#korean" aria-label="한식 카테고리로 이동">
-        <img src="kimchi.jpg" alt="김치 등 한식 이미지">
-        <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🍚</span> 한식</span></div>
-      </a>
-      <a class="cat-card" href="11_인공띠용지능_menulist.html#western" aria-label="양식 카테고리로 이동">
-        <img src="pasta.jpg" alt="파스타 등 양식 이미지">
-        <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🍕</span> 양식</span></div>
-      </a>
-      <a class="cat-card" href="11_인공띠용지능_menulist.html#chinese" aria-label="중식 카테고리로 이동">
-        <img src="chinese.png" alt="짜장/짬뽕 등 중식 이미지">
-        <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🥢</span> 중식</span></div>
-      </a>
-      <a class="cat-card" href="11_인공띠용지능_menulist.html#dessert" aria-label="디저트 카테고리로 이동">
-        <img src="snack.jpg" alt="아이스크림 등 디저트 이미지">
-        <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">🍰</span> 디저트</span></div>
-      </a>
-      <a class="cat-card" href="11_인공띠용지능_menulist.html#drink" aria-label="음료 카테고리로 이동">
-        <img src="drink.png" alt="커피 등 음료 이미지">
-        <div class="cat-overlay"><span class="cat-btn"><span class="cat-emoji">☕</span> 음료</span></div>
-      </a>
-    </div>
+      <!-- 인기 레시피 -->
+      <section class="mt-60" aria-label="인기 레시피">
+        <h3
+          class="center text-gray-deep"
+          style="font-size: 20px; font-weight: 700; margin: 0 0 16px"
+        >
+          인기 레시피
+        </h3>
+        <div class="card-grid">
+          <a
+            href="11_인공띠용지능_detail_r1.html"
+            class="card"
+            aria-label="달콤한 허니 버터 갈릭 쉬림프 상세로 이동"
+          >
+            <img src="갈릭쉬림프.jpg" alt="갈릭 쉬림프 썸네일" class="thumb" />
+            <p class="card-title">달콤한 허니 버터 갈릭 쉬림프</p>
+            <div class="rating">★★★★☆ (4.5)</div>
+          </a>
+          <a
+            href="11_인공띠용지능_detail_r2.html"
+            class="card"
+            aria-label="초간단 샐러드 파스타 상세로 이동"
+          >
+            <img
+              src="샐러드파스타.jpg"
+              alt="샐러드 파스타 썸네일"
+              class="thumb"
+            />
+            <p class="card-title">5분 완성! 초간단 샐러드 파스타</p>
+            <div class="rating">★★★★★ (4.9)</div>
+          </a>
+          <a
+            href="11_인공띠용지능_detail_r3.html"
+            class="card"
+            aria-label="마약 옥수수 상세로 이동"
+          >
+            <img src="마약옥수수.jpg" alt="마약 옥수수 썸네일" class="thumb" />
+            <p class="card-title">단짠단짠 마약 옥수수</p>
+            <div class="rating">★★★★☆ (4.3)</div>
+          </a>
+          <a
+            href="11_인공띠용지능_detail_r4.html"
+            class="card"
+            aria-label="부채살 스테이크 상세로 이동"
+          >
+            <img
+              src="스테이크.jpg"
+              alt="부채살 스테이크 썸네일"
+              class="thumb"
+            />
+            <p class="card-title">고급진 부채살 스테이크</p>
+            <div class="rating">★★★★★ (4.8)</div>
+          </a>
+        </div>
+        <div class="center mt-20">
+          <a href="11_인공띠용지능_rank.html" class="more-btn">더보기 →</a>
+        </div>
+      </section>
+    </main>
 
-    <!-- 재료 검색 -->
-    <section class="mt-60" aria-label="재료 검색">
-      <h2 class="section-title mt-0">원하는 재료로 레시피를 발견하세요!</h2>
-      <div class="search-wrap">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input type="text" class="search-input" placeholder="예: 김치, 계란, 파스타면..." aria-label="재료명으로 레시피 검색">
-        <button class="search-btn" type="button" aria-label="검색 실행">검색</button>
-      </div>
-    </section>
+    <!-- 맨 위로 -->
+    <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
 
-    <!-- 인기 레시피 -->
-    <section class="mt-60" aria-label="인기 레시피">
-      <h3 class="center text-gray-deep" style="font-size:20px;font-weight:700;margin:0 0 16px;">인기 레시피</h3>
-      <div class="card-grid">
-        <a href="11_인공띠용지능_detail_r1.html" class="card" aria-label="달콤한 허니 버터 갈릭 쉬림프 상세로 이동">
-          <img src="갈릭쉬림프.jpg" alt="갈릭 쉬림프 썸네일" class="thumb">
-          <p class="card-title">달콤한 허니 버터 갈릭 쉬림프</p>
-          <div class="rating">★★★★☆ (4.5)</div>
-        </a>
-        <a href="11_인공띠용지능_detail_r2.html" class="card" aria-label="초간단 샐러드 파스타 상세로 이동">
-          <img src="샐러드파스타.jpg" alt="샐러드 파스타 썸네일" class="thumb">
-          <p class="card-title">5분 완성! 초간단 샐러드 파스타</p>
-          <div class="rating">★★★★★ (4.9)</div>
-        </a>
-        <a href="11_인공띠용지능_detail_r3.html" class="card" aria-label="마약 옥수수 상세로 이동">
-          <img src="마약옥수수.jpg" alt="마약 옥수수 썸네일" class="thumb">
-          <p class="card-title">단짠단짠 마약 옥수수</p>
-          <div class="rating">★★★★☆ (4.3)</div>
-        </a>
-        <a href="11_인공띠용지능_detail_r4.html" class="card" aria-label="부채살 스테이크 상세로 이동">
-          <img src="스테이크.jpg" alt="부채살 스테이크 썸네일" class="thumb">
-          <p class="card-title">고급진 부채살 스테이크</p>
-          <div class="rating">★★★★★ (4.8)</div>
-        </a>
-      </div>
-      <div class="center mt-20">
-        <a href="11_인공띠용지능_rank.html" class="more-btn">더보기 →</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- 맨 위로 -->
-  <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
-
-  <!-- 푸터 -->
-  <footer>
-    &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
-  </footer>
-</body>
+    <!-- 푸터 -->
+    <footer>
+      &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
+    </footer>
+  </body>
 </html>
