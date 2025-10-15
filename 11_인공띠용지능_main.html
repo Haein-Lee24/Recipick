@@ -6,6 +6,44 @@
     <title>냠냠노트 - 메인 페이지</title>
     <link rel="stylesheet" href="Recipick_style.css" />
   </head>
+  <style>
+  .hero {
+  position: relative;
+  background: url("banner.jpg") center/cover no-repeat; /* 배너 배경 이미지 */
+  min-height: 400px; /* 높이 조절 가능 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 20px auto;
+}
+
+/* 배경을 약간 흐리게 하고 싶다면 */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("banner.jpg") center/cover no-repeat;
+  opacity: 0.5; /* 배경 불투명도 (0~1) */
+  z-index: 0;
+  filter: brightness(1.1); /* 살짝 밝게 조정 (선택사항) */
+}
+
+/* 중앙의 하얀 반투명 박스 */
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.8); /* 🔸하얀 반투명 */
+  padding: 25px 40px;
+  border-radius: 16px;
+  color: #3c2f2f; /* 글씨색 */
+  font-weight: 700;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+}
+</style>
+
   <body>
     <!-- 네비게이션 -->
     <nav class="site-nav">
