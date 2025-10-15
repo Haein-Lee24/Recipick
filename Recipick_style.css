@@ -803,6 +803,38 @@ footer {
 .file-label:hover {
   background-color: #1f2937;
 }
+.recipe-meta {
+  font-size: 0.7rem;       /* 🔸 글자 크기 작게 */
+  color: var(--muted);     /* 🔸 기존 muted 컬러로 통일 */
+  margin-top: 4px;         /* 🔸 제목과 약간 간격 */
+}
+
+.view-all-btn-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  width: 100%;  /* 부모 너비에 맞춤 */
+}
+
+.view-all-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.view-all-btn:hover {
+  background: #e5dabf;
+  transform: translateY(-2px);
+}
+
 
 /* 저장하기 버튼 크기 키우기 */
 .btn-solid {
