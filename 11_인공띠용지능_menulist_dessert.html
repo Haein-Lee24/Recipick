@@ -4,97 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipick - 디저트 레시피 전체</title>
+    <link rel="stylesheet" href="Recipick_style.css" />
     <style>
-      :root {
-        --primary-color: #f97316;
-        --bg-gray: #f9fafb;
-        --text-gray: #6b7280;
-        --text-dark: #1f2937;
-        --border-gray: #d1d5db;
-        --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        margin: 0;
-        font-family: 'Noto Sans KR', sans-serif;
-        background: var(--bg-gray);
-        color: var(--text-dark);
-      }
-
-      /* 네비게이션 */
-      nav {
-        position: sticky;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #fff;
-        box-shadow: var(--shadow);
-        z-index: 50;
-      }
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 64px;
-      }
-      .nav-links {
-        display: flex;
-        gap: 1.5rem;
-      }
-      .nav-links a {
-        text-decoration: none;
-        color: var(--text-dark);
-        font-weight: 500;
-        transition: color 0.2s;
-      }
-      .nav-links a:hover {
-        color: var(--primary-color);
-      }
-      .nav-links a.active {
-        color: var(--primary-color);
-        font-weight: 700;
-      }
-
-      /* 헤더 */
+      /* 페이지 고유 스타일 (한식/중식과 동일 구조) */
       header {
-        background: #fff;
-        border-bottom: 1px solid var(--border-gray);
+        background: var(--card-bg);
+        border-bottom: 1px solid var(--border);
       }
       .header-container {
-        max-width: 1200px;
+        max-width: 1080px;
         margin: 0 auto;
-        padding: 1.5rem 1rem;
+        padding: 32px 16px 24px;
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
       .header-container h1 {
-        font-size: 1.8rem;
+        font-size: 24px;
         font-weight: 800;
+        color: var(--text);
+        letter-spacing: -0.2px;
+        margin: 0;
       }
       .header-container span {
-        font-size: 0.9rem;
-        color: var(--text-gray);
+        font-size: 14px;
+        color: var(--muted);
       }
       select {
-        border: 1px solid var(--border-gray);
+        border: 1px solid var(--border);
         border-radius: 8px;
-        padding: 4px 8px;
-        font-size: 0.9rem;
-        background: white;
+        padding: 8px 10px;
+        font-size: 14px;
+        background: var(--card-bg);
+        color: var(--text);
       }
 
-      /* 카드 그리드 */
       main {
-        max-width: 1200px;
+        max-width: 1080px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: 24px 16px;
       }
       .grid {
         display: grid;
@@ -102,58 +50,60 @@
         gap: 20px;
       }
       @media (min-width: 640px) {
-        .grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
+        .grid { grid-template-columns: repeat(2, 1fr); }
       }
-      @media (min-width: 1024px) {
-        .grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
+      @media (min-width: 920px) {
+        .grid { grid-template-columns: repeat(3, 1fr); }
       }
-      @media (min-width: 1280px) {
-        .grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
+      @media (min-width: 1040px) {
+        .grid { grid-template-columns: repeat(4, 1fr); }
       }
 
       .card {
-        background: white;
-        border-radius: 12px;
+        background: var(--card-bg);
+        border-radius: 14px;
         overflow: hidden;
         box-shadow: var(--shadow);
         text-decoration: none;
         color: inherit;
-        transition: box-shadow 0.2s;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 1px solid var(--border);
+        padding: 12px;
       }
       .card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
       }
       .card-thumb {
-        height: 130px;
+        width: 100%;
+        height: 132px;
         background-size: cover;
         background-position: center;
+        border-radius: 10px;
+        display: block;
+        margin-bottom: 8px;
       }
-      .card-body {
-        padding: 1rem;
-      }
+      .card-body { padding: 0 4px; }
       .card-title {
         font-weight: 700;
-        margin: 0;
-        font-size: 1.1rem;
+        color: var(--text);
+        margin: 0 0 4px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-size: 16px;
       }
       .card-body p {
-        margin: 0.25rem 0 0;
-        font-size: 0.8rem;
-        color: var(--text-gray);
+        margin: 0 0 4px;
+        font-size: 12px;
+        color: var(--muted);
       }
       .rating {
-        margin-top: 0.3rem;
-        font-size: 0.9rem;
-        color: #facc15;
+        margin-top: 4px;
+        font-size: 14px;
+        color: #e2b458;
       }
 
-      /* 고정 버튼 */
       .back-btn,
       .top-btn {
         position: fixed;
@@ -161,69 +111,47 @@
         z-index: 50;
         display: flex;
         align-items: center;
-        gap: 0.4rem;
-        padding: 0.5rem 0.8rem;
-        border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid var(--border-gray);
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: var(--primary-color);
+        color: #fff;
         box-shadow: var(--shadow);
         text-decoration: none;
-        color: var(--text-dark);
-        backdrop-filter: blur(4px);
-        font-size: 0.9rem;
+        font-size: 14px;
+        opacity: 0.9;
+        transition: opacity 0.2s;
       }
-      .back-btn:hover {
-        background: white;
-      }
-      .back-btn::before {
-        content: '←';
-        font-size: 1rem;
-      }
-      .back-btn {
-        left: 16px;
-      }
+      .back-btn:hover,
+      .top-btn:hover { opacity: 1; }
+      .back-btn { left: 16px; }
+      .top-btn { right: 16px; background: var(--primary-color); }
 
-      .top-btn {
-        right: 16px;
-        background: var(--text-dark);
-        color: white;
-        opacity: 0.85;
-      }
-      .top-btn:hover {
-        opacity: 1;
-      }
-
-      /* 푸터 */
       footer {
-        background: var(--text-dark);
-        color: white;
-        padding: 1rem;
-        margin-top: 3rem;
+        max-width: 1080px;
+        margin: 40px auto 20px;
+        color: var(--muted);
         text-align: center;
-        font-size: 0.85rem;
+        font-size: 12px;
       }
     </style>
   </head>
   <body>
     <span id="top"></span>
 
-    <nav>
-      <div class="nav-container">
-        <a href="11_인공띠용지능_main.html">
-          <img
-            src="Recipick_logo.png"
-            alt="Recipick 로고"
-            style="height: 40px; border-radius: 6px"
-          />
-        </a>
-        <div class="nav-links">
-          <a href="11_인공띠용지능_main.html">홈</a>
-          <a href="11_인공띠용지능_menulist.html#dessert" class="active"
-            >레시피</a
-          >
-          <a href="11_인공띠용지능_register.html">등록</a>
-          <a href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-          <a href="11_인공띠용지능_mypage.html">마이페이지</a>
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
+            <img src="Recipick_logo.png" alt="Recipick 로고" class="logo" />
+          </a>
+        </div>
+        <div class="menu" role="navigation" aria-label="주요 메뉴">
+          <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
+          <a class="nav-link nav-active" href="11_인공띠용지능_menulist.html#dessert">레시피</a>
+          <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+          <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
+          <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
         </div>
       </div>
     </nav>
@@ -232,8 +160,8 @@
       <div class="header-container">
         <h1>디저트 레시피 전체 <span>(총 11개)</span></h1>
         <div class="sort">
-          <label style="font-size: 0.9rem; color: var(--text-gray)">정렬</label>
-          <select>
+          <label style="font-size:0.9rem;color:var(--muted)">정렬</label>
+          <select aria-label="정렬 기준 선택">
             <option>별점순</option>
             <option>최신등록순</option>
             <option>조회순</option>
@@ -244,134 +172,99 @@
 
     <main>
       <div class="grid">
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">아몬드 쿠키</h3>
             <p>작성자: 베이킹홀릭 · 조회수: 58.1K</p>
             <div class="rating">★★★★☆ (4.5)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">블론디</h3>
             <p>작성자: 베이킹러버 · 조회수: 5.2K</p>
             <div class="rating">★★★★☆ (4.3)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">초코 브라우니</h3>
             <p>작성자: 초코중독 · 조회수: 18.2K</p>
             <div class="rating">★★★★★ (4.8)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">치즈케이크</h3>
             <p>작성자: 뉴욕베이커리 · 조회수: 9.0K</p>
             <div class="rating">★★★★★ (4.7)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">티라미수</h3>
             <p>작성자: 디저트소믈리에 · 조회수: 7.6K</p>
             <div class="rating">★★★★☆ (4.6)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">마카롱</h3>
             <p>작성자: 프렌치디저트 · 조회수: 12.7K</p>
             <div class="rating">★★★★☆ (4.4)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">애플파이</h3>
             <p>작성자: 홈베이킹 · 조회수: 6.9K</p>
             <div class="rating">★★★★☆ (4.3)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">레몬 타르트</h3>
             <p>작성자: 시트러스러버 · 조회수: 4.3K</p>
             <div class="rating">★★★★☆ (4.2)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">판나코타</h3>
             <p>작성자: 이탈리안디저트 · 조회수: 3.5K</p>
             <div class="rating">★★★★☆ (4.1)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">크림 브륄레</h3>
             <p>작성자: 파리지앵 · 조회수: 5.1K</p>
             <div class="rating">★★★★★ (4.7)</div>
-          </div></a
-        >
-        <a href="11_인공띠용지능_detail_d.html" class="card"
-          ><div
-            class="card-thumb"
-            style="background-image: url('snack.jpg')"
-          ></div>
+          </div>
+        </a>
+        <a href="11_인공띠용지능_detail_d.html" class="card">
+          <div class="card-thumb" style="background-image:url('snack.jpg')"></div>
           <div class="card-body">
             <h3 class="card-title">초코칩 쿠키</h3>
             <p>작성자: 쿠키하우스 · 조회수: 19.8K</p>
             <div class="rating">★★★★★ (4.8)</div>
-          </div></a
-        >
+          </div>
+        </a>
       </div>
     </main>
 
-    <a href="11_인공띠용지능_menulist.html#dessert" class="back-btn"
-      >카테고리별 레시피 보기</a
-    >
-    <a href="#top" class="top-btn">맨 위로 ↑</a>
+    <a href="11_인공띠용지능_menulist.html#dessert" class="back-btn">카테고리별 레시피 보기</a>
+    <a href="#top" class="top-btn" aria-label="맨 위로 이동">맨 위로 ↑</a>
 
     <footer>
       &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
