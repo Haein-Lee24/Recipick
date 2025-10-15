@@ -1,3 +1,4 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 /* ---- Theme tokens ---- */
 :root {
   --primary-color: #6f5a2c; /* 로고의 진한 갈색을 메인 색상으로 */
@@ -34,7 +35,7 @@ body {
 }
 
 body {
-  font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  font-family: 'NanumSquare', system-ui, -apple-system, sans-serif;
   color: var(--text);
   background: var(--page-bg);
   line-height: 1.6;
