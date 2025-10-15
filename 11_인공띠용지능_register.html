@@ -5,40 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>냠냠노트 - 레시피 등록</title>
 
-  <!-- (삭제됨) Tailwind CDN -->
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-
-  <!-- 팀 공통 아이콘 & 단일 CSS -->
+  <!-- 외부 아이콘 & 공통 CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="Recipick_style.css">
 
   <style>
-    /* 모달 전용(페이지 내 간단 커스텀) */
-    .modal {position:fixed;inset:0;display:none;background:rgba(0,0,0,.45);padding:24px;z-index:60;}
-    .modal:target {display:block;}
-    .modal-card {max-width:480px;margin:100px auto;background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.2);overflow:hidden;}
-    .modal-body {padding:24px;}
-    .modal-close {display:inline-block;padding:10px 18px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;text-decoration:none;color:#111827;}
-    .modal-close:hover {background:#f9fafb;}
-    /* 폼 가독성을 위한 아주 약한 보조 스타일 (공통 CSS에 폼 베이스가 없어 최소한만 추가) */
-    .form-card label{display:block;font-weight:700;margin-bottom:8px;color:#111;}
+    /* ===============================
+       등록 페이지 전용 스타일 (내부)
+       =============================== */
+
+    /* 폼 요소 공통 */
+    .form-card label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #111;
+    }
+
     .form-card input[type="text"],
     .form-card input[type="file"],
-    .form-card textarea{
-      width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;outline:none;background:#fff;
+    .form-card textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      background: #fff;
     }
-    .form-card textarea{resize:vertical}
-    .form-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;padding-top:8px}
-    .btn-secondary{
-      display:inline-block;padding:12px 24px;border-radius:var(--radius-full);border:1px solid var(--border);background:#fff;transition:opacity .2s;
-      box-shadow:var(--shadow);font-weight:700;color:#111;
+
+    .form-card textarea {
+      resize: vertical;
     }
-    .btn-secondary:hover{opacity:.92}
-    .radio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-    @media(min-width:780px){.radio-grid{grid-template-columns:repeat(3,1fr)}}
-    .radio-item{display:flex;align-items:center;gap:8px}
+
+    /* ✅ 등록하기 / 임시저장 버튼 정렬 (가운데 정렬 + 미세 높이 보정) */
+    .form-actions {
+      display: flex;
+      justify-content: center; /* 가운데 정렬 */
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .form-actions .more-btn,
+    .form-actions .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 46px;
+      min-width: 140px;
+      padding: 0 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 1;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    .form-actions .more-btn {
+      background: var(--primary-color);     /* 등록하기 버튼 색상 */
+      color: #fff;
+      border: 1px solid var(--primary-color);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      margin-top: 0 !important;             /* 🔥 외부 CSS에 있던 여백 제거 */
+      transform: translateY(-0.5px);          /* 🔧 등록하기 버튼만 살짝 위로 조정 */
+    }
+
+
+
+
+    /* 임시저장 버튼 */
+    .form-actions .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Hover 효과 */
+    .form-actions .more-btn:hover {
+      opacity: 0.9;
+    }
+
+    .form-actions .btn-secondary:hover {
+      background: #fafafa;
+    }
   </style>
 </head>
+
 <body>
   <a id="top"></a>
 
@@ -46,16 +100,16 @@
   <nav class="site-nav">
     <div class="container nav-inner">
       <div class="logo-area">
-        <a href="Recipick_main.html">
-          <img src="Recipick_logo.png" alt="Recipick 로고" class="logo-img">
+        <a href="냠냠노트_main.html">
+          <img src="냠냠노트_logo.png" alt="냠냠노트 로고" class="logo-img">
         </a>
       </div>
       <nav class="menu">
-        <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
-        <a href="11_인공띠용지능_menulist.html#korean-list" class="nav-link">레시피</a>
-        <a href="11_인공띠용지능_register.html" class="nav-link active">등록</a>
-        <a href="11_인공띠용지능_rank.html#ranking" class="nav-link">랭킹</a>
-        <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
+        <a href="냠냠노트_main.html" class="nav-link">홈</a>
+        <a href="냠냠노트_menulist.html#korean-list" class="nav-link">레시피</a>
+        <a href="냠냠노트_register.html" class="nav-link active">등록</a>
+        <a href="냠냠노트_rank.html#ranking" class="nav-link">랭킹</a>
+        <a href="냠냠노트_mypage.html" class="nav-link">마이페이지</a>
       </nav>
     </div>
   </nav>
@@ -63,8 +117,6 @@
   <!-- 본문 -->
   <main class="page-pad">
     <div id="register" class="container">
-
-      <!-- 헤더(히어로 카드 느낌) -->
       <header class="hero mt-20 center">
         <h1 class="mt-0">
           <i class="fas fa-pen-nib brand"></i>
@@ -75,59 +127,41 @@
         </p>
       </header>
 
-      <!-- 섹션 타이틀 -->
       <h2 class="section-title">레시피 정보 입력</h2>
 
-      <!-- 폼 카드 -->
-      <form action="11_인공띠용지능_submit.html" method="post" enctype="multipart/form-data" class="card form-card">
-
-        <!-- 제목 -->
+      <form class="card form-card">
         <div class="mt-20">
           <label for="title">레시피 제목</label>
           <input id="title" name="title" type="text" required placeholder="예: 부드러운 크림 파스타">
         </div>
 
-        <!-- 카테고리 -->
         <div class="mt-20">
           <span style="display:block;font-weight:700;margin-bottom:8px">요리 카테고리 (1개 선택)</span>
           <div class="radio-grid">
-            <label class="radio-item">
-              <input type="radio" name="category" value="한식" required> <span>한식</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="category" value="양식"> <span>양식</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="category" value="중식"> <span>중식</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="category" value="디저트"> <span>디저트</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="category" value="음료"> <span>음료</span>
-            </label>
+            <label class="radio-item"><input type="radio" name="category" value="한식" required> 한식</label>
+            <label class="radio-item"><input type="radio" name="category" value="양식"> 양식</label>
+            <label class="radio-item"><input type="radio" name="category" value="중식"> 중식</label>
+            <label class="radio-item"><input type="radio" name="category" value="디저트"> 디저트</label>
+            <label class="radio-item"><input type="radio" name="category" value="음료"> 음료</label>
           </div>
         </div>
 
-        <!-- 이미지 -->
         <div class="mt-20">
           <label for="image">대표 이미지 업로드</label>
           <input id="image" name="image" type="file" accept="image/*" required>
         </div>
 
-        <!-- 재료 -->
         <div class="mt-20">
           <label for="ingredients">재료</label>
           <textarea id="ingredients" name="ingredients" rows="4" required placeholder="예: 스파게티면 200g, 생크림 1컵, 베이컨 3줄..."></textarea>
         </div>
 
-        <!-- 조리 순서 -->
         <div class="mt-20">
           <label for="steps">조리 순서</label>
           <textarea id="steps" name="steps" rows="6" required placeholder="1) 면을 삶는다.&#10;2) 베이컨과 마늘을 볶는다.&#10;3) 생크림을 넣고 졸인다."></textarea>
         </div>
 
-        <!-- 버튼 -->
+        <!-- ✅ 버튼 구역 -->
         <div class="form-actions">
           <button type="submit" class="more-btn">등록하기</button>
           <a href="#draft" class="btn-secondary">임시저장</a>
@@ -136,34 +170,8 @@
     </div>
   </main>
 
-  <!-- 뒤로가기 -->
-  <a href="11_인공띠용지능_main.html#korean"
-     style="position:fixed;left:16px;bottom:16px;z-index:50;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;box-shadow:var(--shadow);background:#ffffffcc;border:1px solid var(--border);color:#111;">
-    <i class="fas fa-arrow-left"></i><span style="font-size:13px">뒤로가기</span>
-  </a>
-
-  <!-- 맨 위로 -->
-  <a href="#top" class="to-top">맨 위로 ↑</a>
-
-  <!-- 푸터 -->
   <footer>
-    &copy; 2025 Recipick Wireframe. All rights reserved.
+    &copy; 2025 냠냠노트. All rights reserved.
   </footer>
-
-  <!-- 모달 -->
-  <div id="draft" class="modal" role="dialog" aria-labelledby="draft-title" aria-modal="true">
-    <div class="modal-card">
-      <div class="modal-body">
-        <h2 id="draft-title" style="font-size:20px;font-weight:800;color:#111">임시저장 안내</h2>
-        <p style="margin-top:12px;font-size:14px;color:var(--muted)">
-          입력 중인 내용은 자동으로 저장되지 않습니다.<br>
-          작성 중이던 내용이 사라지지 않도록 등록 전 내용을 확인해주세요.
-        </p>
-        <div style="margin-top:20px;display:flex;justify-content:flex-end">
-          <a href="#" class="modal-close">닫기</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
