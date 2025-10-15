@@ -692,39 +692,54 @@ footer {
 .between {
   justify-content: space-between;
 }
-.btn-row {
-  display: flex;
-  gap: 8px;
-}
-.btn-solid {
-  display: inline-block;
-  background: var(--primary-color);
-  color: #fff;
-  font-weight: 800;
-  padding: 10px 14px;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  transition: opacity 0.2s;
-}
-.btn-solid:hover {
-  opacity: 0.92;
-}
-.btn-warn {
-  display: inline-block;
-  background: #fff7d6;
-  color: #7c5a00;
-  font-weight: 800;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid #f3e5ab;
-}
-.btn-warn:hover {
-  background: #fff1bf;
-}
 
 .right {
   text-align: right;
 }
+.btn-row {
+  display: flex;
+  align-items: center; /* ✅ 수직정렬 */
+  gap: 8px;
+}
+
+.btn-solid,
+.btn-warn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1;
+  min-width: 140px;   /* ✅ 버튼 폭 통일 */
+  height: 44px;       /* ✅ 버튼 높이 통일 */
+  padding: 0 16px;    /* ✅ 좌우 여백만 유지 */
+  box-sizing: border-box; /* ✅ border 포함 크기 계산 */
+}
+
+.btn-solid {
+  background: var(--primary-color);
+  color: #fff;
+  border: 1px solid var(--primary-color);
+  box-shadow: var(--shadow);
+  transition: opacity 0.2s;
+}
+
+.btn-solid:hover {
+  opacity: 0.92;
+}
+
+.btn-warn {
+  background: #fff7d6;
+  color: #7c5a00;
+  border: 1px solid #f3e5ab;
+  transition: background-color 0.2s;
+}
+
+.btn-warn:hover {
+  background: #fff1bf;
+}
+
 
 .float-btn {
   position: fixed;
