@@ -824,9 +824,7 @@ footer {
   box-shadow: 0 0 0 3px rgba(111, 90, 44, 0.2);
 }
 
-.input-file {
-  display: none;
-}
+
 
 .file-label {
   display: inline-block;
