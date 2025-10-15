@@ -509,7 +509,7 @@ footer {
 
 .profile-cover {
   height: 160px;
-  background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop');
+  background-image: url(background.jpg);
   background-size: cover;
   background-position: center;
   border-bottom: 1px solid var(--border);
@@ -573,7 +573,7 @@ footer {
   background: #fff;
   font-weight: 700;
   color: var(--text);
-  transition: background 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .btn-outline:hover {
@@ -635,7 +635,7 @@ footer {
   border: 1px solid var(--border);
   border-radius: 12px;
   background: #fff;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 .list-item:hover {
   background: #f9fafb;
