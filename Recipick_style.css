@@ -318,7 +318,7 @@ a {
   gap: 8px;
   background: rgba(255, 255, 255, 0.75); /* 흰색 반투명 배경 추가 */
   backdrop-filter: blur(4px); /* 배경을 살짝 흐리게 만들어 가독성 UP */
-  color: var(--primary-color); /* 글자색을 로고의 진한 갈색으로 변경 */
+  color: var(--primary-color); 
   font-weight: 800;
   padding: 12px 20px;
   border-radius: var(--radius-full);
@@ -333,6 +333,7 @@ a {
   color: #fff;
   border-color: var(--primary-color);
 }
+
 .cat-emoji {
   font-size: 18px;
   filter: grayscale(100%); /* 이모지 색상을 흑백으로 */
@@ -507,7 +508,7 @@ footer {
 
 .profile-cover {
   height: 160px;
-  background-image: url(background.jpg);
+  background-image: url(background.png);
   background-size: cover;
   background-position: center;
   border-bottom: 1px solid var(--border);
