@@ -590,12 +590,6 @@ footer {
   color: var(--muted);
 }
 
-.profile-bio {
-  font-size: 14px;
-  color: var(--muted);
-  margin-top: 10px;
-}
-
 .profile-actions {
   margin-top: 12px;
 }
