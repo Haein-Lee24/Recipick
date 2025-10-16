@@ -308,11 +308,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: 0px;
 }
 /* 🌟 카테고리 버튼 디자인 개선 부분 🌟 */
 .cat-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
