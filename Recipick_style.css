@@ -98,6 +98,7 @@ a {
 
 .nav-link:hover {
   color: var(--primary-color);
+  transform: scale(1.05);
 }
 
 .nav-active {
