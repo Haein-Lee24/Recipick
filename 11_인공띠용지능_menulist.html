@@ -12,6 +12,16 @@
       section {
         scroll-margin-top: 140px; /* 네비게이션(64px) + 탭(56px) + 여유공간 약간 */
       }
+
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200; /* 네비게이션이 최상단에 오도록 */
+      }
+
+
       /* 페이지 고유의 추가 스타일 */
       .category-tabs {
         background: var(--card-bg);
@@ -22,7 +32,7 @@
         display: flex;
         justify-content: center;
         top: 64px; /* 네비게이션바 높이만큼 띄우기 */
-        z-index: 100;
+        z-index: 150;
       }
       .tabs-inner {
         display: flex;
