@@ -771,28 +771,25 @@ footer {
 .recipe-meta {
   font-size: 0.7rem;       
   color: var(--muted);     
-  margin-top: 4px;         
+  margin-top: 8px;         
 }
 
 .view-all-btn-wrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;;
   align-items: center;
-  margin-top: 24px;
-  width: 100%;  
+  margin-top: 30px !important;
+  width: 100;  
+  grid-column: 1 / -1;
 }
 
 .view-all-btn {
-  display: inline-block;
-  padding: 14px 28px;
+  padding: 14px 45px;
   background: var(--primary-color);
   color: #fff;
-  font-size: 1rem;
+  border-radius: 50px;
   font-weight: 700;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.25s ease, transform 0.25s ease;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: 0.25s;
 }
 
 .view-all-btn:hover {
