@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Recipick - 프로필 수정</title>
   <link rel="stylesheet" href="Recipick_style.css">
+  <style>
+      .background-box {
+      height: 140px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      background: url('background.png') center/cover;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  </style>
 </head>
 <body>
 
@@ -27,7 +43,7 @@
   </nav>
 
   <main class="container page-pad">
-    <section class="card-box center" aria-label="프로필 수정">
+    <section class="card-box center">
       <h1 style="font-size:28px;font-weight:800;color:#1f2937;">📝 프로필 수정하기</h1>
       <p style="color:#6b7280;font-size:14px;margin-top:6px;">
         변경 후 저장 버튼을 눌러주세요.
@@ -49,13 +65,8 @@
 
   <div class="form-group">
     <label class="form-label">배경 이미지 변경</label>
-    <div style="height:140px;border-radius:14px;border:1px solid #e5e7eb;
-                background:url('background.png')
-                center/cover;margin-bottom:8px;
-                display:flex;align-items:center;justify-content:center;">
-      <span style="color:#fff;background:rgba(0,0,0,0.4);padding:6px 12px;border-radius:8px;font-size:13px;">
+    <div class="background-box">
         현재 배경 이미지
-      </span>
     </div>
     <input id="background_image" name="background_image" type="file"class="input-file">
   </div>
