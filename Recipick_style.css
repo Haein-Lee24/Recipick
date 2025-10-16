@@ -174,13 +174,13 @@ a {
 
 /* Nav (site-nav) */
 .site-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background: #f7f0dc;
   box-shadow: none;
-  z-index: 50;
+  z-index: 200;
   border-bottom: 1px solid var(--border);
 }
 
@@ -834,7 +834,6 @@ footer {
   background: #e5dabf;
   transform: translateY(-2px);
 }
-
 
 /* 저장하기 버튼 크기 키우기 */
 .btn-solid {

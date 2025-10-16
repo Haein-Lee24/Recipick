@@ -6,14 +6,23 @@
     <title>Recipick - 레시피 목록</title>
     <link rel="stylesheet" href="Recipick_style.css" />
     <style>
+      body {
+        padding-top: 120px; /* 네비게이션 높이(64px) + 탭 높이(약 56px) */
+      }
+      section {
+        scroll-margin-top: 140px; /* 네비게이션(64px) + 탭(56px) + 여유공간 약간 */
+      }
       /* 페이지 고유의 추가 스타일 */
       .category-tabs {
         background: var(--card-bg);
         border-bottom: 1px solid var(--border);
         padding: 12px 0;
-        position: sticky;
+        position: fixed;
+        width: 100%; 
+        display: flex;
+        justify-content: center;
         top: 64px; /* 네비게이션바 높이만큼 띄우기 */
-        z-index: 40;
+        z-index: 100;
       }
       .tabs-inner {
         display: flex;
