@@ -195,10 +195,16 @@ a {
 
 .menu a:hover {
   color: var(--primary-color);
+  text-decoration: underline;
+  text-decoration-color: var(--primary-color);
+  text-underline-offset: 4px;
 }
 
 .menu a.active {
   color: var(--primary-color);
+  text-decoration: underline;
+  text-decoration-color: var(--primary-color);
+  text-underline-offset: 4px;
 }
 
 /* Hero */
