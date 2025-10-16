@@ -1,7 +1,7 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 /* ---- Theme tokens ---- */
 :root {
-  --primary-color: #6f5a2c; /* 로고의 진한 갈색을 메인 색상으로 */
+  --primary-color: #6f5a2c; 
   --yellow-soft: #f6e8c9;
   --yellow-deep: #6f5a2c;
   --green-soft: #e5f0e9;
@@ -9,12 +9,12 @@
   --gray-light: #f3f4f6;
   --gray-deep: #374151;
 
-  --text: #41403e; /* 텍스트를 좀 더 부드러운 검은색으로 */
-  --muted: #8c8c8c; /* 보조 텍스트 색상 */
+  --text: #41403e; 
+  --muted: #8c8c8c; 
   --card-bg: #fff;
   --page-bg: #fdf9f2; /* 'Happy Salads' 템플릿과 유사한 아주 옅은 베이지색으로 변경 */
   --border: #ded3c4; /* 연한 갈색 테두리로 부드러운 느낌 강조 */
-  --shadow: 0 4px 10px rgba(0, 0, 0, 0.04); /* 그림자를 더 옅게 조정 */
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.04); 
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
   --radius-lg: 16px;
   --radius-xl: 20px;
@@ -106,25 +106,8 @@ a {
   font-weight: 600;
 }
 
-/* 로그아웃 버튼 (예: 마이페이지) */
-.btn-logout {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #fff7eb;
-  color: #7c5a2f;
-  font-weight: 600;
-  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
-}
 
-.btn-logout:hover {
-  background: #f8e9d2;
-  border-color: #d9b591;
-}
+
 
 /* 팔로잉/팔로워 카드 */
 .follow-card {
@@ -522,25 +505,6 @@ footer {
   padding: 24px;
 }
 
-.avatar {
-  margin-top: -44px;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  border: 4px solid var(--page-bg);
-  background: #fff0e1;
-  color: var(--primary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 32px;
-  box-shadow: var(--shadow);
-}
-
-.profile-meta {
-  text-align: center;
-}
 
 .profile-name {
   font-size: 24px;
@@ -554,8 +518,11 @@ footer {
   color: var(--muted);
 }
 
-.profile-actions {
-  margin-top: 12px;
+.profile-bio {
+  font-size: 14px;
+  color: var(--text);
+  margin-top: 4px;
+  text-align: center;
 }
 
 .btn-outline {
@@ -574,29 +541,6 @@ footer {
   border-color: #d1d5db;
 }
 
-.stat-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 12px;
-  background: #f9fafb;
-  border-top: 1px solid var(--border);
-  padding: 12px 8px;
-}
-.stat {
-  text-align: center;
-}
-.stat-num {
-  display: block;
-  color: var(--text);
-  font-size: 18px;
-  font-weight: 800;
-}
-.stat-label {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-}
 
 .card-box {
   background: #fff;
@@ -613,12 +557,78 @@ footer {
   margin-bottom: 10px;
 }
 
+.btn-row {
+  display: flex;
+  align-items: center; 
+  gap: 8px;
+}
+
+.btn-warn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1;
+  min-width: 140px;
+  height: 44px;       
+  padding: 0 16px;    
+  box-sizing: border-box; 
+}
+
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1;
+  min-width: 140px;
+  height: 44px;       
+  padding: 0 16px;    
+  box-sizing: border-box; 
+  background: var(--primary-color);
+  color: #fff;
+  border: 1px solid var(--primary-color);
+  box-shadow: var(--shadow);
+  transition: opacity 0.2s;
+}
+
+.btn-solid:hover {
+  opacity: 0.92;
+}
+
+.btn-warn {
+  background: #fff7d6;
+  color: #7c5a00;
+  border: 1px solid #f3e5ab;
+  transition: background-color 0.2s;
+}
+
+.btn-warn:hover {
+  background: #fff1bf;
+}
+
+.badge-green {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e5f7ee;
+  color: #1b7a4a;
+  font-weight: 700;
+  border: 1px solid #c8ecd9;
+}
+
 .list-v {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
+
 .list-item {
   display: flex;
   align-items: center;
@@ -651,26 +661,22 @@ footer {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.badge-green {
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #e5f7ee;
-  color: #1b7a4a;
-  font-weight: 700;
-  border: 1px solid #c8ecd9;
-}
+
+
 
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr;
   align-items: start;
 }
+
 @media (min-width: 980px) {
   .grid-2 {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
 .gap-24 {
   gap: 24px;
 }
@@ -679,6 +685,7 @@ footer {
   font-size: 12px;
   color: var(--muted);
 }
+
 .bar {
   display: flex;
   align-items: center;
@@ -689,49 +696,6 @@ footer {
 
 .right {
   text-align: right;
-}
-.btn-row {
-  display: flex;
-  align-items: center; /* ✅ 수직정렬 */
-  gap: 8px;
-}
-
-.btn-solid,
-.btn-warn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  border-radius: 12px;
-  font-size: 15px;
-  line-height: 1;
-  min-width: 140px;   /* ✅ 버튼 폭 통일 */
-  height: 44px;       /* ✅ 버튼 높이 통일 */
-  padding: 0 16px;    /* ✅ 좌우 여백만 유지 */
-  box-sizing: border-box; /* ✅ border 포함 크기 계산 */
-}
-
-.btn-solid {
-  background: var(--primary-color);
-  color: #fff;
-  border: 1px solid var(--primary-color);
-  box-shadow: var(--shadow);
-  transition: opacity 0.2s;
-}
-
-.btn-solid:hover {
-  opacity: 0.92;
-}
-
-.btn-warn {
-  background: #fff7d6;
-  color: #7c5a00;
-  border: 1px solid #f3e5ab;
-  transition: background-color 0.2s;
-}
-
-.btn-warn:hover {
-  background: #fff1bf;
 }
 
 
@@ -805,9 +769,9 @@ footer {
   background-color: #1f2937;
 }
 .recipe-meta {
-  font-size: 0.7rem;       /* 🔸 글자 크기 작게 */
-  color: var(--muted);     /* 🔸 기존 muted 컬러로 통일 */
-  margin-top: 4px;         /* 🔸 제목과 약간 간격 */
+  font-size: 0.7rem;       
+  color: var(--muted);     
+  margin-top: 4px;         
 }
 
 .view-all-btn-wrap {
@@ -815,7 +779,7 @@ footer {
   justify-content: center;
   align-items: center;
   margin-top: 24px;
-  width: 100%;  /* 부모 너비에 맞춤 */
+  width: 100%;  
 }
 
 .view-all-btn {
@@ -836,13 +800,13 @@ footer {
   transform: translateY(-2px);
 }
 
-/* 저장하기 버튼 크기 키우기 */
+
 .btn-solid {
   padding: 14px 28px;
   font-size: 16px;
 }
 
-/* 내가 등록한 레시피 그리드 칸 수 조정 */
+
 @media (min-width: 920px) {
   .my-recipes.card-grid {
     grid-template-columns: repeat(3, 1fr);

@@ -3,59 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recipick - 마이페이지</title>
+  <title>냠냠노트 - 마이페이지</title>
   <link rel="stylesheet" href="Recipick_style.css">
+  <style>
+    .follow {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 12px;
+    background: #f9fafb;
+    border-top: 1px solid var(--border);
+    padding: 12px 8px;
+    }
+
+    .follow-num{
+      display:block;
+      color:var(--text);
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .follow-label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+
+
+  </style>
 </head>
+
 
 <body>
   <nav class="site-nav">
     <div class="container nav-inner">
       <div class="logo-area">
-        <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
-          <img src="Recipick_logo.png" alt="Recipick 로고" class="logo">
+        <a href="11_인공띠용지능_main.html" >
+          <img src="Recipick_logo.png" alt="냠냠노트 로고" class="logo">
         </a>
       </div>
-      <div class="menu" role="navigation" aria-label="주요 메뉴">
+      <div class="menu" role="navigation">
         <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
         <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
         <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
         <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-        <a class="active nav-link" href="11_인공띠용지능_mypage.html" aria-current="page">마이페이지</a>
+        <a class="active nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
       </div>
     </div>
   </nav>
 
   <main class="container page-pad">
-    <section class="profile-header" aria-label="프로필 헤더">
-      <div class="profile-cover" role="img" aria-label="요리 관련 배경 이미지"></div>
+    <section class="profile-header">
+      <div class="profile-cover" role="img"></div>
       <div class="profile-box">
-        <div class="avatar" aria-hidden="true">H</div>
-        <div class="profile-meta">
+        <div style="margin-top:-43px;width:88px;height:88px;">
+          <img src="8665202_circle_h_icon.png" alt="프로필 이미지"
+          style="width:100%;height:100%;">
+        </div>
+        <div style="text-align: center;">
           <h1 class="profile-name">Haein_Cook</h1>
           <p class="profile-id">@haein_cook</p>
-          <div class="profile-actions">
+          <p class="profile-bio">안녕하세요!</p>
+          <div style="margin-top:20px">
             <a href="11_인공띠용지능_edit-profile.html" class="btn-outline">프로필 수정</a>
           </div>
         </div>
       </div>
-      <div class="stat-bar" aria-label="프로필 통계">
-        <div class="stat">
-          <strong class="stat-num">12</strong>
-          <span class="stat-label">내 레시피</span>
+      <div class="follow">
+        <div style="text-align:center;">
+          <strong class="follow-num">12</strong>
+          <span class="follow-label">내 레시피</span>
         </div>
-        <div class="stat">
-          <strong class="stat-num">125</strong>
-          <span class="stat-label">팔로잉</span>
+        <div style="text-align:center;">
+          <strong class="follow-num">125</strong>
+          <span class="follow-label">팔로잉</span>
         </div>
-        <div class="stat">
-          <strong class="stat-num">238</strong>
-          <span class="stat-label">팔로워</span>
+        <div style="text-align:center;">
+          <strong class="follow-num">238</strong>
+          <span class="follow-label">팔로워</span>
         </div>
       </div>
     </section>
 
 
-    <section class="grid-2 gap-24 mt-80">
+    <section class="grid-2" style="gap:24px; margin-top:80px;">
       <div class="card-box">
         <h3 class="card-title-lg">저장한 레시피</h3>
         <ul class="list-v">
@@ -122,7 +154,7 @@
     </section>
 
   
-    <section class="mt-80 card-box">
+    <section class="card-box" style="margin-top:80px;">
       <div class="bar between">
         <h3 class="card-title-lg">내가 등록한 레시피</h3>
         <div class="btn-row">
@@ -159,8 +191,8 @@
     </section>
 
     
-    <div class="mt-20 right">
-      <a href="#logout" class="btn-logout">
+    <div style="margin-top:20px;text-align:right;">
+      <a href="#logout" class="btn-warn">
         <span>로그아웃</span>
       </a>
     </div>
