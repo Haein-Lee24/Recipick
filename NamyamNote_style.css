@@ -617,14 +617,21 @@ footer {
   background: #fff1bf;
 }
 
-.badge-green {
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #e5f7ee;
-  color: #1b7a4a;
+.badge {
+  display: inline-block;
+  font-size: 13px;
   font-weight: 700;
-  border: 1px solid #c8ecd9;
+  background: #f6e8c9;
+  color: var(--yellow-deep);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5d4a5;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.badge:hover {
+  background: var(--yellow-deep);
+  color: #fff;
 }
 
 .list-v {
@@ -646,12 +653,15 @@ footer {
   background: #fff;
   transition: background-color 0.2s;
 }
+
 .list-item:hover {
   background: #f9fafb;
 }
+
 .list-text {
   min-width: 0;
 }
+
 .list-ttl {
   font-weight: 700;
   color: var(--text);
@@ -659,6 +669,7 @@ footer {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .list-sub {
   font-size: 12px;
   color: var(--muted);
@@ -683,9 +694,6 @@ footer {
 }
 
 
-.gap-24 {
-  gap: 24px;
-}
 
 .my-recipes .card-sub {
   font-size: 12px;
@@ -695,35 +703,8 @@ footer {
 .bar {
   display: flex;
   align-items: center;
-}
-.between {
-  justify-content: space-between;
-}
-
-.right {
-  text-align: right;
-}
-
-
-.float-btn {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-  background: #fff;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: 999px;
-  box-shadow: var(--shadow);
-  font-size: 14px;
-  opacity: 0.9;
-  transition: opacity 0.2s;
-}
-.float-btn:hover {
-  opacity: 1;
-}
-.left-btn {
-  left: 16px;
+  justify-content: space-between; 
+  margin-bottom: 12px;
 }
 
 .my-recipes .card:hover {
@@ -756,6 +737,26 @@ footer {
 .input-text:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(111, 90, 44, 0.2);
+}
+
+
+
+.float-btn {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.float-btn:hover {
+  opacity: 1;
 }
 
 
@@ -809,6 +810,27 @@ footer {
   font-size: 16px;
 }
 
+.badge-green {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;              
+  background: #e5f7ee;               
+  color: #1b7a4a;                  
+  font-weight: 700;
+  border: 1px solid #c8ecd9;         
+}
+
+.gap-24 {
+  gap: 24px;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.right {
+  text-align: right;
+}
 
 @media (min-width: 920px) {
   .my-recipes.card-grid {
