@@ -1,7 +1,7 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 
 :root {
-  --primary-color: #6f5a2c; 
+  --primary-color: #6f5a2c;
   --yellow-soft: #f6e8c9;
   --yellow-deep: #6f5a2c;
   --green-soft: #e5f0e9;
@@ -9,12 +9,12 @@
   --gray-light: #f3f4f6;
   --gray-deep: #374151;
 
-  --text: #41403e; 
-  --muted: #8c8c8c; 
+  --text: #41403e;
+  --muted: #8c8c8c;
   --card-bg: #fff;
   --page-bg: #fdf9f2; /* 'Happy Salads' 템플릿과 유사한 아주 옅은 베이지색으로 변경 */
   --border: #ded3c4; /* 연한 갈색 테두리로 부드러운 느낌 강조 */
-  --shadow: 0 4px 10px rgba(0, 0, 0, 0.04); 
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
   --radius-lg: 16px;
   --radius-xl: 20px;
@@ -105,9 +105,6 @@ a {
   color: var(--primary-color);
   font-weight: 600;
 }
-
-
-
 
 /* 팔로잉/팔로워 카드 */
 .follow-card {
@@ -307,7 +304,7 @@ a {
   gap: 8px;
   background: rgba(255, 255, 255, 0.75); /* 흰색 반투명 배경 추가 */
   backdrop-filter: blur(4px); /* 배경을 살짝 흐리게 만들어 가독성 UP */
-  color: var(--primary-color); 
+  color: var(--primary-color);
   font-weight: 800;
   padding: 12px 20px;
   border-radius: var(--radius-full);
@@ -511,7 +508,6 @@ footer {
   padding: 24px;
 }
 
-
 .profile-name {
   font-size: 24px;
   font-weight: 800;
@@ -547,7 +543,6 @@ footer {
   border-color: #d1d5db;
 }
 
-
 .card-box {
   background: #fff;
   border: 1px solid var(--border);
@@ -565,7 +560,7 @@ footer {
 
 .btn-row {
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 8px;
 }
 
@@ -578,9 +573,9 @@ footer {
   font-size: 15px;
   line-height: 1;
   min-width: 140px;
-  height: 44px;       
-  padding: 0 16px;    
-  box-sizing: border-box; 
+  height: 44px;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .btn-solid {
@@ -592,9 +587,9 @@ footer {
   font-size: 15px;
   line-height: 1;
   min-width: 140px;
-  height: 44px;       
-  padding: 0 16px;    
-  box-sizing: border-box; 
+  height: 44px;
+  padding: 0 16px;
+  box-sizing: border-box;
   background: var(--primary-color);
   color: #fff;
   border: 1px solid var(--primary-color);
@@ -641,7 +636,6 @@ footer {
   gap: 10px;
 }
 
-
 .list-item {
   display: flex;
   align-items: center;
@@ -671,15 +665,13 @@ footer {
 }
 
 .list-sub {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   margin-top: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 
 .grid-2 {
   display: grid;
@@ -693,8 +685,6 @@ footer {
   }
 }
 
-
-
 .my-recipes .card-sub {
   font-size: 12px;
   color: var(--muted);
@@ -703,7 +693,7 @@ footer {
 .bar {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   margin-bottom: 12px;
 }
 
@@ -725,13 +715,16 @@ footer {
 
 .input-text {
   width: 100%;
-  padding: 12px 16px;
-  font-size: 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background-color: #f9fafb;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
+  height: 110px;
+  resize: none;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow-y: auto;
 }
 
 .input-text:focus {
@@ -739,7 +732,12 @@ footer {
   box-shadow: 0 0 0 3px rgba(111, 90, 44, 0.2);
 }
 
-
+.review-list .card {
+  margin-bottom: 28px;
+}
+.review-input-box {
+  margin-bottom: 28px;
+}
 
 .float-btn {
   position: fixed;
@@ -759,8 +757,6 @@ footer {
   opacity: 1;
 }
 
-
-
 .file-label {
   display: inline-block;
   padding: 10px 16px;
@@ -776,17 +772,17 @@ footer {
   background-color: #1f2937;
 }
 .recipe-meta {
-  font-size: 0.7rem;       
-  color: var(--muted);     
-  margin-top: 8px;         
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 8px;
 }
 
 .view-all-btn-wrap {
   display: flex;
-  justify-content: center;;
+  justify-content: center;
   align-items: center;
   margin-top: 30px !important;
-  width: 100;  
+  width: 100;
   grid-column: 1 / -1;
 }
 
@@ -804,20 +800,20 @@ footer {
   transform: translateY(-2px);
 }
 
-
 .btn-solid {
-  padding: 14px 28px;
-  font-size: 16px;
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 6px;
 }
 
 .badge-green {
   font-size: 12px;
   padding: 6px 10px;
-  border-radius: 999px;              
-  background: #e5f7ee;               
-  color: #1b7a4a;                  
+  border-radius: 999px;
+  background: #e5f7ee;
+  color: #1b7a4a;
   font-weight: 700;
-  border: 1px solid #c8ecd9;         
+  border: 1px solid #c8ecd9;
 }
 
 .gap-24 {
