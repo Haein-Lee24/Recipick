@@ -225,6 +225,9 @@ a {
 .hero .brand {
   color: var(--primary-color);
 }
+.hero .thumb {
+  margin-bottom: 24px;
+}
 
 /* Section title */
 .section-title {
