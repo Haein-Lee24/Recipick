@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipick - 한식 레시피 전체</title>
-    <!-- 팀 공통 디자인 토큰/컴포넌트 -->
-    <link rel="stylesheet" href="Recipick_style.css" />
+    <link rel="stylesheet" href="NamyamNote_style.css" />
+
     <style>
-      /* 페이지 고유의 추가 스타일 (중식 페이지와 동일 스케일/토큰 사용) */
       header {
         background: var(--card-bg);
         border-bottom: 1px solid var(--border);
@@ -40,7 +39,6 @@
         color: var(--text);
       }
 
-      /* 카드 그리드 (중식 페이지와 동일 브레이크포인트) */
       main {
         max-width: 1080px;
         margin: 0 auto;
@@ -106,7 +104,6 @@
         color: #e2b458;
       }
 
-      /* 고정 버튼 (중식 페이지와 동일) */
       .back-btn,
       .top-btn {
         position: fixed;
@@ -130,7 +127,6 @@
       .back-btn { left: 16px; }
       .top-btn { right: 16px; background: var(--primary-color); }
 
-      /* 푸터는 공통 스타일에 맞춰 심플 텍스트 */
       footer {
         max-width: 1080px;
         margin: 40px auto 20px;
@@ -142,13 +138,11 @@
   </head>
   <body>
     <span id="top"></span>
-
-    <!-- 네비게이션 (중식 페이지와 동일한 구조/클래스) -->
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
           <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
-            <img src="Recipick_logo.png" alt="Recipick 로고" class="logo" />
+            <img src="logo.png" alt="Recipick 로고" class="logo" />
           </a>
         </div>
         <div class="menu" role="navigation" aria-label="주요 메뉴">
@@ -317,9 +311,5 @@
 
     <a href="11_인공띠용지능_menulist.html#korean" class="back-btn">카테고리별 레시피 보기</a>
     <a href="#top" class="top-btn" aria-label="맨 위로 이동">맨 위로 ↑</a>
-
-    <footer>
-      &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
-    </footer>
   </body>
 </html>

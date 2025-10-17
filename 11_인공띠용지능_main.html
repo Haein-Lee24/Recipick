@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>냠냠노트 - 메인 페이지</title>
-    <link rel="stylesheet" href="Recipick_style.css" />
+    <link rel="stylesheet" href="NamyamNote_style.css" />
   </head>
   <style>
   .hero {
   position: relative;
-  background: url("banner.jpg") center/cover no-repeat; /* 배너 배경 이미지 */
-  min-height: 400px; /* 높이 조절 가능 */
+  background: url("banner.jpg") center/cover no-repeat;
+  min-height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,37 +19,34 @@
   margin: 20px auto;
 }
 
-/* 배경을 약간 흐리게 하고 싶다면 */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background: url("banner.jpg") center/cover no-repeat;
-  opacity: 0.5; /* 배경 불투명도 (0~1) */
+  opacity: 0.5;
   z-index: 0;
 }
 
-/* 중앙의 하얀 반투명 박스 */
 .hero h1 {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.8); /* 🔸하얀 반투명 */
+  background: rgba(255, 255, 255, 0.8);
   padding: 25px 40px;
   border-radius: 50px;
-  color: #3c2f2f; /* 글씨색 */
+  color: #3c2f2f;
   font-weight: 700;
   font-size: 1.6rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 </style>
 
   <body>
-    <!-- 네비게이션 -->
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
-          <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
-            <img src="Recipick_logo.png" alt="Recipick 로고" class="logo" />
+          <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
+            <img src="logo.png" alt="냠냠노트 로고" class="logo" />
           </a>
         </div>
         <div class="menu" role="navigation" aria-label="주요 메뉴">
@@ -65,14 +62,12 @@
     </nav>
 
     <main class="container page-pad">
-      <!-- 히어로 -->
       <section class="hero" aria-label="히어로 섹션">
         <h1>
           오늘의 레시피, <span class="brand">냠냠노트</span>에서 골라보세요!
         </h1>
       </section>
 
-      <!-- 카테고리 -->
       <h2 class="section-title">카테고리별 레시피 탐색</h2>
       <div class="cat-grid" aria-label="레시피 카테고리">
         <a
@@ -80,7 +75,7 @@
           href="11_인공띠용지능_menulist.html#korean"
           aria-label="한식 카테고리로 이동"
         >
-          <img src="kimchi.jpg" alt="김치 등 한식 이미지" />
+          <img src="kimchi.jpg" alt="한식 이미지" />
           <div class="cat-overlay">
             <span class="cat-btn">
               <span class="cat-emoji">🍲</span>한식</span>
@@ -91,7 +86,7 @@
           href="11_인공띠용지능_menulist.html#western"
           aria-label="양식 카테고리로 이동"
         >
-          <img src="pasta.jpg" alt="파스타 등 양식 이미지" />
+          <img src="pasta.jpg" alt="양식 이미지" />
           <div class="cat-overlay">
             <span class="cat-btn">
               <span class="cat-emoji">🍝</span>양식</span>
@@ -102,7 +97,7 @@
           href="11_인공띠용지능_menulist.html#chinese"
           aria-label="중식 카테고리로 이동"
         >
-          <img src="chinese.png" alt="짜장/짬뽕 등 중식 이미지" />
+          <img src="chinese.png" alt="중식 이미지" />
           <div class="cat-overlay">
             <span class="cat-btn">
               <span class="cat-emoji">🍜</span>중식</span>
@@ -113,7 +108,7 @@
           href="11_인공띠용지능_menulist.html#dessert"
           aria-label="디저트 카테고리로 이동"
         >
-          <img src="snack.jpg" alt="아이스크림 등 디저트 이미지" />
+          <img src="snack.jpg" alt="디저트 이미지" />
           <div class="cat-overlay">
             <span class="cat-btn"
               ><span class="cat-emoji">🍰</span>디저트</span>
@@ -124,7 +119,7 @@
           href="11_인공띠용지능_menulist.html#drink"
           aria-label="음료 카테고리로 이동"
         >
-          <img src="drink.png" alt="커피 등 음료 이미지" />
+          <img src="drink.png" alt="음료 이미지" />
           <div class="cat-overlay">
             <span class="cat-btn">
               <span class="cat-emoji">🍹</span>음료 </span>
@@ -132,7 +127,6 @@
         </a>
       </div>
 
-      <!-- 재료 검색 -->
       <section class="mt-60" aria-label="재료 검색">
         <h2 class="section-title mt-0">
           가지고 있는 재료로 딱 맞는 레시피를 찾아보세요!
@@ -151,56 +145,48 @@
         </div>
       </section>
 
-      <!-- 인기 레시피 -->
       <section class="mt-60" aria-label="인기 레시피">
         <h3
           class="center text-gray-deep"
-          style="font-size: 20px; font-weight: 700; margin: 0 0 16px"
-        >
+          style="font-size: 20px; font-weight: 700; margin: 0 0 16px">
           인기 레시피
         </h3>
         <div class="card-grid">
           <a
             href="11_인공띠용지능_detail_r1.html"
             class="card"
-            aria-label="달콤한 허니 버터 갈릭 쉬림프 상세로 이동"
-          >
-            <img src="갈릭쉬림프.jpg" alt="갈릭 쉬림프 썸네일" class="thumb" />
+            aria-label="달콤한 허니 버터 갈릭 쉬림프 상세로 이동">
+            <img src="shrimp.jpg" alt="갈릭 쉬림프 썸네일" class="thumb" />
             <p class="card-title">달콤한 허니 버터 갈릭 쉬림프🍤</p>
             <div class="rating">★★★★☆ (4.5)</div>
           </a>
           <a
             href="11_인공띠용지능_detail_r2.html"
             class="card"
-            aria-label="초간단 샐러드 파스타 상세로 이동"
-          >
+            aria-label="초간단 샐러드 파스타 상세로 이동">
             <img
-              src="샐러드파스타.jpg"
+              src="saladpasta.jpg"
               alt="샐러드 파스타 썸네일"
-              class="thumb"
-            />
+              class="thumb"/>
             <p class="card-title">5분 완성! 초간단 샐러드 파스타🍝</p>
             <div class="rating">★★★★★ (4.9)</div>
           </a>
           <a
             href="11_인공띠용지능_detail_r3.html"
             class="card"
-            aria-label="마약 옥수수 상세로 이동"
-          >
-            <img src="마약옥수수.jpg" alt="마약 옥수수 썸네일" class="thumb" />
+            aria-label="마약 옥수수 상세로 이동">
+            <img src="corn.jpg" alt="마약 옥수수 썸네일" class="thumb" />
             <p class="card-title">단짠단짠 마약 옥수수🌽</p>
             <div class="rating">★★★★☆ (4.3)</div>
           </a>
           <a
             href="11_인공띠용지능_detail_r4.html"
             class="card"
-            aria-label="부채살 스테이크 상세로 이동"
-          >
+            aria-label="부채살 스테이크 상세로 이동">
             <img
-              src="스테이크.jpg"
+              src="steak.jpg"
               alt="부채살 스테이크 썸네일"
-              class="thumb"
-            />
+              class="thumb"/>
             <p class="card-title">고급진 부채살 스테이크🥩</p>
             <div class="rating">★★★★★ (4.8)</div>
           </a>
@@ -211,12 +197,7 @@
       </section>
     </main>
 
-    <!-- 맨 위로 -->
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
 
-    <!-- 푸터 -->
-    <footer>
-      &copy; 2025 Recipick Wireframe. All rights reserved. (Static Mockup)
-    </footer>
   </body>
 </html>

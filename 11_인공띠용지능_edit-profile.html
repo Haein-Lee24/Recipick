@@ -4,94 +4,96 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Recipick - 프로필 수정</title>
-  <link rel="stylesheet" href="Recipick_style.css">
+  <link rel="stylesheet" href="NamyamNote_style.css">
   <style>
       .background-box {
       height: 140px;
       border-radius: 14px;
-      border: 1px solid #e5e7eb;
       background: url('background.png') center/cover;
-      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-size: 13px;
+      font-size: 20px;
       font-weight: 500;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
   </style>
 </head>
 <body>
 
-  <!-- 공통 네비게이션 -->
   <nav class="site-nav">
     <div class="container nav-inner">
       <div class="logo-area">
-        <a href="11_인공띠용지능_main.html" aria-label="Recipick 홈">
-          <img src="Recipick_logo.png" alt="Recipick 로고" class="logo">
+        <a href="11_인공띠용지능_main.html">
+          <img src="logo.png" alt="냠냠노트 로고" class="logo">
         </a>
       </div>
-      <div class="menu" role="navigation" aria-label="주요 메뉴">
+      <div class="menu" role="navigation">
         <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
         <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
         <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-        <a class="active nav-link" href="11_인공띠용지능_mypage.html" aria-current="page">마이페이지</a>
+        <a class="active nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
       </div>
     </div>
   </nav>
 
   <main class="container page-pad">
     <section class="card-box center">
-      <h1 style="font-size:28px;font-weight:800;color:#1f2937;">📝 프로필 수정하기</h1>
+      <h1 style="font-size:28px;font-weight:800;color:#1f2937;">프로필 수정하기 📝</h1>
       <p style="color:#6b7280;font-size:14px;margin-top:6px;">
         변경 후 저장 버튼을 눌러주세요.
       </p>
     </section>
 
-    <form action="11_인공띠용지능_mypage.html" method="post" enctype="multipart/form-data" class="card-box mt-20">
+    <form action="11_인공띠용지능_mypage.html" method="post" enctype="multipart/form-data"
+     class="card-box" style="margin-top: 20px;">
 
-  <div class="form-group">
-    <label class="form-label">프로필 이미지 변경</label>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <div style="display:flex;align-items:center;">
-        <img src="8665202_circle_h_icon.png" alt="프로필 이미지 수정"
-         style="width:80px;height:80px;">
+      <div class="form-group">
+        <label class="form-label">프로필 이미지 변경</label>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="display:flex;align-items:center;">
+            <img src="8665202_circle_h_icon.png" alt="프로필 이미지 수정"
+            style="width:80px;height:80px;">
+          </div>
+          <input id="profile_image" name="profile_image" type="file" class="input-file">
+        </div>
       </div>
-      <input id="profile_image" name="profile_image" type="file" class="input-file">
-    </div>
-  </div>
 
-  <div class="form-group">
-    <label class="form-label">배경 이미지 변경</label>
-    <div class="background-box">
-        현재 배경 이미지
-    </div>
-    <input id="background_image" name="background_image" type="file"class="input-file">
-  </div>
+      <div class="form-group">
+        <label class="form-label">
+          배경 이미지 변경</label>
+        <div class="background-box">
+            현재 배경 이미지
+        </div>
+        <input id="background_image" name="background_image" type="file"
+        class="input-file" style="margin-top: 20px;">
+      </div>
 
-  <div class="form-group">
-    <p><strong>닉네임</strong></p>
-    <label for="nickname" class="form-label"></label>
-    <input id="nickname" name="nickname" type="text" required value="Haein_Cook" class="input-text">
-  </div>
+      <div class="form-group">
+        <p><strong>닉네임</strong></p>
+        <label for="nickname" class="form-label"></label>
+        <input id="nickname" name="nickname" type="text" required value="Haein_Cook" class="input-text">
+      </div>
 
-  <div class="form-group">
-    <label for="username" class="form-label">사용자 아이디</label>
-    <input id="username" name="username" type="text" required value="@haein_cook_vegan" class="input-text">
-  </div>
+      <div class="form-group">
+        <label for="username" class="form-label">사용자 아이디</label>
+        <input id="username" name="username" type="text" required value="@haein_cook_vegan" class="input-text">
+      </div>
 
-  <div class="form-group">
-    <label for="bio" class="form-label">자기소개</label>
-    <textarea id="bio" name="bio" rows="3" required placeholder="나를 소개하는 한 문장을 적어보세요."
-              class="input-text"></textarea>
-  </div>
+      <div class="form-group">
+        <label for="bio" class="form-label">자기소개</label>
+        <textarea id="bio" name="bio" rows="3" required placeholder="나를 소개하는 한 문장을 적어보세요."
+                  class="input-text"></textarea>
+      </div>
 
-  <div class="center" style="margin-top:40px;">
-    <button type="submit" class="btn-solid">저장하기</button>
-  </div>
-</form>
-</main>
+      <div class="center" style="margin-top:40px;">
+        <button type="submit" class="btn-solid">저장하기</button>
+      </div>
+    </form>
+
+    <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
+
+  </main>
 </body>
 </html>

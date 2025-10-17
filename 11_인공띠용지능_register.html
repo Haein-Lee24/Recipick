@@ -5,16 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>냠냠노트 - 레시피 등록</title>
 
-  <!-- 외부 아이콘 & 공통 CSS -->
-
-  <link rel="stylesheet" href="Recipick_style.css">
+  <link rel="stylesheet" href="NamyamNote_style.css">
 
   <style>
-    /* ===============================
-       등록 페이지 전용 스타일 (내부)
-       =============================== */
 
-    /* 폼 요소 공통 */
     .form-card label {
       display: block;
       font-weight: 700;
@@ -37,10 +31,9 @@
       resize: vertical;
     }
 
-    /* ✅ 등록하기 / 임시저장 버튼 정렬 (가운데 정렬 + 미세 높이 보정) */
     .form-actions {
       display: flex;
-      justify-content: center; /* 가운데 정렬 */
+      justify-content: center;
       align-items: center;
       gap: 14px;
       margin-top: 20px;
@@ -63,18 +56,15 @@
     }
 
     .form-actions .more-btn {
-      background: var(--primary-color);     /* 등록하기 버튼 색상 */
+      background: var(--primary-color);
       color: #fff;
       border: 1px solid var(--primary-color);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-      margin-top: 0 !important;             /* 🔥 외부 CSS에 있던 여백 제거 */
-      transform: translateY(-0.5px);          /* 🔧 등록하기 버튼만 살짝 위로 조정 */
+      margin-top: 0 !important;
+      transform: translateY(-0.5px);
     }
 
 
-
-
-    /* 임시저장 버튼 */
     .form-actions .btn-secondary {
       background: #fff;
       color: var(--text);
@@ -82,7 +72,7 @@
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
     }
 
-    /* Hover 효과 */
+
     .form-actions .more-btn:hover {
       opacity: 0.9;
     }
@@ -95,13 +85,11 @@
 
 <body>
   <a id="top"></a>
-
-  <!-- 상단 네비게이션 -->
   <nav class="site-nav">
     <div class="container nav-inner">
       <div class="logo-area">
         <a href="냠냠노트_main.html">
-          <img src="Recipick_logo.png" alt="냠냠노트 로고" class="logo-img">
+          <img src="logo.png" alt="냠냠노트 로고" class="logo-img">
         </a>
       </div>
       <nav class="menu">
@@ -114,7 +102,6 @@
     </div>
   </nav>
 
-  <!-- 본문 -->
   <main class="page-pad">
     <div id="register" class="container">
       <header class="hero mt-20 center">
@@ -161,7 +148,6 @@
           <textarea id="steps" name="steps" rows="6" required placeholder="1) 면을 삶는다.&#10;2) 베이컨과 마늘을 볶는다.&#10;3) 생크림을 넣고 졸인다."></textarea>
         </div>
 
-        <!-- ✅ 버튼 구역 -->
         <div class="form-actions">
           <button type="submit" class="more-btn">등록하기</button>
           <a href="#draft" class="btn-secondary">임시저장</a>
@@ -170,8 +156,5 @@
     </div>
   </main>
 
-  <footer>
-    &copy; 2025 냠냠노트. All rights reserved.
-  </footer>
 </body>
 </html>
