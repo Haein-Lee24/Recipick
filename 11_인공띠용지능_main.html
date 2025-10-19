@@ -5,41 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>냠냠노트 - 메인 페이지</title>
     <link rel="stylesheet" href="NamyamNote_style.css" />
+    <style>
+      .hero-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fffaf2;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        margin: 40px auto;
+        overflow: hidden;
+        max-width: 1100px;
+        padding: 40px 60px;
+      }
+
+      .hero-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 40px;
+      }
+
+      .hero-text-wrap {
+        flex: 1;
+      }
+
+      .hero-subtitle {
+        color: #6e5827;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+
+      .hero-title-new {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #3c2f2f;
+        margin-bottom: 20px;
+      }
+
+      .brand-line {
+        color: #6f5a2c;
+      }
+
+      .hero-description {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 12px;
+      }
+
+      .hero-btn {
+        display: inline-block;
+        padding: 10px 22px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .hero-btn-primary {
+        background: #6f5a2c;
+        color: #fff;
+      }
+
+      .hero-btn-primary:hover {
+        background: #7c673b;
+      }
+
+      .hero-btn-secondary {
+        background: #f6e8c9;
+        color: #6f5a2c;
+        border: 1.5px solid #e2c97a;
+      }
+
+      .hero-btn-secondary:hover {
+        background: #f0dca9;
+      }
+
+      .hero-visual {
+        flex: 1;
+        text-align: center;
+      }
+
+      .hero-visual-img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 16px;
+        border: 1px solid #e4d8b4;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      }
+
+      @media (max-width: 768px) {
+        .hero-section {
+          flex-direction: column;
+          padding: 30px 20px;
+        }
+
+        .hero-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-visual-img {
+          margin-top: 20px;
+        }
+      }
+    </style>
   </head>
-  <style>
-  .hero {
-  position: relative;
-  background: url("banner.jpg") center/cover no-repeat;
-  min-height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 20px auto;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("banner.jpg") center/cover no-repeat;
-  opacity: 0.5;
-  z-index: 0;
-}
-
-.hero h1 {
-  position: relative;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 25px 40px;
-  border-radius: 50px;
-  color: #3c2f2f;
-  font-weight: 700;
-  font-size: 1.6rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-</style>
 
   <body>
     <nav class="site-nav">
@@ -51,7 +129,8 @@
         </div>
         <div class="menu" role="navigation" aria-label="주요 메뉴">
           <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a
+          <a class="nav-link" href="11_인공띠용지능_menulist.html#korean"
+            >레시피</a
           >
           <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
           <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
@@ -61,67 +140,66 @@
     </nav>
 
     <main class="container page-pad">
-      <section class="hero" aria-label="히어로 섹션">
-        <h1>
-          오늘의 레시피, <span class="brand">냠냠노트</span>에서 골라보세요!
-        </h1>
+      <section class="hero-section" aria-label="메인 배너">
+        <div class="hero-content">
+          <div class="hero-text-wrap">
+            <p class="hero-subtitle">맛과 영양을 고려한 맞춤형 식단</p>
+            <h1 class="hero-title-new">
+              Today's <span class="brand-line">menu</span>
+            </h1>
+            <p class="hero-description">
+              냠냠노트는 쉽고 맛있는 레시피를 제공하여,<br />
+              누구나 만족하는 특별한 요리를 완성할 수 있도록 돕습니다.
+            </p>
+            <div class="hero-buttons">
+              <a
+                href="11_인공띠용지능_menulist.html"
+                class="hero-btn hero-btn-primary"
+                >레시피 보러가기</a
+              >
+              <a
+                href="11_인공띠용지능_register.html"
+                class="hero-btn hero-btn-secondary"
+                >나만의 레시피 등록</a
+              >
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="banner.jpg" alt="요리 이미지" class="hero-visual-img" />
+          </div>
+        </div>
       </section>
 
       <h2 class="section-title">카테고리별 레시피 탐색</h2>
       <div class="cat-grid" aria-label="레시피 카테고리">
-        <a
-          class="cat-card"
-          href="11_인공띠용지능_menulist.html#korean"
-          aria-label="한식 카테고리로 이동"
-        >
+        <a class="cat-card" href="11_인공띠용지능_menulist.html#korean">
           <img src="kimchi.jpg" alt="한식 이미지" />
           <div class="cat-overlay">
-            <span class="cat-btn">
-              <span class="cat-emoji">🍲</span>한식</span>
+            <span class="cat-btn"><span class="cat-emoji"></span>한식</span>
           </div>
         </a>
-        <a
-          class="cat-card"
-          href="11_인공띠용지능_menulist.html#western"
-          aria-label="양식 카테고리로 이동"
-        >
+        <a class="cat-card" href="11_인공띠용지능_menulist.html#western">
           <img src="pasta.jpg" alt="양식 이미지" />
           <div class="cat-overlay">
-            <span class="cat-btn">
-              <span class="cat-emoji">🍝</span>양식</span>
+            <span class="cat-btn"><span class="cat-emoji"></span>양식</span>
           </div>
         </a>
-        <a
-          class="cat-card"
-          href="11_인공띠용지능_menulist.html#chinese"
-          aria-label="중식 카테고리로 이동"
-        >
+        <a class="cat-card" href="11_인공띠용지능_menulist.html#chinese">
           <img src="chinese.png" alt="중식 이미지" />
           <div class="cat-overlay">
-            <span class="cat-btn">
-              <span class="cat-emoji">🍜</span>중식</span>
+            <span class="cat-btn"><span class="cat-emoji"></span>중식</span>
           </div>
         </a>
-        <a
-          class="cat-card"
-          href="11_인공띠용지능_menulist.html#dessert"
-          aria-label="디저트 카테고리로 이동"
-        >
+        <a class="cat-card" href="11_인공띠용지능_menulist.html#dessert">
           <img src="snack.jpg" alt="디저트 이미지" />
           <div class="cat-overlay">
-            <span class="cat-btn"
-              ><span class="cat-emoji">🍰</span>디저트</span>
+            <span class="cat-btn"><span class="cat-emoji"></span>디저트</span>
           </div>
         </a>
-        <a
-          class="cat-card"
-          href="11_인공띠용지능_menulist.html#drink"
-          aria-label="음료 카테고리로 이동"
-        >
+        <a class="cat-card" href="11_인공띠용지능_menulist.html#drink">
           <img src="drink.png" alt="음료 이미지" />
           <div class="cat-overlay">
-            <span class="cat-btn">
-              <span class="cat-emoji">🍹</span>음료 </span>
+            <span class="cat-btn"><span class="cat-emoji"></span>음료</span>
           </div>
         </a>
       </div>
@@ -147,45 +225,32 @@
       <section class="mt-60" aria-label="인기 레시피">
         <h3
           class="center text-gray-deep"
-          style="font-size: 20px; font-weight: 700; margin: 0 0 16px">
+          style="font-size: 20px; font-weight: 700; margin: 0 0 16px"
+        >
           인기 레시피
         </h3>
         <div class="card-grid">
-          <a
-            href="11_인공띠용지능_detail_r1.html"
-            class="card"
-            aria-label="달콤한 허니 버터 갈릭 쉬림프 상세로 이동">
+          <a href="11_인공띠용지능_detail_r1.html" class="card">
             <img src="shrimp.jpg" alt="갈릭 쉬림프 썸네일" class="thumb" />
             <p class="card-title">달콤한 허니 버터 갈릭 쉬림프🍤</p>
             <div class="rating">★★★★☆ (4.5)</div>
           </a>
-          <a
-            href="11_인공띠용지능_detail_r2.html"
-            class="card"
-            aria-label="초간단 샐러드 파스타 상세로 이동">
+          <a href="11_인공띠용지능_detail_r2.html" class="card">
             <img
               src="saladpasta.jpg"
               alt="샐러드 파스타 썸네일"
-              class="thumb"/>
+              class="thumb"
+            />
             <p class="card-title">5분 완성! 초간단 샐러드 파스타🍝</p>
             <div class="rating">★★★★★ (4.9)</div>
           </a>
-          <a
-            href="11_인공띠용지능_detail_r3.html"
-            class="card"
-            aria-label="마약 옥수수 상세로 이동">
+          <a href="11_인공띠용지능_detail_r3.html" class="card">
             <img src="corn.jpg" alt="마약 옥수수 썸네일" class="thumb" />
             <p class="card-title">단짠단짠 마약 옥수수🌽</p>
             <div class="rating">★★★★☆ (4.3)</div>
           </a>
-          <a
-            href="11_인공띠용지능_detail_r4.html"
-            class="card"
-            aria-label="부채살 스테이크 상세로 이동">
-            <img
-              src="steak.jpg"
-              alt="부채살 스테이크 썸네일"
-              class="thumb"/>
+          <a href="11_인공띠용지능_detail_r4.html" class="card">
+            <img src="steak.jpg" alt="부채살 스테이크 썸네일" class="thumb" />
             <p class="card-title">고급진 부채살 스테이크🥩</p>
             <div class="rating">★★★★★ (4.8)</div>
           </a>
@@ -197,6 +262,5 @@
     </main>
 
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
-
   </body>
 </html>

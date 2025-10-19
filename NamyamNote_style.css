@@ -318,9 +318,9 @@ a {
 
 /* 호버 시 색상 반전 효과 */
 .cat-card:hover .cat-btn {
-  background: var(--primary-color);
+  background: #8b7443; /* 기존보다 20% 정도 밝은 브라운 */
   color: #fff;
-  border-color: var(--primary-color);
+  border-color: #8b7443;
 }
 
 .cat-emoji {
