@@ -497,7 +497,7 @@ footer {
 
 .profile-cover {
   height: 160px;
-  background-image: url(background.png);
+  background-image: url(11_background.png);
   background-size: cover;
   background-position: center;
   border-bottom: 1px solid var(--border);
