@@ -705,9 +705,6 @@ footer {
   box-shadow: var(--shadow-lg);
 }
 
-.form-group {
-  margin-top: 24px;
-}
 
 .form-label {
   display: block;
