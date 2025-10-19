@@ -1,160 +1,200 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>냠냠노트 - 레시피 등록</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>냠냠노트 - 레시피 등록</title>
 
-  <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
+    <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
-  <style>
+    <style>
+      .form-card label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #111;
+      }
 
-    .form-card label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #111;
-    }
+      .form-card input[type='text'],
+      .form-card input[type='file'],
+      .form-card textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        outline: none;
+        background: #fff;
+      }
 
-    .form-card input[type="text"],
-    .form-card input[type="file"],
-    .form-card textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      outline: none;
-      background: #fff;
-    }
+      .form-card textarea {
+        resize: vertical;
+      }
 
-    .form-card textarea {
-      resize: vertical;
-    }
+      .form-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        margin-top: 20px;
+      }
 
-    .form-actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
-      margin-top: 20px;
-    }
+      .form-actions .more-btn,
+      .form-actions .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 46px;
+        min-width: 140px;
+        padding: 0 26px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 1;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+      }
 
-    .form-actions .more-btn,
-    .form-actions .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 46px;
-      min-width: 140px;
-      padding: 0 26px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 15px;
-      line-height: 1;
-      box-sizing: border-box;
-      transition: all 0.2s ease;
-    }
+      .form-actions .more-btn {
+        background: var(--primary-color);
+        color: #fff;
+        border: 1px solid var(--primary-color);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        margin-top: 0 !important;
+        transform: translateY(-0.5px);
+      }
 
-    .form-actions .more-btn {
-      background: var(--primary-color);
-      color: #fff;
-      border: 1px solid var(--primary-color);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-      margin-top: 0 !important;
-      transform: translateY(-0.5px);
-    }
+      .form-actions .btn-secondary {
+        background: #fff;
+        color: var(--text);
+        border: 1px solid var(--border);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      }
 
+      .form-actions .more-btn:hover {
+        opacity: 0.9;
+      }
 
-    .form-actions .btn-secondary {
-      background: #fff;
-      color: var(--text);
-      border: 1px solid var(--border);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-    }
+      .form-actions .btn-secondary:hover {
+        background: #fafafa;
+      }
+    </style>
+  </head>
 
-
-    .form-actions .more-btn:hover {
-      opacity: 0.9;
-    }
-
-    .form-actions .btn-secondary:hover {
-      background: #fafafa;
-    }
-  </style>
-</head>
-
-<body>
-  <a id="top"></a>
-  <nav class="site-nav">
-    <div class="container nav-inner">
-      <div class="logo-area">
-        <a href="냠냠노트_main.html">
-          <img src="logo.png" alt="냠냠노트 로고" class="logo-img">
-        </a>
+  <body>
+    <a id="top"></a>
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="냠냠노트_main.html">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
+          </a>
+        </div>
+        <nav class="menu">
+          <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
+          <a href="11_인공띠용지능_menulist.html" class="nav-link">레시피</a>
+          <a href="11_인공띠용지능_menulist.html" class="nav-link active"
+            >등록</a
+          >
+          <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
+        </nav>
       </div>
-      <nav class="menu">
-        <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
-        <a href="11_인공띠용지능_menulist.html" class="nav-link">레시피</a>
-        <a href="11_인공띠용지능_menulist.html" class="nav-link active">등록</a>
-        <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
-        <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
-      </nav>
-    </div>
-  </nav>
+    </nav>
 
-  <main class="page-pad">
-    <div id="register" class="container">
-      <header class="hero mt-20 center">
-        <h1 class="mt-0">
-          <i class="fas fa-pen-nib brand"></i>
-          <span>나만의 레시피 등록하기</span>
-        </h1>
-        <p class="text-gray-deep mt-20" style="font-size:14px;color:var(--muted)">
-          입력 후 <strong>등록</strong> 또는 <strong>임시저장</strong>을 눌러주세요.
-        </p>
-      </header>
+    <main class="page-pad">
+      <div id="register" class="container">
+        <header class="hero mt-20 center">
+          <h1 class="mt-0">
+            <i class="fas fa-pen-nib brand"></i>
+            <span>나만의 레시피 등록하기</span>
+          </h1>
+          <p
+            class="text-gray-deep mt-20"
+            style="font-size: 14px; color: var(--muted)"
+          >
+            입력 후 <strong>등록</strong> 또는 <strong>임시저장</strong>을
+            눌러주세요.
+          </p>
+        </header>
 
-      <h2 class="section-title">레시피 정보 입력</h2>
+        <h2 class="section-title">레시피 정보 입력</h2>
 
-      <form class="card form-card">
-        <div class="mt-20">
-          <label for="title">레시피 제목</label>
-          <input id="title" name="title" type="text" required placeholder="예: 부드러운 크림 파스타">
-        </div>
-
-        <div class="mt-20">
-          <span style="display:block;font-weight:700;margin-bottom:8px">요리 카테고리 (1개 선택)</span>
-          <div class="radio-grid">
-            <label class="radio-item"><input type="radio" name="category" value="한식" required> 한식</label>
-            <label class="radio-item"><input type="radio" name="category" value="양식"> 양식</label>
-            <label class="radio-item"><input type="radio" name="category" value="중식"> 중식</label>
-            <label class="radio-item"><input type="radio" name="category" value="디저트"> 디저트</label>
-            <label class="radio-item"><input type="radio" name="category" value="음료"> 음료</label>
+        <form class="card form-card">
+          <div class="mt-20">
+            <label for="title">레시피 제목</label>
+            <input
+              id="title"
+              name="title"
+              type="text"
+              required
+              placeholder="예: 부드러운 크림 파스타"
+            />
           </div>
-        </div>
 
-        <div class="mt-20">
-          <label for="image">대표 이미지 업로드</label>
-          <input id="image" name="image" type="file" accept="image/*" required>
-        </div>
+          <div class="mt-20">
+            <span style="display: block; font-weight: 700; margin-bottom: 8px"
+              >요리 카테고리 (1개 선택)</span
+            >
+            <div class="radio-grid">
+              <label class="radio-item"
+                ><input type="radio" name="category" value="한식" required />
+                한식</label
+              >
+              <label class="radio-item"
+                ><input type="radio" name="category" value="양식" /> 양식</label
+              >
+              <label class="radio-item"
+                ><input type="radio" name="category" value="중식" /> 중식</label
+              >
+              <label class="radio-item"
+                ><input type="radio" name="category" value="디저트" />
+                디저트</label
+              >
+              <label class="radio-item"
+                ><input type="radio" name="category" value="음료" /> 음료</label
+              >
+            </div>
+          </div>
 
-        <div class="mt-20">
-          <label for="ingredients">재료</label>
-          <textarea id="ingredients" name="ingredients" rows="4" required placeholder="예: 스파게티면 200g, 생크림 1컵, 베이컨 3줄..."></textarea>
-        </div>
+          <div class="mt-20">
+            <label for="image">대표 이미지 업로드</label>
+            <input
+              id="image"
+              name="image"
+              type="file"
+              accept="image/*"
+              required
+            />
+          </div>
 
-        <div class="mt-20">
-          <label for="steps">조리 순서</label>
-          <textarea id="steps" name="steps" rows="6" required placeholder="1) 면을 삶는다.&#10;2) 베이컨과 마늘을 볶는다.&#10;3) 생크림을 넣고 졸인다."></textarea>
-        </div>
+          <div class="mt-20">
+            <label for="ingredients">재료</label>
+            <textarea
+              id="ingredients"
+              name="ingredients"
+              rows="4"
+              required
+              placeholder="예: 스파게티면 200g, 생크림 1컵, 베이컨 3줄..."
+            ></textarea>
+          </div>
 
-        <div class="form-actions">
-          <button type="submit" class="more-btn">등록하기</button>
-          <a href="#draft" class="btn-secondary">임시저장</a>
-        </div>
-      </form>
-    </div>
-  </main>
+          <div class="mt-20">
+            <label for="steps">조리 순서</label>
+            <textarea
+              id="steps"
+              name="steps"
+              rows="6"
+              required
+              placeholder="1) 면을 삶는다.&#10;2) 베이컨과 마늘을 볶는다.&#10;3) 생크림을 넣고 졸인다."
+            ></textarea>
+          </div>
 
-</body>
+          <div class="form-actions">
+            <button type="submit" class="more-btn">등록하기</button>
+            <a href="#draft" class="btn-secondary">임시저장</a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
 </html>
