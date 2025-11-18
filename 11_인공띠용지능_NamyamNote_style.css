@@ -608,7 +608,6 @@ footer {
   opacity: 0.92;
 }
 
-
 .btn-warn:hover {
   background: #fff1bf;
 }
@@ -702,7 +701,6 @@ footer {
   transform: none;
   box-shadow: var(--shadow-lg);
 }
-
 
 .form-label {
   display: block;
@@ -830,4 +828,99 @@ footer {
   .my-recipes.card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+.btn-solid,
+.review-input-box .btn-solid,
+.btn-outline {
+  min-width: 140px !important;
+  height: 44px !important;
+  padding: 0 18px !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  border-radius: 12px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.review-list .card {
+  transform: none !important;
+  box-shadow: var(--shadow) !important;
+  background: #fff !important;
+  cursor: default !important;
+  transition: none !important;
+}
+
+.review-list .card:hover {
+  transform: none !important;
+  box-shadow: var(--shadow) !important;
+  background: #fff !important;
+}
+.review-list .btn-edit {
+  min-width: 80px !important;
+  height: 36px !important;
+  padding: 0 12px !important;
+  font-size: 14px !important;
+  border-radius: 10px !important;
+}
+
+.review-list .btn-delete {
+  min-width: 80px !important;
+  height: 36px !important;
+  padding: 0 12px !important;
+  font-size: 14px !important;
+  border-radius: 10px !important;
+}
+
+.edit-area {
+  background: #fff9e9 !important;
+  border-color: #e5d2a9 !important;
+}
+.review-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 12px;
+}
+.review-list .card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.review-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 12px;
+}
+.card-box h2.card-title-lg,
+.card-box h3.section-title {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  margin-bottom: 14px;
+  border: none !important;
+  padding-bottom: 0 !important;
+}
+
+.card-box .list-item {
+  transition: none !important;
+}
+
+.card-box .list-item:hover {
+  background: #fff !important;
+  cursor: default !important;
+  box-shadow: none !important;
+}
+
+.card-box .list-ttl {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+.card-box .list-item strong {
+  font-size: 16px !important;
 }

@@ -213,5 +213,130 @@
     </main>
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const stars = document.querySelectorAll('.rating-stars i');
+        const reviewBtn = document.querySelector(
+          '.review-input-box .btn-solid'
+        );
+        const reviewInput = document.querySelector('.input-text');
+        const reviewList = document.querySelector('.review-list');
+        const inputBox = document.querySelector('.review-input-box');
+        const userName =
+          localStorage.getItem('nn_username')?.trim() || '익명 사용자';
+
+        let currentRating = 0;
+        let editingReview = null;
+
+        stars.forEach((star, index) => {
+          star.addEventListener('click', () => {
+            currentRating = index + 1;
+            updateStars();
+          });
+          star.addEventListener('mouseover', () => {
+            highlightStars(index + 1);
+          });
+          star.addEventListener('mouseout', () => {
+            updateStars();
+          });
+        });
+
+        function highlightStars(count) {
+          stars.forEach((star, idx) => {
+            const active = idx < count;
+            star.classList.toggle('fas', active);
+            star.classList.toggle('far', !active);
+            star.style.color = active ? '#e2b458' : '#ccc';
+          });
+        }
+
+        function updateStars() {
+          stars.forEach((star, idx) => {
+            const active = idx < currentRating;
+            star.classList.toggle('fas', active);
+            star.classList.toggle('far', !active);
+            star.style.color = active ? '#e2b458' : '#ccc';
+          });
+        }
+
+        reviewBtn.addEventListener('click', () => {
+          const text = reviewInput.value.trim();
+          if (!text || currentRating === 0)
+            return alert('리뷰와 별점을 입력해주세요!');
+
+          if (editingReview) {
+            editingReview.querySelector('.card-sub').textContent = text;
+            editingReview.querySelector('.rating').textContent =
+              '★'.repeat(currentRating) + '☆'.repeat(5 - currentRating);
+
+            editingReview = null;
+            reviewBtn.textContent = '리뷰 등록';
+            reviewInput.value = '';
+            currentRating = 0;
+            updateStars();
+            return;
+          }
+
+          const today = new Date();
+          const dateStr =
+            today.getFullYear() +
+            '.' +
+            String(today.getMonth() + 1).padStart(2, '0') +
+            '.' +
+            String(today.getDate()).padStart(2, '0');
+
+          const ratingStars =
+            '★'.repeat(currentRating) + '☆'.repeat(5 - currentRating);
+
+          const newReview = document.createElement('article');
+          newReview.classList.add('card');
+
+          newReview.innerHTML = `
+      <div class="bar between">
+        <span class="card-title">${userName}</span>
+        <span class="rating">${ratingStars}</span>
+      </div>
+
+      <p class="my-recipes card-sub">${text}</p>
+      <span class="my-recipes card-sub right">${dateStr}</span>
+
+      <div class="review-btns">
+        <button class="btn-outline btn-edit">수정</button>
+        <button class="btn-warn btn-delete">삭제</button>
+      </div>
+    `;
+
+          reviewList.insertAdjacentElement('afterbegin', newReview);
+
+          reviewInput.value = '';
+          currentRating = 0;
+          updateStars();
+        });
+
+        reviewList.addEventListener('click', (e) => {
+          const card = e.target.closest('.card');
+          if (!card) return;
+
+          if (e.target.classList.contains('btn-delete')) {
+            if (confirm('정말 삭제하시겠습니까?')) card.remove();
+            return;
+          }
+
+          if (e.target.classList.contains('btn-edit')) {
+            editingReview = card;
+            const text = card.querySelector('.card-sub').textContent;
+            const starsText = card.querySelector('.rating').textContent;
+
+            currentRating = starsText.replace(/☆/g, '').length;
+
+            reviewInput.value = text;
+            reviewBtn.textContent = '리뷰 수정 완료';
+            updateStars();
+
+            inputBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
