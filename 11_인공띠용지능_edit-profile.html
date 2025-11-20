@@ -30,10 +30,18 @@
       overflow-y: auto;
     }
 
+    
+    .bg-text-label {
+      background-color: rgba(255, 255, 255, 0.8); /* 흰색 배경, 투명도 80% */
+      color: #333; 
+      padding: 6px 16px; 
+      border-radius: 10px; 
+      font-weight: bold;
+      backdrop-filter: blur(2px); 
+    }
 
   </style>
 </head>
-<>
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     // 요소 가져오기
@@ -67,20 +75,22 @@
       }
     });
 
-    // 3. 배경 이미지 미리보기 기능
+// 3. 배경 이미지 미리보기 기능 (수정됨)
     bgInput.addEventListener("change", function (e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
           bgPreview.style.backgroundImage = `url('${e.target.result}')`;
-          bgPreview.textContent = ""; // "현재 배경 이미지" 글자 지우기
-          localStorage.setItem("nn_bg_img_temp", e.target.result); // 임시 저장
+          
+          // [삭제됨] bgPreview.textContent = "";  <-- 이 줄을 지우거나 주석 처리했습니다!
+          // 이제 이미지가 바뀌어도 '현재 배경 이미지' 하얀 박스가 그대로 위에 떠 있습니다.
+
+          localStorage.setItem("nn_bg_img_temp", e.target.result);
         };
         reader.readAsDataURL(file);
       }
     });
-
     // 4. 저장하기 버튼 눌렀을 때 (데이터 저장 및 이동)
     form.addEventListener("submit", function (e) {
       e.preventDefault(); // 폼의 기본 전송 기능 막기
@@ -143,7 +153,7 @@
         <div style="display:flex;align-items:center;gap:16px;">
           <div style="display:flex;align-items:center;">
             <img src="11_circle_h_icon.png" alt="프로필 이미지 수정"
-            style="width:80px;height:80px;">
+            style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
           </div>
           <input id="profile_image" name="profile_image" type="file" class="input-file">
         </div>
@@ -153,7 +163,7 @@
         <label class="form-label">
           배경 이미지 변경</label>
         <div class="background-box">
-            현재 배경 이미지
+            <span class="bg-text-label">현재 배경 이미지</span>
         </div>
         <input id="background_image" name="background_image" type="file"
         class="input-file" style="margin-top: 20px;">
