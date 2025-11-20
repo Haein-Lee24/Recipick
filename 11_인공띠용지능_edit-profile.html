@@ -33,8 +33,83 @@
 
   </style>
 </head>
-<body>
+<>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // 요소 가져오기
+    const form = document.querySelector("form");
+    const profileInput = document.getElementById("profile_image");
+    const profilePreview = document.querySelector('img[alt="프로필 이미지 수정"]');
+    const bgInput = document.getElementById("background_image");
+    const bgPreview = document.querySelector(".background-box");
+    
+    // 1. 기존에 저장된 정보가 있다면 불러와서 채워넣기 (수정하러 들어왔을 때)
+    if(localStorage.getItem('nn_nickname')) {
+        document.getElementById('nickname').value = localStorage.getItem('nn_nickname');
+    }
+    if(localStorage.getItem('nn_username')) {
+        document.getElementById('username').value = localStorage.getItem('nn_username');
+    }
+    if(localStorage.getItem('nn_bio')) {
+        document.getElementById('bio').value = localStorage.getItem('nn_bio');
+    }
 
+    // 2. 프로필 이미지 미리보기 기능
+    profileInput.addEventListener("change", function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profilePreview.src = e.target.result; // 이미지 소스 교체
+          localStorage.setItem("nn_profile_img_temp", e.target.result); // 임시 저장
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 3. 배경 이미지 미리보기 기능
+    bgInput.addEventListener("change", function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          bgPreview.style.backgroundImage = `url('${e.target.result}')`;
+          bgPreview.textContent = ""; // "현재 배경 이미지" 글자 지우기
+          localStorage.setItem("nn_bg_img_temp", e.target.result); // 임시 저장
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 4. 저장하기 버튼 눌렀을 때 (데이터 저장 및 이동)
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // 폼의 기본 전송 기능 막기
+
+      // 텍스트 정보 저장
+      const nickname = document.getElementById("nickname").value;
+      const username = document.getElementById("username").value;
+      const bio = document.getElementById("bio").value;
+
+      localStorage.setItem("nn_nickname", nickname);
+      localStorage.setItem("nn_username", username);
+      localStorage.setItem("nn_bio", bio);
+
+      // 이미지 확정 저장 (임시 저장된 이미지를 실제 키로 이동)
+      const tempProfile = localStorage.getItem("nn_profile_img_temp");
+      const tempBg = localStorage.getItem("nn_bg_img_temp");
+      
+      if (tempProfile) localStorage.setItem("nn_profile_img", tempProfile);
+      if (tempBg) localStorage.setItem("nn_bg_img", tempBg);
+
+      // 임시 데이터 삭제
+      localStorage.removeItem("nn_profile_img_temp");
+      localStorage.removeItem("nn_bg_img_temp");
+
+      alert("프로필이 성공적으로 저장되었습니다!");
+      window.location.href = "11_인공띠용지능_mypage.html"; // 마이페이지로 이동
+    });
+  });
+</script>
   <nav class="site-nav">
     <div class="container nav-inner">
       <div class="logo-area">
