@@ -7,257 +7,211 @@
 
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
+    <!-- ⭐ 랭킹 전용 스타일 (외부 CSS는 수정 안함, HTML에만 추가) -->
     <style>
-      .rank-1 {
-        background-color: gold;
-        color: #333;
-      }
-      .rank-2 {
-        background-color: silver;
-        color: #333;
-      }
-      .rank-3 {
-        background-color: #cd7f32;
-        color: white;
-      }
-      .rank-card {
-        display: flex;
-        align-items: center;
-        background: var(--card-bg);
-        padding: 16px;
-        border-radius: 16px;
-        box-shadow: var(--shadow-lg);
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-      .rank-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
-      }
-      .rank-card-image {
-        width: 96px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 12px;
-        margin-right: 16px;
-        flex-shrink: 0;
-        transition: transform 0.3s;
-      }
-      .rank-card:hover .rank-card-image {
-        transform: scale(1.05);
-      }
-      .rank-info {
-        flex-grow: 1;
-      }
-      .rank-number {
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 24px;
-        border-radius: 999px;
-        margin-right: 16px;
-        flex-shrink: 0;
-        box-shadow: var(--shadow);
-      }
-      .rank-title {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--text);
-        transition: color 0.2s;
-        margin-bottom: 4px;
-      }
-      .rank-card:hover .rank-title {
-        color: var(--primary-color);
-      }
-      .rank-description {
-        font-size: 14px;
-        color: var(--muted);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .rank-meta {
-        text-align: right;
-        flex-shrink: 0;
-        margin-left: 16px;
-      }
-      .rank-rating {
-        font-size: 18px;
-        font-weight: 700;
-        color: #f59e0b;
-      }
-      .rank-views {
-        font-size: 14px;
-        color: var(--muted);
-      }
       .ranking-list {
         display: flex;
         flex-direction: column;
         gap: 16px;
       }
+
+      .rank-card {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        transition: transform 0.25s, box-shadow 0.25s;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .rank-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .rank-number {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 20px;
+        margin-right: 16px;
+        flex-shrink: 0;
+      }
+
+      .rank-1 {
+        background: gold;
+      }
+      .rank-2 {
+        background: silver;
+      }
+      .rank-3 {
+        background: #cd7f32;
+        color: #fff;
+      }
+
+      .rank-card-image {
+        width: 110px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-right: 16px;
+        flex-shrink: 0;
+      }
+
+      .rank-info {
+        flex-grow: 1;
+      }
+
+      .rank-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .rank-description {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .rank-meta {
+        text-align: right;
+        margin-left: 12px;
+        flex-shrink: 0;
+      }
+
+      .rank-rating {
+        font-size: 16px;
+        font-weight: 700;
+        color: #e2b458;
+      }
+
+      .rank-views {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* 모바일 대응 */
+      @media (max-width: 520px) {
+        .rank-card {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .rank-card-image {
+          width: 100%;
+          height: 160px;
+        }
+
+        .rank-meta {
+          width: 100%;
+          text-align: left;
+        }
+
+        .rank-number {
+          margin-bottom: 8px;
+        }
+      }
     </style>
   </head>
+
   <body>
+    <a id="top"></a>
+
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
-          <a href="11_인공띠용지능_main.html" class="logo">
+          <a href="11_인공띠용지능_main.html">
             <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
           </a>
         </div>
-        <div class="menu">
+
+        <nav class="menu">
           <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
-          <a href="11_인공띠용지능_menulist.html#korean" class="nav-link"
-            >레시피</a
-          >
+          <a href="11_인공띠용지능_menulist.html" class="nav-link">레시피</a>
           <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
-          <a href="11_인공띠용지능_rank.html#ranking" class="active nav-link"
-            >랭킹</a
-          >
+          <a href="11_인공띠용지능_rank.html" class="nav-link active">랭킹</a>
           <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
-        </div>
+        </nav>
       </div>
     </nav>
 
     <main class="page-pad">
       <div id="ranking" class="container">
-        <div class="hero center" style="border-bottom: 4px solid #f59e0b50">
-          <h1
-            style="
-              font-size: 2.5rem;
-              letter-spacing: -0.5px;
-              font-weight: 800;
-              display: inline-flex;
-              align-items: center;
-              gap: 12px;
-            "
-          >
-            <i
-              class="fas fa-trophy"
-              style="color: #f59e0b; font-size: 2.5rem"
-            ></i>
-            <span class="brand">🎖️ 냠냠노트</span> 주간 인기 레시피 랭킹 🎖️
-          </h1>
-          <p class="mt-20" style="color: #6b7280">
+        <header class="hero center">
+          <h1 class="mt-0">주간 인기 레시피 랭킹</h1>
+          <p style="font-size: 14px; color: var(--muted)">
             최근 7일간의 조회수와 평점을 기반으로 선정되었습니다.
           </p>
-        </div>
+        </header>
 
-        <div class="ranking-list mt-80">
-          <a
-            href="11_인공띠용지능_detail_r1.html"
-            class="rank-card"
-            style="border-color: gold"
-          >
-            <div class="rank-number rank-1">1</div>
-            <img
-              src="11_shrimp.jpg"
-              alt="달콤한 허니 버터 갈릭 쉬림프 이미지"
-              class="rank-card-image"
-            />
-            <div class="rank-info">
-              <h2 class="rank-title">달콤한 허니 버터 갈릭 쉬림프 🍤🍯</h2>
-              <p class="rank-description">달콤 짭짤, 톡톡 터지는 새우의 맛!</p>
-            </div>
-            <div class="rank-meta">
-              <div class="rank-rating"><i class="fas fa-star"></i> 4.8점</div>
-              <p class="rank-views">조회수 120,450회</p>
-            </div>
-          </a>
+        <h2 class="section-title">전체 랭킹</h2>
 
-          <a
-            href="11_인공띠용지능_detail_r2.html"
-            class="rank-card"
-            style="border-color: silver"
-          >
-            <div class="rank-number rank-2">2</div>
-            <img
-              src="11_saladpasta.jpg"
-              alt="5분 완성! 초간단 샐러드 파스타 이미지"
-              class="rank-card-image"
-            />
-            <div class="rank-info">
-              <h2 class="rank-title">5분 완성! 초간단 샐러드 파스타 🥗🍝</h2>
-              <p class="rank-description">5분 만에 뚝딱! 가볍고 신선한 맛!</p>
-            </div>
-            <div class="rank-meta">
-              <div class="rank-rating"><i class="fas fa-star"></i> 4.9점</div>
-              <p class="rank-views">조회수 98,760회</p>
-            </div>
-          </a>
+        <div id="rankingList" class="ranking-list mt-20"></div>
 
-          <a
-            href="11_인공띠용지능_detail_r3.html"
-            class="rank-card"
-            style="border-color: #cd7f32"
-          >
-            <div class="rank-number rank-3">3</div>
-            <img
-              src="11_corn.jpg"
-              alt="단짠단짠 마약 옥수수 이미지"
-              class="rank-card-image"
-            />
-            <div class="rank-info">
-              <h2 class="rank-title">단짠단짠 마약 옥수수 🌽🌽</h2>
-              <p class="rank-description">
-                멈출 수 없는 단짠 조합! 최고의 간식!
-              </p>
-            </div>
-            <div class="rank-meta">
-              <div class="rank-rating"><i class="fas fa-star"></i> 4.3점</div>
-              <p class="rank-views">조회수 72,110회</p>
-            </div>
-          </a>
-
-          <a href="11_인공띠용지능_detail_r4.html" class="rank-card">
-            <div class="rank-number">4</div>
-            <img
-              src="11_steak.jpg"
-              alt="고급진 부채살 스테이크 이미지"
-              class="rank-card-image"
-            />
-            <div class="rank-info">
-              <h2 class="rank-title">고급진 부채살 스테이크 🥩🍷</h2>
-              <p class="rank-description">
-                육즙 가득! 집에서 즐기는 근사한 만찬!
-              </p>
-            </div>
-            <div class="rank-meta">
-              <div class="rank-rating"><i class="fas fa-star"></i> 4.5점</div>
-              <p class="rank-views">조회수 55,900회</p>
-            </div>
-          </a>
-
-          <a href="11_인공띠용지능_detail_dr.html" class="rank-card">
-            <div class="rank-number">5</div>
-            <img
-              src="11_drink.png"
-              alt="5위 레시피 이미지"
-              onerror="this.onerror=null; this.src='https://placehold.co/120x90/98FB98/000000?text=이미지+없음';"
-              class="rank-card-image"
-            />
-            <div class="rank-info">
-              <h2 class="rank-title">상큼 시원 자몽 에이드 🍹🧊</h2>
-              <p class="rank-description">카페 퀄리티의 청량함!</p>
-            </div>
-            <div class="rank-meta">
-              <div class="rank-rating"><i class="fas fa-star"></i> 4.7점</div>
-              <p class="rank-views">조회수 48,200회</p>
-            </div>
-          </a>
-        </div>
         <div class="card-box mt-60 center">
-          <p class="card-title-lg">더 많은 레시피를 보고 싶으신가요?</p>
+          <p class="card-title-lg">더 많은 레시피가 궁금하신가요?</p>
           <a href="11_인공띠용지능_menulist.html#all" class="more-btn mt-20">
-            전체 레시피 목록 보러가기 <i class="fas fa-arrow-right"></i>
+            전체 레시피 목록 보러가기
           </a>
         </div>
       </div>
     </main>
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
-    
+
+    <script src="11_인공띠용지능_rank-data.js"></script>
+
+    <script>
+      const rankingList = document.getElementById('rankingList');
+
+      rankingData.forEach((item) => {
+        const card = document.createElement('a');
+        card.href = item.link;
+        card.className = 'rank-card';
+
+        card.innerHTML = `
+          <div class="rank-number rank-${item.rank}">
+  ${
+    item.rank === 1
+      ? '🥇'
+      : item.rank === 2
+      ? '🥈'
+      : item.rank === 3
+      ? '🥉'
+      : item.rank
+  }
+</div>
+
+
+          <img src="${item.img}" 
+              alt="${item.title}" 
+              class="rank-card-image" />
+
+          <div class="rank-info">
+            <h2 class="rank-title">${item.title}</h2>
+            <p class="rank-description">${item.desc}</p>
+          </div>
+
+          <div class="rank-meta">
+            <div class="rank-rating">${item.rating}점</div>
+            <p class="rank-views">
+              조회수 ${item.views.toLocaleString()}회
+            </p>
+          </div>
+        `;
+
+        rankingList.appendChild(card);
+      });
+    </script>
   </body>
 </html>
