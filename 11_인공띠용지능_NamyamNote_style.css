@@ -844,6 +844,10 @@ footer {
   gap: 6px;
 }
 
+.view-all-btn-wrap {
+  margin-bottom: 80px;   
+}
+
 .review-list .card {
   transform: none !important;
   box-shadow: var(--shadow) !important;
