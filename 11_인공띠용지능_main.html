@@ -221,39 +221,47 @@
 
       <section class="mt-60" aria-label="추천 레시피">
         <h2 class="section-title">오늘의 추천 레시피</h2>
-        <div class="card-grid">
-          <a href="11_인공띠용지능_detail_r1.html" class="card">
-            <img src="11_shrimp.jpg" alt="갈릭 쉬림프 썸네일" class="thumb" />
-            <p class="card-title">달콤한 허니 버터 갈릭 쉬림프</p>
-            <div class="rating">★★★★☆ (4.5)</div>
-          </a>
-          <a href="11_인공띠용지능_detail_r2.html" class="card">
-            <img
-              src="11_saladpasta.jpg"
-              alt="샐러드 파스타 썸네일"
-              class="thumb"
-            />
-            <p class="card-title">5분 완성! 초간단 샐러드 파스타</p>
-            <div class="rating">★★★★★ (4.9)</div>
-          </a>
-          <a href="11_인공띠용지능_detail_r3.html" class="card">
-            <img src="11_corn.jpg" alt="마약 옥수수 썸네일" class="thumb" />
-            <p class="card-title">단짠단짠 마약 옥수수</p>
-            <div class="rating">★★★★☆ (4.3)</div>
-          </a>
-          <a href="11_인공띠용지능_detail_r4.html" class="card">
-            <img src="11_steak.jpg" alt="부채살 스테이크 썸네일" class="thumb" />
-            <p class="card-title">고급진 부채살 스테이크</p>
-            <div class="rating">★★★★★ (4.8)</div>
-          </a>
-        </div>
+
+        <div id="recommend-list" class="card-grid"></div>
+
         <div class="center mt-20">
-          <a href="11_인공띠용지능_rank.html" class="more-btn">더보기 →</a>
+          <a href="11_인공띠용지능_menulist.html" class="more-btn">더보기 →</a>
         </div>
       </section>
     </main>
 
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
+
+    <script src="11_인공띠용지능_menulist-data.js"></script>
+    <script>
+      const allRecipes = [
+        ...recipeData.korean,
+        ...recipeData.chinese,
+        ...recipeData.western,
+        ...recipeData.dessert,
+        ...recipeData.drink
+      ];
+
+      function getRandomRecipes(list, count) {
+        return [...list].sort(() => Math.random() - 0.5).slice(0, count);
+      }
+
+      function renderRandomRecipes() {
+        const target = document.getElementById("recommend-list");
+        const selected = getRandomRecipes(allRecipes, 4);
+
+        target.innerHTML = selected.map(r => `
+          <a href="${r.link}" class="card">
+            <img src="${r.img}" class="thumb" alt="${r.title}">
+            <p class="card-title">${r.title}</p>
+            <div class="rating">${r.rating}</div>
+          </a>
+        `).join("");
+      }
+
+      renderRandomRecipes();
+    </script>
+
   </body>
 
   <script>
