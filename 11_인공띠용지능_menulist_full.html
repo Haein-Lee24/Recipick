@@ -1,47 +1,115 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>레시피 전체보기</title>
-
-  <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
-
-  <style>
-    
-
-  /* 제목과 위 간격 더 줄이고 싶다면 */
-    #full-title {
-    margin-top: 10px !important;
-    }
-    .section-title { margin-bottom: 24px; }
-  </style>
-</head>
-
-<body>
-  <nav class="site-nav">
-    <div class="container nav-inner">
-      <div class="logo-area">
-        <a href="11_인공띠용지능_main.html">
-          <img src="11_logo.png" alt="Logo" class="logo">
-        </a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>레시피 전체보기</title>
+    <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+    <style>
+      main {
+        margin-top: 40px;
+      }
+      .header-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #eee;
+      }
+      .back-btn {
+        padding: 8px 16px;
+        background: #eee;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="11_인공띠용지능_main.html"
+            ><img src="11_logo.png" alt="Logo" class="logo"
+          /></a>
+        </div>
+        <div class="menu">
+          <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
+          <a class="active nav-link" href="11_인공띠용지능_menulist.html"
+            >레시피</a
+          >
+          <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+          <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
+          <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+        </div>
       </div>
-      <div class="menu">
-        <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-        <a class="active nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
-        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-        <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+    </nav>
+
+    <main class="container page-pad">
+      <div class="header-area">
+        <h2 id="full-title" class="section-title">로딩 중...</h2>
+        <a href="11_인공띠용지능_menulist.html" class="back-btn">← 목록으로</a>
       </div>
-    </div>
-  </nav>
+      <div id="full-list" class="card-grid"></div>
+    </main>
 
-  <main class="container page-pad">
-    <h2 id="full-title" class="section-title"></h2>
-    <div id="full-list" class="card-grid"></div>
-  </main>
+    <script>
+      // URL 파라미터 읽기 (?category=korean)
+      const params = new URLSearchParams(window.location.search);
+      const currentCategory = params.get('category');
 
-  <script src="11_인공띠용지능_menulist-data.js"></script>
-  <script src="11_인공띠용지능_menulist-full.js"></script>
-</body>
+      const categoryMap = {
+        korean: '한식',
+        western: '양식',
+        chinese: '중식',
+        dessert: '디저트',
+        drink: '음료',
+      };
+
+      fetch('recipes.json')
+        .then((res) => res.json())
+        .then((data) => {
+          const titleEl = document.getElementById('full-title');
+          const listEl = document.getElementById('full-list');
+          const targetName = categoryMap[currentCategory];
+
+          if (!targetName) {
+            titleEl.innerText = '잘못된 카테고리입니다.';
+            return;
+          }
+
+          titleEl.innerText = `${targetName} 레시피 전체보기`;
+
+          // 데이터 필터링
+          const filtered = data.recipes.filter((r) => {
+            if (currentCategory === 'dessert')
+              return r.category === '디저트' || r.category === '간식';
+            return r.category === targetName;
+          });
+
+          // 렌더링
+          if (filtered.length === 0) {
+            listEl.innerHTML = '<p>등록된 레시피가 없습니다.</p>';
+          } else {
+            listEl.innerHTML = filtered
+              .map(
+                (r) => `
+                <a href="recipe.html?id=${r.id}" class="card">
+                  <img src="${r.thumbnail}" alt="${r.title}" class="thumb" />
+                  <div class="card-body">
+                    <p class="card-title">${r.title}</p>
+                    <p class="recipe-meta">작성자: 냠냠이 · 조회수: ${r.review_count}</p>
+                    <div class="rating">★ ${r.rating}</div>
+                  </div>
+                </a>
+            `
+              )
+              .join('');
+          }
+        })
+        .catch((err) => console.error('로딩 실패:', err));
+    </script>
+  </body>
 </html>
