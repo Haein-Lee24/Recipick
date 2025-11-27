@@ -1,12 +1,14 @@
 function renderCategory(category) {
-  const container = document.querySelector(`.card-grid[data-category="${category}"]`);
+  const container = document.querySelector(
+    `.card-grid[data-category="${category}"]`
+  );
   if (!container) return;
 
-  container.innerHTML = "";
+  container.innerHTML = '';
 
   const list = recipeData[category].slice(0, 8);
 
-  list.forEach(item => {
+  list.forEach((item) => {
     const card = `
       <a href="${item.link}" class="card">
         <img src="${item.img}" alt="${item.title}" class="thumb" />
@@ -15,14 +17,15 @@ function renderCategory(category) {
         <div class="rating">★★★★☆ (${item.rating})</div>
       </a>
     `;
-    container.insertAdjacentHTML("beforeend", card);
+    container.insertAdjacentHTML('beforeend', card);
   });
 }
 
 function renderAllCategories() {
-  renderCategory("korean");
-  renderCategory("western");
-  renderCategory("chinese");
-  renderCategory("dessert");
-  renderCategory("drink");
+  renderCategory('korean');
+  renderCategory('western');
+  renderCategory('chinese');
+  renderCategory('dessert');
+  renderCategory('drink');
 }
+//추가
