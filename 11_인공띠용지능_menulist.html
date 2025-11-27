@@ -9,16 +9,15 @@
       body {
         padding-top: 28px !important;
       }
+      main.container {
+        display: block !important;
+        margin-top: 100px;
+      }
       section {
         scroll-margin-top: 140px;
+        margin-bottom: 80px;
       }
-      .site-nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 200;
-      }
+
       .category-tabs {
         background: var(--card-bg);
         border-bottom: 1px solid var(--border);
@@ -45,14 +44,27 @@
       .tab-link:hover {
         color: var(--primary-color);
       }
-      main {
-        margin-top: 120px;
+
+      .view-all-btn-wrap {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .view-all-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #eee;
+        border-radius: 20px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .view-all-btn:hover {
+        background: #ddd;
       }
     </style>
   </head>
 
   <body>
-    <!-- 네비게이션 -->
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
@@ -62,9 +74,6 @@
         </div>
         <div class="menu">
           <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="active nav-link" href="11_인공띠용지능_menulist.html#korean"
-            >레시피</a
-          >
           <a class="active nav-link" href="11_인공띠용지능_menulist.html"
             >레시피</a
           >
@@ -75,7 +84,6 @@
       </div>
     </nav>
 
-    <!-- 상단 탭 -->
     <header class="category-tabs">
       <div class="container tabs-inner">
         <a href="#korean" class="tab-link">한식</a>
@@ -97,7 +105,7 @@
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <script>
-      // 1. 카테고리 정의 (간식 제외)
+      // 1. 카테고리 정의 (순서대로 화면에 나옴)
       const categories = [
         { id: 'korean', name: '한식' },
         { id: 'western', name: '양식' },
@@ -121,11 +129,11 @@
         const container = document.getElementById(catId);
 
         // 2. 해당 카테고리만 필터링
-        // (JSON을 수정했으므로 마약옥수수는 이제 자동으로 '한식'에서 잡힙니다!)
+        // (JSON에서 '마약 옥수수'를 '한식'으로 수정했다면 자동으로 한식에 들어갑니다!)
         const filtered = recipes.filter((r) => r.category === catName);
 
+        // 만약 해당 카테고리에 데이터가 하나도 없으면 섹션을 숨김
         if (filtered.length === 0) {
-          // 데이터가 없으면 섹션을 숨김 (깔끔하게)
           container.style.display = 'none';
           return;
         }
