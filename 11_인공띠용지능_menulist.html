@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
     <style>
       body {
-        padding-top: 25px !important;
+        padding-top: 28px !important;
       }
       section {
         scroll-margin-top: 140px;
       }
-
       .site-nav {
         position: fixed;
         top: 0;
@@ -20,7 +19,6 @@
         right: 0;
         z-index: 200;
       }
-
       .category-tabs {
         background: var(--card-bg);
         border-bottom: 1px solid var(--border);
@@ -37,7 +35,6 @@
         justify-content: center;
         gap: 24px;
       }
-
       .tab-link {
         font-weight: 700;
         color: var(--muted);
@@ -54,6 +51,7 @@
   </head>
 
   <body>
+    <!-- 네비게이션 -->
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
@@ -63,9 +61,7 @@
         </div>
         <div class="menu" role="navigation" aria-label="주요 메뉴">
           <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="active nav-link" href="11_인공띠용지능_menulist.html#korean"
-            >레시피</a
-          >
+          <a class="active nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
           <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
           <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
           <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
@@ -73,6 +69,7 @@
       </div>
     </nav>
 
+    <!-- 상단 탭 -->
     <header class="category-tabs">
       <div class="container tabs-inner">
         <a href="#korean" class="tab-link">한식</a>
@@ -84,6 +81,7 @@
     </header>
 
     <main class="container page-pad">
+<<<<<<< HEAD
       <!-- ================================
            한식
       ================================= -->
@@ -440,10 +438,74 @@
               음료 레시피 전체보기
             </a>
           </div>
+=======
+
+      <!-- 한식 -->
+      <section id="korean">
+        <h2 class="section-title">한식 레시피<span> (총 15개)</span></h2>
+        <div class="card-grid" data-category="korean"></div>
+        <div class="view-all-btn-wrap">
+          <a href="11_인공띠용지능_menulist_full.html?category=korean" class="view-all-btn">
+            한식 레시피 전체보기
+          </a>
         </div>
       </section>
+
+      <!-- 양식 -->
+      <section id="western" class="mt-80">
+        <h2 class="section-title">양식 레시피<span> (총 15개)</span></h2>
+        <div class="card-grid" data-category="western"></div>
+        <div class="view-all-btn-wrap">
+          <a href="11_인공띠용지능_menulist_full.html?category=western" class="view-all-btn">
+            양식 레시피 전체보기
+          </a>
+        </div>
+      </section>
+
+      <!-- 중식 -->
+      <section id="chinese" class="mt-80">
+        <h2 class="section-title">중식 레시피<span> (총 11개)</span></h2>
+        <div class="card-grid" data-category="chinese"></div>
+        <div class="view-all-btn-wrap">
+          <a href="11_인공띠용지능_menulist_full.html?category=chinese" class="view-all-btn">
+            중식 레시피 전체보기
+          </a>
+        </div>
+      </section>
+
+      <!-- 디저트 -->
+      <section id="dessert" class="mt-80">
+        <h2 class="section-title">디저트 레시피<span> (총 11개)</span></h2>
+        <div class="card-grid" data-category="dessert"></div>
+        <div class="view-all-btn-wrap">
+          <a href="11_인공띠용지능_menulist_full.html?category=dessert" class="view-all-btn">
+            디저트 레시피 전체보기
+          </a>
+        </div>
+      </section>
+
+      <!-- 음료 -->
+      <section id="drink" class="mt-80">
+        <h2 class="section-title">음료 레시피<span> (총 14개)</span></h2>
+        <div class="card-grid" data-category="drink"></div>
+        <div class="view-all-btn-wrap">
+          <a href="11_인공띠용지능_menulist_full.html?category=drink" class="view-all-btn">
+            음료 레시피 전체보기
+          </a>
+>>>>>>> ebe4511b6cfdb556f637a0a6a270b6a6527f854f
+        </div>
+      </section>
+
     </main>
 
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
+
+    <!-- JS 로드 -->
+    <script src="11_인공띠용지능_menulist-data.js"></script>
+    <script src="11_인공띠용지능_menulist-home.js"></script>
+
+    <script>
+      renderAllCategories();
+    </script>
   </body>
 </html>
