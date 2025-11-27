@@ -231,19 +231,17 @@ a {
 
 .nav-top-center {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   padding: 16px 0;
   background: #f7f0dc;
   border-bottom: 1px solid var(--border);
 }
 
-
 .nav-center-box {
   display: flex;
   align-items: center;
-  gap: 20px; 
+  gap: 20px;
 }
-
 
 .nav-search {
   position: relative;
@@ -287,12 +285,11 @@ a {
   background: #a48c58;
 }
 
-
 .nav-menu-bar {
   display: flex;
   justify-content: center;
   gap: 40px;
-  background: var(--primary-color); 
+  background: var(--primary-color);
   padding: 12px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -309,7 +306,6 @@ a {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-
 
 /* Section title */
 .section-title {
@@ -929,7 +925,7 @@ footer {
 }
 
 .view-all-btn-wrap {
-  margin-bottom: 80px;   
+  margin-bottom: 80px;
 }
 
 .review-list .card {
