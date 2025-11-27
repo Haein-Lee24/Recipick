@@ -126,8 +126,42 @@ function renderRecipe(recipe) {
     `
     )
     .join('');
-    
+
+    saveToRecent(recipe);
 }
+
+// 최근 본 레시피 저장 함수(해인)
+function saveToRecent(recipe) {
+  const CURRENT_KEY = "nn_recent_recipes"; 
+  const MAX_ITEMS = 10; // 최대 저장 개수
+
+  // 1. 저장할 데이터 객체 생성
+  const newRecord = {
+    id: recipe.id,
+    title: recipe.title || recipe.name,
+    info: `${recipe.category} · 조회수 ${recipe.views || '0'}`, // 보여줄 부가 정보
+    link: window.location.href // 현재 페이지 주소
+  };
+
+      // 2. 기존 기록 가져오기
+  let recentList = JSON.parse(localStorage.getItem(CURRENT_KEY)) || [];
+
+      // 3. 중복 제거 (이미 본 거라면 리스트에서 뺀 뒤, 다시 맨 앞으로 넣기 위함)
+  recentList = recentList.filter(item => item.id !== recipe.id);
+
+      // 4. 맨 앞에 추가 (unshift)
+  recentList.unshift(newRecord);
+
+      // 5. 개수 제한 (5개 넘어가면 뒤에서부터 삭제)
+  if (recentList.length > MAX_ITEMS) {
+    recentList.pop();
+  }
+
+  // 6. 저장
+  localStorage.setItem(CURRENT_KEY, JSON.stringify(recentList));
+}
+    
+
 
 function setupReviewSystem(recipe) {
   const stars = document.querySelectorAll('.rating-stars i');

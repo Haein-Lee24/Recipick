@@ -231,7 +231,24 @@
         }
       });
 
+      const recentListContainer = document.getElementById("recent-list");
+      const recentRecipes = JSON.parse(localStorage.getItem("nn_recent_recipes")) || [];
 
+      if (recentRecipes.length === 0) {
+        recentListContainer.innerHTML = '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
+      } 
+      else {
+        recentListContainer.innerHTML = recentRecipes.map(recipe => `
+            <li>
+              <a href="${recipe.link}" class="list-item">
+                <div class="list-text">
+                  <p class="list-ttl">${recipe.title}</p>
+                  <p class="list-sub">${recipe.info}</p>
+                </div>
+              </a>
+            </li>
+        `).join('');
+    }
     </script>
   </body>
 </html>
