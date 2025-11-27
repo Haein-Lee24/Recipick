@@ -6,9 +6,64 @@
   <title>냠냠노트 - 프로필 수정</title>
   <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
   <style>
+    /* --------------------------
+      📌 register.html 스타일 적용 (여백 및 입력창 디자인 통일)
+    --------------------------- */
+    /* 헤더(Hero)와 섹션 제목 간격 조정 */
+    .hero {
+      margin-bottom: 14px !important;
+      border: 1px solid var(--border); /* 테두리 추가 */
+    }
+
+    /* 폼 전체 박스 스타일 (레시피 등록과 동일한 여백) */
+    .form-card {
+      padding: 36px 32px 52px;
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid var(--border); /* 테두리 명확하게 */
+    }
+
+    /* 라벨 스타일 */
+    .form-card label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    /* 🌟 못생긴 입력창 해결: 레시피 등록 페이지와 동일한 인풋 스타일 적용 🌟 */
+    .form-card input[type='text'],
+    .form-card input[type='file'],
+    .form-card textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      background: #fff;
+      font-family: 'NanumSquare', sans-serif;
+      font-size: 15px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+    /* 포커스 시 강조 색상 */
+    .form-card input:focus,
+    .form-card textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(111, 90, 44, 0.1);
+    }
+
+    .form-card textarea {
+      resize: none;
+    }
+
+    /* --------------------------
+      📌 프로필 수정 페이지 전용 스타일
+    --------------------------- */
     .background-box {
       height: 140px;
-      border-radius: 14px;
+      border-radius: 12px;
       background: url('11_background.png') center/cover;
       display: flex;
       align-items: center;
@@ -16,30 +71,34 @@
       color: #fff;
       font-size: 20px;
       font-weight: 500;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
     }
-
-    .form-text {
-      width: 100%;
-      height: 50px;
-      resize: none;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 15px;
-      background-color: #fff;
-      overflow-y: auto;
-    }
-
     
     .bg-text-label {
-      background-color: rgba(255, 255, 255, 0.8); /* 흰색 배경, 투명도 80% */
+      background-color: rgba(255, 255, 255, 0.85);
       color: #333; 
       padding: 6px 16px; 
       border-radius: 10px; 
-      font-weight: bold;
-      backdrop-filter: blur(2px); 
+      font-weight: 800;
+      font-size: 14px; 
+      backdrop-filter: blur(4px);
     }
 
+    .profile-img-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .profile-preview {
+      width: 80px; 
+      height: 80px; 
+      border-radius: 50%; 
+      object-fit: cover;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
   </style>
 </head>
   <script>
@@ -137,62 +196,55 @@
     </div>
   </nav>
 
-  <main class="container page-pad">
-    <section class="card-box center">
-      <h1 style="font-size:28px;font-weight:800;color:#1f2937;">프로필 수정하기 📝</h1>
-      <p style="color:#6b7280;font-size:14px;margin-top:6px;">
-        변경 후 저장 버튼을 눌러주세요.
+ <main class="page-pad">
+  <div class="container">
+    
+    <header class="hero center">
+      <h1 class="mt-0">프로필 수정하기</h1>
+      <p style="font-size: 14px; color: var(--muted)">
+        변경 후 하단의 <strong>저장하기</strong> 버튼을 눌러주세요.
       </p>
-    </section>
+    </header>
 
-    <form action="11_인공띠용지능_mypage.html" method="post" enctype="multipart/form-data"
-     class="card-box" style="margin-top: 20px;">
+    <form action="#" method="post" enctype="multipart/form-data" class="card form-card">
 
-      <div style="margin-top: 25px;">
-        <label class="form-label">프로필 이미지 변경</label>
-        <div style="display:flex;align-items:center;gap:16px;">
-          <div style="display:flex;align-items:center;">
-            <img src="11_circle_h_icon.png" alt="프로필 이미지 수정"
-            style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
-          </div>
-          <input id="profile_image" name="profile_image" type="file" class="input-file">
+      <div class="mt-20">
+        <label>프로필 이미지 변경</label>
+        <div class="profile-img-row">
+          <img src="11_circle_h_icon.png" alt="프로필 이미지 수정" class="profile-preview">
+          <input id="profile_image" name="profile_image" type="file" accept="image/*">
         </div>
       </div>
 
-      <div style="margin-top: 25px;">
-        <label class="form-label">
-          배경 이미지 변경</label>
+      <div class="mt-20">
+        <label>배경 이미지 변경</label>
         <div class="background-box">
             <span class="bg-text-label">현재 배경 이미지</span>
         </div>
-        <input id="background_image" name="background_image" type="file"
-        class="input-file" style="margin-top: 20px;">
+        <input id="background_image" name="background_image" type="file" accept="image/*">
       </div>
 
-      <div style="margin-top: 25px;">
-        <p><strong>닉네임</strong></p>
-        <label for="nickname" class="form-label"></label>
-        <input id="nickname" name="nickname" type="text" required value="Haein_Cook" class="form-text">
+      <div class="mt-20">
+        <label for="nickname">닉네임</label>
+        <input id="nickname" name="nickname" type="text" required value="Haein_Cook">
       </div>
 
-      <div style="margin-top: 25px;">
-        <label for="username" class="form-label">사용자 아이디</label>
-        <input id="username" name="username" type="text" required value="@haein_cook_vegan" class="form-text">
+      <div class="mt-20">
+        <label for="username">사용자 아이디</label>
+        <input id="username" name="username" type="text" required value="@haein_cook_vegan">
       </div>
 
-      <div style="margin-top: 25px;">
-        <label for="bio" class="form-label">자기소개</label>
-        <textarea id="bio" name="bio" rows="3" required placeholder="나를 소개하는 한 문장을 적어보세요."
-                  class="input-text"></textarea>
+      <div class="mt-20">
+        <label for="bio">자기소개</label>
+        <textarea id="bio" name="bio" rows="4" required placeholder="나를 소개하는 한 문장을 적어보세요."></textarea>
       </div>
 
       <div class="center" style="margin-top:40px;">
-        <button type="submit" class="btn-solid">저장하기</button>
+        <button type="submit" class="btn-solid" style="min-width: 200px; height: 50px; font-size: 16px;">저장하기</button>
       </div>
+
     </form>
-
-    <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
-
-  </main>
+  </div>
+</main>
 </body>
 </html>
