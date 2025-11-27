@@ -7,7 +7,6 @@
 
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
-    <!-- ⭐ 랭킹 전용 스타일 (외부 CSS는 수정 안함, HTML에만 추가) -->
     <style>
       .ranking-list {
         display: flex;
@@ -99,24 +98,20 @@
         color: var(--muted);
       }
 
-      /* 모바일 대응 */
       @media (max-width: 520px) {
         .rank-card {
           flex-direction: column;
           align-items: flex-start;
           gap: 12px;
         }
-
         .rank-card-image {
           width: 100%;
           height: 160px;
         }
-
         .rank-meta {
           width: 100%;
           text-align: left;
         }
-
         .rank-number {
           margin-bottom: 8px;
         }
@@ -154,7 +149,7 @@
           </p>
         </header>
 
-        <h2 class="section-title">전체 랭킹</h2>
+        <h2 class="section-title">TOP 5 랭킹</h2>
 
         <div id="rankingList" class="ranking-list mt-20"></div>
 
@@ -169,49 +164,64 @@
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
-    <script src="11_인공띠용지능_rank-data.js"></script>
-
     <script>
       const rankingList = document.getElementById('rankingList');
 
-      rankingData.forEach((item) => {
-        const card = document.createElement('a');
-        card.href = item.link;
-        card.className = 'rank-card';
+      fetch('recipes.json')
+        .then((res) => res.json())
+        .then((data) => {
+          // 1. data.recipes 가져오기
+          let allRecipes = data.recipes;
 
-        card.innerHTML = `
-          <div class="rank-number rank-${item.rank}">
-  ${
-    item.rank === 1
-      ? '🥇'
-      : item.rank === 2
-      ? '🥈'
-      : item.rank === 3
-      ? '🥉'
-      : item.rank
-  }
-</div>
+          // 2. 리뷰 수(review_count)가 많은 순서대로 내림차순 정렬 (b - a)
+          // (평점 순으로 하려면 b.rating - a.rating 으로 바꾸면 됩니다)
+          allRecipes.sort((a, b) => b.review_count - a.review_count);
 
+          // 3. 상위 5개만 자르기 (0번 인덱스부터 5개)
+          const top5Recipes = allRecipes.slice(0, 5);
 
-          <img src="${item.img}" 
-              alt="${item.title}" 
-              class="rank-card-image" />
+          // 4. 화면에 그리기
+          top5Recipes.forEach((item, index) => {
+            const rank = index + 1; // 1위부터 시작
 
-          <div class="rank-info">
-            <h2 class="rank-title">${item.title}</h2>
-            <p class="rank-description">${item.desc}</p>
-          </div>
+            const card = document.createElement('a');
+            card.href = `recipe.html?id=${item.id}`;
+            card.className = 'rank-card';
 
-          <div class="rank-meta">
-            <div class="rank-rating">${item.rating}점</div>
-            <p class="rank-views">
-              조회수 ${item.views.toLocaleString()}회
-            </p>
-          </div>
-        `;
+            card.innerHTML = `
+              <div class="rank-number rank-${rank}">
+                ${
+                  rank === 1
+                    ? '🥇'
+                    : rank === 2
+                    ? '🥈'
+                    : rank === 3
+                    ? '🥉'
+                    : rank
+                }
+              </div>
 
-        rankingList.appendChild(card);
-      });
+              <img src="${item.thumbnail}" class="rank-card-image" alt="${
+              item.title
+            }" />
+
+              <div class="rank-info">
+                <h2 class="rank-title">${item.title}</h2>
+                <p class="rank-description">${item.summary}</p>
+              </div>
+
+              <div class="rank-meta">
+                <div class="rank-rating">★ ${item.rating}</div>
+                <p class="rank-views">리뷰 ${item.review_count}개</p>
+              </div>
+            `;
+
+            rankingList.appendChild(card);
+          });
+        })
+        .catch((err) =>
+          console.error('데이터를 불러오는 중 오류가 발생했어요:', err)
+        );
     </script>
   </body>
 </html>
