@@ -167,7 +167,7 @@
     <script>
       const rankingList = document.getElementById('rankingList');
 
-      fetch('recipes.json')
+      fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
           // 1. data.recipes 가져오기
@@ -185,7 +185,7 @@
             const rank = index + 1; // 1위부터 시작
 
             const card = document.createElement('a');
-            card.href = `recipe.html?id=${item.id}`;
+            card.href = `11_인공띠용지능_recipe.html?id=${item.id}`;
             card.className = 'rank-card';
 
             card.innerHTML = `
