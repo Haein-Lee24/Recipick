@@ -99,6 +99,9 @@
         border-radius: 16px;
         border: 1px solid #e4d8b4;
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        height: 580px;
+        object-fit: cover;
+        transition: opacity 0.4s ease-in-out;
       }
 
       @media (max-width: 768px) {
@@ -121,21 +124,33 @@
 
   <body>
     <nav class="site-nav">
-      <div class="container nav-inner">
-        <div class="logo-area">
+      <div class="container nav-top-center">
+        <div class="nav-center-box">
           <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
             <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
           </a>
+          <div class="nav-search">
+            <input
+              type="text"
+              placeholder="재료명으로 레시피 검색"
+              class="nav-search-input"
+            />
+            <button class="nav-search-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/>
+                <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2"/>
+              </svg>
+            </button>
+
+          </div>
         </div>
-        <div class="menu" role="navigation" aria-label="주요 메뉴">
-          <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="nav-link" href="11_인공띠용지능_menulist.html#korean"
-            >레시피</a
-          >
-          <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-          <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-          <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
-        </div>
+      </div>
+      <div class="nav-menu-bar">
+        <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+        <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
+        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
       </div>
     </nav>
 
@@ -165,7 +180,7 @@
             </div>
           </div>
           <div class="hero-visual">
-            <img src="11_banner.jpg" alt="요리 이미지" class="hero-visual-img" />
+            <img id="hero-carousel" src="11_banner.jpg" alt="요리 이미지" class="hero-visual-img" />
           </div>
         </div>
       </section>
@@ -204,31 +219,8 @@
         </a>
       </div>
 
-      <section class="mt-60" aria-label="재료 검색">
-        <h2 class="section-title mt-0">
-          가지고 있는 재료로 딱 맞는 레시피를 찾아보세요!
-        </h2>
-        <div class="search-wrap">
-          <span class="search-icon" aria-hidden="true">🔍</span>
-          <input
-            type="text"
-            class="search-input"
-            placeholder="예: 김치, 계란, 파스타면..."
-            aria-label="재료명으로 레시피 검색"
-          />
-          <button class="search-btn" type="button" aria-label="검색 실행">
-            검색
-          </button>
-        </div>
-      </section>
-
       <section class="mt-60" aria-label="인기 레시피">
-        <h3
-          class="center text-gray-deep"
-          style="font-size: 20px; font-weight: 700; margin: 0 0 16px"
-        >
-          인기 레시피
-        </h3>
+        <h2 class="section-title">오늘의 추천 레시피</h2>
         <div class="card-grid">
           <a href="11_인공띠용지능_detail_r1.html" class="card">
             <img src="11_shrimp.jpg" alt="갈릭 쉬림프 썸네일" class="thumb" />
@@ -263,4 +255,26 @@
 
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
   </body>
+
+  <script>
+    const carouselImages = [
+      "11_banner.jpg",
+      "11_banner2.jpg",
+      "11_banner3.jpg",
+      "11_banner4.jpg",
+    ];
+    let currentIndex = 0;
+    const carouselImg = document.getElementById("hero-carousel");
+
+    function changeCarousel() {
+      currentIndex = (currentIndex + 1) % carouselImages.length;
+      carouselImg.style.opacity = 0;
+      setTimeout(() => {
+        carouselImg.src = carouselImages[currentIndex];
+        carouselImg.style.opacity = 1;
+      }, 300);
+    }
+
+    setInterval(changeCarousel, 3000);
+  </script>
 </html>
