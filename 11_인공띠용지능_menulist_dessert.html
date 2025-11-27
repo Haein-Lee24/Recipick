@@ -6,7 +6,6 @@
     <title>냠냠노트 - 디저트 레시피 전체</title>
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
     <style>
-      
       header {
         background: var(--card-bg);
         border-bottom: 1px solid var(--border);
@@ -50,13 +49,19 @@
         gap: 20px;
       }
       @media (min-width: 640px) {
-        .grid { grid-template-columns: repeat(2, 1fr); }
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
       @media (min-width: 920px) {
-        .grid { grid-template-columns: repeat(3, 1fr); }
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
       @media (min-width: 1040px) {
-        .grid { grid-template-columns: repeat(4, 1fr); }
+        .grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
       }
 
       .card {
@@ -83,7 +88,9 @@
         display: block;
         margin-bottom: 8px;
       }
-      .card-body { padding: 0 4px; }
+      .card-body {
+        padding: 0 4px;
+      }
       .card-title {
         font-weight: 700;
         color: var(--text);
@@ -123,19 +130,19 @@
         transition: opacity 0.2s;
       }
       .back-btn:hover,
-      .top-btn:hover { opacity: 1; }
-      .back-btn { left: 16px; }
-      .top-btn { right: 16px; background: var(--primary-color); }
-
-      footer {
-        max-width: 1080px;
-        margin: 40px auto 20px;
-        color: var(--muted);
-        text-align: center;
-        font-size: 12px;
+      .top-btn:hover {
+        opacity: 1;
+      }
+      .back-btn {
+        left: 16px;
+      }
+      .top-btn {
+        right: 16px;
+        background: var(--primary-color);
       }
     </style>
   </head>
+
   <body>
     <span id="top"></span>
 
@@ -148,7 +155,11 @@
         </div>
         <div class="menu" role="navigation" aria-label="주요 메뉴">
           <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="active nav-link" href="11_인공띠용지능_menulist.html#dessert">레시피</a>
+          <a
+            class="active nav-link"
+            href="11_인공띠용지능_menulist.html#dessert"
+            >레시피</a
+          >
           <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
           <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
           <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
@@ -160,7 +171,7 @@
       <div class="header-container">
         <h1>디저트 레시피 전체 <span>(총 11개)</span></h1>
         <div class="sort">
-          <label style="font-size:0.9rem;color:var(--muted)">정렬</label>
+          <label style="font-size: 0.9rem; color: var(--muted)">정렬</label>
           <select aria-label="정렬 기준 선택">
             <option>별점순</option>
             <option>최신등록순</option>
@@ -172,88 +183,131 @@
 
     <main>
       <div class="grid">
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+        <a href="recipe.html?recipe=almond_cookie" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">아몬드 쿠키</h3>
             <p>작성자: 베이킹홀릭 · 조회수: 58.1K</p>
             <div class="rating">★★★★☆ (4.5)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=blondie" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">블론디</h3>
             <p>작성자: 베이킹러버 · 조회수: 5.2K</p>
             <div class="rating">★★★★☆ (4.3)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=brownie" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">초코 브라우니</h3>
             <p>작성자: 초코중독 · 조회수: 18.2K</p>
             <div class="rating">★★★★★ (4.8)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=cheesecake" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">치즈케이크</h3>
             <p>작성자: 뉴욕베이커리 · 조회수: 9.0K</p>
             <div class="rating">★★★★★ (4.7)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=tiramisu" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">티라미수</h3>
             <p>작성자: 디저트소믈리에 · 조회수: 7.6K</p>
             <div class="rating">★★★★☆ (4.6)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=macaron" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">마카롱</h3>
             <p>작성자: 프렌치디저트 · 조회수: 12.7K</p>
             <div class="rating">★★★★☆ (4.4)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=apple_pie" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">애플파이</h3>
             <p>작성자: 홈베이킹 · 조회수: 6.9K</p>
             <div class="rating">★★★★☆ (4.3)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=lemon_tart" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">레몬 타르트</h3>
             <p>작성자: 시트러스러버 · 조회수: 4.3K</p>
             <div class="rating">★★★★☆ (4.2)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=panna_cotta" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">판나코타</h3>
             <p>작성자: 이탈리안디저트 · 조회수: 3.5K</p>
             <div class="rating">★★★★☆ (4.1)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=creme_brulee" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">크림 브륄레</h3>
             <p>작성자: 파리지앵 · 조회수: 5.1K</p>
             <div class="rating">★★★★★ (4.7)</div>
           </div>
         </a>
-        <a href="11_인공띠용지능_detail_d.html" class="card">
-          <div class="card-thumb" style="background-image:url('11_snack.jpg')"></div>
+
+        <a href="recipe.html?recipe=choco_chip_cookie" class="card">
+          <div
+            class="card-thumb"
+            style="background-image: url('11_snack.jpg')"
+          ></div>
           <div class="card-body">
             <h3 class="card-title">초코칩 쿠키</h3>
             <p>작성자: 쿠키하우스 · 조회수: 19.8K</p>
@@ -263,7 +317,9 @@
       </div>
     </main>
 
-    <a href="11_인공띠용지능_menulist.html#dessert" class="back-btn">카테고리별 레시피 보기</a>
+    <a href="11_인공띠용지능_menulist.html#dessert" class="back-btn"
+      >카테고리별 레시피 보기</a
+    >
     <a href="#top" class="top-btn" aria-label="맨 위로 이동">맨 위로 ↑</a>
   </body>
 </html>
