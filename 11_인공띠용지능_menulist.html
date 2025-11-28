@@ -91,6 +91,8 @@
     <!--         JS: 레시피 렌더링        -->
     <!-- =============================== -->
     <script>
+      const RECIPES_KEY = "nn_recipes";
+
       const categories = [
         { id: 'korean', name: '한식' },
         { id: 'western', name: '양식' },
@@ -99,10 +101,43 @@
         { id: 'drink', name: '음료' },
       ];
 
-      fetch('11_인공띠용지능_recipes.json')
-        .then((res) => res.json())
-        .then((data) => {
-          const allRecipes = data.recipes;
+      // JSON + localStorage 레시피 합쳐서 가져오기
+      function loadAllRecipes() {
+        return fetch('11_인공띠용지능_recipes.json')
+          .then((res) => res.json())
+          .then((data) => {
+            const baseRecipes = data.recipes || [];
+
+            // 🔹 localStorage에 저장된 레시피 불러오기
+            const raw = localStorage.getItem(RECIPES_KEY);
+            let storedRecipes = [];
+
+            if (raw) {
+              try {
+                const parsed = JSON.parse(raw);
+
+                // menulist 홈에서 쓰는 필드 형태로 매핑
+                storedRecipes = parsed.map((r) => ({
+                  id: r.id,
+                  title: r.title,
+                  category: r.category,
+                  thumbnail: r.image || '11_default.png', // 기본 썸네일 있으면 경로로 교체
+                  review_count: r.views ?? 0,
+                  rating: r.rating ?? 'NEW',
+                }));
+              } catch (e) {
+                console.error('localStorage 파싱 오류:', e);
+              }
+            }
+
+            // 🔹 JSON 레시피 + 웹스토리지 레시피 합치기
+            return [...baseRecipes, ...storedRecipes];
+          });
+      }
+
+      // 페이지 로드 시 렌더링
+      loadAllRecipes()
+        .then((allRecipes) => {
           categories.forEach((cat) => {
             renderSection(cat.id, cat.name, allRecipes);
           });
@@ -152,5 +187,6 @@
         container.innerHTML = html;
       }
     </script>
+   
   </body>
 </html>
