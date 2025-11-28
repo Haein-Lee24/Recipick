@@ -59,6 +59,8 @@
         }
       ]
     },
+
+    
     {
       "id": "r2",
       "title": "5분 완성! 초간단 샐러드 파스타",
@@ -118,6 +120,318 @@
         }
       ]
     },
+
+    {
+      "id": "margherita_pizza",
+      "title": "마르게리타 피자",
+      "summary": "토마토, 모차렐라, 바질로 완성하는 심플한 정통 이탈리안 피자.",
+      "category": "양식",
+      "difficulty": "중 (★★☆)",
+      "time": "30분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "피자 도우", "amount": "1장" },
+        { "name": "모차렐라 치즈", "amount": "80g" },
+        { "name": "토마토 소스", "amount": "4T" }
+      ],
+      "ingredients_optional": [
+        { "name": "바질", "amount": "몇 잎" }
+      ],
+      "steps": [
+        { "title": "도우 준비", "desc": "도우를 얇게 펴서 모양을 잡습니다." },
+        { "title": "토핑", "desc": "토마토 소스를 바르고 치즈를 올립니다." },
+        { "title": "굽기", "desc": "오븐 230°C에서 10~12분 굽습니다." }
+      ],
+      "rating": 4.8,
+      "review_count": 132,
+      "reviews": []
+    },
+
+    {
+      "id": "bolognese",
+      "title": "볼로네제 파스타",
+      "summary": "다진 고기를 듬뿍 넣어 깊고 진한 맛을 낸 정통 미트소스 파스타.",
+      "category": "양식",
+      "difficulty": "중 (★★☆)",
+      "time": "35분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "다진 소고기", "amount": "200g" },
+        { "name": "양파", "amount": "1/2개" },
+        { "name": "토마토 소스", "amount": "1컵" },
+        { "name": "스파게티", "amount": "120g" }
+      ],
+      "ingredients_optional": [
+        { "name": "파르메산 치즈", "amount": "약간" }
+      ],
+      "steps": [
+        { "title": "채소 볶기", "desc": "양파를 볶아 단맛을 냅니다." },
+        { "title": "고기 볶기", "desc": "다진 소고기를 넣어 익힙니다." },
+        { "title": "소스 만들기", "desc": "토마토 소스를 넣고 끓입니다." },
+        { "title": "완성", "desc": "삶은 면과 버무립니다." }
+      ],
+      "rating": 4.2,
+      "review_count": 98,
+      "reviews": []
+    },
+
+    {
+      "id": "alfredo_pasta",
+      "title": "알프레도 크림파스타",
+      "summary": "부드러운 크림소스로 감싸는 고소하고 진한 파스타.",
+      "category": "양식",
+      "difficulty": "중하 (★☆☆)",
+      "time": "20분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "펜네 또는 스파게티", "amount": "130g" },
+        { "name": "생크림", "amount": "1컵" },
+        { "name": "버터", "amount": "1T" },
+        { "name": "파르메산 치즈", "amount": "2T" }
+      ],
+      "ingredients_optional": [
+        { "name": "파슬리", "amount": "약간" }
+      ],
+      "steps": [
+        { "title": "면 삶기", "desc": "면을 알단테로 삶습니다." },
+        { "title": "크림소스", "desc": "버터·크림·치즈를 넣어 소스를 만듭니다." },
+        { "title": "섞기", "desc": "삶은 면을 넣고 졸여 완성합니다." }
+      ],
+      "rating": 4.3,
+      "review_count": 104,
+      "reviews": []
+    },
+
+    {
+      "id": "lasagna",
+      "title": "라자냐",
+      "summary": "고기 소스와 치즈를 층층이 쌓아 구워내는 깊고 풍성한 맛의 라자냐.",
+      "category": "양식",
+      "difficulty": "중상 (★★★)",
+      "time": "50분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "라자냐 면", "amount": "6장" },
+        { "name": "미트 소스", "amount": "2컵" },
+        { "name": "모차렐라", "amount": "1컵" }
+      ],
+      "ingredients_optional": [
+        { "name": "파르메산 치즈", "amount": "2T" }
+      ],
+      "steps": [
+        { "title": "면 준비", "desc": "라자냐 면을 삶아 둡니다." },
+        { "title": "레이어 쌓기", "desc": "소스와 치즈를 반복하며 층을 만듭니다." },
+        { "title": "굽기", "desc": "오븐 180°C에서 30분 굽습니다." }
+      ],
+      "rating": 4.4,
+      "review_count": 87,
+      "reviews": []
+    },
+
+    {
+      "id": "mushroom_risotto",
+      "title": "버섯 리조또",
+      "summary": "부드러운 쌀알과 고소한 버섯 향이 가득한 크리미 리조또.",
+      "category": "양식",
+      "difficulty": "중 (★★☆)",
+      "time": "30분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "리조또용 쌀", "amount": "1컵" },
+        { "name": "버섯", "amount": "1컵" },
+        { "name": "육수", "amount": "2컵" }
+      ],
+      "ingredients_optional": [
+        { "name": "화이트 와인", "amount": "2T" }
+      ],
+      "steps": [
+        { "title": "볶기", "desc": "버섯을 볶고 쌀을 함께 볶습니다." },
+        { "title": "끓이기", "desc": "육수를 조금씩 부어가며 익힙니다." },
+        { "title": "완성", "desc": "치즈와 함께 마무리합니다." }
+      ],
+      "rating": 4.2,
+      "review_count": 73,
+      "reviews": []
+    },
+
+    {
+      "id": "greek_salad",
+      "title": "그릭 샐러드",
+      "summary": "상큼한 드레싱과 신선한 채소가 어우러진 지중해 감성 샐러드.",
+      "category": "양식",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "10분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "토마토", "amount": "1개" },
+        { "name": "오이", "amount": "1/2개" },
+        { "name": "페타 치즈", "amount": "50g" }
+      ],
+      "ingredients_optional": [
+        { "name": "올리브", "amount": "약간" }
+      ],
+      "steps": [
+        { "title": "야채 준비", "desc": "야채를 먹기 좋은 크기로 자릅니다." },
+        { "title": "섞기", "desc": "치즈와 드레싱을 넣어 섞습니다." }
+      ],
+      "rating": 4.3,
+      "review_count": 62,
+      "reviews": []
+    },
+
+    {
+      "id": "fish_and_chips",
+      "title": "피시앤칩스",
+      "summary": "영국식 바삭한 생선튀김과 감자튀김 조합의 대표 메뉴.",
+      "category": "양식",
+      "difficulty": "중 (★★☆)",
+      "time": "30분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "흰살 생선", "amount": "150g" },
+        { "name": "튀김 반죽", "amount": "1컵" },
+        { "name": "감자", "amount": "1개" }
+      ],
+      "ingredients_optional": [
+        { "name": "레몬", "amount": "1조각" }
+      ],
+      "steps": [
+        { "title": "감자튀김", "desc": "감자를 굵게 썰어 튀겨줍니다." },
+        { "title": "생선튀김", "desc": "생선을 튀김옷에 입혀 바삭하게 튀깁니다." }
+      ],
+      "rating": 4.1,
+      "review_count": 41,
+      "reviews": []
+    },
+
+    {
+      "id": "homemade_burger",
+      "title": "수제 버거",
+      "summary": "두툼한 패티와 신선한 채소를 넣어 만드는 집에서 즐기는 프리미엄 버거.",
+      "category": "양식",
+      "difficulty": "중 (★★☆)",
+      "time": "25분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "다진 소고기", "amount": "150g" },
+        { "name": "햄버거 번", "amount": "1개" },
+        { "name": "양상추", "amount": "한 장" }
+      ],
+      "ingredients_optional": [
+        { "name": "치즈", "amount": "1장" }
+      ],
+      "steps": [
+        { "title": "패티 만들기", "desc": "고기를 뭉쳐 패티를 성형합니다." },
+        { "title": "굽기", "desc": "센 불에서 패티를 굽습니다." },
+        { "title": "조립", "desc": "번에 패티와 토핑을 쌓아 완성합니다." }
+      ],
+      "rating": 4.5,
+      "review_count": 120,
+      "reviews": []
+    },
+
+    {
+      "id": "clam_chowder",
+      "title": "클램 차우더",
+      "summary": "부드럽고 진한 맛의 미국식 조개 크림스프.",
+      "category": "양식",
+      "difficulty": "중 (★★☆)",
+      "time": "30분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "바지락", "amount": "1컵" },
+        { "name": "감자", "amount": "1/2개" },
+        { "name": "우유", "amount": "1컵" }
+      ],
+      "ingredients_optional": [
+        { "name": "베이컨", "amount": "20g" }
+      ],
+      "steps": [
+        { "title": "감자 삶기", "desc": "감자를 익힙니다." },
+        { "title": "스프 끓이기", "desc": "우유와 재료들을 넣고 은은하게 끓입니다." }
+      ],
+      "rating": 4.2,
+      "review_count": 38,
+      "reviews": []
+    },
+
+    {
+      "id": "arrabiata",
+      "title": "펜네 아라비아따",
+      "summary": "매콤한 토마토소스로 맛을 낸 이탈리안 파스타.",
+      "category": "양식",
+      "difficulty": "중 (★★☆)",
+      "time": "20분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "펜네", "amount": "150g" },
+        { "name": "토마토 소스", "amount": "1컵" },
+        { "name": "마늘", "amount": "3쪽" }
+      ],
+      "ingredients_optional": [
+        { "name": "페퍼론치노", "amount": "1t" }
+      ],
+      "steps": [
+        { "title": "기름 향내기", "desc": "올리브오일에 마늘을 볶아 향을 냅니다." },
+        { "title": "소스 끓이기", "desc": "토마토소스와 페퍼론치노를 넣고 끓입니다." },
+        { "title": "면과 섞기", "desc": "펜네를 넣고 버무립니다." }
+      ],
+      "rating": 4.3,
+      "review_count": 65,
+      "reviews": []
+    },
+
+    {
+      "id": "chicken_parmigiana",
+      "title": "치킨 파르미지아나",
+      "summary": "바삭하게 튀긴 치킨 위에 토마토소스와 치즈를 듬뿍 얹어 구워낸 요리.",
+      "category": "양식",
+      "difficulty": "중상 (★★★)",
+      "time": "35분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "닭가슴살", "amount": "1덩이" },
+        { "name": "빵가루", "amount": "1컵" },
+        { "name": "토마토 소스", "amount": "1/2컵" }
+      ],
+      "ingredients_optional": [
+        { "name": "모차렐라", "amount": "1/2컵" }
+      ],
+      "steps": [
+        { "title": "튀김 준비", "desc": "닭가슴살에 빵가루를 묻혀 바삭하게 튀깁니다." },
+        { "title": "굽기", "desc": "소스와 치즈를 얹어 오븐에서 완성합니다." }
+      ],
+      "rating": 4.7,
+      "review_count": 55,
+      "reviews": []
+    },
+
+    {
+      "id": "shrimp_scampi",
+      "title": "쉬림프 스캄피",
+      "summary": "버터·마늘·레몬향이 어우러진 상큼한 새우 파스타.",
+      "category": "양식",
+      "difficulty": "중하 (★☆☆)",
+      "time": "18분",
+      "thumbnail": "11_pasta.jpg",
+      "ingredients_required": [
+        { "name": "새우", "amount": "10마리" },
+        { "name": "버터", "amount": "1T" },
+        { "name": "레몬즙", "amount": "1T" }
+      ],
+      "ingredients_optional": [
+        { "name": "파슬리", "amount": "약간" }
+      ],
+      "steps": [
+        { "title": "새우 손질", "desc": "새우를 깨끗이 손질합니다." },
+        { "title": "버터 조리", "desc": "버터에 마늘을 볶고 새우를 익힙니다." },
+        { "title": "마무리", "desc": "레몬즙을 넣어 상큼하게 마무리합니다." }
+      ],
+      "rating": 4.5,
+      "review_count": 70,
+      "reviews": []
+    },
+
     {
       "id": "r3",
       "title": "단짠단짠 마약 옥수수",
@@ -1387,3 +1701,6 @@
     }
   ]
 }
+
+
+
