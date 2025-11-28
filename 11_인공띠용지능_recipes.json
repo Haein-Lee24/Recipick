@@ -798,6 +798,7 @@
       "reviews": []
     },
 
+
     {
       "id": "grapefruit_ade",
       "title": "상큼 시원 자몽 에이드",
@@ -902,6 +903,369 @@
       "reviews": []
     }
     ,
+    {
+      "id": "strawberry_ade",
+      "title": "딸기 에이드",
+      "summary": "상큼 달콤한 홈카페 스타일 딸기 에이드.",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "딸기청", "amount": "3T" },
+        { "name": "탄산수", "amount": "200ml" },
+        { "name": "얼음", "amount": "가득" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "생딸기", "amount": "2~3개" },
+        { "name": "레몬", "amount": "1조각" }
+      ],
+
+      "steps": [
+        { "title": "잔 준비", "desc": "잔에 딸기청을 넣습니다." },
+        { "title": "얼음 채우기", "desc": "잔 가득 얼음을 넣습니다." },
+        { "title": "탄산수 붓기", "desc": "탄산수를 부어 잘 섞습니다." },
+        { "title": "토핑", "desc": "생딸기·레몬을 올려 완성!" }
+      ],
+
+      "rating": 4.2,
+      "review_count": 41,
+      "reviews": []
+    },
+
+    {
+      "id": "iced_americano",
+      "title": "아이스 아메리카노",
+      "summary": "가장 기본이지만 가장 중요한 아이스 커피!",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "3분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "에스프레소", "amount": "1~2샷" },
+        { "name": "물", "amount": "150~200ml" },
+        { "name": "얼음", "amount": "가득" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "시럽", "amount": "1T(선택)" }
+      ],
+
+      "steps": [
+        { "title": "잔 준비", "desc": "잔에 얼음을 가득 채웁니다." },
+        { "title": "샷 넣기", "desc": "에스프레소 샷을 넣습니다." },
+        { "title": "물 붓기", "desc": "차가운 물을 붓고 잘 섞습니다." }
+      ],
+
+      "rating": 4.6,
+      "review_count": 112,
+      "reviews": []
+    },
+    {
+      "id": "cafe_latte",
+      "title": "라떼",
+      "summary": "진한 에스프레소와 부드러운 우유의 조화!",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "에스프레소", "amount": "1샷" },
+        { "name": "우유", "amount": "180ml" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "얼음", "amount": "컵 가득" },
+        { "name": "시럽", "amount": "1T" }
+      ],
+
+      "steps": [
+        { "title": "샷 준비", "desc": "에스프레소를 추출합니다." },
+        { "title": "우유 넣기", "desc": "따뜻하게 데운 우유 또는 차가운 우유를 부어 섞습니다." },
+        { "title": "선택", "desc": "원한다면 얼음·시럽을 추가합니다." }
+      ],
+
+      "rating": 4.7,
+      "review_count": 63,
+      "reviews": []
+    },
+    {
+      "id": "cappuccino",
+      "title": "카푸치노",
+      "summary": "부드러운 폼과 풍부한 커피향이 매력적인 카푸치노.",
+      "category": "음료",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "에스프레소", "amount": "1샷" },
+        { "name": "우유", "amount": "150ml" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "시나몬 가루", "amount": "약간" }
+      ],
+
+      "steps": [
+        { "title": "샷 준비", "desc": "에스프레소를 준비합니다." },
+        { "title": "스팀우유 만들기", "desc": "우유를 데우며 풍부한 우유 거품을 냅니다." },
+        { "title": "레이어 만들기", "desc": "샷 → 우유 → 폼 순으로 담습니다." },
+        { "title": "마무리", "desc": "시나몬 가루를 뿌려 완성." }
+      ],
+
+      "rating": 4.4,
+      "review_count": 52,
+      "reviews": []
+    },
+    {
+      "id": "lemonade",
+      "title": "레모네이드",
+      "summary": "상큼함이 터지는 집에서도 쉽게 만드는 레모네이드!",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "레몬즙", "amount": "3T" },
+        { "name": "설탕 시럽", "amount": "2T" },
+        { "name": "물 또는 탄산수", "amount": "200ml" },
+        { "name": "얼음", "amount": "가득" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "레몬 슬라이스", "amount": "1조각" }
+      ],
+
+      "steps": [
+        { "title": "액기스 넣기", "desc": "잔에 레몬즙과 시럽을 넣습니다." },
+        { "title": "얼음 채우기", "desc": "얼음을 듬뿍 넣습니다." },
+        { "title": "물/탄산 붓기", "desc": "물을 붓고 섞습니다." }
+      ],
+
+      "rating": 4.3,
+      "review_count": 48,
+      "reviews": []
+    },
+    {
+      "id": "mango_smoothie",
+      "title": "망고 스무디",
+      "summary": "진하고 달콤한 망고 그대로 갈아 만든 홈카페 스무디.",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "냉동 망고", "amount": "1컵" },
+        { "name": "우유 또는 요거트", "amount": "150ml" },
+        { "name": "얼음", "amount": "1/2컵" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "꿀 또는 시럽", "amount": "1T" }
+      ],
+
+      "steps": [
+        { "title": "재료 넣기", "desc": "믹서기에 냉동 망고, 우유(또는 요거트), 얼음을 넣습니다." },
+        { "title": "갈기", "desc": "곱게 갈아 원하는 농도로 맞춥니다. 되면 우유를 조금 더 넣습니다." },
+        { "title": "마무리", "desc": "잔에 담고 취향에 따라 꿀 또는 시럽을 추가합니다." }
+      ],
+
+      "rating": 4.7,
+      "review_count": 121,
+      "reviews": []
+    },
+    {
+      "id": "choco_milkshake",
+      "title": "초코 밀크셰이크",
+      "summary": "진한 초콜릿과 아이스크림이 만나 달콤 폭발 밀크셰이크!",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "우유", "amount": "150ml" },
+        { "name": "바닐라 아이스크림", "amount": "2스쿱" },
+        { "name": "초코 시럽", "amount": "2T" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "휘핑크림", "amount": "약간" },
+        { "name": "초코칩", "amount": "1T" }
+      ],
+
+      "steps": [
+        { "title": "재료 넣기", "desc": "믹서기에 우유, 아이스크림, 초코 시럽을 넣습니다." },
+        { "title": "갈기", "desc": "부드럽게 갈아 잔에 붓습니다." },
+        { "title": "토핑", "desc": "휘핑크림과 초코칩을 올려 카페 감성으로 마무리합니다." }
+      ],
+
+      "rating": 4.5,
+      "review_count": 98,
+      "reviews": []
+    },
+    {
+      "id": "bubble_tea",
+      "title": "버블티",
+      "summary": "쫀득한 타피오카 펄이 들어간 달달한 밀크티 버블티.",
+      "category": "음료",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "20분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "홍차 티백", "amount": "1개" },
+        { "name": "뜨거운 물", "amount": "100ml" },
+        { "name": "우유", "amount": "150ml" },
+        { "name": "타피오카 펄", "amount": "1/2컵(삶은 것)" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "설탕 또는 흑당 시럽", "amount": "1~2T" },
+        { "name": "얼음", "amount": "가득" }
+      ],
+
+      "steps": [
+        { "title": "차 우리기", "desc": "홍차 티백을 뜨거운 물에 3~5분 우리고 식혀 둡니다." },
+        { "title": "펄 준비", "desc": "삶은 타피오카 펄을 컵 바닥에 넣습니다." },
+        { "title": "밀크티 만들기", "desc": "식힌 홍차에 우유와 시럽을 섞습니다." },
+        { "title": "완성", "desc": "얼음과 함께 컵에 붓고 잘 섞어 마십니다." }
+      ],
+
+      "rating": 4.6,
+      "review_count": 140,
+      "reviews": []
+    },
+    {
+      "id": "mojito_non_alcohol",
+      "title": "논알콜 모히또",
+      "summary": "상큼한 라임과 민트 향이 살아있는 무알콜 모히또.",
+      "category": "음료",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "라임 또는 레몬", "amount": "1/2개" },
+        { "name": "설탕 또는 시럽", "amount": "1~2T" },
+        { "name": "탄산수", "amount": "150~200ml" },
+        { "name": "얼음", "amount": "가득" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "민트 잎", "amount": "몇 장" }
+      ],
+
+      "steps": [
+        { "title": "잔 준비", "desc": "잔에 라임 조각과 설탕(또는 시럽), 민트 잎을 넣고 으깨 향을 냅니다." },
+        { "title": "얼음 채우기", "desc": "잔에 얼음을 듬뿍 넣습니다." },
+        { "title": "탄산수 붓기", "desc": "탄산수를 붓고 가볍게 섞어 완성합니다." }
+      ],
+
+      "rating": 4.2,
+      "review_count": 56,
+      "reviews": []
+    },
+    {
+      "id": "hot_chocolate",
+      "title": "핫초코",
+      "summary": "쌀쌀할 때 생각나는 진하고 따뜻한 핫초코.",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "10분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "우유", "amount": "200ml" },
+        { "name": "코코아 가루 또는 초코 파우더", "amount": "2T" },
+        { "name": "설탕", "amount": "1~2T" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "휘핑크림", "amount": "약간" },
+        { "name": "마시멜로", "amount": "몇 개" }
+      ],
+
+      "steps": [
+        { "title": "우유 데우기", "desc": "냄비나 전자레인지로 우유를 따뜻하게 데웁니다(끓이지는 않기)." },
+        { "title": "분말 섞기", "desc": "코코아 가루와 설탕을 넣고 잘 녹여 섞습니다." },
+        { "title": "마무리", "desc": "컵에 따라 담고 휘핑크림 또는 마시멜로를 올립니다." }
+      ],
+
+      "rating": 4.3,
+      "review_count": 87,
+      "reviews": []
+    },
+    {
+      "id": "peach_iced_tea",
+      "title": "복숭아 아이스티",
+      "summary": "달콤한 복숭아 시럽과 홍차가 어우러진 클래식 아이스티.",
+      "category": "음료",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "10분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "홍차 티백", "amount": "1개" },
+        { "name": "뜨거운 물", "amount": "150ml" },
+        { "name": "복숭아 시럽", "amount": "2~3T" },
+        { "name": "얼음", "amount": "가득" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "복숭아 슬라이스", "amount": "몇 조각" }
+      ],
+
+      "steps": [
+        { "title": "티 우리기", "desc": "홍차 티백을 뜨거운 물에 3~5분 우려 진한 차를 만듭니다. 식혀 둡니다." },
+        { "title": "잔 준비", "desc": "잔에 복숭아 시럽과 얼음을 넣습니다." },
+        { "title": "섞기", "desc": "식힌 홍차를 부어 잘 섞고, 복숭아 슬라이스를 올려 완성합니다." }
+      ],
+
+      "rating": 4.2,
+      "review_count": 74,
+      "reviews": []
+    },
+    {
+      "id": "hibiscus_tea",
+      "title": "히비스커스 티",
+      "summary": "새콤한 맛과 붉은 색이 매력적인 히비스커스 허브티.",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "7분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "히비스커스 티백", "amount": "1개" },
+        { "name": "뜨거운 물", "amount": "200ml" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "꿀 또는 시럽", "amount": "1T" },
+        { "name": "레몬 조각", "amount": "1조각" },
+        { "name": "얼음", "amount": "적당량(아이스티용)" }
+      ],
+
+      "steps": [
+        { "title": "우려내기", "desc": "히비스커스 티백을 뜨거운 물에 5분 정도 우려 색과 향을 진하게 냅니다." },
+        { "title": "마무리(따뜻하게)", "desc": "티백을 건지고 꿀을 넣어 잘 섞습니다." },
+        { "title": "아이스 버전", "desc": "식힌 후 얼음 잔에 부어 아이스 히비스커스 티로 즐겨도 좋습니다." }
+      ],
+
+      "rating": 4.4,
+      "review_count": 65,
+      "reviews": []
+    },
+
+
+
 
     {
       "id": "kimchi_fried_rice",
