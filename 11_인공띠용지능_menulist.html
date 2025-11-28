@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" id="top">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>냠냠노트 - 레시피 목록</title>
-
-    <!-- 공통 스타일 -->
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
     <style>
-      main {
-        margin-top: 40px;
-      }
+      
       .header-area {
         display: flex;
         justify-content: space-between;
@@ -21,52 +17,10 @@
         border-bottom: 1px solid #eee;
       }
            
-      /* ===============================
-          ⭐ 카테고리 탭
-         =============================== */
-      .category-tabs {
-        position: fixed;
-        top: 64px; /* 네비바 바로 아래 */
-        left: 0;
-        width: 100%;
-        height: 68px; /* 🔥 높이 키움 */
-        background: #ffffff;
-        border-bottom: 1px solid var(--border);
-        z-index: 999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .tabs-inner {
-        display: flex;
-        gap: 32px; /* 간격 넓힘 */
-      }
-
-      .tab-link {
-        display: inline-block;
-        font-weight: 800;
-        color: var(--muted);
-        font-size: 16px;
-        padding: 8px 4px;
-        text-decoration: none;
-      }
-
-      .tab-link:hover {
-        color: var(--primary-color);
-      }
-
-      /* ===============================
+          /* ===============================
           ⭐ 본문 상단 여백 조정
          =============================== */
-      main.container {
-        margin-top: 140px !important; /* 🔥 기존 160 → 140 */
-        max-width: 1080px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0 20px;
-      }
-
+   
       section {
         scroll-margin-top: 130px; /* 🔥 기존 140 → 130 */
         margin-bottom: 80px;
@@ -101,35 +55,23 @@
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
-          <a href="11_인공띠용지능_main.html"
-            ><img src="11_logo.png" alt="Logo" class="logo"
-          /></a>
+          <a href="11_인공띠용지능_main.html">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
+          </a>
         </div>
-        <div class="menu">
-          <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="active nav-link" href="11_인공띠용지능_menulist.html"
-            >레시피</a
-          >
-          <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-          <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
-          <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
-        </div>
+        
+        <nav class="menu">
+          <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
+          <a href="11_인공띠용지능_menulist.html" class="nav-link active">레시피</a>
+          <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
+          <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
+        </nav>
       </div>
     </nav>
 
 
-    <!-- =============================== -->
-    <!--         카테고리 탭              -->
-    <!-- =============================== -->
-    <header class="category-tabs">
-      <div class="tabs-inner">
-        <a href="#korean" class="tab-link">한식</a>
-        <a href="#western" class="tab-link">양식</a>
-        <a href="#chinese" class="tab-link">중식</a>
-        <a href="#dessert" class="tab-link">디저트</a>
-        <a href="#drink" class="tab-link">음료</a>
-      </div>
-    </header>
+   
 
     <!-- =============================== -->
     <!--        본문(레시피 섹션)         -->
