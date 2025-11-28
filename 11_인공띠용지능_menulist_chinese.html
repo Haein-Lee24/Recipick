@@ -172,7 +172,7 @@
       <div class="header-container">
         <h1>중식 레시피 전체 <span>(총 11개)</span></h1>
         <div class="sort">
-          <label style="font-size: 0.9rem; color: var(--text-gray)">정렬</label>
+          <label style="font-size: 0.9rem; color: var(--muted)">정렬</label>
           <select>
             <option>별점순</option>
             <option>최신등록순</option>
@@ -316,11 +316,21 @@
           </div>
         </a>
       </div>
+
+      <!-- 🔽 사용자 등록 중식 레시피 섹션 추가 -->
+      <section style="margin-top: 40px;">
+        <h2 class="section-title">사용자 등록 중식 레시피</h2>
+        <div class="grid" id="user-recipes" data-category="중식"></div>
+      </section>
+      <!-- 🔼 여기까지 -->
     </main>
 
     <a href="11_인공띠용지능_menulist.html#chinese" class="back-btn"
       >카테고리별 레시피 보기</a
     >
-    <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
+    <a href="#top" class="top-btn" aria-label="맨 위로 이동">맨 위로 ↑</a>
+
+    <!-- 사용자 등록 레시피 불러오는 JS -->
+    <script src="11_인공띠용지능_menulist-user.js"></script>
   </body>
 </html>

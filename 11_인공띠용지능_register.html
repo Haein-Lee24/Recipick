@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
     <style>
-      /* --------------------------
-          📌 카드 여백 + 전체 폼 스타일
-      --------------------------- */
       .form-card {
         padding: 36px 32px 52px;
         background: #fff;
@@ -38,9 +35,13 @@
         resize: vertical;
       }
 
-      /* --------------------------
-          📌 버튼 통일 (button + a 동일)
-      --------------------------- */
+      .radio-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      /* 버튼 영역 */
       .form-actions {
         display: flex;
         justify-content: center;
@@ -49,80 +50,73 @@
         margin-top: 26px;
       }
 
-      .form-actions .more-btn,
-      .form-actions .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+      .form-actions button {
         height: 46px;
         min-width: 150px;
-        padding: 0 26px;
         border-radius: 999px;
+        padding: 0 26px;
         font-weight: 700;
         font-size: 15px;
-        line-height: 1;
-        margin: 0;
-        text-decoration: none;
-        box-sizing: border-box;
         cursor: pointer;
+        border: none;
+        box-sizing: border-box;
       }
 
-      .form-actions .more-btn {
+      /* 등록 버튼 – 호버 과하지 않게 */
+      #submitBtn {
         background: var(--primary-color);
         color: #fff;
         border: 1px solid var(--primary-color);
+        transition: opacity 0.18s ease;
+      }
+      #submitBtn:hover {
+        opacity: 0.92;
       }
 
-      .form-actions .more-btn:hover {
-        background: rgba(135, 113, 67, 0.9);
-      }
-
-      .form-actions .btn-secondary {
+      /* 임시저장 버튼 – 호버도 은은하게 */
+      #saveDraftBtn {
         background: #fff;
         color: var(--text);
         border: 1px solid var(--border);
+        transition: background 0.18s ease;
+      }
+      #saveDraftBtn:hover {
+        background: #f7f7f7;
       }
 
-      .form-actions .btn-secondary:hover {
-        background: #fafafa;
+      .draft-time {
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
       }
 
-      /* --------------------------
-          📌 라디오 버튼 그리드
-      --------------------------- */
-      .radio-grid {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 8px;
+      /* 🔥 이 페이지에서는 흰 카드(form-card)가 호버해도 안 움직이게 */
+      .card.form-card {
+        transition: none !important;
+      }
+      .card.form-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
       }
 
-      /* --------------------------
-          📌 placeholder + 내용 글씨체 통일
-      --------------------------- */
+      /* 재료 / 조리 순서 칸 폰트 나눔스퀘어로 통일 */
       #ingredients,
-      #ingredients::placeholder,
-      #steps,
-      #steps::placeholder {
-        font-family: "NanumSquare", system-ui, sans-serif !important;
+      #steps {
+        font-family: "NanumSquare", system-ui, sans-serif;
         font-size: 14px;
+        line-height: 1.5;
       }
 
-      /* --------------------------
-          ⭐ 제목 간 여백 축소
-      --------------------------- */
-      .hero {
-        margin-bottom: 14px !important;
-      }
-
-      .section-title {
-        margin-top: 4px !important;
+      /* placeholder도 같은 글씨체로 */
+      #ingredients::placeholder,
+      #steps::placeholder {
+        font-family: "NanumSquare", system-ui, sans-serif;
       }
     </style>
   </head>
 
   <body>
-    <a id="top"></a>
-
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
@@ -134,9 +128,7 @@
         <nav class="menu">
           <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
           <a href="11_인공띠용지능_menulist.html" class="nav-link">레시피</a>
-          <a href="11_인공띠용지능_register.html" class="nav-link active">
-            등록
-          </a>
+          <a href="11_인공띠용지능_register.html" class="nav-link active">등록</a>
           <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
           <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
         </nav>
@@ -144,8 +136,7 @@
     </nav>
 
     <main class="page-pad">
-      <div id="register" class="container">
-        <!-- 큰 제목 -->
+      <div class="container">
         <header class="hero center">
           <h1 class="mt-0">나만의 레시피 등록하기</h1>
           <p style="font-size: 14px; color: var(--muted)">
@@ -153,11 +144,10 @@
           </p>
         </header>
 
-        <!-- 여백이 줄어진 위치 -->
         <h2 class="section-title">레시피 정보 입력</h2>
 
-        <form class="card form-card">
-
+        <form class="card form-card" id="recipeForm">
+          <!-- 제목 -->
           <div class="mt-20">
             <label for="title">레시피 제목</label>
             <input
@@ -169,11 +159,11 @@
             />
           </div>
 
+          <!-- 카테고리 -->
           <div class="mt-20">
             <span style="display:block; font-weight:700; margin-bottom:8px;">
               요리 카테고리 (1개 선택)
             </span>
-
             <div class="radio-grid">
               <label><input type="radio" name="category" value="한식" required /> 한식</label>
               <label><input type="radio" name="category" value="양식" /> 양식</label>
@@ -183,11 +173,13 @@
             </div>
           </div>
 
+          <!-- 이미지 -->
           <div class="mt-20">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
+          <!-- 재료 -->
           <div class="mt-20">
             <label for="ingredients">재료</label>
             <textarea
@@ -195,9 +187,11 @@
               name="ingredients"
               rows="4"
               placeholder="예: 스파게티면 200g, 생크림 1컵, 베이컨 3줄..."
+              required
             ></textarea>
           </div>
 
+          <!-- 조리 순서 -->
           <div class="mt-20">
             <label for="steps">조리 순서</label>
             <textarea
@@ -205,17 +199,24 @@
               name="steps"
               rows="6"
               placeholder="1) 면을 삶는다.&#10;2) 베이컨과 마늘을 볶는다.&#10;3) 생크림을 넣고 졸인다."
+              required
             ></textarea>
           </div>
 
+          <!-- 버튼 -->
           <div class="form-actions">
-            <button type="submit" class="more-btn">등록하기</button>
-            <a href="#draft" class="btn-secondary">임시저장</a>
+            <button type="submit" id="submitBtn">등록하기</button>
+            <button type="button" id="saveDraftBtn">임시저장</button>
           </div>
 
+          <!-- 임시저장 시간 -->
+          <p id="draftTime" class="draft-time">
+            현재 임시저장된 내용이 없습니다.
+          </p>
         </form>
       </div>
     </main>
 
+    <script src="11_인공띠용지능_register.js"></script>
   </body>
 </html>
