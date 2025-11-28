@@ -309,25 +309,7 @@
   "review_count": 9900,
   "reviews": []
 },
-{
-  "id": "k16",
-  "title": "마약 옥수수",
-  "summary": "단짠단짠 중독성 있는 옥수수 요리.",
-  "category": "한식",
-  "difficulty": "쉬움 (★☆☆)",
-  "time": "10분",
-  "thumbnail": "11_kimchi.jpg",
-  "ingredients_required": [
-    { "name": "옥수수", "amount": "1컵" }
-  ],
-  "ingredients_optional": [],
-  "steps": [
-    { "title": "볶기", "desc": "옥수수를 양념과 볶아 완성합니다." }
-  ],
-  "rating": 4.3,
-  "review_count": 12000,
-  "reviews": []
-},
+
 
     {
       "id": "r1",
