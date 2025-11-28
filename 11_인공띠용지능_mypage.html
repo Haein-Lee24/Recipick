@@ -9,11 +9,15 @@
       .follow {
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        gap: 12px;
+        justify-content: space-between;
         background: #f9fafb;
         border-top: 1px solid var(--border);
         padding: 12px 8px;
+      }
+
+      .follow > div {
+        flex: 1;                 /* 3개의 박스 동일 너비 */
+        text-align: center;       /* 숫자/라벨 중앙 */
       }
 
       .follow-num {
@@ -28,6 +32,14 @@
         color: var(--muted);
         font-size: 13px;
       }
+      .profile-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center !important;  /* 가운데 정렬 강제 */
+        text-align: center;              /* 텍스트도 중앙으로 */
+      }
+
+
     </style>
   </head>
 
@@ -117,11 +129,11 @@
         </div>
         <div class="follow">
           <div style="text-align: center">
-            <strong class="follow-num">12</strong>
+            <strong class="follow-num">8</strong>
             <span class="follow-label">내 레시피</span>
           </div>
           <div style="text-align: center">
-            <strong class="follow-num">125</strong>
+            <strong class="follow-num">325</strong>
             <span class="follow-label">팔로잉</span>
           </div>
           <div style="text-align: center">
