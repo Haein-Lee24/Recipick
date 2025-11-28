@@ -1,6 +1,335 @@
 {
   "recipes": [
     {
+  "id": "k1",
+  "title": "김치찌개",
+  "summary": "얼큰하고 깊은 맛의 김치찌개.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "김치", "amount": "1컵" },
+    { "name": "돼지고기", "amount": "80g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "김치와 돼지고기를 준비합니다." },
+    { "title": "끓이기", "desc": "재료를 넣고 끓입니다." },
+    { "title": "완성", "desc": "간을 맞춰 마무리합니다." }
+  ],
+  "rating": 4.8,
+  "review_count": 10500,
+  "reviews": []
+},
+{
+  "id": "k2",
+  "title": "비빔밥",
+  "summary": "다양한 나물을 비벼 즐기는 전통 비빔밥.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "밥", "amount": "1공기" },
+    { "name": "고추장", "amount": "1T" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "나물과 고추장을 준비합니다." },
+    { "title": "비비기", "desc": "밥과 재료를 넣고 비빕니다." },
+    { "title": "완성", "desc": "계란후라이를 올려 완성합니다." }
+  ],
+  "rating": 4.4,
+  "review_count": 8200,
+  "reviews": []
+},
+{
+  "id": "k3",
+  "title": "불고기",
+  "summary": "달콤짭짤한 양념이 스며든 한식 불고기.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "소고기", "amount": "150g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "고기를 양념합니다." },
+    { "title": "볶기", "desc": "팬에 볶아줍니다." },
+    { "title": "완성", "desc": "접시에 담아 완성합니다." }
+  ],
+  "rating": 4.9,
+  "review_count": 15100,
+  "reviews": []
+},
+{
+  "id": "k4",
+  "title": "잡채",
+  "summary": "쫄깃한 당면과 다양한 채소가 조화를 이루는 잡채.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "25분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "당면", "amount": "100g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 볶기", "desc": "채소와 고기를 볶습니다." },
+    { "title": "당면 삶기", "desc": "당면을 삶습니다." },
+    { "title": "완성", "desc": "모든 재료를 섞습니다." }
+  ],
+  "rating": 4.2,
+  "review_count": 6300,
+  "reviews": []
+},
+{
+  "id": "k5",
+  "title": "떡볶이",
+  "summary": "달콤하면서도 매콤한 국민 간식 떡볶이.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "15분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "떡", "amount": "200g" },
+    { "name": "고추장", "amount": "1.5T" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "양념 만들기", "desc": "고추장과 양념을 섞습니다." },
+    { "title": "떡 넣기", "desc": "떡을 넣고 졸입니다." },
+    { "title": "완성", "desc": "간을 맞춰 마무리합니다." }
+  ],
+  "rating": 4.5,
+  "review_count": 21400,
+  "reviews": []
+},
+{
+  "id": "k6",
+  "title": "순두부찌개",
+  "summary": "부드럽고 얼큰한 순두부찌개.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "순두부", "amount": "1봉" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "양념 준비", "desc": "고춧가루와 마늘을 볶습니다." },
+    { "title": "재료 넣기", "desc": "순두부와 육수를 넣습니다." },
+    { "title": "완성", "desc": "계란을 넣어 마무리합니다." }
+  ],
+  "rating": 4.3,
+  "review_count": 5700,
+  "reviews": []
+},
+{
+  "id": "k7",
+  "title": "된장찌개",
+  "summary": "구수하고 깊은 맛의 된장찌개.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "된장", "amount": "1T" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "끓이기", "desc": "된장과 재료를 넣고 끓입니다." },
+    { "title": "간 맞추기", "desc": "간을 맞춥니다." }
+  ],
+  "rating": 4.4,
+  "review_count": 12100,
+  "reviews": []
+},
+{
+  "id": "k8",
+  "title": "김밥",
+  "summary": "간편하게 말아 먹는 한국의 대표 음식.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "30분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "김", "amount": "1장" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "속재료를 썰어 준비합니다." },
+    { "title": "말기", "desc": "밥과 재료를 김에 올려 말아줍니다." }
+  ],
+  "rating": 4.2,
+  "review_count": 9300,
+  "reviews": []
+},
+{
+  "id": "k9",
+  "title": "감자탕",
+  "summary": "얼큰하고 진한 국물 맛의 감자탕.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "40분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "뼈다귀", "amount": "300g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "끓이기", "desc": "뼈를 삶아 국물을 냅니다." },
+    { "title": "재료 넣기", "desc": "감자와 양념을 넣어 끓입니다." }
+  ],
+  "rating": 4.1,
+  "review_count": 4800,
+  "reviews": []
+},
+{
+  "id": "k10",
+  "title": "삼겹살",
+  "summary": "한국인이 사랑하는 구워먹는 삼겹살.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "15분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "삼겹살", "amount": "200g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "굽기", "desc": "삼겹살을 노릇하게 굽습니다." },
+    { "title": "완성", "desc": "먹기 좋게 썰어 완성합니다." }
+  ],
+  "rating": 4.9,
+  "review_count": 18900,
+  "reviews": []
+},
+{
+  "id": "k11",
+  "title": "갈비찜",
+  "summary": "부드럽고 달콤한 명절 요리 갈비찜.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "45분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "갈비", "amount": "400g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "삶기", "desc": "갈비를 삶습니다." },
+    { "title": "조림", "desc": "양념과 함께 조립니다." }
+  ],
+  "rating": 4.8,
+  "review_count": 7700,
+  "reviews": []
+},
+{
+  "id": "k12",
+  "title": "해물파전",
+  "summary": "바삭한 식감과 해물 향이 가득한 해물파전.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "파", "amount": "1줌" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "반죽 만들기", "desc": "밀가루 반죽을 만듭니다." },
+    { "title": "굽기", "desc": "팬에 구워 완성합니다." }
+  ],
+  "rating": 4.3,
+  "review_count": 6000,
+  "reviews": []
+},
+{
+  "id": "k13",
+  "title": "냉면",
+  "summary": "시원하고 새콤한 여름 별미 냉면.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "15분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "냉면", "amount": "1인분" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "면 삶기", "desc": "냉면 면을 삶습니다." },
+    { "title": "육수 넣기", "desc": "찬 육수를 부어 완성합니다." }
+  ],
+  "rating": 4.4,
+  "review_count": 11200,
+  "reviews": []
+},
+{
+  "id": "k14",
+  "title": "김치볶음밥",
+  "summary": "간단하지만 맛있는 김치볶음밥.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "김치", "amount": "1컵" },
+    { "name": "밥", "amount": "1공기" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "볶기", "desc": "김치와 밥을 볶습니다." }
+  ],
+  "rating": 4.5,
+  "review_count": 22000,
+  "reviews": []
+},
+{
+  "id": "k15",
+  "title": "닭갈비",
+  "summary": "매콤달콤한 춘천식 닭갈비.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "30분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "닭고기", "amount": "200g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "양념", "desc": "닭을 양념합니다." },
+    { "title": "볶기", "desc": "팬에서 볶아 완성합니다." }
+  ],
+  "rating": 4.6,
+  "review_count": 9900,
+  "reviews": []
+},
+{
+  "id": "k16",
+  "title": "마약 옥수수",
+  "summary": "단짠단짠 중독성 있는 옥수수 요리.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "10분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "옥수수", "amount": "1컵" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "볶기", "desc": "옥수수를 양념과 볶아 완성합니다." }
+  ],
+  "rating": 4.3,
+  "review_count": 12000,
+  "reviews": []
+},
+
+    {
       "id": "r1",
       "title": "달콤한 허니 버터 갈릭 쉬림프",
       "summary": "달콤·짭짤·고소한 갈릭 버터 새우! 간단하지만 중독적인 맛.",
