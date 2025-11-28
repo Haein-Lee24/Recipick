@@ -68,7 +68,7 @@
         drink: '음료',
       };
 
-      fetch('recipes.json')
+      fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
           const titleEl = document.getElementById('full-title');
@@ -96,7 +96,7 @@
             listEl.innerHTML = filtered
               .map(
                 (r) => `
-                <a href="recipe.html?id=${r.id}" class="card">
+                <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
                   <img src="${r.thumbnail}" alt="${r.title}" class="thumb" />
                   <div class="card-body">
                     <p class="card-title">${r.title}</p>

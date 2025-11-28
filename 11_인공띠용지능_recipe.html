@@ -58,7 +58,8 @@
             <div id="recipe-rating" class="rating"></div>
 
             <div class="btn-row">
-              <button class="btn-solid">
+              <!-- 저장하기 버튼 활성화(해인) -->
+              <button class="btn-solid" id="btn-save">
                 <i class="fas fa-heart"></i> 저장하기
               </button>
               <button class="btn-outline">
@@ -114,6 +115,54 @@
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
-    <script src="recipeLoader.js"></script>
+    <script src="11_인공띠용지능_recipeLoader.js"></script>
+  <!--저장버튼 활성화 (해인) -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const saveBtn = document.getElementById("btn-save");
+      
+      // 현재 페이지 URL에서 레시피 ID 파싱 (예: ?id=kimchi)
+      // 만약 URL 파라미터를 안 쓴다면 임의의 식별자가 필요합니다.
+      const urlParams = new URLSearchParams(window.location.search);
+      const recipeId = urlParams.get('id') || 'unknown_recipe'; 
+
+      saveBtn.addEventListener("click", function() {
+        // 1. 현재 화면에 표시된 데이터 가져오기
+        const title = document.getElementById("recipe-title").innerText;
+        const category = document.getElementById("recipe-category").innerText;
+        // 난이도나 작가 정보가 있다면 가져오기 (여기선 예시로 처리)
+        const subInfo = category + " · 저장된 레시피"; 
+        
+        // 2. 저장할 객체 만들기
+        const recipeData = {
+          id: recipeId,
+          title: title,
+          subInfo: subInfo,
+          link: window.location.href // 현재 페이지 주소
+        };
+
+        // 3. 기존 저장 목록 불러오기
+        let savedRecipes = JSON.parse(localStorage.getItem("nn_saved_recipes")) || [];
+
+        // 4. 중복 체크 (이미 저장된 거면 삭제 or 알림)
+        const existingIndex = savedRecipes.findIndex(item => item.id === recipeId && item.title === title);
+        
+        if (existingIndex !== -1) {
+          // 이미 있으면 삭제(저장 취소) 로직
+          savedRecipes.splice(existingIndex, 1);
+          alert("저장이 취소되었습니다.");
+          saveBtn.innerHTML = '<i class="fas fa-heart"></i> 저장하기'; // 아이콘 원복
+        } else {
+          // 없으면 추가
+          savedRecipes.push(recipeData);
+          alert("레시피가 저장되었습니다!");
+          saveBtn.innerHTML = '<i class="fas fa-check"></i> 저장됨'; // 아이콘 변경
+        }
+
+        // 5. 로컬 스토리지에 다시 저장
+        localStorage.setItem("nn_saved_recipes", JSON.stringify(savedRecipes));
+      });
+    });
+  </script>
   </body>
 </html>
