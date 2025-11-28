@@ -38,6 +38,7 @@ body {
   color: var(--text);
   background: var(--page-bg);
   line-height: 1.6;
+  padding-top: 65px;
 }
 
 a {
@@ -155,7 +156,7 @@ a {
 
 /* Nav (site-nav) */
 .site-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
