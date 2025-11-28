@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
     <style>
-      
+      /* 상단 구역 스타일 */
       .header-area {
         display: flex;
         justify-content: space-between;
@@ -16,17 +16,14 @@
         padding-bottom: 16px;
         border-bottom: 1px solid #eee;
       }
-           
-          /* ===============================
-          ⭐ 본문 상단 여백 조정
-         =============================== */
-   
+
+      /* 본문 섹션 간 여백 및 스크롤 위치 조정 */
       section {
-        scroll-margin-top: 130px; /* 🔥 기존 140 → 130 */
+        scroll-margin-top: 130px;
         margin-bottom: 80px;
       }
 
-      /* 전체보기 버튼 조정 */
+      /* "전체보기" 버튼 디자인 */
       .view-all-btn-wrap {
         text-align: center;
         margin-top: 20px;
@@ -50,7 +47,7 @@
 
   <body>
     <!-- =============================== -->
-    <!--            네비바               -->
+    <!--           상단 네비게이션       -->
     <!-- =============================== -->
     <nav class="site-nav">
       <div class="container nav-inner">
@@ -59,7 +56,7 @@
             <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
           </a>
         </div>
-        
+
         <nav class="menu">
           <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
           <a href="11_인공띠용지능_menulist.html" class="nav-link active">레시피</a>
@@ -70,13 +67,11 @@
       </div>
     </nav>
 
-
-   
-
     <!-- =============================== -->
-    <!--        본문(레시피 섹션)         -->
+    <!--       카테고리 기반 섹션 구조    -->
     <!-- =============================== -->
     <main class="container page-pad">
+      <!-- 카테고리별로 동적으로 채워질 영역 -->
       <section id="korean"></section>
       <section id="western"></section>
       <section id="chinese"></section>
@@ -84,15 +79,16 @@
       <section id="drink"></section>
     </main>
 
-    <!-- 맨 위로 -->
+    <!-- 맨 위로 이동 버튼 -->
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <!-- =============================== -->
-    <!--         JS: 레시피 렌더링        -->
+    <!--      JS - 레시피 목록 로딩      -->
     <!-- =============================== -->
     <script>
       const RECIPES_KEY = "nn_recipes";
 
+      /* 렌더링할 카테고리 목록 */
       const categories = [
         { id: 'korean', name: '한식' },
         { id: 'western', name: '양식' },
@@ -101,14 +97,18 @@
         { id: 'drink', name: '음료' },
       ];
 
-      // JSON + localStorage 레시피 합쳐서 가져오기
+      /* ----------------------------------------
+        JSON + localStorage 레시피 모두 불러오기
+        - JSON은 기본 레시피
+        - localStorage는 사용자 등록 레시피
+      ---------------------------------------- */
       function loadAllRecipes() {
         return fetch('11_인공띠용지능_recipes.json')
           .then((res) => res.json())
           .then((data) => {
             const baseRecipes = data.recipes || [];
 
-            // 🔹 localStorage에 저장된 레시피 불러오기
+            // localStorage 데이터 읽기
             const raw = localStorage.getItem(RECIPES_KEY);
             let storedRecipes = [];
 
@@ -116,12 +116,12 @@
               try {
                 const parsed = JSON.parse(raw);
 
-                // menulist 홈에서 쓰는 필드 형태로 매핑
+                // menulist 홈에서 사용하는 필드 이름으로 변환
                 storedRecipes = parsed.map((r) => ({
                   id: r.id,
                   title: r.title,
                   category: r.category,
-                  thumbnail: r.image || '11_default.png', // 기본 썸네일 있으면 경로로 교체
+                  thumbnail: r.image || '11_default.png',
                   review_count: r.views ?? 0,
                   rating: r.rating ?? 'NEW',
                 }));
@@ -130,12 +130,14 @@
               }
             }
 
-            // 🔹 JSON 레시피 + 웹스토리지 레시피 합치기
+            // JSON + 사용자 레시피 합쳐서 반환
             return [...baseRecipes, ...storedRecipes];
           });
       }
 
-      // 페이지 로드 시 렌더링
+      /* ----------------------------------------
+        페이지 로드 시 카테고리별 렌더링 시작
+      ---------------------------------------- */
       loadAllRecipes()
         .then((allRecipes) => {
           categories.forEach((cat) => {
@@ -144,17 +146,27 @@
         })
         .catch((err) => console.error('데이터 로딩 실패:', err));
 
+      /* ----------------------------------------
+        카테고리 섹션 렌더링
+        - 상위 4개만 미리보기로 표시
+        - "전체보기" 버튼 제공
+      ---------------------------------------- */
       function renderSection(catId, catName, recipes) {
         const container = document.getElementById(catId);
+
+        // 해당 카테고리만 필터링
         const filtered = recipes.filter((r) => r.category === catName);
 
+        // 해당 카테고리에 레시피가 없으면 섹션 제거
         if (filtered.length === 0) {
           container.style.display = 'none';
           return;
         }
 
+        // 미리보기 4개만 출력
         const previewList = filtered.slice(0, 4);
 
+        // 섹션 HTML 구성
         let html = `
           <h2 class="section-title" style="margin-top:0;">
             ${catName} 레시피 <span>(총 ${filtered.length}개)</span>
@@ -187,6 +199,5 @@
         container.innerHTML = html;
       }
     </script>
-   
   </body>
 </html>
