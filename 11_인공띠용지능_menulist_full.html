@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>레시피 전체보기</title>
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+    
     <style>
-      main {
-        margin-top: 40px;
-      }
+      
       .header-area {
         display: flex;
         justify-content: space-between;
@@ -58,9 +57,8 @@
     <script>
       // URL 파라미터 읽기 (?category=korean)
       const params = new URLSearchParams(window.location.search);
-      const currentCategory = params.get('category'); // korean / western / chinese / dessert / drink
+      const currentCategory = params.get('category');
 
-      // JSON 데이터에서 쓰는 카테고리 한글 이름
       const categoryMap = {
         korean: '한식',
         western: '양식',
@@ -69,124 +67,46 @@
         drink: '음료',
       };
 
-      // localStorage에 저장된 유저 레시피 key (register.js와 동일)
-      const STORAGE_KEY = 'nn_recipes';
-
-      // 카테고리별 기본 이미지 (유저가 이미지 안 올렸을 때)
-      function getDefaultImage(korCategory) {
-        switch (korCategory) {
-          case '한식':
-            return '11_kimchi.jpg';
-          case '양식':
-            return '11_pasta.jpg';
-          case '중식':
-            return '11_chinese.png';
-          case '디저트':
-            return '11_snack.jpg';
-          case '음료':
-            return '11_drink.png';
-          default:
-            return '11_pasta.jpg';
-        }
-      }
-
-      // localStorage에서 유저 레시피 불러오기
-      function loadUserRecipes(targetName, isDessertMode) {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) return [];
-
-          const all = JSON.parse(raw); // [{id,title,category,image,...}, ...]
-
-          // targetName: '한식', '양식', '디저트', '음료' ...
-          return all.filter((u) => {
-            if (isDessertMode) {
-              // 디저트는 '디저트' 또는 '간식' 둘 다 포함
-              return u.category === '디저트' || u.category === '간식';
-            }
-            return u.category === targetName;
-          });
-        } catch (e) {
-          console.error('유저 레시피 파싱 오류:', e);
-          return [];
-        }
-      }
-
-      // 카드 HTML 만드는 함수 (JSON + 유저 공통)
-      function makeCardHTML(title, thumbnail, metaText, ratingText, href) {
-        return `
-          <a href="${href}" class="card">
-            <img src="${thumbnail}" alt="${title}" class="thumb" />
-            <div class="card-body">
-              <p class="card-title">${title}</p>
-              <p class="recipe-meta">${metaText}</p>
-              <div class="rating">${ratingText}</div>
-            </div>
-          </a>
-        `;
-      }
-
-      // 실제 렌더링 로직
       fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
           const titleEl = document.getElementById('full-title');
           const listEl = document.getElementById('full-list');
-          const targetName = categoryMap[currentCategory]; // '한식' / '양식' ...
+          const targetName = categoryMap[currentCategory];
 
           if (!targetName) {
             titleEl.innerText = '잘못된 카테고리입니다.';
             return;
           }
 
-          const isDessertMode = currentCategory === 'dessert';
           titleEl.innerText = `${targetName} 레시피 전체보기`;
 
-          // 1) JSON 원본 데이터 필터링
-          const jsonRecipes = data.recipes.filter((r) => {
-            if (isDessertMode) {
+          // 데이터 필터링
+          const filtered = data.recipes.filter((r) => {
+            if (currentCategory === 'dessert')
               return r.category === '디저트' || r.category === '간식';
-            }
             return r.category === targetName;
           });
 
-          // 2) localStorage에서 유저 레시피 필터링
-          const userRecipes = loadUserRecipes(targetName, isDessertMode);
-
-          // 3) JSON + 유저 둘 다 비었으면 안내 문구
-          if (jsonRecipes.length === 0 && userRecipes.length === 0) {
+          // 렌더링
+          if (filtered.length === 0) {
             listEl.innerHTML = '<p>등록된 레시피가 없습니다.</p>';
-            return;
+          } else {
+            listEl.innerHTML = filtered
+              .map(
+                (r) => `
+                <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
+                  <img src="${r.thumbnail}" alt="${r.title}" class="thumb" />
+                  <div class="card-body">
+                    <p class="card-title">${r.title}</p>
+                    <p class="recipe-meta">작성자: 냠냠이 · 조회수: ${r.review_count}</p>
+                    <div class="rating">★ ${r.rating}</div>
+                  </div>
+                </a>
+            `
+              )
+              .join('');
           }
-
-          // 4) JSON 레시피 카드 HTML
-          const jsonCardsHTML = jsonRecipes
-            .map((r) => {
-              const href = `11_인공띠용지능_recipe.html?id=${r.id}`;
-              const thumb = r.thumbnail || getDefaultImage(r.category);
-              const meta = `작성자: 냠냠이 · 리뷰 ${r.review_count}개`;
-              const rating = `★ ${r.rating}`;
-              return makeCardHTML(r.title, thumb, meta, rating, href);
-            })
-            .join('');
-
-          // 5) 유저 레시피 카드 HTML
-          const userCardsHTML = userRecipes
-            .map((u) => {
-              const href = '#'; // 상세페이지 안 만들었으니까 우선 막아두기
-              const thumb = u.image || getDefaultImage(u.category);
-              const meta = `작성자: 사용자 · 조회수 ${u.views || 0}`;
-              const ratingValue =
-                typeof u.rating === 'number'
-                  ? u.rating.toFixed(1)
-                  : u.rating || 0;
-              const rating = `★ ${ratingValue}`;
-              return makeCardHTML(u.title, thumb, meta, rating, href);
-            })
-            .join('');
-
-          // 6) JSON → 유저 순서로 붙이기
-          listEl.innerHTML = jsonCardsHTML + userCardsHTML;
         })
         .catch((err) => console.error('로딩 실패:', err));
     </script>
