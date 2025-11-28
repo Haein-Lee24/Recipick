@@ -15,7 +15,7 @@
         align-items: center;
         margin-bottom: 24px;
         padding-bottom: 16px;
-        border-bottom: 1px solid #eee;
+        border-bottom: none !important;
       }
       .back-btn {
         padding: 8px 16px;
@@ -154,7 +154,7 @@
 
           // 3) 총 개수로 제목 세팅
           const totalCount = jsonRecipes.length + userRecipes.length;
-          titleEl.innerText = `${targetName} 레시피 (총 ${totalCount}개)`;
+          titleEl.innerText = `전체 ${targetName} 레시피 (총 ${totalCount}개)`;
 
           // 4) JSON + 유저 둘 다 비었을 때
           if (jsonRecipes.length === 0 && userRecipes.length === 0) {

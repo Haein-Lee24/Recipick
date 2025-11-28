@@ -1,6 +1,335 @@
 {
   "recipes": [
     {
+  "id": "k1",
+  "title": "김치찌개",
+  "summary": "얼큰하고 깊은 맛의 김치찌개.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "김치", "amount": "1컵" },
+    { "name": "돼지고기", "amount": "80g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "김치와 돼지고기를 준비합니다." },
+    { "title": "끓이기", "desc": "재료를 넣고 끓입니다." },
+    { "title": "완성", "desc": "간을 맞춰 마무리합니다." }
+  ],
+  "rating": 4.8,
+  "review_count": 10500,
+  "reviews": []
+},
+{
+  "id": "k2",
+  "title": "비빔밥",
+  "summary": "다양한 나물을 비벼 즐기는 전통 비빔밥.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "밥", "amount": "1공기" },
+    { "name": "고추장", "amount": "1T" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "나물과 고추장을 준비합니다." },
+    { "title": "비비기", "desc": "밥과 재료를 넣고 비빕니다." },
+    { "title": "완성", "desc": "계란후라이를 올려 완성합니다." }
+  ],
+  "rating": 4.4,
+  "review_count": 8200,
+  "reviews": []
+},
+{
+  "id": "k3",
+  "title": "불고기",
+  "summary": "달콤짭짤한 양념이 스며든 한식 불고기.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "소고기", "amount": "150g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "고기를 양념합니다." },
+    { "title": "볶기", "desc": "팬에 볶아줍니다." },
+    { "title": "완성", "desc": "접시에 담아 완성합니다." }
+  ],
+  "rating": 4.9,
+  "review_count": 15100,
+  "reviews": []
+},
+{
+  "id": "k4",
+  "title": "잡채",
+  "summary": "쫄깃한 당면과 다양한 채소가 조화를 이루는 잡채.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "25분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "당면", "amount": "100g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 볶기", "desc": "채소와 고기를 볶습니다." },
+    { "title": "당면 삶기", "desc": "당면을 삶습니다." },
+    { "title": "완성", "desc": "모든 재료를 섞습니다." }
+  ],
+  "rating": 4.2,
+  "review_count": 6300,
+  "reviews": []
+},
+{
+  "id": "k5",
+  "title": "떡볶이",
+  "summary": "달콤하면서도 매콤한 국민 간식 떡볶이.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "15분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "떡", "amount": "200g" },
+    { "name": "고추장", "amount": "1.5T" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "양념 만들기", "desc": "고추장과 양념을 섞습니다." },
+    { "title": "떡 넣기", "desc": "떡을 넣고 졸입니다." },
+    { "title": "완성", "desc": "간을 맞춰 마무리합니다." }
+  ],
+  "rating": 4.5,
+  "review_count": 21400,
+  "reviews": []
+},
+{
+  "id": "k6",
+  "title": "순두부찌개",
+  "summary": "부드럽고 얼큰한 순두부찌개.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "순두부", "amount": "1봉" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "양념 준비", "desc": "고춧가루와 마늘을 볶습니다." },
+    { "title": "재료 넣기", "desc": "순두부와 육수를 넣습니다." },
+    { "title": "완성", "desc": "계란을 넣어 마무리합니다." }
+  ],
+  "rating": 4.3,
+  "review_count": 5700,
+  "reviews": []
+},
+{
+  "id": "k7",
+  "title": "된장찌개",
+  "summary": "구수하고 깊은 맛의 된장찌개.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "된장", "amount": "1T" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "끓이기", "desc": "된장과 재료를 넣고 끓입니다." },
+    { "title": "간 맞추기", "desc": "간을 맞춥니다." }
+  ],
+  "rating": 4.4,
+  "review_count": 12100,
+  "reviews": []
+},
+{
+  "id": "k8",
+  "title": "김밥",
+  "summary": "간편하게 말아 먹는 한국의 대표 음식.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "30분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "김", "amount": "1장" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "재료 준비", "desc": "속재료를 썰어 준비합니다." },
+    { "title": "말기", "desc": "밥과 재료를 김에 올려 말아줍니다." }
+  ],
+  "rating": 4.2,
+  "review_count": 9300,
+  "reviews": []
+},
+{
+  "id": "k9",
+  "title": "감자탕",
+  "summary": "얼큰하고 진한 국물 맛의 감자탕.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "40분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "뼈다귀", "amount": "300g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "끓이기", "desc": "뼈를 삶아 국물을 냅니다." },
+    { "title": "재료 넣기", "desc": "감자와 양념을 넣어 끓입니다." }
+  ],
+  "rating": 4.1,
+  "review_count": 4800,
+  "reviews": []
+},
+{
+  "id": "k10",
+  "title": "삼겹살",
+  "summary": "한국인이 사랑하는 구워먹는 삼겹살.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "15분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "삼겹살", "amount": "200g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "굽기", "desc": "삼겹살을 노릇하게 굽습니다." },
+    { "title": "완성", "desc": "먹기 좋게 썰어 완성합니다." }
+  ],
+  "rating": 4.9,
+  "review_count": 18900,
+  "reviews": []
+},
+{
+  "id": "k11",
+  "title": "갈비찜",
+  "summary": "부드럽고 달콤한 명절 요리 갈비찜.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "45분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "갈비", "amount": "400g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "삶기", "desc": "갈비를 삶습니다." },
+    { "title": "조림", "desc": "양념과 함께 조립니다." }
+  ],
+  "rating": 4.8,
+  "review_count": 7700,
+  "reviews": []
+},
+{
+  "id": "k12",
+  "title": "해물파전",
+  "summary": "바삭한 식감과 해물 향이 가득한 해물파전.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "파", "amount": "1줌" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "반죽 만들기", "desc": "밀가루 반죽을 만듭니다." },
+    { "title": "굽기", "desc": "팬에 구워 완성합니다." }
+  ],
+  "rating": 4.3,
+  "review_count": 6000,
+  "reviews": []
+},
+{
+  "id": "k13",
+  "title": "냉면",
+  "summary": "시원하고 새콤한 여름 별미 냉면.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "15분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "냉면", "amount": "1인분" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "면 삶기", "desc": "냉면 면을 삶습니다." },
+    { "title": "육수 넣기", "desc": "찬 육수를 부어 완성합니다." }
+  ],
+  "rating": 4.4,
+  "review_count": 11200,
+  "reviews": []
+},
+{
+  "id": "k14",
+  "title": "김치볶음밥",
+  "summary": "간단하지만 맛있는 김치볶음밥.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "20분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "김치", "amount": "1컵" },
+    { "name": "밥", "amount": "1공기" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "볶기", "desc": "김치와 밥을 볶습니다." }
+  ],
+  "rating": 4.5,
+  "review_count": 22000,
+  "reviews": []
+},
+{
+  "id": "k15",
+  "title": "닭갈비",
+  "summary": "매콤달콤한 춘천식 닭갈비.",
+  "category": "한식",
+  "difficulty": "중 (★★☆)",
+  "time": "30분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "닭고기", "amount": "200g" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "양념", "desc": "닭을 양념합니다." },
+    { "title": "볶기", "desc": "팬에서 볶아 완성합니다." }
+  ],
+  "rating": 4.6,
+  "review_count": 9900,
+  "reviews": []
+},
+{
+  "id": "k16",
+  "title": "마약 옥수수",
+  "summary": "단짠단짠 중독성 있는 옥수수 요리.",
+  "category": "한식",
+  "difficulty": "쉬움 (★☆☆)",
+  "time": "10분",
+  "thumbnail": "11_kimchi.jpg",
+  "ingredients_required": [
+    { "name": "옥수수", "amount": "1컵" }
+  ],
+  "ingredients_optional": [],
+  "steps": [
+    { "title": "볶기", "desc": "옥수수를 양념과 볶아 완성합니다." }
+  ],
+  "rating": 4.3,
+  "review_count": 12000,
+  "reviews": []
+},
+
+    {
       "id": "r1",
       "title": "달콤한 허니 버터 갈릭 쉬림프",
       "summary": "달콤·짭짤·고소한 갈릭 버터 새우! 간단하지만 중독적인 맛.",
@@ -8,7 +337,6 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "15분",
       "thumbnail": "11_shrimp.jpg",
-
       "ingredients_required": [
         { "name": "새우", "amount": "200g" },
         { "name": "버터", "amount": "1.5T" },
@@ -16,12 +344,10 @@
         { "name": "꿀", "amount": "1T" },
         { "name": "간장", "amount": "0.5T" }
       ],
-
       "ingredients_optional": [
         { "name": "파슬리", "amount": "약간" },
         { "name": "후추", "amount": "조금" }
       ],
-
       "steps": [
         {
           "title": "새우 손질",
@@ -40,10 +366,8 @@
           "desc": "꿀·간장을 넣어 1~2분 졸인 뒤 파슬리를 뿌려 완성합니다."
         }
       ],
-
       "rating": 4.8,
       "review_count": 210,
-
       "reviews": [
         {
           "user": "새우요리러버",
@@ -59,8 +383,6 @@
         }
       ]
     },
-
-    
     {
       "id": "r2",
       "title": "5분 완성! 초간단 샐러드 파스타",
@@ -69,7 +391,6 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "5분",
       "thumbnail": "11_saladpasta.jpg",
-
       "ingredients_required": [
         { "name": "파스타(삶은 것)", "amount": "150g" },
         { "name": "올리브오일", "amount": "1T" },
@@ -77,12 +398,10 @@
         { "name": "상추/로메인", "amount": "한 줌" },
         { "name": "레몬즙", "amount": "1T" }
       ],
-
       "ingredients_optional": [
         { "name": "파마산 치즈", "amount": "약간" },
         { "name": "발사믹 글레이즈", "amount": "1줄" }
       ],
-
       "steps": [
         {
           "title": "채소 손질",
@@ -101,10 +420,8 @@
           "desc": "원한다면 치즈·발사믹을 뿌려 완성합니다."
         }
       ],
-
       "rating": 4.9,
       "review_count": 150,
-
       "reviews": [
         {
           "user": "샐파매니아",
@@ -120,7 +437,6 @@
         }
       ]
     },
-
     {
       "id": "margherita_pizza",
       "title": "마르게리타 피자",
@@ -146,7 +462,6 @@
       "review_count": 132,
       "reviews": []
     },
-
     {
       "id": "bolognese",
       "title": "볼로네제 파스타",
@@ -174,7 +489,6 @@
       "review_count": 98,
       "reviews": []
     },
-
     {
       "id": "alfredo_pasta",
       "title": "알프레도 크림파스타",
@@ -201,7 +515,6 @@
       "review_count": 104,
       "reviews": []
     },
-
     {
       "id": "lasagna",
       "title": "라자냐",
@@ -227,7 +540,6 @@
       "review_count": 87,
       "reviews": []
     },
-
     {
       "id": "mushroom_risotto",
       "title": "버섯 리조또",
@@ -253,7 +565,6 @@
       "review_count": 73,
       "reviews": []
     },
-
     {
       "id": "greek_salad",
       "title": "그릭 샐러드",
@@ -278,7 +589,6 @@
       "review_count": 62,
       "reviews": []
     },
-
     {
       "id": "fish_and_chips",
       "title": "피시앤칩스",
@@ -303,7 +613,6 @@
       "review_count": 41,
       "reviews": []
     },
-
     {
       "id": "homemade_burger",
       "title": "수제 버거",
@@ -329,7 +638,6 @@
       "review_count": 120,
       "reviews": []
     },
-
     {
       "id": "clam_chowder",
       "title": "클램 차우더",
@@ -354,7 +662,6 @@
       "review_count": 38,
       "reviews": []
     },
-
     {
       "id": "arrabiata",
       "title": "펜네 아라비아따",
@@ -372,15 +679,23 @@
         { "name": "페퍼론치노", "amount": "1t" }
       ],
       "steps": [
-        { "title": "기름 향내기", "desc": "올리브오일에 마늘을 볶아 향을 냅니다." },
-        { "title": "소스 끓이기", "desc": "토마토소스와 페퍼론치노를 넣고 끓입니다." },
-        { "title": "면과 섞기", "desc": "펜네를 넣고 버무립니다." }
+        {
+          "title": "기름 향내기",
+          "desc": "올리브오일에 마늘을 볶아 향을 냅니다."
+        },
+        {
+          "title": "소스 끓이기",
+          "desc": "토마토소스와 페퍼론치노를 넣고 끓입니다."
+        },
+        {
+          "title": "면과 섞기",
+          "desc": "펜네를 넣고 버무립니다."
+        }
       ],
       "rating": 4.3,
       "review_count": 65,
       "reviews": []
     },
-
     {
       "id": "chicken_parmigiana",
       "title": "치킨 파르미지아나",
@@ -398,14 +713,19 @@
         { "name": "모차렐라", "amount": "1/2컵" }
       ],
       "steps": [
-        { "title": "튀김 준비", "desc": "닭가슴살에 빵가루를 묻혀 바삭하게 튀깁니다." },
-        { "title": "굽기", "desc": "소스와 치즈를 얹어 오븐에서 완성합니다." }
+        {
+          "title": "튀김 준비",
+          "desc": "닭가슴살에 빵가루를 묻혀 바삭하게 튀깁니다."
+        },
+        {
+          "title": "굽기",
+          "desc": "소스와 치즈를 얹어 오븐에서 완성합니다."
+        }
       ],
       "rating": 4.7,
       "review_count": 55,
       "reviews": []
     },
-
     {
       "id": "shrimp_scampi",
       "title": "쉬림프 스캄피",
@@ -424,14 +744,19 @@
       ],
       "steps": [
         { "title": "새우 손질", "desc": "새우를 깨끗이 손질합니다." },
-        { "title": "버터 조리", "desc": "버터에 마늘을 볶고 새우를 익힙니다." },
-        { "title": "마무리", "desc": "레몬즙을 넣어 상큼하게 마무리합니다." }
+        {
+          "title": "버터 조리",
+          "desc": "버터에 마늘을 볶고 새우를 익힙니다."
+        },
+        {
+          "title": "마무리",
+          "desc": "레몬즙을 넣어 상큼하게 마무리합니다."
+        }
       ],
       "rating": 4.5,
       "review_count": 70,
       "reviews": []
     },
-
     {
       "id": "r3",
       "title": "단짠단짠 마약 옥수수",
@@ -440,7 +765,6 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "10분",
       "thumbnail": "11_corn.jpg",
-
       "ingredients_required": [
         { "name": "옥수수캔", "amount": "1캔" },
         { "name": "버터", "amount": "1T" },
@@ -448,12 +772,10 @@
         { "name": "설탕", "amount": "1T" },
         { "name": "소금", "amount": "약간" }
       ],
-
       "ingredients_optional": [
         { "name": "파슬리", "amount": "약간" },
         { "name": "치즈", "amount": "1T" }
       ],
-
       "steps": [
         {
           "title": "버터 녹이기",
@@ -468,10 +790,8 @@
           "desc": "치즈를 넣어 섞고, 파슬리를 뿌려 마무리합니다."
         }
       ],
-
       "rating": 4.3,
       "review_count": 120,
-
       "reviews": [
         {
           "user": "간식하울",
@@ -495,7 +815,6 @@
       "difficulty": "중 (★★☆)",
       "time": "20분",
       "thumbnail": "11_steak.jpg",
-
       "ingredients_required": [
         { "name": "부채살", "amount": "200g" },
         { "name": "소금", "amount": "1꼬집" },
@@ -503,12 +822,10 @@
         { "name": "버터", "amount": "1T" },
         { "name": "마늘", "amount": "3알" }
       ],
-
       "ingredients_optional": [
         { "name": "타임/로즈마리", "amount": "약간" },
         { "name": "올리브오일", "amount": "1T" }
       ],
-
       "steps": [
         {
           "title": "고기 밑간",
@@ -523,10 +840,8 @@
           "desc": "불을 끄고 3분간 레스팅한 뒤 썰어 완성합니다."
         }
       ],
-
       "rating": 4.5,
       "review_count": 88,
-
       "reviews": [
         {
           "user": "고기매니아",
@@ -542,6 +857,7 @@
         }
       ]
     },
+
     {
       "id": "mala_tang",
       "title": "집에서 즐기는 마라탕",
@@ -550,7 +866,6 @@
       "difficulty": "중 (★★☆)",
       "time": "30분",
       "thumbnail": "11_chinese.png",
-
       "ingredients_required": [
         { "name": "마라 소스", "amount": "1봉" },
         { "name": "사골 육수", "amount": "700ml" },
@@ -558,13 +873,11 @@
         { "name": "소고기 샤브용", "amount": "100g" },
         { "name": "분모자/푸주/면", "amount": "선택" }
       ],
-
       "ingredients_optional": [
         { "name": "숙주/팽이버섯", "amount": "한 줌" },
         { "name": "어묵/소시지", "amount": "약간" },
         { "name": "마늘", "amount": "1/2 스푼" }
       ],
-
       "steps": [
         {
           "title": "재료 손질 및 준비",
@@ -583,10 +896,8 @@
           "desc": "채소와 소고기를 넣고 익을 때까지만 끓여 바로 담아냅니다."
         }
       ],
-
       "rating": 4.3,
       "review_count": 785,
-
       "reviews": [
         {
           "user": "마라홀릭",
@@ -604,6 +915,526 @@
     },
 
     {
+      "id": "jajangmyeon",
+      "title": "고소 짭짤 짜장면",
+      "summary": "집에서도 간단하게! 춘장을 볶아 깊은 맛을 내는 짜장면 레시피.",
+      "category": "중식",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "25분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "중화면", "amount": "1인분" },
+        { "name": "돼지고기 다짐육", "amount": "80g" },
+        { "name": "양파", "amount": "1/2개" },
+        { "name": "애호박", "amount": "1/4개" },
+        { "name": "춘장", "amount": "2T" }
+      ],
+      "ingredients_optional": [
+        { "name": "식용유", "amount": "2T" },
+        { "name": "설탕", "amount": "1/2T" },
+        { "name": "물전분", "amount": "2T" }
+      ],
+      "steps": [
+        { "title": "재료 손질", "desc": "양파와 애호박, 돼지고기를 잘게 썰어 준비합니다." },
+        { "title": "춘장 볶기", "desc": "팬에 기름을 두르고 춘장을 약불에서 2~3분 볶아 향을 냅니다." },
+        { "title": "야채·고기 볶기", "desc": "다른 팬에 고기와 야채를 볶다가 볶은 춘장을 넣어 섞습니다." },
+        { "title": "농도 맞추기", "desc": "물과 물전분을 넣어 졸여 소스 농도를 맞춥니다." },
+        { "title": "면 올리기", "desc": "삶은 중화면 위에 짜장을 듬뿍 올려 완성합니다." }
+      ],
+      "rating": 4.5,
+      "review_count": 132,
+      "reviews": []
+    },
+    {
+      "id": "jjamppong",
+      "title": "불맛 나는 짬뽕",
+      "summary": "얼큰한 국물과 각종 해물이 어우러진 중식 짬뽕!",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "30분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "중화면", "amount": "1인분" },
+        { "name": "오징어", "amount": "1/2마리" },
+        { "name": "홍합/조개", "amount": "한 줌" },
+        { "name": "양배추", "amount": "한 줌" },
+        { "name": "고춧가루", "amount": "1.5T" }
+      ],
+      "ingredients_optional": [
+        { "name": "다진 마늘", "amount": "1T" },
+        { "name": "간장", "amount": "1T" },
+        { "name": "치킨스톡 또는 다시다", "amount": "1t" }
+      ],
+      "steps": [
+        { "title": "재료 손질", "desc": "해물과 야채를 먹기 좋게 썰어 준비합니다." },
+        { "title": "불맛 내기", "desc": "센 불에 기름을 두르고 고춧가루와 마늘을 볶아 불맛을 냅니다." },
+        { "title": "해물·야채 볶기", "desc": "해물과 채소를 넣고 센 불에서 빠르게 볶습니다." },
+        { "title": "국물 끓이기", "desc": "물 또는 육수를 붓고 간장·치킨스톡으로 간을 맞추며 끓입니다." },
+        { "title": "면과 함께", "desc": "삶은 면 그릇에 담고 짬뽕 국물을 부어 완성합니다." }
+      ],
+      "rating": 4.4,
+      "review_count": 118,
+      "reviews": []
+    },
+    {
+      "id": "tangsuyuk",
+      "title": "겉바속촉 탕수육",
+      "summary": "바삭한 튀김 옷과 새콤달콤 소스의 완벽 조합 탕수육!",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "35분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "돼지고기(등심/안심)", "amount": "200g" },
+        { "name": "전분", "amount": "5T" },
+        { "name": "당근", "amount": "1/4개" },
+        { "name": "양파", "amount": "1/4개" },
+        { "name": "오이", "amount": "1/4개" }
+      ],
+      "ingredients_optional": [
+        { "name": "간장", "amount": "1T" },
+        { "name": "식초", "amount": "2T" },
+        { "name": "설탕", "amount": "2T" },
+        { "name": "물", "amount": "5T" },
+        { "name": "물전분", "amount": "1.5T" }
+      ],
+      "steps": [
+        {
+          "title": "고기 밑간",
+          "desc": "고기에 소금·후추·간장을 약간 넣어 밑간하고 전분을 고루 묻힙니다."
+        },
+        {
+          "title": "튀기기",
+          "desc": "170~180°C 기름에 고기를 바삭하게 두 번 튀겨줍니다."
+        },
+        {
+          "title": "소스 준비",
+          "desc": "팬에 물·식초·설탕·간장을 넣고 끓입니다."
+        },
+        {
+          "title": "야채와 농도 맞추기",
+          "desc": "채썬 야채를 넣고 물전분으로 농도를 맞춥니다."
+        },
+        {
+          "title": "완성",
+          "desc": "접시에 튀김을 담고 소스를 뿌리거나 곁들여 제공합니다."
+        }
+      ],
+      "rating": 4.6,
+      "review_count": 201,
+      "reviews": []
+    },
+    {
+      "id": "yangjangpi",
+      "title": "쫄깃 새콤 양장피",
+      "summary": "각종 해산물과 야채, 겨자 소스로 마무리하는 대표 냉채 요리.",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "30분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "양장피", "amount": "1장(또는 한 줌)" },
+        { "name": "오이", "amount": "1/2개" },
+        { "name": "당근", "amount": "1/3개" },
+        { "name": "해파리 또는 오징어", "amount": "한 줌" },
+        { "name": "게맛살/햄", "amount": "조금" }
+      ],
+      "ingredients_optional": [
+        { "name": "겨자", "amount": "1T" },
+        { "name": "간장", "amount": "1.5T" },
+        { "name": "식초", "amount": "2T" },
+        { "name": "설탕", "amount": "1T" }
+      ],
+      "steps": [
+        {
+          "title": "양장피 준비",
+          "desc": "양장피를 뜨거운 물에 살짝 데쳐 찬물에 헹궈 둡니다."
+        },
+        {
+          "title": "재료 손질",
+          "desc": "야채, 해산물, 햄·게맛살을 채 썰어 준비합니다."
+        },
+        {
+          "title": "소스 만들기",
+          "desc": "겨자·간장·식초·설탕을 섞어 새콤한 겨자 소스를 만듭니다."
+        },
+        {
+          "title": "섞기",
+          "desc": "접시에 양장피와 재료를 올리고 소스를 끼얹어 비벼 먹습니다."
+        }
+      ],
+      "rating": 4.2,
+      "review_count": 64,
+      "reviews": []
+    },
+    {
+      "id": "kkansho_shrimp",
+      "title": "매콤달콤 깐쇼새우",
+      "summary": "튀긴 새우에 매콤달콤 소스를 입힌 인기 중식 메뉴.",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "25분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "중하새우", "amount": "15마리" },
+        { "name": "전분", "amount": "3T" },
+        { "name": "고추장 또는 칠리소스", "amount": "2T" },
+        { "name": "케첩", "amount": "2T" },
+        { "name": "설탕", "amount": "1.5T" }
+      ],
+      "ingredients_optional": [
+        { "name": "다진 마늘", "amount": "1T" },
+        { "name": "간장", "amount": "1T" },
+        { "name": "식초", "amount": "1T" }
+      ],
+      "steps": [
+        { "title": "새우 손질", "desc": "새우의 껍질과 내장을 제거하고 전분을 묻힙니다." },
+        {
+          "title": "새우 튀기기",
+          "desc": "기름에 바삭하게 튀겨 건져 둡니다."
+        },
+        {
+          "title": "소스 만들기",
+          "desc": "팬에 마늘을 볶은 후 고추장/칠리소스, 케첩, 설탕, 간장, 식초를 넣고 끓입니다."
+        },
+        {
+          "title": "버무리기",
+          "desc": "소스에 튀긴 새우를 넣고 재빨리 버무려 완성합니다."
+        }
+      ],
+      "rating": 4.5,
+      "review_count": 97,
+      "reviews": []
+    },
+    {
+      "id": "chinese_fried_rice",
+      "title": "중국식 새우볶음밥",
+      "summary": "불맛 가득! 탱탱한 새우와 계란이 들어간 중국식 볶음밥.",
+      "category": "중식",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "15분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "밥", "amount": "1공기(차가운 밥)" },
+        { "name": "새우", "amount": "8~10마리" },
+        { "name": "계란", "amount": "1개" },
+        { "name": "대파", "amount": "1/3대" }
+      ],
+      "ingredients_optional": [
+        { "name": "간장", "amount": "1T" },
+        { "name": "소금", "amount": "약간" },
+        { "name": "참기름", "amount": "조금" }
+      ],
+      "steps": [
+        { "title": "재료 준비", "desc": "새우는 껍질을 벗기고, 파는 잘게 썹니다." },
+        {
+          "title": "계란 코팅",
+          "desc": "볼에 밥과 풀어둔 계란을 섞어 계란 코팅밥을 만듭니다."
+        },
+        {
+          "title": "볶기",
+          "desc": "팬에 기름을 두르고 파를 볶아 향을 낸 뒤 새우를 볶습니다."
+        },
+        {
+          "title": "밥 넣기",
+          "desc": "계란 코팅된 밥을 넣고 센 불에서 빠르게 볶으며 간장·소금으로 간을 맞춥니다."
+        },
+        {
+          "title": "완성",
+          "desc": "마지막에 참기름을 살짝 두르고 섞어 마무리합니다."
+        }
+      ],
+      "rating": 4.7,
+      "review_count": 156,
+      "reviews": []
+    },
+    {
+      "id": "mala_xiangguo",
+      "title": "마라샹궈",
+      "summary": "각종 재료를 매콤 얼얼한 마라 소스에 볶아낸 볶음 요리.",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "25분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "마라 소스", "amount": "3T" },
+        { "name": "소고기/햄/소시지", "amount": "100g" },
+        { "name": "청경채", "amount": "2포기" },
+        { "name": "각종 버섯", "amount": "한 줌" },
+        { "name": "두부피/분모자", "amount": "선택" }
+      ],
+      "ingredients_optional": [
+        { "name": "마늘", "amount": "1T" },
+        { "name": "고추기름", "amount": "1T" }
+      ],
+      "steps": [
+        {
+          "title": "재료 손질",
+          "desc": "야채와 고기를 먹기 좋은 크기로 썰어 준비합니다."
+        },
+        {
+          "title": "볶기",
+          "desc": "팬 혹은 웍에 기름을 두르고 마늘을 볶은 뒤 마라 소스를 넣어 향을 냅니다."
+        },
+        {
+          "title": "재료 넣기",
+          "desc": "단단한 재료부터 넣어 볶다가 채소와 버섯을 차례로 넣고 센 불에서 볶습니다."
+        },
+        {
+          "title": "완성",
+          "desc": "재료가 익으면 접시에 담아 밥과 함께 곁들여 먹습니다."
+        }
+      ],
+      "rating": 4.3,
+      "review_count": 88,
+      "reviews": []
+    },
+    {
+      "id": "mapo_tofu",
+      "title": "마파두부",
+      "summary": "부드러운 두부와 매콤한 소스가 조화로운 중식 대표 반찬.",
+      "category": "중식",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "20분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "연두부 또는 부침두부", "amount": "1모" },
+        { "name": "다진 돼지고기", "amount": "80g" },
+        { "name": "두반장", "amount": "1.5T" },
+        { "name": "다진 마늘", "amount": "1T" }
+      ],
+      "ingredients_optional": [
+        { "name": "간장", "amount": "1T" },
+        { "name": "설탕", "amount": "1t" },
+        { "name": "물전분", "amount": "1.5T" },
+        { "name": "고추기름", "amount": "1t" }
+      ],
+      "steps": [
+        {
+          "title": "두부 손질",
+          "desc": "두부를 한 입 크기로 썰어 끓는 물에 살짝 데쳐 비린 맛을 제거합니다(선택)."
+        },
+        {
+          "title": "고기 볶기",
+          "desc": "팬에 기름을 두르고 다진 고기와 마늘을 볶습니다."
+        },
+        {
+          "title": "소스 만들기",
+          "desc": "두반장, 간장, 설탕, 물을 넣어 끓입니다."
+        },
+        {
+          "title": "두부 넣기",
+          "desc": "두부를 넣고 잠시 끓인 뒤 물전분으로 걸쭉하게 만듭니다."
+        },
+        {
+          "title": "완성",
+          "desc": "그릇에 담고 고추기름을 살짝 두른 후 밥과 함께 먹습니다."
+        }
+      ],
+      "rating": 4.4,
+      "review_count": 141,
+      "reviews": []
+    },
+    {
+      "id": "kungpao_chicken",
+      "title": "궁보계정(꿍파오 치킨)",
+      "summary": "닭고기, 땅콩, 채소를 매콤달콤하게 볶아낸 중식 요리.",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "25분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "닭가슴살 또는 닭다리살", "amount": "150g" },
+        { "name": "땅콩", "amount": "2T" },
+        { "name": "피망/파프리카", "amount": "1/2개" },
+        { "name": "마른 고추", "amount": "3~4개" }
+      ],
+      "ingredients_optional": [
+        { "name": "간장", "amount": "1.5T" },
+        { "name": "식초", "amount": "1T" },
+        { "name": "설탕", "amount": "1T" },
+        { "name": "전분", "amount": "1T" }
+      ],
+      "steps": [
+        {
+          "title": "닭고기 밑간",
+          "desc": "닭고기에 간장·전분을 약간 넣어 밑간합니다."
+        },
+        {
+          "title": "볶기",
+          "desc": "팬에 기름을 두르고 마른 고추를 볶아 향을 낸 후 닭고기를 볶습니다."
+        },
+        {
+          "title": "야채·땅콩 추가",
+          "desc": "피망과 땅콩을 넣고 함께 볶습니다."
+        },
+        {
+          "title": "소스 완성",
+          "desc": "간장·식초·설탕을 섞은 소스를 넣고 볶아 윤기 나게 마무리합니다."
+        }
+      ],
+      "rating": 4.3,
+      "review_count": 73,
+      "reviews": []
+    },
+    {
+      "id": "guobaorou",
+      "title": "겉바속촉 꿔바로우",
+      "summary": "겉은 바삭, 속은 촉촉한 달콤 새콤 돼지고기 튀김 요리.",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "35분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "돼지고기(등심)", "amount": "200g" },
+        { "name": "전분", "amount": "5T" },
+        { "name": "계란 흰자", "amount": "1개" }
+      ],
+      "ingredients_optional": [
+        { "name": "식초", "amount": "2T" },
+        { "name": "설탕", "amount": "2T" },
+        { "name": "간장", "amount": "1T" },
+        { "name": "물", "amount": "4T" },
+        { "name": "물전분", "amount": "1T" }
+      ],
+      "steps": [
+        {
+          "title": "반죽 만들기",
+          "desc": "전분과 계란 흰자를 섞어 걸쭉한 튀김 반죽을 만들고 고기를 넣어 버무립니다."
+        },
+        {
+          "title": "튀기기",
+          "desc": "기름에 고기를 바삭하게 두 번 튀겨줍니다."
+        },
+        {
+          "title": "소스 만들기",
+          "desc": "팬에 식초·설탕·간장·물을 넣고 끓인 뒤 물전분으로 농도를 맞춥니다."
+        },
+        {
+          "title": "버무리기",
+          "desc": "튀긴 고기를 소스에 가볍게 버무려 완성합니다."
+        }
+      ],
+      "rating": 4.5,
+      "review_count": 82,
+      "reviews": []
+    },
+    {
+      "id": "spring_roll",
+      "title": "바삭 채소 춘권",
+      "summary": "야채와 고기를 가득 넣어 바삭하게 튀겨내는 춘권.",
+      "category": "중식",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "25분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "춘권피", "amount": "6장" },
+        { "name": "양배추", "amount": "한 줌" },
+        { "name": "당근", "amount": "1/3개" },
+        { "name": "당면 또는 숙주", "amount": "약간" }
+      ],
+      "ingredients_optional": [
+        { "name": "간장", "amount": "1T" },
+        { "name": "굴소스", "amount": "1T" }
+      ],
+      "steps": [
+        {
+          "title": "속 재료 볶기",
+          "desc": "채 썬 야채와 당면을 팬에 볶아 간장·굴소스로 간을 맞춥니다."
+        },
+        {
+          "title": "말기",
+          "desc": "춘권피에 속 재료를 올리고 돌돌 말아 끝을 물 전분으로 붙입니다."
+        },
+        {
+          "title": "튀기기",
+          "desc": "기름에 노릇하게 튀겨 기름을 빼고 먹기 좋은 크기로 잘라 완성합니다."
+        }
+      ],
+      "rating": 4.1,
+      "review_count": 45,
+      "reviews": []
+    },
+    {
+      "id": "yuxiang_eggplant",
+      "title": "어향가지",
+      "summary": "달콤하고 매콤한 소스를 입힌 가지 볶음 요리.",
+      "category": "중식",
+      "difficulty": "쉬움 (★☆☆)",
+      "time": "20분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "가지", "amount": "2개" },
+        { "name": "다진 돼지고기(선택)", "amount": "50g" },
+        { "name": "다진 마늘", "amount": "1T" },
+        { "name": "두반장", "amount": "1T" }
+      ],
+      "ingredients_optional": [
+        { "name": "간장", "amount": "1T" },
+        { "name": "식초", "amount": "1T" },
+        { "name": "설탕", "amount": "1T" }
+      ],
+      "steps": [
+        {
+          "title": "가지 손질",
+          "desc": "가지를 길게 썰어 기름에 살짝 튀기거나 볶아 부드럽게 만듭니다."
+        },
+        {
+          "title": "고기 볶기",
+          "desc": "다진 고기를 마늘과 함께 볶다가 두반장을 넣습니다."
+        },
+        {
+          "title": "소스 완성",
+          "desc": "간장·식초·설탕을 넣어 소스를 만든 뒤 가지를 넣고 잘 섞어 마무리합니다."
+        }
+      ],
+      "rating": 4.2,
+      "review_count": 53,
+      "reviews": []
+    },
+    {
+      "id": "wonton_soup",
+      "title": "담백한 완탕탕",
+      "summary": "쫄깃한 완탕과 맑은 국물이 매력적인 중국식 만두국.",
+      "category": "중식",
+      "difficulty": "중 (★★☆)",
+      "time": "30분",
+      "thumbnail": "11_chinese.png",
+      "ingredients_required": [
+        { "name": "완탕피", "amount": "10장" },
+        { "name": "다진 돼지고기", "amount": "80g" },
+        { "name": "대파", "amount": "1/3대" },
+        { "name": "육수 또는 멸치육수", "amount": "500ml" }
+      ],
+      "ingredients_optional": [
+        { "name": "간장", "amount": "1T" },
+        { "name": "참기름", "amount": "조금" },
+        { "name": "후추", "amount": "약간" }
+      ],
+      "steps": [
+        {
+          "title": "완탕 속 만들기",
+          "desc": "고기에 다진 파·간장·후추를 넣고 잘 섞어 완탕피에 소량씩 넣어 감쌉니다."
+        },
+        {
+          "title": "국물 끓이기",
+          "desc": "냄비에 육수를 넣고 끓입니다."
+        },
+        {
+          "title": "완탕 삶기",
+          "desc": "끓는 국물에 완탕을 넣고 떠오를 때까지 끓입니다."
+        },
+        {
+          "title": "완성",
+          "desc": "간을 보고 간장·참기름으로 마무리해 그릇에 담아 냅니다."
+        }
+      ],
+      "rating": 4.3,
+      "review_count": 61,
+      "reviews": []
+    },
+
+    {
       "id": "almond_cookie",
       "title": "바삭 고소한 아몬드 쿠키",
       "summary": "단 15분 만에 완성! 바삭한 식감과 고소한 풍미가 일품인 초간단 쿠키.",
@@ -611,7 +1442,6 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "15분 (굽는 시간 제외)",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "박력분", "amount": "150g" },
         { "name": "버터", "amount": "100g" },
@@ -619,12 +1449,10 @@
         { "name": "계란", "amount": "1개" },
         { "name": "아몬드 슬라이스", "amount": "50g" }
       ],
-
       "ingredients_optional": [
         { "name": "베이킹파우더", "amount": "1/2 티스푼" },
         { "name": "소금", "amount": "약간" }
       ],
-
       "steps": [
         {
           "title": "버터 크림화",
@@ -643,10 +1471,8 @@
           "desc": "180°C에서 12~15분 굽습니다."
         }
       ],
-
       "rating": 4.5,
       "review_count": 581,
-
       "reviews": [
         {
           "user": "홈베이커_초보",
@@ -662,7 +1488,6 @@
         }
       ]
     },
-
     {
       "id": "blondie",
       "title": "달콤 촉촉 블론디",
@@ -671,7 +1496,6 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "25분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "버터", "amount": "120g" },
         { "name": "설탕", "amount": "150g" },
@@ -679,12 +1503,10 @@
         { "name": "박력분", "amount": "150g" },
         { "name": "바닐라 익스트랙", "amount": "1티스푼" }
       ],
-
       "ingredients_optional": [
         { "name": "화이트 초콜릿칩", "amount": "50g" },
         { "name": "견과류", "amount": "30g" }
       ],
-
       "steps": [
         {
           "title": "버터 녹이기",
@@ -703,7 +1525,6 @@
           "desc": "180°C에서 20~25분 굽습니다."
         }
       ],
-
       "rating": 4.3,
       "review_count": 52,
       "reviews": [
@@ -715,7 +1536,6 @@
         }
       ]
     },
-
     {
       "id": "brownie",
       "title": "진한 초코 브라우니",
@@ -724,7 +1544,6 @@
       "difficulty": "중 (★★☆)",
       "time": "30분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "다크초콜릿", "amount": "120g" },
         { "name": "버터", "amount": "80g" },
@@ -732,12 +1551,10 @@
         { "name": "계란", "amount": "2개" },
         { "name": "박력분", "amount": "50g" }
       ],
-
       "ingredients_optional": [
         { "name": "견과류", "amount": "30g" },
         { "name": "초코칩", "amount": "30g" }
       ],
-
       "steps": [
         {
           "title": "초콜릿·버터 녹이기",
@@ -756,7 +1573,6 @@
           "desc": "170°C에서 20~25분 굽습니다."
         }
       ],
-
       "rating": 4.8,
       "review_count": 182,
       "reviews": [
@@ -776,7 +1592,6 @@
       "difficulty": "중 (★★☆)",
       "time": "60분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "크림치즈", "amount": "250g" },
         { "name": "설탕", "amount": "60g" },
@@ -784,12 +1599,10 @@
         { "name": "생크림", "amount": "100ml" },
         { "name": "비스킷", "amount": "80g" }
       ],
-
       "ingredients_optional": [
         { "name": "레몬즙", "amount": "1T" },
         { "name": "바닐라 익스트랙", "amount": "1티스푼" }
       ],
-
       "steps": [
         {
           "title": "치즈 풀기",
@@ -808,7 +1621,6 @@
           "desc": "160°C에서 50분 굽습니다."
         }
       ],
-
       "rating": 4.7,
       "review_count": 90,
       "reviews": [
@@ -820,7 +1632,6 @@
         }
       ]
     },
-
     {
       "id": "tiramisu",
       "title": "클래식 티라미수",
@@ -829,7 +1640,6 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "20분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "마스카포네 치즈", "amount": "200g" },
         { "name": "계란 노른자", "amount": "2개" },
@@ -837,9 +1647,9 @@
         { "name": "에스프레소", "amount": "60ml" },
         { "name": "사보이아르디", "amount": "8~10개" }
       ],
-
-      "ingredients_optional": [{ "name": "코코아파우더", "amount": "1T" }],
-
+      "ingredients_optional": [
+        { "name": "코코아파우더", "amount": "1T" }
+      ],
       "steps": [
         {
           "title": "크림 만들기",
@@ -858,7 +1668,6 @@
           "desc": "코코아를 뿌려 1시간 냉장 보관합니다."
         }
       ],
-
       "rating": 4.6,
       "review_count": 76,
       "reviews": [
@@ -870,7 +1679,6 @@
         }
       ]
     },
-
     {
       "id": "macaron",
       "title": "겉바속촉 프렌치 마카롱",
@@ -879,21 +1687,17 @@
       "difficulty": "어려움 (★★★)",
       "time": "60분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "아몬드가루", "amount": "70g" },
         { "name": "슈가파우더", "amount": "100g" },
         { "name": "계란흰자", "amount": "2개" },
         { "name": "설탕", "amount": "40g" }
       ],
-
-      "ingredients_optional": [{ "name": "버터크림 필링", "amount": "적당량" }],
-
+      "ingredients_optional": [
+        { "name": "버터크림 필링", "amount": "적당량" }
+      ],
       "steps": [
-        {
-          "title": "가루체",
-          "desc": "아몬드가루와 슈가파우더를 체칩니다."
-        },
+        { "title": "가루체", "desc": "아몬드가루와 슈가파우더를 체칩니다." },
         {
           "title": "머랭",
           "desc": "흰자를 휘핑하며 설탕을 나눠 넣어 머랭을 만듭니다."
@@ -907,7 +1711,6 @@
           "desc": "150°C에서 13~15분 굽습니다."
         }
       ],
-
       "rating": 4.4,
       "review_count": 127,
       "reviews": [
@@ -919,7 +1722,6 @@
         }
       ]
     },
-
     {
       "id": "apple_pie",
       "title": "달콤 바삭 애플파이",
@@ -928,16 +1730,15 @@
       "difficulty": "중 (★★☆)",
       "time": "40분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "사과", "amount": "2개" },
         { "name": "설탕", "amount": "2T" },
         { "name": "시나몬", "amount": "1티스푼" },
         { "name": "파이시트", "amount": "2장" }
       ],
-
-      "ingredients_optional": [{ "name": "버터", "amount": "1T" }],
-
+      "ingredients_optional": [
+        { "name": "버터", "amount": "1T" }
+      ],
       "steps": [
         {
           "title": "필링 준비",
@@ -952,7 +1753,6 @@
           "desc": "180°C에서 25~30분 굽습니다."
         }
       ],
-
       "rating": 4.3,
       "review_count": 69,
       "reviews": []
@@ -965,16 +1765,15 @@
       "difficulty": "중 (★★☆)",
       "time": "50분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "레몬즙", "amount": "80ml" },
         { "name": "계란", "amount": "2개" },
         { "name": "설탕", "amount": "80g" },
         { "name": "버터", "amount": "50g" }
       ],
-
-      "ingredients_optional": [{ "name": "타르트 쉘", "amount": "1개" }],
-
+      "ingredients_optional": [
+        { "name": "타르트 쉘", "amount": "1개" }
+      ],
       "steps": [
         {
           "title": "커드 만들기",
@@ -989,12 +1788,10 @@
           "desc": "타르트 쉘에 커드를 넣고 10분 굽습니다."
         }
       ],
-
       "rating": 4.2,
       "review_count": 43,
       "reviews": []
     },
-
     {
       "id": "panna_cotta",
       "title": "부드러운 판나코타",
@@ -1003,16 +1800,15 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "15분(냉장 2시간)",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "생크림", "amount": "250ml" },
         { "name": "우유", "amount": "100ml" },
         { "name": "설탕", "amount": "30g" },
         { "name": "젤라틴", "amount": "5g" }
       ],
-
-      "ingredients_optional": [{ "name": "바닐라 빈", "amount": "조금" }],
-
+      "ingredients_optional": [
+        { "name": "바닐라 빈", "amount": "조금" }
+      ],
       "steps": [
         {
           "title": "데우기",
@@ -1027,12 +1823,10 @@
           "desc": "틀에 담아 냉장 2시간 굳힙니다."
         }
       ],
-
       "rating": 4.1,
       "review_count": 35,
       "reviews": []
     },
-
     {
       "id": "creme_brulee",
       "title": "크림 브륄레",
@@ -1041,16 +1835,15 @@
       "difficulty": "중 (★★☆)",
       "time": "50분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "생크림", "amount": "250ml" },
         { "name": "계란 노른자", "amount": "3개" },
         { "name": "설탕", "amount": "40g" },
         { "name": "바닐라 익스트랙", "amount": "1티스푼" }
       ],
-
-      "ingredients_optional": [{ "name": "설탕 토치용", "amount": "2T" }],
-
+      "ingredients_optional": [
+        { "name": "설탕 토치용", "amount": "2T" }
+      ],
       "steps": [
         {
           "title": "커스터드 만들기",
@@ -1065,12 +1858,10 @@
           "desc": "설탕을 뿌리고 토치로 녹여 카라멜을 만듭니다."
         }
       ],
-
       "rating": 4.7,
       "review_count": 51,
       "reviews": []
     },
-
     {
       "id": "choco_chip_cookie",
       "title": "바삭 촉촉 초코칩 쿠키",
@@ -1079,7 +1870,6 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "20분",
       "thumbnail": "11_snack.jpg",
-
       "ingredients_required": [
         { "name": "버터", "amount": "100g" },
         { "name": "설탕", "amount": "80g" },
@@ -1087,11 +1877,9 @@
         { "name": "박력분", "amount": "150g" },
         { "name": "초코칩", "amount": "80g" }
       ],
-
       "ingredients_optional": [
         { "name": "바닐라 익스트랙", "amount": "1티스푼" }
       ],
-
       "steps": [
         {
           "title": "버터 풀기",
@@ -1106,12 +1894,10 @@
           "desc": "180°C에서 12~15분 굽습니다."
         }
       ],
-
       "rating": 4.8,
       "review_count": 198,
       "reviews": []
     },
-
 
     {
       "id": "grapefruit_ade",
@@ -1121,19 +1907,16 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "자몽", "amount": "1개" },
         { "name": "자몽 청(시럽)", "amount": "3T" },
         { "name": "탄산수", "amount": "200ml" },
         { "name": "얼음", "amount": "적당량" }
       ],
-
       "ingredients_optional": [
         { "name": "민트 잎", "amount": "약간" },
         { "name": "레몬 슬라이스", "amount": "1조각" }
       ],
-
       "steps": [
         {
           "title": "재료 준비",
@@ -1152,7 +1935,6 @@
           "desc": "탄산수를 붓고 자몽·민트로 장식합니다."
         }
       ],
-
       "rating": 4.7,
       "review_count": 524,
       "reviews": [
@@ -1176,7 +1958,6 @@
         }
       ]
     },
-
     {
       "id": "vanilla_latte",
       "title": "바닐라 라떼",
@@ -1185,18 +1966,15 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "에스프레소", "amount": "1샷" },
         { "name": "우유", "amount": "180ml" },
         { "name": "바닐라 시럽", "amount": "1~2T" }
       ],
-
       "ingredients_optional": [
         { "name": "얼음", "amount": "컵 가득" },
         { "name": "휘핑크림", "amount": "약간" }
       ],
-
       "steps": [
         {
           "title": "잔 준비",
@@ -1211,12 +1989,10 @@
           "desc": "얼음이나 휘핑크림을 올려 마무리합니다."
         }
       ],
-
       "rating": 4.8,
       "review_count": 0,
       "reviews": []
-    }
-    ,
+    },
     {
       "id": "strawberry_ade",
       "title": "딸기 에이드",
@@ -1225,30 +2001,25 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "딸기청", "amount": "3T" },
         { "name": "탄산수", "amount": "200ml" },
         { "name": "얼음", "amount": "가득" }
       ],
-
       "ingredients_optional": [
         { "name": "생딸기", "amount": "2~3개" },
         { "name": "레몬", "amount": "1조각" }
       ],
-
       "steps": [
         { "title": "잔 준비", "desc": "잔에 딸기청을 넣습니다." },
         { "title": "얼음 채우기", "desc": "잔 가득 얼음을 넣습니다." },
         { "title": "탄산수 붓기", "desc": "탄산수를 부어 잘 섞습니다." },
         { "title": "토핑", "desc": "생딸기·레몬을 올려 완성!" }
       ],
-
       "rating": 4.2,
       "review_count": 41,
       "reviews": []
     },
-
     {
       "id": "iced_americano",
       "title": "아이스 아메리카노",
@@ -1257,23 +2028,19 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "3분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "에스프레소", "amount": "1~2샷" },
         { "name": "물", "amount": "150~200ml" },
         { "name": "얼음", "amount": "가득" }
       ],
-
       "ingredients_optional": [
         { "name": "시럽", "amount": "1T(선택)" }
       ],
-
       "steps": [
         { "title": "잔 준비", "desc": "잔에 얼음을 가득 채웁니다." },
         { "title": "샷 넣기", "desc": "에스프레소 샷을 넣습니다." },
         { "title": "물 붓기", "desc": "차가운 물을 붓고 잘 섞습니다." }
       ],
-
       "rating": 4.6,
       "review_count": 112,
       "reviews": []
@@ -1286,23 +2053,25 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "에스프레소", "amount": "1샷" },
         { "name": "우유", "amount": "180ml" }
       ],
-
       "ingredients_optional": [
         { "name": "얼음", "amount": "컵 가득" },
         { "name": "시럽", "amount": "1T" }
       ],
-
       "steps": [
         { "title": "샷 준비", "desc": "에스프레소를 추출합니다." },
-        { "title": "우유 넣기", "desc": "따뜻하게 데운 우유 또는 차가운 우유를 부어 섞습니다." },
-        { "title": "선택", "desc": "원한다면 얼음·시럽을 추가합니다." }
+        {
+          "title": "우유 넣기",
+          "desc": "따뜻하게 데운 우유 또는 차가운 우유를 부어 섞습니다."
+        },
+        {
+          "title": "선택",
+          "desc": "원한다면 얼음·시럽을 추가합니다."
+        }
       ],
-
       "rating": 4.7,
       "review_count": 63,
       "reviews": []
@@ -1315,23 +2084,28 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "에스프레소", "amount": "1샷" },
         { "name": "우유", "amount": "150ml" }
       ],
-
       "ingredients_optional": [
         { "name": "시나몬 가루", "amount": "약간" }
       ],
-
       "steps": [
         { "title": "샷 준비", "desc": "에스프레소를 준비합니다." },
-        { "title": "스팀우유 만들기", "desc": "우유를 데우며 풍부한 우유 거품을 냅니다." },
-        { "title": "레이어 만들기", "desc": "샷 → 우유 → 폼 순으로 담습니다." },
-        { "title": "마무리", "desc": "시나몬 가루를 뿌려 완성." }
+        {
+          "title": "스팀우유 만들기",
+          "desc": "우유를 데우며 풍부한 우유 거품을 냅니다."
+        },
+        {
+          "title": "레이어 만들기",
+          "desc": "샷 → 우유 → 폼 순으로 담습니다."
+        },
+        {
+          "title": "마무리",
+          "desc": "시나몬 가루를 뿌려 완성."
+        }
       ],
-
       "rating": 4.4,
       "review_count": 52,
       "reviews": []
@@ -1344,24 +2118,29 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "레몬즙", "amount": "3T" },
         { "name": "설탕 시럽", "amount": "2T" },
         { "name": "물 또는 탄산수", "amount": "200ml" },
         { "name": "얼음", "amount": "가득" }
       ],
-
       "ingredients_optional": [
         { "name": "레몬 슬라이스", "amount": "1조각" }
       ],
-
       "steps": [
-        { "title": "액기스 넣기", "desc": "잔에 레몬즙과 시럽을 넣습니다." },
-        { "title": "얼음 채우기", "desc": "얼음을 듬뿍 넣습니다." },
-        { "title": "물/탄산 붓기", "desc": "물을 붓고 섞습니다." }
+        {
+          "title": "액기스 넣기",
+          "desc": "잔에 레몬즙과 시럽을 넣습니다."
+        },
+        {
+          "title": "얼음 채우기",
+          "desc": "얼음을 듬뿍 넣습니다."
+        },
+        {
+          "title": "물/탄산 붓기",
+          "desc": "물을 붓고 섞습니다."
+        }
       ],
-
       "rating": 4.3,
       "review_count": 48,
       "reviews": []
@@ -1374,23 +2153,28 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "냉동 망고", "amount": "1컵" },
         { "name": "우유 또는 요거트", "amount": "150ml" },
         { "name": "얼음", "amount": "1/2컵" }
       ],
-
       "ingredients_optional": [
         { "name": "꿀 또는 시럽", "amount": "1T" }
       ],
-
       "steps": [
-        { "title": "재료 넣기", "desc": "믹서기에 냉동 망고, 우유(또는 요거트), 얼음을 넣습니다." },
-        { "title": "갈기", "desc": "곱게 갈아 원하는 농도로 맞춥니다. 되면 우유를 조금 더 넣습니다." },
-        { "title": "마무리", "desc": "잔에 담고 취향에 따라 꿀 또는 시럽을 추가합니다." }
+        {
+          "title": "재료 넣기",
+          "desc": "믹서기에 냉동 망고, 우유(또는 요거트), 얼음을 넣습니다."
+        },
+        {
+          "title": "갈기",
+          "desc": "곱게 갈아 원하는 농도로 맞춥니다. 되면 우유를 조금 더 넣습니다."
+        },
+        {
+          "title": "마무리",
+          "desc": "잔에 담고 취향에 따라 꿀 또는 시럽을 추가합니다."
+        }
       ],
-
       "rating": 4.7,
       "review_count": 121,
       "reviews": []
@@ -1403,24 +2187,29 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "우유", "amount": "150ml" },
         { "name": "바닐라 아이스크림", "amount": "2스쿱" },
         { "name": "초코 시럽", "amount": "2T" }
       ],
-
       "ingredients_optional": [
         { "name": "휘핑크림", "amount": "약간" },
         { "name": "초코칩", "amount": "1T" }
       ],
-
       "steps": [
-        { "title": "재료 넣기", "desc": "믹서기에 우유, 아이스크림, 초코 시럽을 넣습니다." },
-        { "title": "갈기", "desc": "부드럽게 갈아 잔에 붓습니다." },
-        { "title": "토핑", "desc": "휘핑크림과 초코칩을 올려 카페 감성으로 마무리합니다." }
+        {
+          "title": "재료 넣기",
+          "desc": "믹서기에 우유, 아이스크림, 초코 시럽을 넣습니다."
+        },
+        {
+          "title": "갈기",
+          "desc": "부드럽게 갈아 잔에 붓습니다."
+        },
+        {
+          "title": "토핑",
+          "desc": "휘핑크림과 초코칩을 올려 카페 감성으로 마무리합니다."
+        }
       ],
-
       "rating": 4.5,
       "review_count": 98,
       "reviews": []
@@ -1433,26 +2222,34 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "20분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "홍차 티백", "amount": "1개" },
         { "name": "뜨거운 물", "amount": "100ml" },
         { "name": "우유", "amount": "150ml" },
         { "name": "타피오카 펄", "amount": "1/2컵(삶은 것)" }
       ],
-
       "ingredients_optional": [
         { "name": "설탕 또는 흑당 시럽", "amount": "1~2T" },
         { "name": "얼음", "amount": "가득" }
       ],
-
       "steps": [
-        { "title": "차 우리기", "desc": "홍차 티백을 뜨거운 물에 3~5분 우리고 식혀 둡니다." },
-        { "title": "펄 준비", "desc": "삶은 타피오카 펄을 컵 바닥에 넣습니다." },
-        { "title": "밀크티 만들기", "desc": "식힌 홍차에 우유와 시럽을 섞습니다." },
-        { "title": "완성", "desc": "얼음과 함께 컵에 붓고 잘 섞어 마십니다." }
+        {
+          "title": "차 우리기",
+          "desc": "홍차 티백을 뜨거운 물에 3~5분 우리고 식혀 둡니다."
+        },
+        {
+          "title": "펄 준비",
+          "desc": "삶은 타피오카 펄을 컵 바닥에 넣습니다."
+        },
+        {
+          "title": "밀크티 만들기",
+          "desc": "식힌 홍차에 우유와 시럽을 섞습니다."
+        },
+        {
+          "title": "완성",
+          "desc": "얼음과 함께 컵에 붓고 잘 섞어 마십니다."
+        }
       ],
-
       "rating": 4.6,
       "review_count": 140,
       "reviews": []
@@ -1465,24 +2262,29 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "5분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "라임 또는 레몬", "amount": "1/2개" },
         { "name": "설탕 또는 시럽", "amount": "1~2T" },
         { "name": "탄산수", "amount": "150~200ml" },
         { "name": "얼음", "amount": "가득" }
       ],
-
       "ingredients_optional": [
         { "name": "민트 잎", "amount": "몇 장" }
       ],
-
       "steps": [
-        { "title": "잔 준비", "desc": "잔에 라임 조각과 설탕(또는 시럽), 민트 잎을 넣고 으깨 향을 냅니다." },
-        { "title": "얼음 채우기", "desc": "잔에 얼음을 듬뿍 넣습니다." },
-        { "title": "탄산수 붓기", "desc": "탄산수를 붓고 가볍게 섞어 완성합니다." }
+        {
+          "title": "잔 준비",
+          "desc": "잔에 라임 조각과 설탕(또는 시럽), 민트 잎을 넣고 으깨 향을 냅니다."
+        },
+        {
+          "title": "얼음 채우기",
+          "desc": "잔에 얼음을 듬뿍 넣습니다."
+        },
+        {
+          "title": "탄산수 붓기",
+          "desc": "탄산수를 붓고 가볍게 섞어 완성합니다."
+        }
       ],
-
       "rating": 4.2,
       "review_count": 56,
       "reviews": []
@@ -1495,24 +2297,29 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "10분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "우유", "amount": "200ml" },
         { "name": "코코아 가루 또는 초코 파우더", "amount": "2T" },
         { "name": "설탕", "amount": "1~2T" }
       ],
-
       "ingredients_optional": [
         { "name": "휘핑크림", "amount": "약간" },
         { "name": "마시멜로", "amount": "몇 개" }
       ],
-
       "steps": [
-        { "title": "우유 데우기", "desc": "냄비나 전자레인지로 우유를 따뜻하게 데웁니다(끓이지는 않기)." },
-        { "title": "분말 섞기", "desc": "코코아 가루와 설탕을 넣고 잘 녹여 섞습니다." },
-        { "title": "마무리", "desc": "컵에 따라 담고 휘핑크림 또는 마시멜로를 올립니다." }
+        {
+          "title": "우유 데우기",
+          "desc": "냄비나 전자레인지로 우유를 따뜻하게 데웁니다(끓이지는 않기)."
+        },
+        {
+          "title": "분말 섞기",
+          "desc": "코코아 가루와 설탕을 넣고 잘 녹여 섞습니다."
+        },
+        {
+          "title": "마무리",
+          "desc": "컵에 따라 담고 휘핑크림 또는 마시멜로를 올립니다."
+        }
       ],
-
       "rating": 4.3,
       "review_count": 87,
       "reviews": []
@@ -1525,24 +2332,29 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "10분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "홍차 티백", "amount": "1개" },
         { "name": "뜨거운 물", "amount": "150ml" },
         { "name": "복숭아 시럽", "amount": "2~3T" },
         { "name": "얼음", "amount": "가득" }
       ],
-
       "ingredients_optional": [
         { "name": "복숭아 슬라이스", "amount": "몇 조각" }
       ],
-
       "steps": [
-        { "title": "티 우리기", "desc": "홍차 티백을 뜨거운 물에 3~5분 우려 진한 차를 만듭니다. 식혀 둡니다." },
-        { "title": "잔 준비", "desc": "잔에 복숭아 시럽과 얼음을 넣습니다." },
-        { "title": "섞기", "desc": "식힌 홍차를 부어 잘 섞고, 복숭아 슬라이스를 올려 완성합니다." }
+        {
+          "title": "티 우리기",
+          "desc": "홍차 티백을 뜨거운 물에 3~5분 우려 진한 차를 만듭니다. 식혀 둡니다."
+        },
+        {
+          "title": "잔 준비",
+          "desc": "잔에 복숭아 시럽과 얼음을 넣습니다."
+        },
+        {
+          "title": "섞기",
+          "desc": "식힌 홍차를 부어 잘 섞고, 복숭아 슬라이스를 올려 완성합니다."
+        }
       ],
-
       "rating": 4.2,
       "review_count": 74,
       "reviews": []
@@ -1555,31 +2367,33 @@
       "difficulty": "매우 쉬움 (☆☆☆)",
       "time": "7분",
       "thumbnail": "11_drink.png",
-
       "ingredients_required": [
         { "name": "히비스커스 티백", "amount": "1개" },
         { "name": "뜨거운 물", "amount": "200ml" }
       ],
-
       "ingredients_optional": [
         { "name": "꿀 또는 시럽", "amount": "1T" },
         { "name": "레몬 조각", "amount": "1조각" },
         { "name": "얼음", "amount": "적당량(아이스티용)" }
       ],
-
       "steps": [
-        { "title": "우려내기", "desc": "히비스커스 티백을 뜨거운 물에 5분 정도 우려 색과 향을 진하게 냅니다." },
-        { "title": "마무리(따뜻하게)", "desc": "티백을 건지고 꿀을 넣어 잘 섞습니다." },
-        { "title": "아이스 버전", "desc": "식힌 후 얼음 잔에 부어 아이스 히비스커스 티로 즐겨도 좋습니다." }
+        {
+          "title": "우려내기",
+          "desc": "히비스커스 티백을 뜨거운 물에 5분 정도 우려 색과 향을 진하게 냅니다."
+        },
+        {
+          "title": "마무리(따뜻하게)",
+          "desc": "티백을 건지고 꿀을 넣어 잘 섞습니다."
+        },
+        {
+          "title": "아이스 버전",
+          "desc": "식힌 후 얼음 잔에 부어 아이스 히비스커스 티로 즐겨도 좋습니다."
+        }
       ],
-
       "rating": 4.4,
       "review_count": 65,
       "reviews": []
     },
-
-
-
 
     {
       "id": "kimchi_fried_rice",
@@ -1589,7 +2403,6 @@
       "difficulty": "쉬움 (★☆☆)",
       "time": "20분",
       "thumbnail": "11_kimchi.jpg",
-
       "ingredients_required": [
         { "name": "밥", "amount": "1공기" },
         { "name": "잘 익은 김치", "amount": "1/4포기" },
@@ -1597,14 +2410,12 @@
         { "name": "양파", "amount": "1/4개" },
         { "name": "버터/식용유", "amount": "약간" }
       ],
-
       "ingredients_optional": [
         { "name": "고춧가루", "amount": "1/2 스푼" },
         { "name": "간장/굴소스", "amount": "1 스푼" },
         { "name": "참기름", "amount": "약간" },
         { "name": "설탕", "amount": "1/2 스푼" }
       ],
-
       "steps": [
         {
           "title": "재료 준비",
@@ -1623,7 +2434,6 @@
           "desc": "밥을 넣어 골고루 볶고, 불을 끈 후 참기름을 둘러 마무리합니다. 계란후라이를 올려 완성!"
         }
       ],
-
       "rating": 4.5,
       "review_count": 220,
       "reviews": [
@@ -1641,7 +2451,6 @@
         }
       ]
     },
-
     {
       "id": "carbonara",
       "title": "정통 까르보나라",
@@ -1650,19 +2459,16 @@
       "difficulty": "중 (★★☆)",
       "time": "25분",
       "thumbnail": "11_pasta.jpg",
-
       "ingredients_required": [
         { "name": "스파게티 면", "amount": "100g" },
         { "name": "관찰레(또는 베이컨)", "amount": "50g" },
         { "name": "계란 노른자", "amount": "2개" },
         { "name": "페코리노 로마노 치즈", "amount": "30g" }
       ],
-
       "ingredients_optional": [
         { "name": "후추", "amount": "듬뿍" },
         { "name": "면수", "amount": "약간" }
       ],
-
       "steps": [
         {
           "title": "재료 준비",
@@ -1681,7 +2487,6 @@
           "desc": "접시에 담고 후추를 듬뿍 갈아 넣으면 정통 까르보나라 완성!"
         }
       ],
-
       "rating": 4.9,
       "review_count": 188,
       "reviews": [
@@ -1701,6 +2506,3 @@
     }
   ]
 }
-
-
-
