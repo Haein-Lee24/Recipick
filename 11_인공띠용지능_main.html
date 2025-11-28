@@ -32,7 +32,7 @@
       }
 
       .hero-subtitle {
-        color: #916B46;
+        color: #916b46;
         font-weight: 700;
         font-size: 1rem;
         margin-bottom: 8px;
@@ -41,12 +41,12 @@
       .hero-title-new {
         font-size: 2.8rem;
         font-weight: 800;
-        color: #916B46;
+        color: #916b46;
         margin-bottom: 20px;
       }
 
       .brand-line {
-        color: #916B46;
+        color: #916b46;
       }
 
       .hero-description {
@@ -70,22 +70,22 @@
       }
 
       .hero-btn-primary {
-        background: #916B46;
+        background: #916b46;
         color: #fff;
       }
 
       .hero-btn-primary:hover {
-        background: #a48c58;
+        background: #ac8d6f;
       }
 
       .hero-btn-secondary {
         background: #f6e8c9;
-        color: #916B46;
+        color: #916b46;
         border: 1.5px solid #e2c97a;
       }
 
       .hero-btn-secondary:hover {
-        background: #e2c97a;
+        background: #dccd9c;
       }
 
       .hero-visual {
@@ -137,17 +137,25 @@
             />
             <button class="nav-search-btn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/>
-                <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2"/>
+                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
+                <line
+                  x1="16.5"
+                  y1="16.5"
+                  x2="21"
+                  y2="21"
+                  stroke="white"
+                  stroke-width="2"
+                />
               </svg>
             </button>
-
           </div>
         </div>
       </div>
       <div class="nav-menu-bar">
         <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
-        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean"
+          >레시피</a
+        >
         <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
         <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
         <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
@@ -180,7 +188,12 @@
             </div>
           </div>
           <div class="hero-visual">
-            <img id="hero-carousel" src="11_banner.jpg" alt="요리 이미지" class="hero-visual-img" />
+            <img
+              id="hero-carousel"
+              src="11_banner.jpg"
+              alt="요리 이미지"
+              class="hero-visual-img"
+            />
           </div>
         </div>
       </section>
@@ -239,7 +252,7 @@
         ...recipeData.chinese,
         ...recipeData.western,
         ...recipeData.dessert,
-        ...recipeData.drink
+        ...recipeData.drink,
       ];
 
       function getRandomRecipes(list, count) {
@@ -247,32 +260,35 @@
       }
 
       function renderRandomRecipes() {
-        const target = document.getElementById("recommend-list");
+        const target = document.getElementById('recommend-list');
         const selected = getRandomRecipes(allRecipes, 4);
 
-        target.innerHTML = selected.map(r => `
+        target.innerHTML = selected
+          .map(
+            (r) => `
           <a href="${r.link}" class="card">
             <img src="${r.img}" class="thumb" alt="${r.title}">
             <p class="card-title">${r.title}</p>
             <div class="rating">${r.rating}</div>
           </a>
-        `).join("");
+        `
+          )
+          .join('');
       }
 
       renderRandomRecipes();
     </script>
-
   </body>
 
   <script>
     const carouselImages = [
-      "11_banner.jpg",
-      "11_banner2.jpg",
-      "11_banner3.jpg",
-      "11_banner4.jpg",
+      '11_banner.jpg',
+      '11_banner2.jpg',
+      '11_banner3.jpg',
+      '11_banner4.jpg',
     ];
     let currentIndex = 0;
-    const carouselImg = document.getElementById("hero-carousel");
+    const carouselImg = document.getElementById('hero-carousel');
 
     function changeCarousel() {
       currentIndex = (currentIndex + 1) % carouselImages.length;

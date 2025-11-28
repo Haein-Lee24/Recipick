@@ -42,66 +42,65 @@
 
     </style>
   </head>
+  <body>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 1. 저장된 데이터 불러오기
+        const savedNickname = localStorage.getItem("nn_nickname");
+        const savedUsername = localStorage.getItem("nn_username");
+        const savedBio = localStorage.getItem("nn_bio");
+        const savedProfileImg = localStorage.getItem("nn_profile_img");
+        const savedBgImg = localStorage.getItem("nn_bg_img");
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // 1. 저장된 데이터 불러오기
-      const savedNickname = localStorage.getItem("nn_nickname");
-      const savedUsername = localStorage.getItem("nn_username");
-      const savedBio = localStorage.getItem("nn_bio");
-      const savedProfileImg = localStorage.getItem("nn_profile_img");
-      const savedBgImg = localStorage.getItem("nn_bg_img");
+        // 2. 데이터가 있다면 화면에 반영하기
+        if (savedNickname) {
+          document.querySelector(".profile-name").textContent = savedNickname;
+        }
+        if (savedUsername) {
+          document.querySelector(".profile-id").textContent = savedUsername;
+        }
+        if (savedBio) {
+          document.querySelector(".profile-bio").textContent = savedBio;
+        }
+        if (savedProfileImg) {
+          // 이미지 태그 찾아서 src 변경
+          document.querySelector('.profile-box img').src = savedProfileImg;
+        }
+        if (savedBgImg) {
+          // 배경 div 찾아서 style 변경
+          document.querySelector('.profile-cover').style.backgroundImage = `url('${savedBgImg}')`;
+        }
 
-      // 2. 데이터가 있다면 화면에 반영하기
-      if (savedNickname) {
-        document.querySelector(".profile-name").textContent = savedNickname;
-      }
-      if (savedUsername) {
-        document.querySelector(".profile-id").textContent = savedUsername;
-      }
-      if (savedBio) {
-        document.querySelector(".profile-bio").textContent = savedBio;
-      }
-      if (savedProfileImg) {
-        // 이미지 태그 찾아서 src 변경
-        document.querySelector('.profile-box img').src = savedProfileImg;
-      }
-      if (savedBgImg) {
-        // 배경 div 찾아서 style 변경
-        document.querySelector('.profile-cover').style.backgroundImage = `url('${savedBgImg}')`;
-      }
-
-      // 3. 로그아웃 버튼 기능
-      const logoutBtn = document.querySelector('a[href="#logout"]');
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          const confirmLogout = confirm("정말 로그아웃 하시겠습니까?");
-          if (confirmLogout) {
-            alert("로그아웃 되었습니다.");
-            // 실제로는 세션을 지우겠지만, 여기선 메인으로 이동시킵니다.
-            window.location.href = "11_인공띠용지능_main.html";
-          }
-        });
-      }
-    });
-</script>
+        // 3. 로그아웃 버튼 기능
+        const logoutBtn = document.querySelector('a[href="#logout"]');
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const confirmLogout = confirm("정말 로그아웃 하시겠습니까?");
+            if (confirmLogout) {
+              alert("로그아웃 되었습니다.");
+              // 실제로는 세션을 지우겠지만, 여기선 메인으로 이동시킵니다.
+              window.location.href = "11_인공띠용지능_main.html";
+            }
+          });
+        }
+      });
+  </script>
     <nav class="site-nav">
       <div class="container nav-inner">
         <div class="logo-area">
           <a href="11_인공띠용지능_main.html">
-            <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
           </a>
         </div>
-        <div class="menu" role="navigation">
-          <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
-          <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-          <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
-          <a class="active nav-link" href="11_인공띠용지능_mypage.html"
-            >마이페이지</a
-          >
-        </div>
+
+        <nav class="menu">
+          <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
+          <a href="11_인공띠용지능_menulist.html" class="nav-link">레시피</a>
+          <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
+          <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="nav-link active">마이페이지</a>
+        </nav>
       </div>
     </nav>
 

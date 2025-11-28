@@ -659,10 +659,10 @@ footer {
   height: 44px;
   padding: 0 16px;
   box-sizing: border-box;
-  background: #fff7d6;
-  color: #7c5a00;
-  border: 1px solid #f3e5ab;
-  transition: background-color 0.2s;
+  background: #f6e8c9;
+  color: var(--yellow-deep);
+  border: 1px solid #e5d4a5;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .btn-solid {
@@ -689,7 +689,8 @@ footer {
 }
 
 .btn-warn:hover {
-  background: #fff1bf;
+  color: #fff;
+  background: var(--yellow-deep);
 }
 
 .badge {
