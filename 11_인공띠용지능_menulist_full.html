@@ -174,9 +174,11 @@
             .join("");
 
           // 6) 유저 레시피 카드 HTML
+// 6) 유저 레시피 카드 HTML
           const userCardsHTML = userRecipes
             .map((u) => {
-              const href = "#"; // 나중에 상세페이지 만들면 수정
+              // 🔥 여기! 이제 상세 페이지로 이동하도록 수정
+              const href = `11_인공띠용지능_recipe.html?id=${u.id}`;
               const thumb = u.image || getDefaultImage(u.category);
               const meta = `작성자: 사용자 · 조회수 ${u.views || 0}`;
               const ratingValue =
@@ -185,6 +187,7 @@
               return makeCardHTML(u.title, thumb, meta, rating, href);
             })
             .join("");
+
 
           // 7) JSON → 유저 순으로 카드 출력
           listEl.innerHTML = jsonCardsHTML + userCardsHTML;
