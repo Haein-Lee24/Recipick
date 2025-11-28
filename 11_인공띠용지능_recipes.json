@@ -863,6 +863,47 @@
     },
 
     {
+      "id": "vanilla_latte",
+      "title": "바닐라 라떼",
+      "summary": "달콤한 바닐라 시럽이 들어간 부드러운 라떼.",
+      "category": "음료",
+      "difficulty": "매우 쉬움 (☆☆☆)",
+      "time": "5분",
+      "thumbnail": "11_drink.png",
+
+      "ingredients_required": [
+        { "name": "에스프레소", "amount": "1샷" },
+        { "name": "우유", "amount": "180ml" },
+        { "name": "바닐라 시럽", "amount": "1~2T" }
+      ],
+
+      "ingredients_optional": [
+        { "name": "얼음", "amount": "컵 가득" },
+        { "name": "휘핑크림", "amount": "약간" }
+      ],
+
+      "steps": [
+        {
+          "title": "잔 준비",
+          "desc": "잔에 바닐라 시럽을 넣습니다."
+        },
+        {
+          "title": "에스프레소 & 우유",
+          "desc": "에스프레소를 넣고 따뜻한 우유 또는 차가운 우유를 부어 섞습니다."
+        },
+        {
+          "title": "마무리",
+          "desc": "얼음이나 휘핑크림을 올려 마무리합니다."
+        }
+      ],
+
+      "rating": 4.8,
+      "review_count": 0,
+      "reviews": []
+    }
+    ,
+
+    {
       "id": "kimchi_fried_rice",
       "title": "김치볶음밥",
       "summary": "맛있는 계란후라이와 함께 즐기는 국민 한 그릇 요리!",

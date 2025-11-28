@@ -31,49 +31,48 @@
     </style>
   </head>
 
-  <>
-    <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // 1. 저장된 데이터 불러오기
-    const savedNickname = localStorage.getItem("nn_nickname");
-    const savedUsername = localStorage.getItem("nn_username");
-    const savedBio = localStorage.getItem("nn_bio");
-    const savedProfileImg = localStorage.getItem("nn_profile_img");
-    const savedBgImg = localStorage.getItem("nn_bg_img");
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 1. 저장된 데이터 불러오기
+      const savedNickname = localStorage.getItem("nn_nickname");
+      const savedUsername = localStorage.getItem("nn_username");
+      const savedBio = localStorage.getItem("nn_bio");
+      const savedProfileImg = localStorage.getItem("nn_profile_img");
+      const savedBgImg = localStorage.getItem("nn_bg_img");
 
-    // 2. 데이터가 있다면 화면에 반영하기
-    if (savedNickname) {
-      document.querySelector(".profile-name").textContent = savedNickname;
-    }
-    if (savedUsername) {
-      document.querySelector(".profile-id").textContent = savedUsername;
-    }
-    if (savedBio) {
-      document.querySelector(".profile-bio").textContent = savedBio;
-    }
-    if (savedProfileImg) {
-      // 이미지 태그 찾아서 src 변경
-      document.querySelector('.profile-box img').src = savedProfileImg;
-    }
-    if (savedBgImg) {
-      // 배경 div 찾아서 style 변경
-      document.querySelector('.profile-cover').style.backgroundImage = `url('${savedBgImg}')`;
-    }
+      // 2. 데이터가 있다면 화면에 반영하기
+      if (savedNickname) {
+        document.querySelector(".profile-name").textContent = savedNickname;
+      }
+      if (savedUsername) {
+        document.querySelector(".profile-id").textContent = savedUsername;
+      }
+      if (savedBio) {
+        document.querySelector(".profile-bio").textContent = savedBio;
+      }
+      if (savedProfileImg) {
+        // 이미지 태그 찾아서 src 변경
+        document.querySelector('.profile-box img').src = savedProfileImg;
+      }
+      if (savedBgImg) {
+        // 배경 div 찾아서 style 변경
+        document.querySelector('.profile-cover').style.backgroundImage = `url('${savedBgImg}')`;
+      }
 
-    // 3. 로그아웃 버튼 기능
-    const logoutBtn = document.querySelector('a[href="#logout"]');
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        const confirmLogout = confirm("정말 로그아웃 하시겠습니까?");
-        if (confirmLogout) {
-          alert("로그아웃 되었습니다.");
-          // 실제로는 세션을 지우겠지만, 여기선 메인으로 이동시킵니다.
-          window.location.href = "11_인공띠용지능_main.html";
-        }
-      });
-    }
-  });
+      // 3. 로그아웃 버튼 기능
+      const logoutBtn = document.querySelector('a[href="#logout"]');
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const confirmLogout = confirm("정말 로그아웃 하시겠습니까?");
+          if (confirmLogout) {
+            alert("로그아웃 되었습니다.");
+            // 실제로는 세션을 지우겠지만, 여기선 메인으로 이동시킵니다.
+            window.location.href = "11_인공띠용지능_main.html";
+          }
+        });
+      }
+    });
 </script>
     <nav class="site-nav">
       <div class="container nav-inner">
@@ -138,31 +137,7 @@
             <h3 class="card-title-lg">저장한 레시피</h3>
             <a href="#" class="badge">더보기</a>
           </div>
-          <ul class="list-v">
-            <li>
-              <a href="11_인공띠용지능_detail_k.html" class="list-item">
-                <div class="list-text">
-                  <p class="list-ttl">김치찌개</p>
-                  <p class="list-sub">한식 · 집밥여왕 · 10.5K</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="11_인공띠용지능_detail_w.html" class="list-item">
-                <div class="list-text">
-                  <p class="list-ttl">마르게리타 피자</p>
-                  <p class="list-sub">양식 · 화덕의정석 · 14.0K</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="11_인공띠용지능_detail_c.html" class="list-item">
-                <div class="list-text">
-                  <p class="list-ttl">마라탕</p>
-                  <p class="list-sub">중식 · 얼얼이 · 78.5K</p>
-                </div>
-              </a>
-            </li>
+          <ul class="list-v" id="saved-list">
           </ul>
         </div>
 
@@ -171,31 +146,7 @@
             <h3 class="card-title-lg">최근 본 레시피</h3>
             <a href="#" class="badge">더보기</a>
           </div>
-          <ul class="list-v">
-            <li>
-              <a href="11_인공띠용지능_detail_k.html" class="list-item">
-                <div class="list-text">
-                  <p class="list-ttl">비빔밥</p>
-                  <p class="list-sub">한식 · 12분 전</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="11_인공띠용지능_detail_k.html" class="list-item">
-                <div class="list-text">
-                  <p class="list-ttl">떡볶이</p>
-                  <p class="list-sub">한식 · 1시간 전</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="11_인공띠용지능_detail_w.html" class="list-item">
-                <div class="list-text">
-                  <p class="list-ttl">볼로네제 파스타</p>
-                  <p class="list-sub">양식 · 어제</p>
-                </div>
-              </a>
-            </li>
+          <ul class="list-v" id="recent-list">
           </ul>
         </div>
       </section>
@@ -254,7 +205,50 @@
         if (userName) {
           localStorage.setItem('nn_username', userName);
         }
+
+        // 기존 document.addEventListener("DOMContentLoaded", function () { ...  안에 추가하세요
+
+    // --- [추가된 기능] 저장한 레시피 불러오기 ---
+        const savedListContainer = document.getElementById("saved-list");
+        const savedRecipes = JSON.parse(localStorage.getItem("nn_saved_recipes")) || [];
+
+        if (savedRecipes.length === 0) {
+            // 저장된 게 없을 때 표시
+            savedListContainer.innerHTML = '<li style="padding:20px; text-align:center; color:#999;">저장된 레시피가 없습니다.</li>';
+        } 
+        else {
+            // 저장된 목록 루프 돌면서 HTML 생성
+            savedListContainer.innerHTML = savedRecipes.map(recipe => `
+                <li>
+                  <a href="${recipe.link}" class="list-item">
+                  <div class="list-text">
+                    <p class="list-ttl">${recipe.title}</p>
+                    <p class="list-sub">${recipe.subInfo}</p>
+                  </div>
+                </a>
+              </li>
+          `).join('');
+        }
       });
+
+      const recentListContainer = document.getElementById("recent-list");
+      const recentRecipes = JSON.parse(localStorage.getItem("nn_recent_recipes")) || [];
+
+      if (recentRecipes.length === 0) {
+        recentListContainer.innerHTML = '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
+      } 
+      else {
+        recentListContainer.innerHTML = recentRecipes.map(recipe => `
+            <li>
+              <a href="${recipe.link}" class="list-item">
+                <div class="list-text">
+                  <p class="list-ttl">${recipe.title}</p>
+                  <p class="list-sub">${recipe.info}</p>
+                </div>
+              </a>
+            </li>
+        `).join('');
+    }
     </script>
   </body>
 </html>

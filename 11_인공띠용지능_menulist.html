@@ -4,91 +4,164 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>냠냠노트 - 레시피 목록</title>
+
+    <!-- 공통 스타일 -->
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+
     <style>
+      /* body 기본 여백 제거 */
       body {
-        padding-top: 28px !important;
-      }
-      main.container {
-        display: block !important;
-        margin-top: 100px;
-      }
-      section {
-        scroll-margin-top: 140px;
-        margin-bottom: 80px;
+        padding-top: 0 !important;
+        margin: 0;
       }
 
-      .category-tabs {
-        background: var(--card-bg);
-        border-bottom: 1px solid var(--border);
-        padding: 12px 0;
-        position: fixed;
+      /* ===============================
+          ⭐ 네비게이션 바 (통일된 버전)
+         =============================== */
+      .site-nav {
+        position: sticky;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 64px;
+        background: #f7f0dc;
+        border-bottom: 1px solid var(--border);
+        z-index: 1000;
+      }
+
+      .nav-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+        max-width: 1080px;
+        padding: 0 20px;
+        margin: 0 auto;
+      }
+
+      .logo-area img {
+        height: 50px;
+      }
+
+      .menu {
+        display: flex;
+        gap: 20px;
+      }
+
+      .menu a {
+        font-weight: 700;
+        color: #444;
+        text-decoration: none;
+      }
+
+      .menu a.active {
+        color: var(--primary-color);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      /* ===============================
+          ⭐ 카테고리 탭
+         =============================== */
+      .category-tabs {
+        position: fixed;
+        top: 64px; /* 네비바 바로 아래 */
+        left: 0;
+        width: 100%;
+        height: 68px; /* 🔥 높이 키움 */
+        background: #ffffff;
+        border-bottom: 1px solid var(--border);
+        z-index: 999;
         display: flex;
         justify-content: center;
-        top: 64px;
-        z-index: 150;
+        align-items: center;
       }
+
       .tabs-inner {
         display: flex;
-        gap: 24px;
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 32px; /* 간격 넓힘 */
       }
+
       .tab-link {
-        font-weight: 700;
+        display: inline-block;
+        font-weight: 800;
         color: var(--muted);
+        font-size: 16px;
         padding: 8px 4px;
         text-decoration: none;
       }
+
       .tab-link:hover {
         color: var(--primary-color);
       }
-      main {
-        margin-top: 120px; /* nav + tabs 높이만큼 내리기 */
+
+      /* ===============================
+          ⭐ 본문 상단 여백 조정
+         =============================== */
+      main.container {
+        margin-top: 140px !important; /* 🔥 기존 160 → 140 */
+        max-width: 1080px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 20px;
       }
 
+      section {
+        scroll-margin-top: 130px; /* 🔥 기존 140 → 130 */
+        margin-bottom: 80px;
+      }
+
+      /* 전체보기 버튼 조정 */
       .view-all-btn-wrap {
         text-align: center;
         margin-top: 20px;
       }
+
       .view-all-btn {
         display: inline-block;
-        padding: 10px 20px;
-        background: #eee;
-        border-radius: 20px;
-        color: #333;
-        text-decoration: none;
+        padding: 12px 24px;
+        background: var(--primary-color);
+        color: #fff;
+        border-radius: 999px;
         font-size: 14px;
+        font-weight: 700;
       }
+
       .view-all-btn:hover {
-        background: #ddd;
+        background: #a48c58;
       }
     </style>
   </head>
 
   <body>
+    <!-- =============================== -->
+    <!--            네비바               -->
+    <!-- =============================== -->
     <nav class="site-nav">
-      <div class="container nav-inner">
+      <div class="nav-inner">
         <div class="logo-area">
           <a href="11_인공띠용지능_main.html">
-            <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
+            <img src="11_logo.png" alt="냠냠노트 로고" />
           </a>
         </div>
+
         <div class="menu">
-          <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-          <a class="active nav-link" href="11_인공띠용지능_menulist.html"
+          <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
+          <a href="11_인공띠용지능_menulist.html" class="nav-link active"
             >레시피</a
           >
-          <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-          <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
-          <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+          <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
+          <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
         </div>
       </div>
     </nav>
 
+    <!-- =============================== -->
+    <!--         카테고리 탭              -->
+    <!-- =============================== -->
     <header class="category-tabs">
-      <div class="container tabs-inner">
+      <div class="tabs-inner">
         <a href="#korean" class="tab-link">한식</a>
         <a href="#western" class="tab-link">양식</a>
         <a href="#chinese" class="tab-link">중식</a>
@@ -97,6 +170,9 @@
       </div>
     </header>
 
+    <!-- =============================== -->
+    <!--        본문(레시피 섹션)         -->
+    <!-- =============================== -->
     <main class="container page-pad">
       <section id="korean"></section>
       <section id="western"></section>
@@ -105,10 +181,13 @@
       <section id="drink"></section>
     </main>
 
+    <!-- 맨 위로 -->
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
+    <!-- =============================== -->
+    <!--         JS: 레시피 렌더링        -->
+    <!-- =============================== -->
     <script>
-      // 1. 카테고리 정의 (순서대로 화면에 나옴)
       const categories = [
         { id: 'korean', name: '한식' },
         { id: 'western', name: '양식' },
@@ -117,11 +196,10 @@
         { id: 'drink', name: '음료' },
       ];
 
-      fetch('recipes.json')
+      fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
           const allRecipes = data.recipes;
-
           categories.forEach((cat) => {
             renderSection(cat.id, cat.name, allRecipes);
           });
@@ -130,28 +208,25 @@
 
       function renderSection(catId, catName, recipes) {
         const container = document.getElementById(catId);
-
-        // 2. 해당 카테고리만 필터링
-        // (JSON에서 '마약 옥수수'를 '한식'으로 수정했다면 자동으로 한식에 들어갑니다!)
         const filtered = recipes.filter((r) => r.category === catName);
 
-        // 만약 해당 카테고리에 데이터가 하나도 없으면 섹션을 숨김
         if (filtered.length === 0) {
           container.style.display = 'none';
           return;
         }
 
-        // 3. 4개만 자르기 (미리보기)
         const previewList = filtered.slice(0, 4);
 
         let html = `
-          <h2 class="section-title">${catName} 레시피<span> (총 ${filtered.length}개)</span></h2>
+          <h2 class="section-title" style="margin-top:0;">
+            ${catName} 레시피 <span>(총 ${filtered.length}개)</span>
+          </h2>
           <div class="card-grid">
         `;
 
         previewList.forEach((r) => {
           html += `
-            <a href="recipe.html?id=${r.id}" class="card">
+            <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
               <img src="${r.thumbnail}" alt="${r.title}" class="thumb" />
               <div class="card-body">
                 <p class="card-title">${r.title}</p>
