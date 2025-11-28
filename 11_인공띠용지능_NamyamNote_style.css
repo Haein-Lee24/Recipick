@@ -1,7 +1,7 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 
 :root {
-  --primary-color: #916B46;
+  --primary-color: #916b46;
   --yellow-soft: #f6e8c9;
   --yellow-deep: #6f5a2c;
   --green-soft: #e5f0e9;
@@ -84,7 +84,7 @@ a {
 /* 로고 */
 .logo-img,
 .logo {
-  height: 50px;
+  height: 56px;
   width: auto;
   border-radius: 8px;
   display: block;
