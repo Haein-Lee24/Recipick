@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>레시피 검색 결과</title>
+  <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
+
+  <style>
+    .search-title { 
+      font-size: 1.8rem; 
+      font-weight: 700; 
+      margin-top: 40px; 
+    }
+    .card-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+      gap: 20px; 
+      margin-top: 30px; 
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-decoration: none;
+      color: #333;
+      transition: transform .15s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .card img { 
+      width: 100%; 
+      border-radius: 12px; 
+    }
+    .card-title { 
+      font-weight: 700; 
+      margin-top: 10px; 
+      font-size: 1.1rem;
+    }
+    .no-result { 
+      margin-top: 40px; 
+      font-size: 1.2rem; 
+      color: #777; 
+    }
+  </style>
+</head>
+
+<body class="container">
+
+  <h1 class="search-title">검색 결과</h1>
+
+  <div id="search-result" class="card-grid"></div>
+
+  <script>
+    // URL에서 검색어 추출
+    const params = new URLSearchParams(window.location.search);
+    const keyword = params.get("keyword")?.trim() ?? "";
+
+    const resultBox = document.getElementById("search-result");
+
+    // 🔥 JSON 불러오기
+    fetch("11_인공띠용지능_recipes.json")
+      .then(res => res.json())
+      .then(data => {
+        // JSON 구조: { "recipes": [...] }
+        const recipes = data.recipes;
+
+        const found = filterRecipes(recipes, keyword);
+
+        if (found.length === 0) {
+          resultBox.innerHTML = `<p class="no-result">"${keyword}" 검색 결과가 없습니다.</p>`;
+        } else {
+          resultBox.innerHTML = found.map(r => `
+            <a href="${r.id}.html" class="card">
+              <img src="${r.thumbnail}" alt="${r.title}">
+              <p class="card-title">${r.title}</p>
+              <div class="rating">⭐ ${r.rating}</div>
+            </a>
+          `).join("");
+        }
+      })
+      .catch(err => {
+        console.error("JSON 불러오기 오류:", err);
+        resultBox.innerHTML = `<p class="no-result">레시피 데이터를 불러올 수 없습니다.</p>`;
+      });
+
+    // 🔍 검색 함수
+    function filterRecipes(recipes, keyword) {
+      const lower = keyword.toLowerCase();
+
+      return recipes.filter(recipe => {
+        return (
+          recipe.title.toLowerCase().includes(lower) ||
+          recipe.category.toLowerCase().includes(lower) ||
+          recipe.ingredients_required.some(i => i.name.toLowerCase().includes(lower))
+        );
+      });
+    }
+  </script>
+
+</body>
+</html>

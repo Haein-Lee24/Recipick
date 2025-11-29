@@ -300,5 +300,26 @@
 
     setInterval(changeCarousel, 3000);
   </script>
+
+  <script>
+  const searchInput = document.querySelector(".nav-search-input");
+  const searchBtn = document.querySelector(".nav-search-btn");
+
+  searchBtn.addEventListener("click", () => {
+    const keyword = searchInput.value.trim();
+    if (!keyword) return alert("검색어를 입력해주세요!");
+
+    window.location.href = `11_인공띠용지능_search.html?keyword=${encodeURIComponent(keyword)}`;
+  });
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      searchBtn.click();
+    }
+  });
+</script>
+
+
+
   </body>
 </html>
