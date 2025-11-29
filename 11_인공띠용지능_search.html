@@ -72,7 +72,8 @@
           resultBox.innerHTML = `<p class="no-result">"${keyword}" 검색 결과가 없습니다.</p>`;
         } else {
           resultBox.innerHTML = found.map(r => `
-            <a href="${r.id}.html" class="card">
+            <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
+
               <img src="${r.thumbnail}" alt="${r.title}">
               <p class="card-title">${r.title}</p>
               <div class="rating">⭐ ${r.rating}</div>
