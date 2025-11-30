@@ -84,6 +84,8 @@
             }
           });
         }
+
+        
       });
   </script>
     <nav class="site-nav">
@@ -173,30 +175,8 @@
           </div>
         </div>
 
-        <div class="card-grid my-recipes">
-          <a href="11_인공띠용지능_detail_w.html" class="card">
-            <img src="11_pasta.jpg" alt="정통 까르보나라" class="thumb" />
-            <div>
-              <p class="card-title">정통 까르보나라</p>
-              <p class="card-sub">양식 · 파스타장인 · 조회수 12.3K</p>
-            </div>
-          </a>
-
-          <a href="11_인공띠용지능_detail_k.html" class="card">
-            <img src="11_kimchi.jpg" alt="김치볶음밥" class="thumb" />
-            <div>
-              <p class="card-title">김치볶음밥</p>
-              <p class="card-sub">한식 · 한그릇 · 조회수 22.0K</p>
-            </div>
-          </a>
-
-          <a href="11_인공띠용지능_detail_d.html" class="card">
-            <img src="11_snack.jpg" alt="블론디" class="thumb" />
-            <div>
-              <p class="card-title">블론디</p>
-              <p class="card-sub">디저트 · 베이킹러버 · 조회수 5.2K</p>
-            </div>
-          </a>
+        <div class="card-grid my-recipes" id="my-recipes-grid">
+          <!-- JS로 내 레시피 카드가 채워집니다 -->
         </div>
       </section>
 
@@ -209,57 +189,111 @@
       <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
     </main>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const userName = document
-          .querySelector('.profile-name')
-          ?.textContent.trim();
+      document.addEventListener("DOMContentLoaded", function () {
+        // 1) 프로필 이름 → 로컬스토리지 저장
+        const userNameEl = document.querySelector(".profile-name");
+        const userName = userNameEl ? userNameEl.textContent.trim() : "";
         if (userName) {
-          localStorage.setItem('nn_username', userName);
+          localStorage.setItem("nn_username", userName);
         }
 
-        // 기존 document.addEventListener("DOMContentLoaded", function () { ...  안에 추가하세요
-
-    // --- [추가된 기능] 저장한 레시피 불러오기 ---
+        // 2) 저장한 레시피 리스트 (왼쪽 "저장한 레시피")
         const savedListContainer = document.getElementById("saved-list");
-        const savedRecipes = JSON.parse(localStorage.getItem("nn_saved_recipes")) || [];
+        const savedRecipes =
+          JSON.parse(localStorage.getItem("nn_saved_recipes")) || [];
 
-        if (savedRecipes.length === 0) {
-            // 저장된 게 없을 때 표시
-            savedListContainer.innerHTML = '<li style="padding:20px; text-align:center; color:#999;">저장된 레시피가 없습니다.</li>';
-        } 
-        else {
-            // 저장된 목록 루프 돌면서 HTML 생성
-            savedListContainer.innerHTML = savedRecipes.map(recipe => `
+        if (savedListContainer) {
+          if (savedRecipes.length === 0) {
+            savedListContainer.innerHTML =
+              '<li style="padding:20px; text-align:center; color:#999;">저장된 레시피가 없습니다.</li>';
+          } else {
+            savedListContainer.innerHTML = savedRecipes
+              .map(
+                (recipe) => `
                 <li>
                   <a href="${recipe.link}" class="list-item">
-                  <div class="list-text">
-                    <p class="list-ttl">${recipe.title}</p>
-                    <p class="list-sub">${recipe.subInfo}</p>
-                  </div>
-                </a>
-              </li>
-          `).join('');
+                    <div class="list-text">
+                      <p class="list-ttl">${recipe.title}</p>
+                      <p class="list-sub">${recipe.subInfo || ""}</p>
+                    </div>
+                  </a>
+                </li>
+              `
+              )
+              .join("");
+          }
+        }
+
+        // 3) 상단 프로필 카드 - "내 레시피" 개수 업데이트
+        const myRecipes =
+          JSON.parse(localStorage.getItem("nn_recipes")) || [];
+        const followNums = document.querySelectorAll(".follow-num");
+        if (followNums.length > 0) {
+          // 첫 번째 숫자만 "내 레시피"이니까 거기만 변경
+          followNums[0].textContent = myRecipes.length;
+        }
+
+        // 4) (선택) 내가 등록한 레시피 카드 영역
+        // 나중에 <div id="my-recipes-grid">로 바꾸면 여기 코드가 동작함
+        const myRecipesGrid = document.getElementById("my-recipes-grid");
+        if (myRecipesGrid) {
+          if (myRecipes.length === 0) {
+            myRecipesGrid.innerHTML =
+              '<p class="card-sub muted">아직 등록한 레시피가 없습니다. 상단의 "새 레시피 등록" 버튼으로 추가해보세요!</p>';
+          } else {
+            myRecipesGrid.innerHTML = myRecipes
+              .map((r) => {
+                const imgSrc = r.image || r.thumbnail || "11_default.png";
+                const title = r.title || "제목 없는 레시피";
+                const category = r.category || "기타";
+                const views = r.views || 0;
+                const link =
+                  "11_인공띠용지능_recipe.html?id=" +
+                  encodeURIComponent(String(r.id));
+
+                return `
+                  <a href="${link}" class="card">
+                    <img src="${imgSrc}" alt="${title}" class="thumb" />
+                    <div>
+                      <p class="card-title">${title}</p>
+                      <p class="card-sub">${category} · 조회수 ${views}</p>
+                    </div>
+                  </a>
+                `;
+              })
+              .join("");
+          }
+        }
+
+        // 5) 최근 본 레시피 리스트
+        const recentListContainer = document.getElementById("recent-list");
+        const recentRecipes =
+          JSON.parse(localStorage.getItem("nn_recent_recipes")) || [];
+
+        if (recentListContainer) {
+          if (recentRecipes.length === 0) {
+            recentListContainer.innerHTML =
+              '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
+          } else {
+            recentListContainer.innerHTML = recentRecipes
+              .map(
+                (recipe) => `
+                <li>
+                  <a href="${recipe.link}" class="list-item">
+                    <div class="list-text">
+                      <p class="list-ttl">${recipe.title}</p>
+                      <p class="list-sub">${recipe.info}</p>
+                    </div>
+                  </a>
+                </li>
+              `
+              )
+              .join("");
+          }
         }
       });
-
-      const recentListContainer = document.getElementById("recent-list");
-      const recentRecipes = JSON.parse(localStorage.getItem("nn_recent_recipes")) || [];
-
-      if (recentRecipes.length === 0) {
-        recentListContainer.innerHTML = '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
-      } 
-      else {
-        recentListContainer.innerHTML = recentRecipes.map(recipe => `
-            <li>
-              <a href="${recipe.link}" class="list-item">
-                <div class="list-text">
-                  <p class="list-ttl">${recipe.title}</p>
-                  <p class="list-sub">${recipe.info}</p>
-                </div>
-              </a>
-            </li>
-        `).join('');
-    }
     </script>
+  
+
   </body>
 </html>
