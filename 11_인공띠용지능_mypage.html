@@ -16,8 +16,8 @@
       }
 
       .follow > div {
-        flex: 1;                 /* 3개의 박스 동일 너비 */
-        text-align: center;       /* 숫자/라벨 중앙 */
+        flex: 1;                 
+        text-align: center;
       }
 
       .follow-num {
@@ -35,24 +35,21 @@
       .profile-box {
         display: flex;
         flex-direction: column;
-        align-items: center !important;  /* 가운데 정렬 강제 */
-        text-align: center;              /* 텍스트도 중앙으로 */
+        align-items: center !important;  
+        text-align: center;              
       }
-
 
     </style>
   </head>
   <body>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // 1. 저장된 데이터 불러오기
         const savedNickname = localStorage.getItem("nn_nickname");
         const savedUsername = localStorage.getItem("nn_username");
         const savedBio = localStorage.getItem("nn_bio");
         const savedProfileImg = localStorage.getItem("nn_profile_img");
         const savedBgImg = localStorage.getItem("nn_bg_img");
 
-        // 2. 데이터가 있다면 화면에 반영하기
         if (savedNickname) {
           document.querySelector(".profile-name").textContent = savedNickname;
         }
@@ -63,15 +60,12 @@
           document.querySelector(".profile-bio").textContent = savedBio;
         }
         if (savedProfileImg) {
-          // 이미지 태그 찾아서 src 변경
           document.querySelector('.profile-box img').src = savedProfileImg;
         }
         if (savedBgImg) {
-          // 배경 div 찾아서 style 변경
           document.querySelector('.profile-cover').style.backgroundImage = `url('${savedBgImg}')`;
         }
 
-        // 3. 로그아웃 버튼 기능
         const logoutBtn = document.querySelector('a[href="#logout"]');
         if (logoutBtn) {
           logoutBtn.addEventListener("click", function (e) {
@@ -79,7 +73,6 @@
             const confirmLogout = confirm("정말 로그아웃 하시겠습니까?");
             if (confirmLogout) {
               alert("로그아웃 되었습니다.");
-              // 실제로는 세션을 지우겠지만, 여기선 메인으로 이동시킵니다.
               window.location.href = "11_인공띠용지능_main.html";
             }
           });
@@ -169,14 +162,15 @@
           <h3 class="card-title-lg">내가 등록한 레시피</h3>
           <div class="btn-row">
             <a href="11_인공띠용지능_register.html" class="btn-solid"
-              >새 레시피 등록</a
-            >
-            <a href="#" class="btn-warn">레시피 관리</a>
+              >새 레시피 등록
+            </a>
+            <a href="11_인공띠용지능_recipe_manage.html" class="btn-warn">레시피 관리</a>
+
+
           </div>
         </div>
 
         <div class="card-grid my-recipes" id="my-recipes-grid">
-          <!-- JS로 내 레시피 카드가 채워집니다 -->
         </div>
       </section>
 
@@ -189,110 +183,143 @@
       <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
     </main>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // 1) 프로필 이름 → 로컬스토리지 저장
-        const userNameEl = document.querySelector(".profile-name");
-        const userName = userNameEl ? userNameEl.textContent.trim() : "";
-        if (userName) {
-          localStorage.setItem("nn_username", userName);
-        }
+ 
+    const LOCAL_RECIPES_KEY = "nn_recipes";
+    const SAVED_RECIPES_KEY = "nn_saved_recipes";
+    const RECENT_RECIPES_KEY = "nn_recent_recipes";
 
-        // 2) 저장한 레시피 리스트 (왼쪽 "저장한 레시피")
-        const savedListContainer = document.getElementById("saved-list");
-        const savedRecipes =
-          JSON.parse(localStorage.getItem("nn_saved_recipes")) || [];
+ 
+    function loadLocalRecipes() {
+      try {
+        const raw = localStorage.getItem(LOCAL_RECIPES_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        console.error("내 레시피 로드 오류:", e);
+        return [];
+      }
+    }
 
-        if (savedListContainer) {
-          if (savedRecipes.length === 0) {
-            savedListContainer.innerHTML =
-              '<li style="padding:20px; text-align:center; color:#999;">저장된 레시피가 없습니다.</li>';
-          } else {
-            savedListContainer.innerHTML = savedRecipes
-              .map(
-                (recipe) => `
-                <li>
-                  <a href="${recipe.link}" class="list-item">
-                    <div class="list-text">
-                      <p class="list-ttl">${recipe.title}</p>
-                      <p class="list-sub">${recipe.subInfo || ""}</p>
-                    </div>
-                  </a>
-                </li>
-              `
-              )
-              .join("");
-          }
-        }
 
-        // 3) 상단 프로필 카드 - "내 레시피" 개수 업데이트
-        const myRecipes =
-          JSON.parse(localStorage.getItem("nn_recipes")) || [];
-        const followNums = document.querySelectorAll(".follow-num");
-        if (followNums.length > 0) {
-          // 첫 번째 숫자만 "내 레시피"이니까 거기만 변경
-          followNums[0].textContent = myRecipes.length;
-        }
+    function renderMyRecipeCount(list) {
+      const count = list.length;
+      const followNums = document.querySelectorAll(".follow-num");
+      if (followNums.length > 0) {
+   
+        followNums[0].textContent = count;
+      }
+    }
 
-        // 4) (선택) 내가 등록한 레시피 카드 영역
-        // 나중에 <div id="my-recipes-grid">로 바꾸면 여기 코드가 동작함
-        const myRecipesGrid = document.getElementById("my-recipes-grid");
-        if (myRecipesGrid) {
-          if (myRecipes.length === 0) {
-            myRecipesGrid.innerHTML =
-              '<p class="card-sub muted">아직 등록한 레시피가 없습니다. 상단의 "새 레시피 등록" 버튼으로 추가해보세요!</p>';
-          } else {
-            myRecipesGrid.innerHTML = myRecipes
-              .map((r) => {
-                const imgSrc = r.image || r.thumbnail || "11_default.png";
-                const title = r.title || "제목 없는 레시피";
-                const category = r.category || "기타";
-                const views = r.views || 0;
-                const link =
-                  "11_인공띠용지능_recipe.html?id=" +
-                  encodeURIComponent(String(r.id));
 
-                return `
-                  <a href="${link}" class="card">
-                    <img src="${imgSrc}" alt="${title}" class="thumb" />
-                    <div>
-                      <p class="card-title">${title}</p>
-                      <p class="card-sub">${category} · 조회수 ${views}</p>
-                    </div>
-                  </a>
-                `;
-              })
-              .join("");
-          }
-        }
+    function renderMyRecipesGrid(list) {
+      const grid =
+        document.getElementById("my-recipes-grid") ||
+        document.querySelector(".card-grid.my-recipes");
+      if (!grid) return;
 
-        // 5) 최근 본 레시피 리스트
-        const recentListContainer = document.getElementById("recent-list");
-        const recentRecipes =
-          JSON.parse(localStorage.getItem("nn_recent_recipes")) || [];
+      if (list.length === 0) {
+        grid.innerHTML =
+          '<p class="card-sub muted">아직 등록한 레시피가 없습니다. 상단의 "새 레시피 등록" 버튼으로 첫 레시피를 만들어보세요!</p>';
+        return;
+      }
 
-        if (recentListContainer) {
-          if (recentRecipes.length === 0) {
-            recentListContainer.innerHTML =
-              '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
-          } else {
-            recentListContainer.innerHTML = recentRecipes
-              .map(
-                (recipe) => `
-                <li>
-                  <a href="${recipe.link}" class="list-item">
-                    <div class="list-text">
-                      <p class="list-ttl">${recipe.title}</p>
-                      <p class="list-sub">${recipe.info}</p>
-                    </div>
-                  </a>
-                </li>
-              `
-              )
-              .join("");
-          }
-        }
-      });
-    </script>
+      grid.innerHTML = list
+        .map((r) => {
+          const title = r.title || "제목 없는 레시피";
+          const category = r.category || "기타";
+          const views = r.views || 0;
+          const thumb = r.image || r.thumbnail || "11_default.png";
+          const link =
+            "11_인공띠용지능_recipe.html?id=" +
+            encodeURIComponent(String(r.id));
+
+          return `
+            <a href="${link}" class="card">
+              <img src="${thumb}" alt="${title}" class="thumb" />
+              <div>
+                <p class="card-title">${title}</p>
+                <p class="card-sub">${category} · 조회수 ${views}</p>
+              </div>
+            </a>
+          `;
+        })
+        .join("");
+    }
+
+    function renderSavedList() {
+      const savedListContainer = document.getElementById("saved-list");
+      if (!savedListContainer) return;
+
+      const savedRecipes =
+        JSON.parse(localStorage.getItem(SAVED_RECIPES_KEY)) || [];
+
+      if (savedRecipes.length === 0) {
+        savedListContainer.innerHTML =
+          '<li style="padding:20px; text-align:center; color:#999;">저장된 레시피가 없습니다.</li>';
+      } else {
+        savedListContainer.innerHTML = savedRecipes
+          .map(
+            (recipe) => `
+            <li>
+              <a href="${recipe.link}" class="list-item">
+                <div class="list-text">
+                  <p class="list-ttl">${recipe.title}</p>
+                  <p class="list-sub">${recipe.subInfo || ""}</p>
+                </div>
+              </a>
+            </li>
+          `
+          )
+          .join("");
+      }
+    }
+
+    function renderRecentList() {
+      const recentListContainer = document.getElementById("recent-list");
+      if (!recentListContainer) return;
+
+      const recentRecipes =
+        JSON.parse(localStorage.getItem(RECENT_RECIPES_KEY)) || [];
+
+      if (recentRecipes.length === 0) {
+        recentListContainer.innerHTML =
+          '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
+      } else {
+        recentListContainer.innerHTML = recentRecipes
+          .map(
+            (recipe) => `
+            <li>
+              <a href="${recipe.link}" class="list-item">
+                <div class="list-text">
+                  <p class="list-ttl">${recipe.title}</p>
+                  <p class="list-sub">${recipe.info}</p>
+                </div>
+              </a>
+            </li>
+          `
+          )
+          .join("");
+      }
+    }
+
+    // --- 초기화 ---
+    document.addEventListener("DOMContentLoaded", function () {
+      const userNameEl = document.querySelector(".profile-name");
+      const userName = userNameEl ? userNameEl.textContent.trim() : "";
+      if (userName) {
+        localStorage.setItem("nn_username", userName);
+      }
+
+      let myRecipes = loadLocalRecipes();
+      renderMyRecipeCount(myRecipes);
+      renderMyRecipesGrid(myRecipes);
+
+      renderSavedList();
+      renderRecentList();
+    });
+  </script>
+
   
 
   </body>

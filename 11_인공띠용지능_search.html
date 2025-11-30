@@ -1,104 +1,183 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>레시피 검색 결과</title>
-  <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
+<html lang="ko" id="top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>냠냠노트 - 레시피 검색 결과</title>
+    <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+  </head>
 
-  <style>
-    .search-title { 
-      font-size: 1.8rem; 
-      font-weight: 700; 
-      margin-top: 40px; 
-    }
-    .card-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-      gap: 20px; 
-      margin-top: 30px; 
-    }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      text-decoration: none;
-      color: #333;
-      transition: transform .15s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-    }
-    .card img { 
-      width: 100%; 
-      border-radius: 12px; 
-    }
-    .card-title { 
-      font-weight: 700; 
-      margin-top: 10px; 
-      font-size: 1.1rem;
-    }
-    .no-result { 
-      margin-top: 40px; 
-      font-size: 1.2rem; 
-      color: #777; 
-    }
-  </style>
-</head>
+  <body>
+    <!-- ✅ 메인 페이지와 동일한 네비 -->
+    <nav class="site-nav">
+      <div class="container nav-top-center">
+        <div class="nav-center-box">
+          <a href="11_인공띠용지능_main.html" aria-label="홈">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
+          </a>
 
-<body class="container">
+          <div class="nav-search">
+            <input
+              type="text"
+              placeholder="재료명으로 레시피 검색"
+              class="nav-search-input"
+            />
+            <button class="nav-search-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
+                <line
+                  x1="16.5"
+                  y1="16.5"
+                  x2="21"
+                  y2="21"
+                  stroke="white"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <h1 class="search-title">검색 결과</h1>
+      <div class="nav-menu-bar">
+        <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html#korean">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+        <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
+        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+      </div>
+    </nav>
 
-  <div id="search-result" class="card-grid"></div>
+    <!-- ----------------------------- -->
+    <!--           MAIN                -->
+    <!-- ----------------------------- -->
 
-  <script>
-    // URL에서 검색어 추출
-    const params = new URLSearchParams(window.location.search);
-    const keyword = params.get("keyword")?.trim() ?? "";
+    <main class="page-pad">
+      <div id="ranking" class="container">
+        <header class="hero center">
+          <h1 class="mt-0">
+            <span id="keyword-text"></span> 검색 결과
+          </h1>
+          <p style="font-size: 14px; color: var(--muted)">
+            총 <span id="result-count">0</span>개의 레시피를 찾았어요.
+          </p>
+        </header>
 
-    const resultBox = document.getElementById("search-result");
+        <h2 class="section-title">검색된 레시피</h2>
 
-    // 🔥 JSON 불러오기
-    fetch("11_인공띠용지능_recipes.json")
-      .then(res => res.json())
-      .then(data => {
-        // JSON 구조: { "recipes": [...] }
-        const recipes = data.recipes;
+        <div id="search-result" class="ranking-list mt-20"></div>
+      </div>
+    </main>
 
-        const found = filterRecipes(recipes, keyword);
+    <a href="#top" class="to-top">맨 위로 ↑</a>
 
-        if (found.length === 0) {
-          resultBox.innerHTML = `<p class="no-result">"${keyword}" 검색 결과가 없습니다.</p>`;
-        } else {
-          resultBox.innerHTML = found.map(r => `
-            <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
+    <script>
+      // -----------------------------
+      // URL에서 검색어 추출
+      // -----------------------------
+      const params = new URLSearchParams(window.location.search);
+      const keyword = (params.get("keyword") || "").trim();
 
-              <img src="${r.thumbnail}" alt="${r.title}">
-              <p class="card-title">${r.title}</p>
-              <div class="rating">⭐ ${r.rating}</div>
-            </a>
-          `).join("");
-        }
-      })
-      .catch(err => {
-        console.error("JSON 불러오기 오류:", err);
-        resultBox.innerHTML = `<p class="no-result">레시피 데이터를 불러올 수 없습니다.</p>`;
+      document.getElementById("keyword-text").textContent = keyword
+        ? `"${keyword}"`
+        : "전체";
+
+      const resultCountEl = document.getElementById("result-count");
+      const resultBox = document.getElementById("search-result");
+
+      // -----------------------------
+      // 레시피 JSON 로드
+      // -----------------------------
+      fetch("11_인공띠용지능_recipes.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const recipes = data.recipes || [];
+          const found = filterRecipes(recipes, keyword);
+          resultCountEl.textContent = found.length;
+
+          if (found.length === 0) {
+            resultBox.innerHTML = `
+              <div class="card-box mt-20 center">
+                <p class="card-title-lg">"${keyword}"에 대한 검색 결과가 없습니다.</p>
+                <p style="font-size:14px; color:var(--muted); margin-top:8px;">
+                  다른 재료명이나 요리 이름으로 다시 검색해보세요.
+                </p>
+              </div>`;
+            return;
+          }
+
+          // -----------------------------
+          // 검색 결과 카드 렌더링 (순위 제거)
+          // -----------------------------
+          resultBox.innerHTML = found
+            .map((item) => {
+              const rating = item.rating ?? 0;
+              const reviewCount = item.review_count ?? 0;
+              const summary =
+                item.summary ||
+                `${item.category || "요리"} · 검색된 레시피`;
+
+              return `
+              <a href="11_인공띠용지능_recipe.html?id=${item.id}" class="rank-card">
+
+                <img
+                  src="${item.thumbnail}"
+                  class="rank-card-image"
+                  alt="${item.title}"
+                />
+
+                <div class="rank-info">
+                  <h2 class="rank-title">${item.title}</h2>
+                  <p class="rank-description">${summary}</p>
+                </div>
+
+                <div class="rank-meta">
+                  <div class="rank-rating">★ ${rating}</div>
+                  <p class="rank-views">리뷰 ${reviewCount}개</p>
+                </div>
+              </a>
+            `;
+            })
+            .join("");
+        });
+
+      // 검색 필터 함수
+      function filterRecipes(recipes, keyword) {
+        if (!keyword) return recipes;
+        const lower = keyword.toLowerCase();
+
+        return recipes.filter((recipe) => {
+          const titleMatch =
+            recipe.title?.toLowerCase().includes(lower);
+          const categoryMatch =
+            recipe.category?.toLowerCase().includes(lower);
+
+          const ingredients = recipe.ingredients_required || [];
+          const ingredientMatch = ingredients.some((i) =>
+            (i.name || "").toLowerCase().includes(lower)
+          );
+
+          return titleMatch || categoryMatch || ingredientMatch;
+        });
+      }
+
+      // -----------------------------
+      // 네비바 검색 (메인 동일)
+      // -----------------------------
+      const navInput = document.querySelector(".nav-search-input");
+      const navBtn = document.querySelector(".nav-search-btn");
+
+      navBtn.addEventListener("click", () => {
+        const kw = navInput.value.trim();
+        if (!kw) return alert("검색어를 입력해주세요!");
+        location.href =
+          "11_인공띠용지능_search.html?keyword=" +
+          encodeURIComponent(kw);
       });
 
-    // 🔍 검색 함수
-    function filterRecipes(recipes, keyword) {
-      const lower = keyword.toLowerCase();
-
-      return recipes.filter(recipe => {
-        return (
-          recipe.title.toLowerCase().includes(lower) ||
-          recipe.category.toLowerCase().includes(lower) ||
-          recipe.ingredients_required.some(i => i.name.toLowerCase().includes(lower))
-        );
+      navInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") navBtn.click();
       });
-    }
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>
