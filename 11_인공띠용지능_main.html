@@ -85,7 +85,7 @@
       }
 
       .hero-btn-secondary:hover {
-        background: #dccd9c;
+        background: #ecdeb5;
       }
 
       .hero-visual {
@@ -278,8 +278,9 @@
 
       renderRandomRecipes();
     </script>
+  </body>
 
-    <script>
+  <script>
     const carouselImages = [
       '11_banner.jpg',
       '11_banner2.jpg',
@@ -300,26 +301,4 @@
 
     setInterval(changeCarousel, 3000);
   </script>
-
-  <script>
-  const searchInput = document.querySelector(".nav-search-input");
-  const searchBtn = document.querySelector(".nav-search-btn");
-
-  searchBtn.addEventListener("click", () => {
-    const keyword = searchInput.value.trim();
-    if (!keyword) return alert("검색어를 입력해주세요!");
-
-    window.location.href = `11_인공띠용지능_search.html?keyword=${encodeURIComponent(keyword)}`;
-  });
-
-  searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      searchBtn.click();
-    }
-  });
-</script>
-
-
-
-  </body>
 </html>

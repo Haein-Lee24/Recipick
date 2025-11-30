@@ -396,7 +396,7 @@ a {
 
 /* 호버 시 색상 반전 효과 */
 .cat-card:hover .cat-btn {
-  background: #8b7443; /* 기존보다 20% 정도 밝은 브라운 */
+  background: #ac8d6f; /* 기존보다 20% 정도 밝은 브라운 */
   color: #fff;
   border-color: #8b7443;
 }
@@ -409,7 +409,6 @@ a {
 .cat-emoji:empty {
   display: none;
 }
-
 
 /* 호버 시 이모지 색상 복원 */
 .cat-card:hover .cat-emoji {
@@ -537,7 +536,7 @@ a {
 }
 
 .more-btn:hover {
-  background: #a48c58;
+  background: #ac8d6f;
   color: #fff;
   opacity: 1;
 }
