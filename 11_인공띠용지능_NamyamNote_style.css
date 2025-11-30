@@ -406,6 +406,11 @@ a {
   filter: grayscale(100%); /* 이모지 색상을 흑백으로 */
 }
 
+.cat-emoji:empty {
+  display: none;
+}
+
+
 /* 호버 시 이모지 색상 복원 */
 .cat-card:hover .cat-emoji {
   filter: grayscale(0%);
