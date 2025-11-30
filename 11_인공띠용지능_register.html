@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" id="top">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +41,6 @@
         gap: 8px;
       }
 
-      /* 버튼 영역 */
       .form-actions {
         display: flex;
         justify-content: center;
@@ -62,7 +61,6 @@
         box-sizing: border-box;
       }
 
-      /* 등록 버튼 – 호버 과하지 않게 */
       #submitBtn {
         background: var(--primary-color);
         color: #fff;
@@ -73,7 +71,6 @@
         opacity: 0.92;
       }
 
-      /* 임시저장 버튼 – 호버도 은은하게 */
       #saveDraftBtn {
         background: #fff;
         color: var(--text);
@@ -91,7 +88,7 @@
         text-align: center;
       }
 
-      /* 🔥 이 페이지에서는 흰 카드(form-card)가 호버해도 안 움직이게 */
+      /* 이 페이지의 form 카드: 호버 때 안 움직이게 */
       .card.form-card {
         transition: none !important;
       }
@@ -100,7 +97,7 @@
         box-shadow: none !important;
       }
 
-      /* 재료 / 조리 순서 칸 폰트 나눔스퀘어로 통일 */
+      /* 재료 / 조리순서 텍스트 폰트 통일 */
       #ingredients,
       #steps {
         font-family: "NanumSquare", system-ui, sans-serif;
@@ -108,10 +105,19 @@
         line-height: 1.5;
       }
 
-      /* placeholder도 같은 글씨체로 */
       #ingredients::placeholder,
       #steps::placeholder {
         font-family: "NanumSquare", system-ui, sans-serif;
+      }
+
+      /* 🔥 등록 페이지 전용 hero 아래 간격만 살짝 줄이기 */
+      .register-hero {
+        margin-bottom: 20px;   /* 필요하면 숫자 더 줄여도 돼 (예: 16px) */
+      }
+
+      /* 섹션 제목 위 간격도 조금 줄이기 */
+      .section-title {
+        margin-top: 20px;
       }
     </style>
   </head>
@@ -137,7 +143,8 @@
 
     <main class="page-pad">
       <div class="container">
-        <header class="hero center">
+        <!-- 🔸 여기 class에 register-hero 추가한 게 포인트 -->
+        <header class="hero center register-hero">
           <h1 class="mt-0">나만의 레시피 등록하기</h1>
           <p style="font-size: 14px; color: var(--muted)">
             입력 후 <strong>등록</strong> 또는 <strong>임시저장</strong>을 눌러주세요.
@@ -147,7 +154,6 @@
         <h2 class="section-title">레시피 정보 입력</h2>
 
         <form class="card form-card" id="recipeForm">
-          <!-- 제목 -->
           <div class="mt-20">
             <label for="title">레시피 제목</label>
             <input
@@ -159,7 +165,6 @@
             />
           </div>
 
-          <!-- 카테고리 -->
           <div class="mt-20">
             <span style="display:block; font-weight:700; margin-bottom:8px;">
               요리 카테고리 (1개 선택)
@@ -173,13 +178,11 @@
             </div>
           </div>
 
-          <!-- 이미지 -->
           <div class="mt-20">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
-          <!-- 재료 -->
           <div class="mt-20">
             <label for="ingredients">재료</label>
             <textarea
@@ -191,7 +194,6 @@
             ></textarea>
           </div>
 
-          <!-- 조리 순서 -->
           <div class="mt-20">
             <label for="steps">조리 순서</label>
             <textarea
@@ -203,19 +205,19 @@
             ></textarea>
           </div>
 
-          <!-- 버튼 -->
           <div class="form-actions">
             <button type="submit" id="submitBtn">등록하기</button>
             <button type="button" id="saveDraftBtn">임시저장</button>
           </div>
 
-          <!-- 임시저장 시간 -->
           <p id="draftTime" class="draft-time">
             현재 임시저장된 내용이 없습니다.
           </p>
         </form>
       </div>
     </main>
+
+    <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <script src="11_인공띠용지능_register.js"></script>
   </body>
