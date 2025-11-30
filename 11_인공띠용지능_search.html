@@ -2,8 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>레시피 검색 결과</title>
   <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
+  
 
   <style>
     .search-title { 
@@ -46,11 +48,30 @@
   </style>
 </head>
 
+<a href="#top" class="to-top">맨 위로 ↑</a>
+
+<body>
+    <!-- =============================== -->
+    <!--           상단 네비게이션       -->
+    <!-- =============================== -->
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="11_인공띠용지능_main.html">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
+          </a>
+        </div>
+      </div>
+    </nav>
+  </body>
+
 <body class="container">
 
   <h1 class="search-title">검색 결과</h1>
 
   <div id="search-result" class="card-grid"></div>
+
+
 
   <script>
     // URL에서 검색어 추출
