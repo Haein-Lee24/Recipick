@@ -56,6 +56,17 @@
         <a href="11_인공띠용지능_menulist.html" class="back-btn">← 목록으로</a>
       </div>
 
+      <!-- 정렬 선택 바 -->
+      <div class="sort-bar" style="margin-bottom: 20px;">
+        <label for="sort-select" style="margin-right: 8px; font-weight: 600;">정렬:</label>
+        <select id="sort-select" style="padding: 6px 10px; border-radius: 6px;">
+          <option value="name">이름순(가나다순)</option>
+          <option value="views">인기순(조회수 많은순)</option>
+          <option value="rating">평점 높은순</option>
+        </select>
+      </div>
+
+
       <!-- 레시피 카드 리스트가 출력될 영역 -->
       <div id="full-list" class="card-grid"></div>
     </main>
@@ -149,9 +160,11 @@
         .then((data) => {
           const titleEl = document.getElementById("full-title");
           const listEl = document.getElementById("full-list");
+          const sortSelect = document.getElementById("sort-select");
+
           const targetName = categoryMap[currentCategory];
 
-          // 잘못된 category 처리
+    // 잘못된 category 처리
           if (!targetName) {
             titleEl.innerText = "잘못된 카테고리입니다.";
             return;
@@ -159,54 +172,88 @@
 
           const isDessertMode = currentCategory === "dessert";
 
-          /* JSON 데이터 중 해당 카테고리만 필터링 */
+         /* JSON 레시피 */
           const jsonRecipes = data.recipes.filter((r) => {
             if (isDessertMode)
               return r.category === "디저트" || r.category === "간식";
-            return r.category === targetName;
+              return r.category === targetName;
           });
 
-          /* localStorage 사용자 레시피도 필터링 */
+          /* localStorage 레시피 */
           const userRecipes = loadUserRecipes(targetName, isDessertMode);
 
-          /* 제목: 총 개수 표기 */
-          const totalCount = jsonRecipes.length + userRecipes.length;
-          titleEl.innerText = `전체 ${targetName} 레시피 (총 ${totalCount}개)`;
+          /* 전체 리스트 합치기 */
+          let fullList = [...jsonRecipes, ...userRecipes];
 
-          /* 아무 레시피도 없을 때 */
-          if (jsonRecipes.length === 0 && userRecipes.length === 0) {
+          /* 제목 표기 */
+          titleEl.innerText = `전체 ${targetName} 레시피 (총 ${fullList.length}개)`;
+
+          if (fullList.length === 0) {
             listEl.innerHTML = "<p>등록된 레시피가 없습니다.</p>";
             return;
           }
 
-          /* 기본 JSON 레시피 → 카드로 변환 */
-          const jsonCardsHTML = jsonRecipes
+    /* ------------------------
+       정렬 함수
+    ------------------------- */
+          function sortList(type) {
+            if (type === "name") {
+              fullList.sort((a, b) => a.title.localeCompare(b.title, "ko-KR"));
+          }
+
+          if (type === "views") {
+            fullList.sort((a, b) => {
+              // JSON: review_count  / user: views
+              const A = a.review_count ? Number(a.review_count) : Number(a.views || 0);
+              const B = b.review_count ? Number(b.review_count) : Number(b.views || 0);
+              return B - A;
+            });
+          }
+
+          if (type === "rating") {
+            fullList.sort((a, b) => {
+              const A = Number(a.rating);
+              const B = Number(b.rating);
+            return B - A;
+            });
+          }
+
+          renderCards();
+        }
+
+    /* ------------------------
+       렌더링 함수
+    ------------------------- */
+        function renderCards() {
+          listEl.innerHTML = fullList
             .map((r) => {
               const href = `11_인공띠용지능_recipe.html?id=${r.id}`;
-              const thumb = r.thumbnail || getDefaultImage(r.category);
-              const meta = `작성자: 냠냠이 · 리뷰 ${r.review_count}개`;
-              const rating = `★ ${r.rating}`;
+              const thumb = r.thumbnail || r.image || getDefaultImage(r.category);
+
+              const meta = r.review_count
+                ? `작성자: 냠냠이 · 리뷰 ${r.review_count}개`
+                : `작성자: 사용자 · 조회수 ${r.views || 0}`;
+
+              const rating = `★ ${Number(r.rating).toFixed(1)}`;
+
               return makeCardHTML(r.title, thumb, meta, rating, href);
             })
             .join("");
+        }
 
-          /* 사용자 레시피 → 카드로 변환 */
-          const userCardsHTML = userRecipes
-            .map((u) => {
-              const href = `11_인공띠용지능_recipe.html?id=${u.id}`;
-              const thumb = u.image || getDefaultImage(u.category);
-              const meta = `작성자: 사용자 · 조회수 ${u.views || 0}`;
-              const ratingValue =
-                typeof u.rating === "number" ? u.rating.toFixed(1) : u.rating || 0;
-              const rating = `★ ${ratingValue}`;
-              return makeCardHTML(u.title, thumb, meta, rating, href);
-            })
-            .join("");
+    /* ------------------------
+       초기 정렬: 이름순
+    ------------------------- */
+        sortList("name");
 
-          /* JSON → 사용자 순으로 리스트 출력 */
-          listEl.innerHTML = jsonCardsHTML + userCardsHTML;
-        })
-        .catch((err) => console.error("로딩 실패:", err));
+    /* ------------------------
+       정렬 UI 이벤트 연결
+    ------------------------- */
+        sortSelect.addEventListener("change", () => {
+          sortList(sortSelect.value);
+        });
+      })
+      .catch((err) => console.error("로딩 실패:", err));
     </script>
   </body>
 </html>
