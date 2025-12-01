@@ -174,23 +174,33 @@
       fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
-          // 1. data.recipes 가져오기
           let allRecipes = data.recipes;
 
-          // 2. 리뷰 수(review_count)가 많은 순서대로 내림차순 정렬 (b - a)
-          // (평점 순으로 하려면 b.rating - a.rating 으로 바꾸면 됩니다)
-          allRecipes.sort((a, b) => b.review_count - a.review_count);
+          // 1. 각 레시피에 '임의의 조회수' 생성 (범위: 300 ~ 600)
+          allRecipes.forEach((item) => {
+            // Math.random() * (최대값 - 최소값 + 1) + 최소값
+            // 300 ~ 600 사이의 랜덤 정수 생성
+            const randomViews =
+              Math.floor(Math.random() * (600 - 300 + 1)) + 300;
+            item.virtual_views = randomViews;
+          });
 
-          // 3. 상위 5개만 자르기 (0번 인덱스부터 5개)
+          // 2. '조회수(virtual_views)'가 높은 순서대로 내림차순 정렬
+          allRecipes.sort((a, b) => b.virtual_views - a.virtual_views);
+
+          // 3. 상위 5개만 자르기
           const top5Recipes = allRecipes.slice(0, 5);
 
           // 4. 화면에 그리기
           top5Recipes.forEach((item, index) => {
-            const rank = index + 1; // 1위부터 시작
+            const rank = index + 1;
 
             const card = document.createElement('a');
             card.href = `11_인공띠용지능_recipe.html?id=${item.id}`;
             card.className = 'rank-card';
+
+            // 숫자 3자리마다 쉼표(,) 찍기
+            const formattedViews = item.virtual_views.toLocaleString();
 
             card.innerHTML = `
               <div class="rank-number rank-${rank}">
@@ -216,7 +226,7 @@
 
               <div class="rank-meta">
                 <div class="rank-rating">★ ${item.rating}</div>
-                <p class="rank-views">리뷰 ${item.review_count}개</p>
+                <p class="rank-views">조회수 ${formattedViews}회</p>
               </div>
             `;
 
