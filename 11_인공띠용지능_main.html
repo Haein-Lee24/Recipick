@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" id="top">
+< lang="ko" id="top">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -122,7 +122,7 @@
     </style>
   </head>
 
-  <body>
+  <>
     <nav class="site-nav">
       <div class="container nav-top-center">
         <div class="nav-center-box">
@@ -278,6 +278,33 @@
 
       renderRandomRecipes();
     </script>
+      <!-- 🔍 네비바 검색 기능 (메인에서도 검색 페이지로 이동) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navInput = document.querySelector(".nav-search-input");
+        const navBtn = document.querySelector(".nav-search-btn");
+
+        if (!navInput || !navBtn) return; // 안전장치
+
+        navBtn.addEventListener("click", () => {
+          const kw = navInput.value.trim();
+          if (!kw) {
+            alert("검색어를 입력해주세요!");
+            return;
+          }
+          // 검색 결과 페이지로 이동
+          location.href =
+            "11_인공띠용지능_search.html?keyword=" +
+            encodeURIComponent(kw);
+        });
+
+        navInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            navBtn.click();
+          }
+        });
+      });
+  </script>
   </body>
 
   <script>
