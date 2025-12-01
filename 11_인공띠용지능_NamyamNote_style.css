@@ -149,6 +149,44 @@ a {
   color: var(--gray-deep);
 }
 
+/* 정렬바 영역 */
+.sort-area {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* 메뉴리스트 전체보기 페이지 정렬기능 관련 디자인 */
+/* 정렬 셀렉트 박스 */
+#sort-select {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover 효과 */
+#sort-select:hover {
+  border-color: #bfbfbf;
+}
+
+/* focus 효과 */
+#sort-select:focus {
+  outline: none;
+  border-color: #888;
+  box-shadow: 0 0 0 2px rgba(200, 200, 200, 0.3);
+}
+
+
 /* ===============================
    Main page specific (메인 전용)
    =============================== */
