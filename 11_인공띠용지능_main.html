@@ -245,39 +245,41 @@
 
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
 
-    <script src="11_인공띠용지능_menulist-data.js"></script>
     <script>
-      const allRecipes = [
-        ...recipeData.korean,
-        ...recipeData.chinese,
-        ...recipeData.western,
-        ...recipeData.dessert,
-        ...recipeData.drink,
-      ];
+  // JSON 불러오기
+  async function loadRecipes() {
+    const response = await fetch("11_인공띠용지능_recipes.json");
+    const data = await response.json();
+    return data.recipes;
+  }
 
-      function getRandomRecipes(list, count) {
-        return [...list].sort(() => Math.random() - 0.5).slice(0, count);
-      }
+  // 랜덤 추출 함수
+  function getRandomRecipes(list, count) {
+    return [...list].sort(() => Math.random() - 0.5).slice(0, count);
+  }
 
-      function renderRandomRecipes() {
-        const target = document.getElementById('recommend-list');
-        const selected = getRandomRecipes(allRecipes, 4);
+  // 추천 레시피 렌더링
+  async function renderRandomRecipes() {
+    const target = document.getElementById("recommend-list");
+    const recipes = await loadRecipes();
+    const selected = getRandomRecipes(recipes, 4);
 
-        target.innerHTML = selected
-          .map(
-            (r) => `
-          <a href="${r.link}" class="card">
-            <img src="${r.img}" class="thumb" alt="${r.title}">
-            <p class="card-title">${r.title}</p>
-            <div class="rating">${r.rating}</div>
-          </a>
-        `
-          )
-          .join('');
-      }
+    target.innerHTML = selected
+      .map(
+        (r) => `
+        <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
+          <img src="${r.thumbnail}" class="thumb" alt="${r.title}">
+          <p class="card-title">${r.title}</p>
+          <div class="rating">★ ${r.rating}</div>
+        </a>
+      `
+      )
+      .join("");
+  }
 
-      renderRandomRecipes();
-    </script>
+  renderRandomRecipes();
+</script>
+
       <!-- 🔍 네비바 검색 기능 (메인에서도 검색 페이지로 이동) -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
