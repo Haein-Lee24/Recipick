@@ -117,96 +117,120 @@
 
     <script src="11_인공띠용지능_recipeLoader.js"></script>
     <!--저장버튼 활성화 (해인, 수정 버전) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const saveBtn = document.getElementById("btn-save");
-      if (!saveBtn) return;
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const saveBtn = document.getElementById("btn-save");
+        if (!saveBtn) return;
 
-      const STORAGE_KEY = "nn_saved_recipes";
+        const STORAGE_KEY = "nn_saved_recipes";
 
-      // 현재 페이지 URL에서 레시피 ID 파싱
-      const urlParams = new URLSearchParams(window.location.search);
-      const recipeId =
-        urlParams.get("id") || urlParams.get("recipe") || "unknown_recipe";
+        // 현재 페이지 URL에서 레시피 ID 파싱
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId =
+          urlParams.get("id") || urlParams.get("recipe") || "unknown_recipe";
 
-      // 버튼 상태 업데이트 함수
-      function setSavedState(isSaved) {
-        if (isSaved) {
-          saveBtn.innerHTML = '<i class="fas fa-check"></i> 저장됨';
-        } else {
-          saveBtn.innerHTML = '<i class="fas fa-heart"></i> 저장하기';
-        }
-      }
-
-      // localStorage에서 현재 레시피가 저장되어 있는지 확인
-      function isAlreadySaved(list) {
-        return list.some((item) => String(item.id) === String(recipeId));
-      }
-
-      // 1. 기존 저장 목록 불러오기
-      let savedRecipes = [];
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) {
-            savedRecipes = parsed;
+        // 버튼 상태 업데이트 함수
+        function setSavedState(isSaved) {
+          if (isSaved) {
+            saveBtn.innerHTML = '<i class="fas fa-check"></i> 저장됨';
+          } else {
+            saveBtn.innerHTML = '<i class="fas fa-heart"></i> 저장하기';
           }
         }
-      } catch (e) {
-        console.error("저장된 레시피 파싱 오류:", e);
-      }
 
-      // 2. 최초 진입 시 버튼 상태 반영 (이미 저장된 레시피면 '저장됨'으로 보이게)
-      setSavedState(isAlreadySaved(savedRecipes));
+        // localStorage에서 현재 레시피가 저장되어 있는지 확인
+        function isAlreadySaved(list) {
+          return list.some((item) => String(item.id) === String(recipeId));
+        }
 
-      // 3. 클릭 시 저장/취소 토글
-      saveBtn.addEventListener("click", function () {
-        // 현재 화면값 읽기 (recipeLoader.js가 먼저 DOM 채우고 있음) 
-        const title = document.getElementById("recipe-title").innerText.trim();
-        const category = document
-          .getElementById("recipe-category")
-          .innerText.trim();
-
-        const subInfo = `${category || "기타"} · 저장된 레시피`;
-
-        // 다시 한 번 로컬스토리지 읽어서 최신 상태 보장
-        let list = [];
+        // 1. 기존 저장 목록 불러오기
+        let savedRecipes = [];
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
           if (raw) {
             const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) list = parsed;
+            if (Array.isArray(parsed)) {
+              savedRecipes = parsed;
+            }
           }
         } catch (e) {
-          console.error("저장 목록 재파싱 오류:", e);
+          console.error("저장된 레시피 파싱 오류:", e);
         }
 
-        const idx = list.findIndex(
-          (item) => String(item.id) === String(recipeId)
-        );
+        // 2. 처음 로딩 시 버튼 상태 반영
+        setSavedState(isAlreadySaved(savedRecipes));
 
-        if (idx !== -1) {
-          list.splice(idx, 1);
-          alert("저장이 취소되었습니다.");
-          setSavedState(false);
-        } 
-        else {
-          const recipeData = {
-            id: recipeId,
-            title: title,
-            subInfo: subInfo,
-            link: window.location.href,
-          };
-          list.push(recipeData);
-          alert("레시피가 저장되었습니다!");
-          setSavedState(true);
-        }
+        // 3. 클릭 시 저장/취소 토글
+        saveBtn.addEventListener("click", function () {
+          const titleEl = document.getElementById("recipe-title");
+          const categoryEl = document.getElementById("recipe-category");
+          const thumbEl = document.getElementById("thumb");
+          const ratingEl = document.getElementById("recipe-rating");
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+          const title = titleEl ? titleEl.innerText.trim() : "제목 없는 레시피";
+          const category = categoryEl
+            ? categoryEl.innerText.trim()
+            : "기타";
+          const subInfo = `${category} · 저장된 레시피`;
+
+          // 👉 썸네일 src
+          const thumbnail = thumbEl
+            ? thumbEl.getAttribute("src")
+            : "11_default.png";
+
+          // 👉 평점 / 리뷰 개수는 recipeLoader.js에서 심어둔 data-* 속성 사용
+          let rating = 0;
+          let reviewCount = 0;
+          if (ratingEl) {
+            const dataRating = ratingEl.getAttribute("data-rating");
+            const dataReview = ratingEl.getAttribute("data-review-count");
+            if (dataRating) rating = Number(dataRating) || 0;
+            if (dataReview) reviewCount = Number(dataReview) || 0;
+          }
+
+          // 다시 최신 목록 읽기
+          let list = [];
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              if (Array.isArray(parsed)) list = parsed;
+            }
+          } catch (e) {
+            console.error("저장 목록 재파싱 오류:", e);
+          }
+
+          const idx = list.findIndex(
+            (item) => String(item.id) === String(recipeId)
+          );
+
+          if (idx !== -1) {
+            // 이미 있으면 삭제
+            list.splice(idx, 1);
+            alert("저장이 취소되었습니다.");
+            setSavedState(false);
+          } else {
+            // 👉 썸네일 / 평점 / 리뷰수까지 다 같이 저장
+            const recipeData = {
+              id: recipeId,
+              title: title,
+              subInfo: subInfo,
+              link:
+                "11_인공띠용지능_recipe.html?id=" +
+                encodeURIComponent(String(recipeId)),
+              thumbnail: thumbnail,
+              rating: rating,
+              review_count: reviewCount,
+            };
+            list.push(recipeData);
+            alert("레시피가 저장되었습니다!");
+            setSavedState(true);
+          }
+
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        });
       });
-    });
-  </script>
+    </script>
 
   </body>
 </html>

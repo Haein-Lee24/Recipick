@@ -141,7 +141,7 @@
         <div class="card-box">
           <div class="bar" style="justify-content: space-between">
             <h3 class="card-title-lg">저장한 레시피</h3>
-            <a href="#" class="badge">더보기</a>
+            <a href="11_인공띠용지능_saved_list.html" class="badge">더보기</a>
           </div>
           <ul class="list-v" id="saved-list">
           </ul>
@@ -150,7 +150,7 @@
         <div class="card-box">
           <div class="bar" style="justify-content: space-between">
             <h3 class="card-title-lg">최근 본 레시피</h3>
-            <a href="#" class="badge">더보기</a>
+            <a href="11_인공띠용지능_recent_list.html" class="badge">더보기</a>
           </div>
           <ul class="list-v" id="recent-list">
           </ul>
@@ -258,7 +258,10 @@
         savedListContainer.innerHTML =
           '<li style="padding:20px; text-align:center; color:#999;">저장된 레시피가 없습니다.</li>';
       } else {
-        savedListContainer.innerHTML = savedRecipes
+        const MAX_ITEMS = 3; // 🔹 최대 3개만 보여주기
+        const preview = savedRecipes.slice(0, MAX_ITEMS);
+
+        savedListContainer.innerHTML = preview
           .map(
             (recipe) => `
             <li>
@@ -275,6 +278,7 @@
       }
     }
 
+
     function renderRecentList() {
       const recentListContainer = document.getElementById("recent-list");
       if (!recentListContainer) return;
@@ -286,14 +290,17 @@
         recentListContainer.innerHTML =
           '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
       } else {
-        recentListContainer.innerHTML = recentRecipes
+        const MAX_ITEMS = 3; // 🔹 최대 3개만 보여주기
+        const preview = recentRecipes.slice(0, MAX_ITEMS);
+
+        recentListContainer.innerHTML = preview
           .map(
             (recipe) => `
             <li>
               <a href="${recipe.link}" class="list-item">
                 <div class="list-text">
                   <p class="list-ttl">${recipe.title}</p>
-                  <p class="list-sub">${recipe.info}</p>
+                  <p class="list-sub">${recipe.info || ""}</p>
                 </div>
               </a>
             </li>
@@ -302,6 +309,7 @@
           .join("");
       }
     }
+
 
     // --- 초기화 ---
     document.addEventListener("DOMContentLoaded", function () {

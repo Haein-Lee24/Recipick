@@ -170,11 +170,26 @@ function renderRecipe(recipe) {
   document.getElementById("recipe-difficulty").textContent = difficulty;
   document.getElementById("recipe-time").textContent = time;
 
-  // 🔥 평점 표시
+// 🔥 평점 표시
   const ratingEl = document.getElementById("recipe-rating");
-  const filledStars = "★".repeat(Math.round(ratingValue));
-  const emptyStars = "☆".repeat(5 - Math.round(ratingValue));
-  ratingEl.innerHTML = `${filledStars}${emptyStars} (${ratingValue}점 / ${reviewCount}개 리뷰)`;
+
+  if (ratingEl) {
+    // 별 모양 텍스트 생성
+    const filledStars = "★".repeat(Math.round(ratingValue));
+    const emptyStars = "☆".repeat(5 - Math.round(ratingValue));
+
+    // 별점 + 리뷰 텍스트 출력
+    ratingEl.innerHTML = `${filledStars}${emptyStars} (${ratingValue}점 / ${reviewCount}개 리뷰)`;
+
+    // 👉 저장/최근 본 레시피에서 쓰기 위한 raw 데이터 저장
+    ratingEl.setAttribute("data-rating", ratingValue);
+    ratingEl.setAttribute("data-review-count", reviewCount);
+  }
+
+
+  // 👉 저장/최근 리스트에서 쓰도록 raw 값도 같이 심어두기
+  ratingEl.setAttribute("data-rating", ratingValue);
+  ratingEl.setAttribute("data-review-count", reviewCount);
 
   // 🔥 필수 재료
   const reqList = document.getElementById("ingredients-required");
@@ -255,6 +270,7 @@ function renderRecipe(recipe) {
 
   if (reviews.length === 0) {
     reviewListEl.innerHTML =
+      
       '<p class="my-recipes card-sub muted">아직 등록된 리뷰가 없습니다.</p>';
   } else {
     reviewListEl.innerHTML = reviews
@@ -280,18 +296,35 @@ function renderRecipe(recipe) {
 }
 
 // -----------------------------
-// 5. 최근 본 레시피 저장 (해인 버전 확장)
+// 5. 최근 본 레시피 저장 (확장 버전)
 // -----------------------------
 function saveToRecent(recipe) {
   const MAX_ITEMS = 10; // 최대 저장 개수
 
+  // 평점/리뷰 수 계산 (JSON + 로컬레시피 둘 다 대응)
+  const ratingValue =
+    recipe.rating != null ? Number(recipe.rating) : 0;
+  const reviewCount =
+    recipe.review_count != null
+      ? Number(recipe.review_count)
+      : Array.isArray(recipe.reviews)
+      ? recipe.reviews.length
+      : 0;
+
   const newRecord = {
     id: recipe.id,
     title: recipe.title || recipe.name,
-    info: `${recipe.category || "기타"} · 조회수 ${
-      recipe.views || recipe.review_count || 0
-    }`,
-    link: window.location.href
+    info: `${recipe.category || "기타"} · 리뷰 ${
+      reviewCount
+    }개`,
+    // 상세 페이지로 이동하는 링크
+    link:
+      "11_인공띠용지능_recipe.html?id=" +
+      encodeURIComponent(String(recipe.id)),
+    // 👉 썸네일 / 평점 / 리뷰 수 같이 저장
+    thumbnail: recipe.thumbnail || recipe.image || "11_default.png",
+    rating: ratingValue,
+    review_count: reviewCount,
   };
 
   let recentList = [];
@@ -308,7 +341,9 @@ function saveToRecent(recipe) {
   }
 
   // 같은 id 있으면 제거
-  recentList = recentList.filter((item) => String(item.id) !== String(recipe.id));
+  recentList = recentList.filter(
+    (item) => String(item.id) !== String(recipe.id)
+  );
 
   // 맨 앞에 추가
   recentList.unshift(newRecord);
@@ -320,6 +355,7 @@ function saveToRecent(recipe) {
 
   localStorage.setItem(RECENT_RECIPES_KEY, JSON.stringify(recentList));
 }
+
 
 // -----------------------------
 // 6. 리뷰 UI 설정 (기존 코드 최대한 유지)

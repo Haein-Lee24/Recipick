@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" id="top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>냠냠노트 - 저장한 레시피</title>
+
+    <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+  </head>
+
+  <body>
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <div class="logo-area">
+          <a href="11_인공띠용지능_main.html">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
+          </a>
+        </div>
+
+        <nav class="menu">
+          <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
+          <a href="11_인공띠용지능_menulist.html" class="nav-link">레시피</a>
+          <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
+          <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
+          <a href="11_인공띠용지능_mypage.html" class="nav-link">마이페이지</a>
+        </nav>
+      </div>
+    </nav>
+
+    <main class="page-pad">
+      <!-- ⚠️ CSS 적용 위해 id="ranking" 필수 -->
+      <div id="ranking" class="container">
+        <header class="hero center">
+          <h1 class="mt-0">저장한 레시피</h1>
+          <p style="font-size: 14px; color: var(--muted)">
+            내가 북마크한 레시피들을 모아봤어요.
+          </p>
+        </header>
+
+        <h2 class="section-title">저장한 레시피 목록</h2>
+
+        <div id="savedList" class="ranking-list mt-20"></div>
+      </div>
+    </main>
+
+    <a href="#top" class="to-top">맨 위로 ↑</a>
+
+    <script>
+      const SAVED_RECIPES_KEY = "nn_saved_recipes";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const listEl = document.getElementById("savedList");
+        let saved = [];
+
+        try {
+          const raw = localStorage.getItem(SAVED_RECIPES_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) saved = parsed;
+          }
+        } catch (e) {
+          console.error("저장 레시피 파싱 오류:", e);
+        }
+
+        if (saved.length === 0) {
+          listEl.innerHTML = `
+            <div class="card-box mt-20 center">
+              <p class="card-title-lg">저장한 레시피가 없습니다.</p>
+            </div>`;
+          return;
+        }
+
+        listEl.innerHTML = saved
+          .map((item) => {
+            const title = item.title || "제목 없는 레시피";
+            const summary =
+              item.summary || item.subInfo || "저장한 레시피";
+            const rating = item.rating ?? 0;
+            const reviewCount = item.review_count ?? 0;
+            const thumb = item.thumbnail || item.image || "11_default.png";
+
+            const link =
+              item.link ||
+              ("11_인공띠용지능_recipe.html?id=" +
+                encodeURIComponent(String(item.id || "")));
+
+            return `
+              <a href="${link}" class="rank-card">
+                <img
+                  src="${thumb}"
+                  class="rank-card-image"
+                  alt="${title}"
+                />
+
+                <div class="rank-info">
+                  <h2 class="rank-title">${title}</h2>
+                  <p class="rank-description">${summary}</p>
+                </div>
+
+                <div class="rank-meta">
+                  <div class="rank-rating">★ ${rating}</div>
+                  <p class="rank-views">리뷰 ${reviewCount}개</p>
+                </div>
+              </a>
+            `;
+          })
+          .join("");
+      });
+    </script>
+  </body>
+</html>
+
