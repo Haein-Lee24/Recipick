@@ -14,12 +14,15 @@
         border-radius: 16px;
       }
 
+      /* 모든 라벨 공통 */
+      .field-label,
       .form-card label {
         display: block;
         font-weight: 700;
         margin-bottom: 8px;
       }
 
+      /* 입력 요소 스타일 */
       .form-card input[type='text'],
       .form-card input[type='file'],
       .form-card textarea {
@@ -29,10 +32,26 @@
         border-radius: 12px;
         outline: none;
         background: #fff;
+        box-sizing: border-box;
+
+        /* 🔥 기본 margin 제거 (간격이 들쭉날쭉해지는 원인 제거) */
+        margin: 0;
       }
 
+      /* textarea는 스크롤만 */
       .form-card textarea {
-        resize: vertical;
+        resize: none;
+        overflow-y: auto;
+      }
+
+      /* 각 요소 간 간격 통일 */
+      .form-group {
+        margin-top: 20px; /* 🔥 원하는 통일 간격 */
+      }
+
+      /* 첫 번째는 위 공백 제거 */
+      .form-group:first-child {
+        margin-top: 0;
       }
 
       .radio-grid {
@@ -88,7 +107,7 @@
         text-align: center;
       }
 
-      /* 이 페이지의 form 카드: 호버 때 안 움직이게 */
+      /* 호버 비활성 */
       .card.form-card {
         transition: none !important;
       }
@@ -97,7 +116,7 @@
         box-shadow: none !important;
       }
 
-      /* 재료 / 조리순서 텍스트 폰트 통일 */
+      /* 텍스트 에어리어 폰트 */
       #ingredients,
       #steps {
         font-family: "NanumSquare", system-ui, sans-serif;
@@ -110,12 +129,10 @@
         font-family: "NanumSquare", system-ui, sans-serif;
       }
 
-      /* 🔥 등록 페이지 전용 hero 아래 간격만 살짝 줄이기 */
       .register-hero {
-        margin-bottom: 20px;   /* 필요하면 숫자 더 줄여도 돼 (예: 16px) */
+        margin-bottom: 20px;
       }
 
-      /* 섹션 제목 위 간격도 조금 줄이기 */
       .section-title {
         margin-top: 20px;
       }
@@ -143,7 +160,6 @@
 
     <main class="page-pad">
       <div class="container">
-        <!-- 🔸 여기 class에 register-hero 추가한 게 포인트 -->
         <header class="hero center register-hero">
           <h1 class="mt-0">나만의 레시피 등록하기</h1>
           <p style="font-size: 14px; color: var(--muted)">
@@ -154,7 +170,9 @@
         <h2 class="section-title">레시피 정보 입력</h2>
 
         <form class="card form-card" id="recipeForm">
-          <div class="mt-20">
+
+          <!-- 레시피 제목 -->
+          <div class="form-group">
             <label for="title">레시피 제목</label>
             <input
               id="title"
@@ -165,10 +183,9 @@
             />
           </div>
 
-          <div class="mt-20">
-            <span style="display:block; font-weight:700; margin-bottom:8px;">
-              요리 카테고리 (1개 선택)
-            </span>
+          <!-- 카테고리 -->
+          <div class="form-group">
+            <span class="field-label">요리 카테고리 (1개 선택)</span>
             <div class="radio-grid">
               <label><input type="radio" name="category" value="한식" required /> 한식</label>
               <label><input type="radio" name="category" value="양식" /> 양식</label>
@@ -178,12 +195,14 @@
             </div>
           </div>
 
-          <div class="mt-20">
+          <!-- 이미지 업로드 -->
+          <div class="form-group">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
-          <div class="mt-20">
+          <!-- 재료 -->
+          <div class="form-group">
             <label for="ingredients">재료</label>
             <textarea
               id="ingredients"
@@ -194,7 +213,8 @@
             ></textarea>
           </div>
 
-          <div class="mt-20">
+          <!-- 조리 순서 -->
+          <div class="form-group">
             <label for="steps">조리 순서</label>
             <textarea
               id="steps"
