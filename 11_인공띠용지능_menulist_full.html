@@ -11,7 +11,7 @@
         margin-top: 40px;
       }
 
-      /* 상단 영역 전체 */
+
       .header-area {
         display: flex;
         flex-direction: column;
@@ -20,12 +20,12 @@
         margin-bottom: 2px;
       }
 
-      /* 제목 (맨 위, 가운데) */
+
       .header-area h2 {
         margin: 10;
         text-align: center;
         font-size: 24px;
-        padding-bottom: 20px; /* 선과 텍스트 사이 간격 */
+        padding-bottom: 20px;
         border-bottom: 1px solid #ded3c4 !important;
         width: 100%;  
       }
@@ -35,7 +35,7 @@
       }
 
 
-      /* 제목 아래줄: 뒤로가기 + 정렬바 한 줄 */
+
       .header-controls {
         width: 100%;
         display: flex;
@@ -62,7 +62,7 @@
   </head>
 
   <body>
-    <!-- 사이트 공통 네비게이션 -->
+
     <nav class="site-nav">
   <div class="container nav-top-center">
     <div class="nav-center-box">
@@ -97,12 +97,12 @@
 
 
     <main class="container page-pad">
-      <!-- 상단: 제목 + (뒤로가기 & 정렬바) -->
+
       <div class="header-area">
-        <!-- 🔺 맨 위 제목 -->
+
         <h2 id="full-title" class="section-title">로딩 중...</h2>
 
-        <!-- 🔻 그 바로 아래 줄: 뒤로가기 + 정렬 -->
+
         <div class="header-controls">
           <a href="11_인공띠용지능_menulist.html" class="back-btn">
             ← 카테고리별 목록으로
@@ -119,20 +119,15 @@
         </div>
       </div>
 
-      <!-- 레시피 카드 리스트가 출력될 영역 -->
+
       <div id="full-list" class="card-grid"></div>
     </main>
 
     <script>
-      /* ----------------------------------------
-        URL 파라미터에서 category 값 읽기
-      ---------------------------------------- */
+
       const params = new URLSearchParams(window.location.search);
       const currentCategory = params.get("category");
 
-      /* ----------------------------------------
-        JSON 내부 카테고리(한글)와 URL 파라미터(영어) 매핑
-      ---------------------------------------- */
       const categoryMap = {
         korean: "한식",
         western: "양식",
@@ -141,7 +136,6 @@
         drink: "음료",
       };
 
-      // localStorage key
       const STORAGE_KEY = "nn_recipes";
 
       function getDefaultImage(korCategory) {
@@ -201,7 +195,6 @@
 
           const targetName = categoryMap[currentCategory];
 
-          // 잘못된 category 처리
           if (!targetName) {
             titleEl.innerText = "잘못된 카테고리입니다.";
             return;
@@ -209,20 +202,17 @@
 
           const isDessertMode = currentCategory === "dessert";
 
-          // JSON 레시피
           const jsonRecipes = data.recipes.filter((r) => {
             if (isDessertMode)
               return r.category === "디저트" || r.category === "간식";
             return r.category === targetName;
           });
 
-          // localStorage 레시피
           const userRecipes = loadUserRecipes(targetName, isDessertMode);
 
-          // 전체 리스트 합치기
           let fullList = [...jsonRecipes, ...userRecipes];
 
-          // 제목 표기
+
           titleEl.innerText = `전체 ${targetName} 레시피 (총 ${fullList.length}개)`;
 
           if (fullList.length === 0) {
@@ -281,10 +271,10 @@
               .join("");
           }
 
-          // 초기 정렬: 이름순
+
           sortList("name");
 
-          // 정렬 UI 이벤트
+
           sortSelect.addEventListener("change", () => {
             sortList(sortSelect.value);
           });

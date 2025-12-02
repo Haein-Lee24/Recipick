@@ -1,12 +1,10 @@
-// 11_인공띠용지능_menulist-user.js
-
 const RECIPES_KEY = "nn_recipes";
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("user-recipes");
   if (!container) return;
 
-  const category = container.dataset.category; // "한식" / "양식" / ...
+  const category = container.dataset.category;
 
   const raw = localStorage.getItem(RECIPES_KEY);
   if (!raw) return;

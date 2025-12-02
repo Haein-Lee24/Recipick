@@ -6,24 +6,20 @@
   <title>냠냠노트 - 프로필 수정</title>
   <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
   <style>
-    /* --------------------------
-      📌 register.html 스타일 적용 (여백 및 입력창 디자인 통일)
-    --------------------------- */
-    /* 헤더(Hero)와 섹션 제목 간격 조정 */
     .hero {
       margin-bottom: 14px !important;
-      border: 1px solid var(--border); /* 테두리 추가 */
+      border: 1px solid var(--border); 
     }
 
-    /* 폼 전체 박스 스타일 (레시피 등록과 동일한 여백) */
+  
     .form-card {
       padding: 36px 32px 52px;
       background: #fff;
       border-radius: 16px;
-      border: 1px solid var(--border); /* 테두리 명확하게 */
+      border: 1px solid var(--border);
     }
 
-    /* 라벨 스타일 */
+
     .form-card label {
       display: block;
       font-weight: 700;
@@ -31,7 +27,6 @@
       color: var(--text);
     }
 
-    /* 🌟 못생긴 입력창 해결: 레시피 등록 페이지와 동일한 인풋 스타일 적용 🌟 */
     .form-card input[type='text'],
     .form-card input[type='file'],
     .form-card textarea {
@@ -47,7 +42,7 @@
       transition: border-color 0.2s;
     }
 
-    /* 포커스 시 강조 색상 */
+
     .form-card input:focus,
     .form-card textarea:focus {
       border-color: var(--primary-color);
@@ -58,9 +53,6 @@
       resize: none;
     }
 
-    /* --------------------------
-      📌 프로필 수정 페이지 전용 스타일
-    --------------------------- */
     .background-box {
       height: 140px;
       border-radius: 12px;
@@ -103,14 +95,14 @@
 </head>
   <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // 요소 가져오기
+    
     const form = document.querySelector("form");
     const profileInput = document.getElementById("profile_image");
     const profilePreview = document.querySelector('img[alt="프로필 이미지 수정"]');
     const bgInput = document.getElementById("background_image");
     const bgPreview = document.querySelector(".background-box");
     
-    // 1. 기존에 저장된 정보가 있다면 불러와서 채워넣기 (수정하러 들어왔을 때)
+
     if(localStorage.getItem('nn_nickname')) {
         document.getElementById('nickname').value = localStorage.getItem('nn_nickname');
     }
@@ -121,20 +113,20 @@
         document.getElementById('bio').value = localStorage.getItem('nn_bio');
     }
 
-    // 2. 프로필 이미지 미리보기 기능
+
     profileInput.addEventListener("change", function (e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-          profilePreview.src = e.target.result; // 이미지 소스 교체
-          localStorage.setItem("nn_profile_img_temp", e.target.result); // 임시 저장
+          profilePreview.src = e.target.result; 
+          localStorage.setItem("nn_profile_img_temp", e.target.result); 
         };
         reader.readAsDataURL(file);
       }
     });
 
-// 3. 배경 이미지 미리보기 기능 (수정됨)
+
     bgInput.addEventListener("change", function (e) {
       const file = e.target.files[0];
       if (file) {
@@ -142,19 +134,16 @@
         reader.onload = function (e) {
           bgPreview.style.backgroundImage = `url('${e.target.result}')`;
           
-          // [삭제됨] bgPreview.textContent = "";  <-- 이 줄을 지우거나 주석 처리했습니다!
-          // 이제 이미지가 바뀌어도 '현재 배경 이미지' 하얀 박스가 그대로 위에 떠 있습니다.
 
           localStorage.setItem("nn_bg_img_temp", e.target.result);
         };
         reader.readAsDataURL(file);
       }
     });
-    // 4. 저장하기 버튼 눌렀을 때 (데이터 저장 및 이동)
+    
     form.addEventListener("submit", function (e) {
-      e.preventDefault(); // 폼의 기본 전송 기능 막기
-
-      // 텍스트 정보 저장
+      e.preventDefault(); 
+      
       const nickname = document.getElementById("nickname").value;
       const username = document.getElementById("username").value;
       const bio = document.getElementById("bio").value;
@@ -163,19 +152,18 @@
       localStorage.setItem("nn_username", username);
       localStorage.setItem("nn_bio", bio);
 
-      // 이미지 확정 저장 (임시 저장된 이미지를 실제 키로 이동)
+
       const tempProfile = localStorage.getItem("nn_profile_img_temp");
       const tempBg = localStorage.getItem("nn_bg_img_temp");
       
       if (tempProfile) localStorage.setItem("nn_profile_img", tempProfile);
       if (tempBg) localStorage.setItem("nn_bg_img", tempBg);
 
-      // 임시 데이터 삭제
       localStorage.removeItem("nn_profile_img_temp");
       localStorage.removeItem("nn_bg_img_temp");
 
       alert("프로필이 성공적으로 저장되었습니다!");
-      window.location.href = "11_인공띠용지능_mypage.html"; // 마이페이지로 이동
+      window.location.href = "11_인공띠용지능_mypage.html"; 
     });
   });
 </script>
