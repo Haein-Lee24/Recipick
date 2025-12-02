@@ -16,15 +16,24 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
-        margin-bottom: 24px;
+        gap: 60px;
+        margin-bottom: 2px;
       }
 
       /* 제목 (맨 위, 가운데) */
       .header-area h2 {
-        margin: 0;
+        margin: 10;
         text-align: center;
+        font-size: 24px;
+        padding-bottom: 20px; /* 선과 텍스트 사이 간격 */
+        border-bottom: 1px solid #ded3c4 !important;
+        width: 100%;  
       }
+
+      .section-title {
+        border-bottom: none !important;
+      }
+
 
       /* 제목 아래줄: 뒤로가기 + 정렬바 한 줄 */
       .header-controls {
@@ -47,6 +56,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        margin-top: 30px;
       }
     </style>
   </head>
