@@ -198,39 +198,45 @@
         </div>
       </section>
 
-      <h2 class="section-title">카테고리별 레시피 탐색</h2>
-      <div class="cat-grid" aria-label="레시피 카테고리">
-        <a class="cat-card" href="11_인공띠용지능_menulist.html#korean">
-          <img src="11_kimchi.jpg" alt="한식 이미지" />
-          <div class="cat-overlay">
-            <span class="cat-btn"><span class="cat-emoji"></span>한식</span>
-          </div>
-        </a>
-        <a class="cat-card" href="11_인공띠용지능_menulist.html#western">
-          <img src="11_pasta.jpg" alt="양식 이미지" />
-          <div class="cat-overlay">
-            <span class="cat-btn"><span class="cat-emoji"></span>양식</span>
-          </div>
-        </a>
-        <a class="cat-card" href="11_인공띠용지능_menulist.html#chinese">
-          <img src="11_chinese.png" alt="중식 이미지" />
-          <div class="cat-overlay">
-            <span class="cat-btn"><span class="cat-emoji"></span>중식</span>
-          </div>
-        </a>
-        <a class="cat-card" href="11_인공띠용지능_menulist.html#dessert">
-          <img src="11_snack.jpg" alt="디저트 이미지" />
-          <div class="cat-overlay">
-            <span class="cat-btn"><span class="cat-emoji"></span>디저트</span>
-          </div>
-        </a>
-        <a class="cat-card" href="11_인공띠용지능_menulist.html#drink">
-          <img src="11_drink.png" alt="음료 이미지" />
-          <div class="cat-overlay">
-            <span class="cat-btn"><span class="cat-emoji"></span>음료</span>
-          </div>
-        </a>
-      </div>
+<h2 class="section-title">카테고리별 레시피 탐색</h2>
+<div class="cat-grid" aria-label="레시피 카테고리">
+
+  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=korean">
+    <img src="11_kimchi.jpg" alt="한식 이미지" />
+    <div class="cat-overlay">
+      <span class="cat-btn"><span class="cat-emoji"></span>한식</span>
+    </div>
+  </a>
+
+  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=western">
+    <img src="11_pasta.jpg" alt="양식 이미지" />
+    <div class="cat-overlay">
+      <span class="cat-btn"><span class="cat-emoji"></span>양식</span>
+    </div>
+  </a>
+
+  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=chinese">
+    <img src="11_chinese.png" alt="중식 이미지" />
+    <div class="cat-overlay">
+      <span class="cat-btn"><span class="cat-emoji"></span>중식</span>
+    </div>
+  </a>
+
+  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=dessert">
+    <img src="11_snack.jpg" alt="디저트 이미지" />
+    <div class="cat-overlay">
+      <span class="cat-btn"><span class="cat-emoji"></span>디저트</span>
+    </div>
+  </a>
+
+  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=drink">
+    <img src="11_drink.png" alt="음료 이미지" />
+    <div class="cat-overlay">
+      <span class="cat-btn"><span class="cat-emoji"></span>음료</span>
+    </div>
+  </a>
+
+</div>
 
       <section class="mt-60" aria-label="추천 레시피">
         <h2 class="section-title">오늘의 추천 레시피</h2>
@@ -246,19 +252,19 @@
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
 
     <script>
-  // JSON 불러오기
+
   async function loadRecipes() {
     const response = await fetch("11_인공띠용지능_recipes.json");
     const data = await response.json();
     return data.recipes;
   }
 
-  // 랜덤 추출 함수
+
   function getRandomRecipes(list, count) {
     return [...list].sort(() => Math.random() - 0.5).slice(0, count);
   }
 
-  // 추천 레시피 렌더링
+
   async function renderRandomRecipes() {
     const target = document.getElementById("recommend-list");
     const recipes = await loadRecipes();
@@ -280,13 +286,13 @@
   renderRandomRecipes();
 </script>
 
-      <!-- 🔍 네비바 검색 기능 (메인에서도 검색 페이지로 이동) -->
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const navInput = document.querySelector(".nav-search-input");
         const navBtn = document.querySelector(".nav-search-btn");
 
-        if (!navInput || !navBtn) return; // 안전장치
+        if (!navInput || !navBtn) return; 
 
         navBtn.addEventListener("click", () => {
           const kw = navInput.value.trim();
@@ -294,7 +300,7 @@
             alert("검색어를 입력해주세요!");
             return;
           }
-          // 검색 결과 페이지로 이동
+
           location.href =
             "11_인공띠용지능_search.html?keyword=" +
             encodeURIComponent(kw);
