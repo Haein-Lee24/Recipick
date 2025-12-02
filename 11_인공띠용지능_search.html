@@ -72,6 +72,11 @@
       const params = new URLSearchParams(window.location.search);
       const keyword = (params.get("keyword") || "").trim();
 
+      const navSearchInput = document.querySelector(".nav-search-input");
+      if (navSearchInput) {
+        navSearchInput.value = keyword;  
+      }
+
       document.getElementById("keyword-text").textContent = keyword
         ? `"${keyword}"`
         : "전체";
