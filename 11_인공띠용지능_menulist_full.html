@@ -249,7 +249,7 @@
                 const thumb =
                   r.thumbnail || r.image || getDefaultImage(r.category);
 
-                const meta = `작성자: ${r.author || "냠냠이"} · 조회수 ${r.views || 0}`;
+                const meta = `작성자: ${r.author || "냠냠이"} · 조회수 ${r.review_count || 0}`;
 
 
                 const rating = `★ ${Number(r.rating).toFixed(1)}`;
