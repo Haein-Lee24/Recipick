@@ -165,11 +165,11 @@ a {
 /* 메뉴리스트 전체보기 페이지 정렬기능 관련 디자인 */
 /* 정렬 셀렉트 박스 */
 #sort-select {
-  padding: 7px 14px;
+  padding: 8px 14px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
   background: #fff;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.2s ease;
 }

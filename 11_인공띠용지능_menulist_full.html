@@ -7,25 +7,46 @@
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
     <style>
-      /* 상단 영역 및 뒤로가기 버튼 스타일 */
       main {
         margin-top: 40px;
       }
+
+      /* 상단 영역 전체 */
       .header-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+
+      /* 제목 (맨 위, 가운데) */
+      .header-area h2 {
+        margin: 0;
+        text-align: center;
+      }
+
+      /* 제목 아래줄: 뒤로가기 + 정렬바 한 줄 */
+      .header-controls {
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 24px;
-        padding-bottom: 16px;
-        border-bottom: none !important;
       }
+
       .back-btn {
-        padding: 8px 16px;
+        padding: 8px 20px;
         background: #eee;
-        border-radius: 8px;
+        border-radius: 80px;
         text-decoration: none;
         color: #333;
         font-size: 14px;
+      }
+
+      .sort-area {
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
     </style>
   </head>
@@ -50,22 +71,27 @@
     </nav>
 
     <main class="container page-pad">
-      <!-- 제목 + 뒤로가기 버튼 -->
+      <!-- 상단: 제목 + (뒤로가기 & 정렬바) -->
       <div class="header-area">
+        <!-- 🔺 맨 위 제목 -->
         <h2 id="full-title" class="section-title">로딩 중...</h2>
-        <a href="11_인공띠용지능_menulist.html" class="back-btn">← 카테고리별 목록으로</a>
-      </div>
 
-      <!-- 정렬 영역 -->
-      <div class="sort-area">
-        <label for="sort-select">정렬:</label>
-        <select id="sort-select">
-          <option value="name">이름순(기본)</option>
-          <option value="views">인기순(조회수 많은순)</option>
-          <option value="rating">평점 높은순</option>
-        </select>
-      </div>
+        <!-- 🔻 그 바로 아래 줄: 뒤로가기 + 정렬 -->
+        <div class="header-controls">
+          <a href="11_인공띠용지능_menulist.html" class="back-btn">
+            ← 카테고리별 목록으로
+          </a>
 
+          <div class="sort-area">
+            <label for="sort-select">정렬:</label>
+            <select id="sort-select">
+              <option value="name">이름순(기본)</option>
+              <option value="views">인기순(조회수 많은순)</option>
+              <option value="rating">평점 높은순</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
       <!-- 레시피 카드 리스트가 출력될 영역 -->
       <div id="full-list" class="card-grid"></div>
@@ -74,7 +100,6 @@
     <script>
       /* ----------------------------------------
         URL 파라미터에서 category 값 읽기
-        ex) ?category=korean, western, dessert 등
       ---------------------------------------- */
       const params = new URLSearchParams(window.location.search);
       const currentCategory = params.get("category");
@@ -93,9 +118,6 @@
       // localStorage key
       const STORAGE_KEY = "nn_recipes";
 
-      /* ----------------------------------------
-        카테고리별 기본 이미지 제공 함수
-      ---------------------------------------- */
       function getDefaultImage(korCategory) {
         switch (korCategory) {
           case "한식":
@@ -113,15 +135,10 @@
         }
       }
 
-      /* ----------------------------------------
-        localStorage에 저장된 사용자 레시피 로드
-        - 디저트는 ‘디저트’ + ‘간식’ 모두 포함
-      ---------------------------------------- */
       function loadUserRecipes(targetName, isDessertMode) {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
           if (!raw) return [];
-
           const all = JSON.parse(raw);
 
           return all.filter((u) => {
@@ -136,9 +153,6 @@
         }
       }
 
-      /* ----------------------------------------
-        카드 HTML 템플릿 생성 함수
-      ---------------------------------------- */
       function makeCardHTML(title, thumbnail, metaText, ratingText, href) {
         return `
           <a href="${href}" class="card">
@@ -152,9 +166,6 @@
         `;
       }
 
-      /* ----------------------------------------
-        JSON 파일(기본 레시피들) 불러와서 렌더링
-      ---------------------------------------- */
       fetch("11_인공띠용지능_recipes.json")
         .then((res) => res.json())
         .then((data) => {
@@ -164,7 +175,7 @@
 
           const targetName = categoryMap[currentCategory];
 
-    // 잘못된 category 처리
+          // 잘못된 category 처리
           if (!targetName) {
             titleEl.innerText = "잘못된 카테고리입니다.";
             return;
@@ -172,20 +183,20 @@
 
           const isDessertMode = currentCategory === "dessert";
 
-         /* JSON 레시피 */
+          // JSON 레시피
           const jsonRecipes = data.recipes.filter((r) => {
             if (isDessertMode)
               return r.category === "디저트" || r.category === "간식";
-              return r.category === targetName;
+            return r.category === targetName;
           });
 
-          /* localStorage 레시피 */
+          // localStorage 레시피
           const userRecipes = loadUserRecipes(targetName, isDessertMode);
 
-          /* 전체 리스트 합치기 */
+          // 전체 리스트 합치기
           let fullList = [...jsonRecipes, ...userRecipes];
 
-          /* 제목 표기 */
+          // 제목 표기
           titleEl.innerText = `전체 ${targetName} 레시피 (총 ${fullList.length}개)`;
 
           if (fullList.length === 0) {
@@ -193,67 +204,67 @@
             return;
           }
 
-    /* ------------------------
-       정렬 함수
-    ------------------------- */
           function sortList(type) {
             if (type === "name") {
-              fullList.sort((a, b) => a.title.localeCompare(b.title, "ko-KR"));
+              fullList.sort((a, b) =>
+                a.title.localeCompare(b.title, "ko-KR")
+              );
+            }
+
+            if (type === "views") {
+              fullList.sort((a, b) => {
+                const A = a.review_count
+                  ? Number(a.review_count)
+                  : Number(a.views || 0);
+                const B = b.review_count
+                  ? Number(b.review_count)
+                  : Number(b.views || 0);
+                return B - A;
+              });
+            }
+
+            if (type === "rating") {
+              fullList.sort(
+                (a, b) => Number(b.rating) - Number(a.rating)
+              );
+            }
+
+            renderCards();
           }
 
-          if (type === "views") {
-            fullList.sort((a, b) => {
-              // JSON: review_count  / user: views
-              const A = a.review_count ? Number(a.review_count) : Number(a.views || 0);
-              const B = b.review_count ? Number(b.review_count) : Number(b.views || 0);
-              return B - A;
-            });
+          function renderCards() {
+            listEl.innerHTML = fullList
+              .map((r) => {
+                const href = `11_인공띠용지능_recipe.html?id=${r.id}`;
+                const thumb =
+                  r.thumbnail || r.image || getDefaultImage(r.category);
+
+                const meta = r.review_count
+                  ? `작성자: 냠냠이 · 리뷰 ${r.review_count}개`
+                  : `작성자: 사용자 · 조회수 ${r.views || 0}`;
+
+                const rating = `★ ${Number(r.rating).toFixed(1)}`;
+
+                return makeCardHTML(
+                  r.title,
+                  thumb,
+                  meta,
+                  rating,
+                  href
+                );
+              })
+              .join("");
           }
 
-          if (type === "rating") {
-            fullList.sort((a, b) => {
-              const A = Number(a.rating);
-              const B = Number(b.rating);
-            return B - A;
-            });
-          }
+          // 초기 정렬: 이름순
+          sortList("name");
 
-          renderCards();
-        }
-
-    /* ------------------------
-       렌더링 함수
-    ------------------------- */
-        function renderCards() {
-          listEl.innerHTML = fullList
-            .map((r) => {
-              const href = `11_인공띠용지능_recipe.html?id=${r.id}`;
-              const thumb = r.thumbnail || r.image || getDefaultImage(r.category);
-
-              const meta = r.review_count
-                ? `작성자: 냠냠이 · 리뷰 ${r.review_count}개`
-                : `작성자: 사용자 · 조회수 ${r.views || 0}`;
-
-              const rating = `★ ${Number(r.rating).toFixed(1)}`;
-
-              return makeCardHTML(r.title, thumb, meta, rating, href);
-            })
-            .join("");
-        }
-
-    /* ------------------------
-       초기 정렬: 이름순
-    ------------------------- */
-        sortList("name");
-
-    /* ------------------------
-       정렬 UI 이벤트 연결
-    ------------------------- */
-        sortSelect.addEventListener("change", () => {
-          sortList(sortSelect.value);
-        });
-      })
-      .catch((err) => console.error("로딩 실패:", err));
+          // 정렬 UI 이벤트
+          sortSelect.addEventListener("change", () => {
+            sortList(sortSelect.value);
+          });
+        })
+        .catch((err) => console.error("로딩 실패:", err));
     </script>
   </body>
 </html>
