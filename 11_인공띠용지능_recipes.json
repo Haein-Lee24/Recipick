@@ -14,9 +14,9 @@
       ],
       "ingredients_optional": [],
       "steps": [
-        { "title": "재료 준비", "desc": "김치와 돼지고기를 준비합니다." },
-        { "title": "끓이기", "desc": "재료를 넣고 끓입니다." },
-        { "title": "완성", "desc": "간을 맞춰 마무리합니다." }
+        { "title": "재료 준비", "desc": "잘 익은 김치와 돼지고기를 먹기 좋은 크기로 준비합니다." },
+        { "title": "끓이기", "desc": "냄비에 돼지고기를 먼저 볶아 감칠맛을 끌어올린 뒤 김치를 넣어 함께 볶습니다." },
+        { "title": "완성", "desc": "물 또는 육수를 붓고 푹 끓여 깊은 맛을 완성합니다. 취향에 따라 두부나 파를 추가합니다." }
       ],
       "rating": 4.8,
       "review_count": 105,
@@ -36,9 +36,9 @@
       ],
       "ingredients_optional": [],
       "steps": [
-        { "title": "재료 준비", "desc": "나물과 고추장을 준비합니다." },
-        { "title": "비비기", "desc": "밥과 재료를 넣고 비빕니다." },
-        { "title": "완성", "desc": "계란후라이를 올려 완성합니다." }
+        { "title": "나물 준비", "desc": "시금치, 고사리, 콩나물 등 나물을 데쳐 양념합니다." },
+        { "title": "밥 준비", "desc": "따뜻한 밥을 그릇에 담고 나물·고기·고추장을 보기 좋게 올립니다." },
+        { "title": "비비기", "desc": "고추장과 참기름을 넣고 골고루 비벼 깊은 풍미를 즐깁니다." }
       ],
       "rating": 4.4,
       "review_count": 82,
@@ -55,9 +55,9 @@
       "ingredients_required": [{ "name": "소고기", "amount": "150g" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "재료 준비", "desc": "고기를 양념합니다." },
-        { "title": "볶기", "desc": "팬에 볶아줍니다." },
-        { "title": "완성", "desc": "접시에 담아 완성합니다." }
+        { "title": "고기 양념", "desc": "간장·설탕·배즙·마늘·참기름을 섞어 고기를 재워 둡니다." },
+        { "title": "빠르게 볶기", "desc": "센 불에서 고기를 재빨리 볶아 육즙을 가둡니다." },
+        { "title": "완성", "desc": "채소를 넣어 함께 볶아 한층 풍부한 맛을 완성합니다." }
       ],
       "rating": 4.9,
       "review_count": 151,
@@ -74,9 +74,9 @@
       "ingredients_required": [{ "name": "당면", "amount": "100g" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "재료 볶기", "desc": "채소와 고기를 볶습니다." },
-        { "title": "당면 삶기", "desc": "당면을 삶습니다." },
-        { "title": "완성", "desc": "모든 재료를 섞습니다." }
+        { "title": "채소 볶기", "desc": "양파, 당근, 시금치, 고기를 각각 볶아 식감을 살립니다." },
+        { "title": "당면 삶기", "desc": "당면을 탱탱하게 삶아 양념과 버무립니다." },
+        { "title": "섞기", "desc": "모든 재료를 한데 섞어 깊고 조화로운 맛을 완성합니다." }
       ],
       "rating": 4.2,
       "review_count": 63,
@@ -96,9 +96,9 @@
       ],
       "ingredients_optional": [],
       "steps": [
-        { "title": "양념 만들기", "desc": "고추장과 양념을 섞습니다." },
-        { "title": "떡 넣기", "desc": "떡을 넣고 졸입니다." },
-        { "title": "완성", "desc": "간을 맞춰 마무리합니다." }
+        { "title": "양념 만들기", "desc": "고추장, 고춧가루, 설탕을 섞어 떡볶이 양념을 준비합니다." },
+        { "title": "떡 끓이기", "desc": "떡을 넣고 양념이 충분히 스며들도록 졸입니다." },
+        { "title": "완성", "desc": "어묵이나 파를 더해 풍성하게 즐깁니다." }
       ],
       "rating": 4.5,
       "review_count": 214,
@@ -115,9 +115,9 @@
       "ingredients_required": [{ "name": "순두부", "amount": "1봉" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "양념 준비", "desc": "고춧가루와 마늘을 볶습니다." },
-        { "title": "재료 넣기", "desc": "순두부와 육수를 넣습니다." },
-        { "title": "완성", "desc": "계란을 넣어 마무리합니다." }
+        { "title": "양념 볶기", "desc": "고춧가루와 마늘을 기름에 볶아 향을 냅니다." },
+        { "title": "재료 넣기", "desc": "순두부·돼지고기·해물 등을 넣고 육수를 부어 끓입니다." },
+        { "title": "완성", "desc": "끓기 시작하면 계란 하나 톡 넣어 풍미를 더합니다." }
       ],
       "rating": 4.3,
       "review_count": 57,
@@ -134,8 +134,8 @@
       "ingredients_required": [{ "name": "된장", "amount": "1T" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "끓이기", "desc": "된장과 재료를 넣고 끓입니다." },
-        { "title": "간 맞추기", "desc": "간을 맞춥니다." }
+        { "title": "끓이기", "desc": "된장·다시마·야채를 넣고 은은하게 끓여 감칠맛을 냅니다." },
+        { "title": "간 맞추기", "desc": "두부·호박·버섯을 넣고 취향에 맞게 간을 조절합니다." }
       ],
       "rating": 4.4,
       "review_count": 121,
@@ -152,8 +152,8 @@
       "ingredients_required": [{ "name": "김", "amount": "1장" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "재료 준비", "desc": "속재료를 썰어 준비합니다." },
-        { "title": "말기", "desc": "밥과 재료를 김에 올려 말아줍니다." }
+        { "title": "재료 준비", "desc": "햄, 계란, 단무지, 오이 등 속재료를 준비합니다." },
+        { "title": "말기", "desc": "밥과 재료를 김 위에 올려 단단하게 말아줍니다." }
       ],
       "rating": 4.2,
       "review_count": 93,
@@ -170,8 +170,8 @@
       "ingredients_required": [{ "name": "뼈다귀", "amount": "300g" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "끓이기", "desc": "뼈를 삶아 국물을 냅니다." },
-        { "title": "재료 넣기", "desc": "감자와 양념을 넣어 끓입니다." }
+        { "title": "육수 내기", "desc": "뼈를 오래 삶아 깊고 진한 국물을 만듭니다." },
+        { "title": "재료 넣기", "desc": "감자·우거지·양념을 넣고 진득하게 끓여 완성합니다." }
       ],
       "rating": 4.1,
       "review_count": 48,
@@ -188,8 +188,8 @@
       "ingredients_required": [{ "name": "삼겹살", "amount": "200g" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "굽기", "desc": "삼겹살을 노릇하게 굽습니다." },
-        { "title": "완성", "desc": "먹기 좋게 썰어 완성합니다." }
+        { "title": "굽기", "desc": "달궈진 팬에 삼겹살을 노릇하게 굽습니다." },
+        { "title": "완성", "desc": "한 입 크기로 썰어 쌈장, 마늘, 상추와 함께 즐깁니다." }
       ],
       "rating": 4.9,
       "review_count": 189,
@@ -206,8 +206,8 @@
       "ingredients_required": [{ "name": "갈비", "amount": "400g" }],
       "ingredients_optional": [],
       "steps": [
-        { "title": "삶기", "desc": "갈비를 삶습니다." },
-        { "title": "조림", "desc": "양념과 함께 조립니다." }
+        { "title": "삶기", "desc": "갈비의 잡내를 제거하도록 삶아 준비합니다." },
+        { "title": "조림", "desc": "양념과 함께 천천히 조려 깊은 풍미를 냅니다." }
       ],
       "rating": 4.8,
       "review_count": 77,
@@ -262,7 +262,7 @@
         { "name": "밥", "amount": "1공기" }
       ],
       "ingredients_optional": [],
-      "steps": [{ "title": "볶기", "desc": "김치와 밥을 볶습니다." }],
+      "steps": [{ "title": "볶기", "desc": "김치를 먼저 볶아 풍미를 살린 뒤 밥을 넣어 고르게 볶습니다." }],
       "rating": 4.5,
       "review_count": 220,
       "reviews": []
