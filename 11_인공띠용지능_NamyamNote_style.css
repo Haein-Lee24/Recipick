@@ -8,12 +8,11 @@
   --green-deep: #2f6b4f;
   --gray-light: #f3f4f6;
   --gray-deep: #374151;
-
   --text: #41403e;
   --muted: #8c8c8c;
   --card-bg: #fff;
-  --page-bg: #fdf9f2; /* 'Happy Salads' 템플릿과 유사한 아주 옅은 베이지색으로 변경 */
-  --border: #ded3c4; /* 연한 갈색 테두리로 부드러운 느낌 강조 */
+  --page-bg: #fdf9f2;
+  --border: #ded3c4;
   --shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
   --radius-lg: 16px;
@@ -21,7 +20,6 @@
   --radius-full: 999px;
 }
 
-/* ---- Base ---- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -45,7 +43,6 @@ a {
   text-decoration: none;
 }
 
-/* ---- Layout helpers ---- */
 .container {
   width: 100%;
   max-width: 1080px;
@@ -57,31 +54,13 @@ a {
   padding: 32px 16px 24px;
 }
 
-.mt-0 {
-  margin-top: 0;
-}
+.mt-0 { margin-top: 0; }
+.mt-20 { margin-top: 20px; }
+.mt-60 { margin-top: 60px; }
+.mt-80 { margin-top: 80px; }
 
-.mt-20 {
-  margin-top: 20px;
-}
+.center { text-align: center; }
 
-.mt-60 {
-  margin-top: 60px;
-}
-
-.mt-80 {
-  margin-top: 80px;
-}
-
-.center {
-  text-align: center;
-}
-
-/* ===============================
-   Global components (공통 스타일)
-   =============================== */
-
-/* 로고 */
 .logo-img,
 .logo {
   height: 56px;
@@ -90,7 +69,6 @@ a {
   display: block;
 }
 
-/* 네비 링크 (공통) */
 .nav-link {
   color: var(--muted);
   transition: color 0.2s;
@@ -106,7 +84,6 @@ a {
   font-weight: 600;
 }
 
-/* 팔로잉/팔로워 카드 */
 .follow-card {
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -120,50 +97,27 @@ a {
   color: var(--primary-color);
 }
 
-/* 색상 유틸(커스텀) */
-.bg-yellow-soft {
-  background: var(--yellow-soft);
-}
+.bg-yellow-soft { background: var(--yellow-soft); }
+.text-yellow-deep { color: var(--yellow-deep); }
+.hover-bg-yellow-soft:hover { background: #eadbb6; }
 
-.text-yellow-deep {
-  color: var(--yellow-deep);
-}
+.bg-green-soft { background: var(--green-soft); }
+.text-green-deep { color: var(--green-deep); }
 
-.hover-bg-yellow-soft:hover {
-  background: #eadbb6;
-}
+.bg-gray-light { background: var(--gray-light); }
+.text-gray-deep { color: var(--gray-deep); }
 
-.bg-green-soft {
-  background: var(--green-soft);
-}
-
-.text-green-deep {
-  color: var(--green-deep);
-}
-
-.bg-gray-light {
-  background: var(--gray-light);
-}
-
-.text-gray-deep {
-  color: var(--gray-deep);
-}
-
-/* 정렬바 영역 */
 .sort-area {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 10px;
-
   margin-bottom: 24px;
   font-size: 14px;
   font-weight: 600;
   color: #444;
 }
 
-/* 메뉴리스트 전체보기 페이지 정렬기능 관련 디자인 */
-/* 정렬 셀렉트 박스 */
 #sort-select {
   padding: 8px 14px;
   border-radius: 8px;
@@ -174,24 +128,16 @@ a {
   transition: all 0.2s ease;
 }
 
-/* hover 효과 */
 #sort-select:hover {
   border-color: #bfbfbf;
 }
 
-/* focus 효과 */
 #sort-select:focus {
   outline: none;
   border-color: #888;
   box-shadow: 0 0 0 2px rgba(200, 200, 200, 0.3);
 }
 
-
-/* ===============================
-   Main page specific (메인 전용)
-   =============================== */
-
-/* Nav (site-nav) */
 .site-nav {
   position: sticky;
   top: 0;
@@ -242,7 +188,6 @@ a {
   text-underline-offset: 4px;
 }
 
-/* Hero */
 .hero {
   background: #fff;
   padding: 32px 24px;
@@ -260,12 +205,8 @@ a {
   color: var(--text);
 }
 
-.hero .brand {
-  color: var(--primary-color);
-}
-.hero .thumb {
-  margin-bottom: 24px;
-}
+.hero .brand { color: var(--primary-color); }
+.hero .thumb { margin-bottom: 24px; }
 
 .nav-top-center {
   display: flex;
@@ -319,9 +260,7 @@ a {
   font-size: 16px;
 }
 
-.nav-search-btn:hover {
-  background: #a48c58;
-}
+.nav-search-btn:hover { background: #a48c58; }
 
 .nav-menu-bar {
   display: flex;
@@ -345,7 +284,6 @@ a {
   text-underline-offset: 4px;
 }
 
-/* Section title */
 .section-title {
   margin: 80px 0 16px;
   font-size: 24px;
@@ -356,7 +294,6 @@ a {
   letter-spacing: -0.2px;
 }
 
-/* Category grid */
 .cat-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -364,15 +301,11 @@ a {
 }
 
 @media (min-width: 780px) {
-  .cat-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .cat-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 1040px) {
-  .cat-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
+  .cat-grid { grid-template-columns: repeat(5, 1fr); }
 }
 
 .cat-card {
@@ -415,45 +348,37 @@ a {
   justify-content: center;
   padding: 0px;
 }
-/* 🌟 카테고리 버튼 디자인 개선 부분 🌟 */
+
 .cat-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.75); /* 흰색 반투명 배경 추가 */
-  backdrop-filter: blur(4px); /* 배경을 살짝 흐리게 만들어 가독성 UP */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
   color: var(--primary-color);
   font-weight: 800;
   padding: 12px 20px;
   border-radius: var(--radius-full);
   box-shadow: none;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  border: 2px solid var(--border); /* 로고 색감과 어울리는 테두리 */
+  border: 2px solid var(--border);
 }
 
-/* 호버 시 색상 반전 효과 */
 .cat-card:hover .cat-btn {
-  background: #916b46; /* 기존보다 20% 정도 밝은 브라운 */
+  background: #916b46;
   color: #fff;
   border-color: #916b46;
 }
 
 .cat-emoji {
   font-size: 18px;
-  filter: grayscale(100%); /* 이모지 색상을 흑백으로 */
+  filter: grayscale(100%);
 }
 
-.cat-emoji:empty {
-  display: none;
-}
+.cat-emoji:empty { display: none; }
+.cat-card:hover .cat-emoji { filter: grayscale(0%); }
 
-/* 호버 시 이모지 색상 복원 */
-.cat-card:hover .cat-emoji {
-  filter: grayscale(0%);
-}
-
-/* Search */
 .search-wrap {
   margin: 60px auto 0;
   max-width: 640px;
@@ -500,11 +425,8 @@ a {
   transition: opacity 0.2s;
 }
 
-.search-btn:hover {
-  opacity: 0.92;
-}
+.search-btn:hover { opacity: 0.92; }
 
-/* Popular cards */
 .card-grid {
   margin-top: 20px;
   display: grid;
@@ -513,15 +435,11 @@ a {
 }
 
 @media (min-width: 640px) {
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 920px) {
-  .card-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .card-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 .card {
@@ -579,7 +497,6 @@ a {
   opacity: 1;
 }
 
-/* To top + Footer */
 .to-top {
   position: fixed;
   right: 16px;
@@ -594,9 +511,7 @@ a {
   transition: opacity 0.2s;
 }
 
-.to-top:hover {
-  opacity: 1;
-}
+.to-top:hover { opacity: 1; }
 
 footer {
   background: var(--text);
@@ -606,8 +521,6 @@ footer {
   font-size: 13px;
   text-align: center;
 }
-
-/* mypage및 edit-profile 스타일*/
 
 .profile-header {
   background: #fff;
@@ -726,9 +639,7 @@ footer {
   transition: opacity 0.2s;
 }
 
-.btn-solid:hover {
-  opacity: 0.92;
-}
+.btn-solid:hover { opacity: 0.92; }
 
 .btn-warn:hover {
   color: #fff;
@@ -771,13 +682,9 @@ footer {
   transition: background-color 0.2s;
 }
 
-.list-item:hover {
-  background: #f9fafb;
-}
+.list-item:hover { background: #f9fafb; }
 
-.list-text {
-  min-width: 0;
-}
+.list-text { min-width: 0; }
 
 .list-ttl {
   font-weight: 700;
@@ -803,9 +710,7 @@ footer {
 }
 
 @media (min-width: 980px) {
-  .grid-2 {
-    grid-template-columns: 1fr 1fr;
-  }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
 }
 
 .my-recipes .card-sub {
@@ -853,125 +758,6 @@ footer {
 
 .review-list .card {
   margin-bottom: 28px;
-}
-.review-input-box {
-  margin-bottom: 28px;
-}
-
-.float-btn {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-  background: #fff;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: 999px;
-  box-shadow: var(--shadow);
-  font-size: 14px;
-  opacity: 0.9;
-  transition: opacity 0.2s;
-}
-.float-btn:hover {
-  opacity: 1;
-}
-
-.file-label {
-  display: inline-block;
-  padding: 10px 16px;
-  background-color: var(--gray-deep);
-  color: #fff;
-  font-weight: 600;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.file-label:hover {
-  background-color: #1f2937;
-}
-.recipe-meta {
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-top: 8px;
-}
-
-.view-all-btn-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px !important;
-  width: 100;
-  grid-column: 1 / -1;
-}
-
-.view-all-btn {
-  padding: 14px 48px;
-  background: var(--primary-color);
-  color: #fff;
-  border-radius: 50px;
-  font-weight: 700;
-  transition: 0.25s;
-}
-
-.view-all-btn:hover {
-  background: #e5dabf;
-  transform: translateY(-2px);
-}
-
-.btn-solid {
-  padding: 6px 14px;
-  font-size: 14px;
-  border-radius: 6px;
-}
-
-.badge-green {
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #e5f7ee;
-  color: #1b7a4a;
-  font-weight: 700;
-  border: 1px solid #c8ecd9;
-}
-
-.gap-24 {
-  gap: 24px;
-}
-
-.between {
-  justify-content: space-between;
-}
-
-.right {
-  text-align: right;
-}
-
-@media (min-width: 920px) {
-  .my-recipes.card-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.btn-solid,
-.review-input-box .btn-solid,
-.btn-outline {
-  min-width: 140px !important;
-  height: 44px !important;
-  padding: 0 18px !important;
-  font-size: 15px !important;
-  font-weight: 800 !important;
-  border-radius: 12px !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.view-all-btn-wrap {
-  margin-bottom: 80px;
-}
-
-.review-list .card {
   transform: none !important;
   box-shadow: var(--shadow) !important;
   background: #fff !important;
@@ -979,11 +765,15 @@ footer {
   transition: none !important;
 }
 
-.review-list .card:hover {
-  transform: none !important;
-  box-shadow: var(--shadow) !important;
-  background: #fff !important;
+.review-input-box { margin-bottom: 28px; }
+
+.review-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 12px;
 }
+
 .review-list .btn-edit {
   min-width: 80px !important;
   height: 36px !important;
@@ -1004,26 +794,7 @@ footer {
   background: #fff9e9 !important;
   border-color: #e5d2a9 !important;
 }
-.review-btns {
-  display: flex;
-  justify-content: flex-end;
-  gap: 6px;
-  margin-top: 12px;
-}
-.review-list .card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: var(--shadow);
-}
 
-.review-btns {
-  display: flex;
-  justify-content: flex-end;
-  gap: 6px;
-  margin-top: 12px;
-}
 .card-box h2.card-title-lg,
 .card-box h3.section-title {
   font-size: 22px !important;
@@ -1033,9 +804,7 @@ footer {
   padding-bottom: 0 !important;
 }
 
-.card-box .list-item {
-  transition: none !important;
-}
+.card-box .list-item { transition: none !important; }
 
 .card-box .list-item:hover {
   background: #fff !important;
@@ -1051,6 +820,7 @@ footer {
 .card-box .list-item strong {
   font-size: 16px !important;
 }
+
 #ranking .ranking-list {
   display: flex;
   flex-direction: column;
@@ -1111,9 +881,7 @@ footer {
   flex-shrink: 0;
 }
 
-#ranking .rank-info {
-  flex-grow: 1;
-}
+#ranking .rank-info { flex-grow: 1; }
 
 #ranking .rank-title {
   font-size: 18px;
@@ -1164,3 +932,4 @@ footer {
     margin-bottom: 8px;
   }
 }
+
