@@ -249,24 +249,7 @@
       "review_count": 112,
       "reviews": []
     },
-    {
-      "id": "k14",
-      "title": "김치볶음밥",
-      "summary": "간단하지만 맛있는 김치볶음밥.",
-      "category": "한식",
-      "difficulty": "쉬움 (★☆☆)",
-      "time": "20분",
-      "thumbnail": "11_kimchi.jpg",
-      "ingredients_required": [
-        { "name": "김치", "amount": "1컵" },
-        { "name": "밥", "amount": "1공기" }
-      ],
-      "ingredients_optional": [],
-      "steps": [{ "title": "볶기", "desc": "김치를 먼저 볶아 풍미를 살린 뒤 밥을 넣어 고르게 볶습니다." }],
-      "rating": 4.5,
-      "review_count": 220,
-      "reviews": []
-    },
+    
     {
       "id": "k15",
       "title": "닭갈비",
