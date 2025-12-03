@@ -28,4 +28,3 @@ function renderAllCategories() {
   renderCategory('dessert');
   renderCategory('drink');
 }
-//추가
