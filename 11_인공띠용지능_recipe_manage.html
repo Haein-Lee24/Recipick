@@ -4,12 +4,9 @@
     <meta charset="UTF-8" />
     <title>냠냠노트 - 레시피 관리</title>
 
-    <!-- 공통 스타일 (홈/랭킹과 동일) -->
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
     <style>
-      /* 레시피 관리 전용 스타일 */
-
       #ranking .manage-empty-text {
         margin-top: 20px;
         font-size: 14px;
@@ -22,11 +19,8 @@
         flex-direction: column;
         gap: 16px;
         margin-top: 24px;
+      }
 
-    }
-
-
-      /* 랭킹 카드 스타일 재활용 */
       #ranking .rank-card {
         display: flex;
         align-items: center;
@@ -58,7 +52,6 @@
         min-width: 0;
       }
 
-      /* 입력 필드 (제목/카테고리) */
       #ranking .manage-input {
         width: 100%;
         padding: 8px 10px;
@@ -81,7 +74,6 @@
         color: var(--muted);
       }
 
-      /* 오른쪽 버튼 영역 */
       #ranking .rank-meta {
         text-align: right;
         margin-left: 12px;
@@ -162,9 +154,7 @@
           <a href="11_인공띠용지능_menulist.html" class="nav-link">레시피</a>
           <a href="11_인공띠용지능_register.html" class="nav-link">등록</a>
           <a href="11_인공띠용지능_rank.html" class="nav-link">랭킹</a>
-          <a href="11_인공띠용지능_mypage.html" class="nav-link active"
-            >마이페이지</a
-          >
+          <a href="11_인공띠용지능_mypage.html" class="nav-link active">마이페이지</a>
         </nav>
       </div>
     </nav>
@@ -180,11 +170,8 @@
 
         <h2 class="section-title">등록한 레시피 목록</h2>
 
-        <p id="empty-text" class="manage-empty-text">
-          등록된 레시피가 없습니다.
-        </p>
+        <p id="empty-text" class="manage-empty-text">등록된 레시피가 없습니다.</p>
 
-        <!-- 랭킹 리스트와 유사한 카드 리스트 -->
         <div id="manageList" class="manage-list"></div>
       </div>
     </main>
@@ -239,7 +226,7 @@
           const thumbSrc =
             r.image && r.image.trim()
               ? r.image
-              : '11_background.png'; // 썸네일 없을 때 대체 이미지
+              : '11_background.png';
 
           card.innerHTML = `
             <img src="${thumbSrc}" class="rank-card-image" alt="${escapeHTML(
@@ -283,39 +270,32 @@
 
       document.addEventListener('DOMContentLoaded', renderList);
 
-      // 수정/삭제 버튼 이벤트 (카드 우측)
-      document
-        .getElementById('manageList')
-        .addEventListener('click', function (e) {
-          const target = e.target;
-          if (
-            !target.classList.contains('btn-edit') &&
-            !target.classList.contains('btn-delete')
-          )
-            return;
+      document.getElementById('manageList').addEventListener('click', function (e) {
+        const target = e.target;
+        if (
+          !target.classList.contains('btn-edit') &&
+          !target.classList.contains('btn-delete')
+        )
+          return;
 
-          const card = target.closest('.rank-card');
-          if (!card) return;
+        const card = target.closest('.rank-card');
+        if (!card) return;
 
-          const id = card.getAttribute('data-id');
-          let list = loadRecipes();
+        const id = card.getAttribute('data-id');
+        let list = loadRecipes();
 
-          if (target.classList.contains('btn-edit')) {
-            // 👉 수정 페이지(등록 페이지)로 이동 (edit 모드)
-            const url =
-              '11_인공띠용지능_register.html?editId=' +
-              encodeURIComponent(id);
-            window.location.href = url;
-          }
+        if (target.classList.contains('btn-edit')) {
+          const url = '11_인공띠용지능_register.html?editId=' + encodeURIComponent(id);
+          window.location.href = url;
+        }
 
-          if (target.classList.contains('btn-delete')) {
-            // 👉 alert 후 삭제
-            list = list.filter((r) => String(r.id) !== String(id));
-            saveRecipes(list);
-            alert('레시피가 삭제되었습니다.');
-            renderList();
-          }
-        });
+        if (target.classList.contains('btn-delete')) {
+          list = list.filter((r) => String(r.id) !== String(id));
+          saveRecipes(list);
+          alert('레시피가 삭제되었습니다.');
+          renderList();
+        }
+      });
     </script>
   </body>
 </html>
