@@ -110,28 +110,22 @@
     </style>
   </head>
   <body>
-    <!-- ------------------------------
-         🔥 로그인된 유저 데이터 불러오기
-    -------------------------------- -->
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // 1. 로그인 유저 정보 로드
         const currentUser = localStorage.getItem("currentUser");
         const users = JSON.parse(localStorage.getItem("users")) || {};
         const userInfo = users[currentUser];
 
-        // 2. 로그인 확인
         if (!currentUser || !userInfo) {
           alert("로그인이 필요한 페이지입니다.");
           location.href = "11_인공띠용지능_login.html";
           return;
         }
 
-        // 3. 프로필 정보 렌더링
         document.querySelector(".profile-name").textContent = userInfo.nickname;
         document.querySelector(".profile-id").textContent = "@" + currentUser;
 
-        // 4. 프로필 소개 / 이미지 / 배경 이미지 유지
         const savedBio = localStorage.getItem("nn_bio");
         const savedProfileImg = localStorage.getItem("nn_profile_img");
         const savedBgImg = localStorage.getItem("nn_bg_img");
@@ -147,7 +141,6 @@
             `url('${savedBgImg}')`;
         }
 
-        // 5. 로그아웃 기능
         const logoutBtn = document.querySelector('a[href="#logout"]');
         if (logoutBtn) {
           logoutBtn.addEventListener("click", (e) => {
@@ -161,9 +154,6 @@
         }
       });
     </script>
-
-
-    <!-- 네비게이션 -->
     <nav class="site-nav">
       <div class="container nav-top-center">
         <div class="nav-center-box">
@@ -209,7 +199,6 @@
       </div>
     </nav>
 
-    <!-- 메인 -->
     <main class="container page-pad">
       <section class="profile-header">
         <div class="profile-cover" role="img"></div>
@@ -234,7 +223,6 @@
           </div>
         </div>
 
-        <!-- 🔥 팔로우/팔로잉/내 레시피 영역 -->
         <div class="follow">
           <div id="btn-myrecipe">
             <strong class="follow-num">0</strong>
@@ -251,7 +239,6 @@
         </div>
       </section>
 
-      <!-- 저장한 레시피 / 최근 본 레시피 -->
       <section class="grid-2" style="gap: 24px; margin-top: 80px">
         <div class="card-box">
           <div class="bar" style="justify-content: space-between">
@@ -270,7 +257,6 @@
         </div>
       </section>
 
-      <!-- 내가 등록한 레시피 -->
       <section
         class="card-box"
         style="margin-top: 80px"
@@ -300,9 +286,6 @@
       <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
     </main>
 
-    <!-- ---------------------------------
-        ⬇ 팔로우 팝업 HTML
-    ----------------------------------- -->
     <div id="follow-popup">
       <div class="popup-box">
         <h2 id="popup-title">목록</h2>
@@ -310,10 +293,6 @@
         <div class="popup-close">닫기</div>
       </div>
     </div>
-
-    <!-- ------------------------
-        ⬇ 레시피 / 리스트 로딩 JS
-    ------------------------- -->
     <script>
       const LOCAL_RECIPES_KEY = "nn_recipes";
       const SAVED_RECIPES_KEY = "nn_saved_recipes";
@@ -335,7 +314,6 @@
         const count = list.length;
         const followNums = document.querySelectorAll(".follow-num");
         if (followNums.length > 0) {
-          // 첫 번째(내 레시피) 숫자만 갱신
           followNums[0].textContent = count;
         }
       }
@@ -445,12 +423,7 @@
         renderRecentList();
       });
     </script>
-
-    <!-- -------------------------
-        ⬇ 상단 검색창 스크립트
-    -------------------------- -->
     <script>
-      // 🔥 팔로잉/팔로워 숫자 자동 세팅
       async function loadFollowCounts() {
         try {
           const res = await fetch("11_인공띠용지능_followlist.json");
@@ -461,8 +434,8 @@
 
           const nums = document.querySelectorAll(".follow-num");
           if (nums.length >= 3) {
-            nums[1].textContent = followingCount;  // 팔로잉 숫자
-            nums[2].textContent = followerCount;   // 팔로워 숫자
+            nums[1].textContent = followingCount;  
+            nums[2].textContent = followerCount;   
           }
         } catch (err) {
           console.error("팔로우 숫자 로딩 실패:", err);
@@ -494,10 +467,6 @@
         });
       });
     </script>
-
-    <!-- -------------------------
-        ⬇ 팔로워/팔로잉 팝업 + 내 레시피 스크롤
-    -------------------------- -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const popup = document.getElementById("follow-popup");
@@ -534,26 +503,18 @@
             alert("팔로우 정보를 불러오지 못했어요.");
           }
         }
-
-        // 팔로잉 버튼 클릭 → 팔로잉 팝업
         document
           .getElementById("btn-following")
           .addEventListener("click", () => loadFollowList("following"));
-
-        // 팔로워 버튼 클릭 → 팔로워 팝업
         document
           .getElementById("btn-follower")
           .addEventListener("click", () => loadFollowList("follower"));
-
-        // 팝업 닫기
         popupClose.addEventListener("click", () => {
           popup.style.display = "none";
         });
         popup.addEventListener("click", (e) => {
           if (e.target === popup) popup.style.display = "none";
         });
-
-        // 💡 내 레시피 숫자 클릭 → "내가 등록한 레시피" 섹션으로 스무스 스크롤
         document
           .getElementById("btn-myrecipe")
           .addEventListener("click", () => {

@@ -51,7 +51,7 @@ function loadAllRecipes() {
       const localRecipes = localRaw.map((r) => normalizeLocalRecipe(r));
       const combined = [...baseRecipes, ...localRecipes];
 
-      // 🔹 localStorage에 저장된 리뷰를 레시피에 합쳐서 반영
+
       const reviewsMap = loadPersistedReviews();
       combined.forEach((r) => {
         const id = String(r.id);
@@ -77,7 +77,6 @@ function loadAllRecipes() {
     });
 }
 
-// 🔹 리뷰를 보관하는 map 불러오기 { [recipeId]: [review, ...] }
 function loadPersistedReviews() {
   try {
     const raw = localStorage.getItem(REVIEWS_KEY);
@@ -90,7 +89,7 @@ function loadPersistedReviews() {
   }
 }
 
-// 🔹 리뷰 map 저장
+
 function savePersistedReviews(map) {
   try {
     localStorage.setItem(REVIEWS_KEY, JSON.stringify(map));
@@ -99,28 +98,23 @@ function savePersistedReviews(map) {
   }
 }
 
-/**
- * register.js에서 저장한 "내 레시피"를
- * 상세 페이지에서 쓰기 좋은 통일된 구조로 바꿔주는 함수
- * (✅ 선택 재료까지 제대로 반영)
- */
+
 function normalizeLocalRecipe(r) {
-  // ---------- 1) 필수 재료 ----------
   let required = [];
   if (Array.isArray(r.ingredientsRequired)) {
-    // 새 구조: { name, amount } 배열
+    
     required = r.ingredientsRequired.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   } else if (Array.isArray(r.ingredients_required)) {
-    // 이미 정규화된 구조로 저장된 경우
+  
     required = r.ingredients_required.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   } else if (typeof r.ingredients === 'string') {
-    // 예전 구조: 통짜 문자열
+  
     required = r.ingredients
       .split(/[,\n]/)
       .map((s) => s.trim())
@@ -131,47 +125,46 @@ function normalizeLocalRecipe(r) {
       }));
   }
 
-  // ---------- 2) 선택 재료 ----------
+  
   let optional = [];
   if (Array.isArray(r.ingredientsOptional)) {
-    // 새 구조: { name, amount } 배열
+
     optional = r.ingredientsOptional.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   } else if (Array.isArray(r.ingredients_optional)) {
-    // 혹시 예전에 ingredients_optional 로 저장된 경우
+
     optional = r.ingredients_optional.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   }
 
-  // ---------- 3) 조리 과정 ----------
+ 
   let steps = [];
 
   if (Array.isArray(r.stepsDetail)) {
-    // ✅ 새 구조: { title, description } 배열
+ 
     steps = r.stepsDetail.map((s, idx) => ({
       title: (s.title && s.title.trim()) || `단계 ${idx + 1}`,
       desc: (s.description || '').trim()
     }));
   } else if (Array.isArray(r.steps)) {
-    // 이미 { title, desc } 형태의 배열인 경우
+   
     steps = r.steps;
   } else if (typeof r.steps === 'string' && r.steps.trim()) {
-    // 예전 문자열 구조: "제목\n설명\n\n제목\n설명..." 형태 또는 그냥 줄 나열
-    const blocks = r.steps.split(/\n\s*\n/); // 빈 줄 기준으로 블럭 나누기
+  
+    const blocks = r.steps.split(/\n\s*\n/); 
 
     blocks.forEach((block, idx) => {
       const lines = block.split('\n').map((s) => s.trim()).filter(Boolean);
 
       if (lines.length === 0) return;
 
-      let titleLine = lines[0];                 // 첫 줄
-      const descLine = lines.slice(1).join('\n'); // 나머지 줄
+      let titleLine = lines[0];                 
+      const descLine = lines.slice(1).join('\n'); 
 
-      // "1. 단계 1", "1 단계 1" 이런 앞부분 숫자/단계 제거
       titleLine = titleLine.replace(/^\d+\s*\.?\s*(단계)?\s*/u, '').trim();
 
       const title = titleLine || `단계 ${idx + 1}`;
@@ -203,7 +196,7 @@ function normalizeLocalRecipe(r) {
     reviews: reviews,
     views: r.views || 0,
 
-    // 상세 페이지에서 사용하는 필드들
+  
     ingredients_required: required,
     ingredients_optional: optional,
     steps: steps,
@@ -465,27 +458,26 @@ function setupReviewSystem(recipe) {
         </article>
       `;
 
-      // 리스트 맨 앞에 새 리뷰 추가
+
       reviewList.insertAdjacentHTML('afterbegin', newReviewHtml);
 
-      // "아직 등록된 리뷰가 없습니다." 메시지 제거
+      
       const emptyMsg = reviewList.querySelector('.muted');
       if (emptyMsg) emptyMsg.remove();
 
-      // 🔹 localStorage에 리뷰 저장
+      
       const map = loadPersistedReviews();
       const list = Array.isArray(map[recipeId]) ? map[recipeId] : [];
       list.unshift(reviewObj);
       map[recipeId] = list;
       savePersistedReviews(map);
 
-      // 🔹 리뷰 제목 개수 +1
+     
       const currentCountMatch = reviewTitle.textContent.match(/\d+/);
       let currentCount = currentCountMatch ? Number(currentCountMatch[0]) : 0;
       currentCount += 1;
       reviewTitle.textContent = `리뷰 (${currentCount}개)`;
 
-      // 🔹 상단 별점 / 리뷰 개수도 업데이트
       const ratingEl = document.getElementById('recipe-rating');
       if (ratingEl) {
         const oldRating =
@@ -508,7 +500,7 @@ function setupReviewSystem(recipe) {
         ratingEl.setAttribute('data-review-count', String(newCount));
       }
 
-      // 입력 초기화
+    
       reviewInput.value = '';
       currentRating = 0;
       updateStars();
