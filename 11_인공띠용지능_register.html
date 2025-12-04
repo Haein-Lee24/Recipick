@@ -14,7 +14,6 @@
         border-radius: 16px;
       }
 
-      /* 모든 라벨 공통 */
       .field-label,
       .form-card label {
         display: block;
@@ -22,7 +21,6 @@
         margin-bottom: 8px;
       }
 
-      /* 입력 요소 스타일 */
       .form-card input[type='text'],
       .form-card input[type='file'],
       .form-card textarea {
@@ -33,23 +31,18 @@
         outline: none;
         background: #fff;
         box-sizing: border-box;
-
-        /* 🔥 기본 margin 제거 (간격이 들쭉날쭉해지는 원인 제거) */
         margin: 0;
       }
 
-      /* textarea는 스크롤만 */
       .form-card textarea {
         resize: none;
         overflow-y: auto;
       }
 
-      /* 각 요소 간 간격 통일 */
       .form-group {
-        margin-top: 20px; /* 🔥 원하는 통일 간격 */
+        margin-top: 20px;
       }
 
-      /* 첫 번째는 위 공백 제거 */
       .form-group:first-child {
         margin-top: 0;
       }
@@ -107,7 +100,6 @@
         text-align: center;
       }
 
-      /* 호버 비활성 */
       .card.form-card {
         transition: none !important;
       }
@@ -116,7 +108,6 @@
         box-shadow: none !important;
       }
 
-      /* 텍스트 에어리어 폰트 */
       #ingredients,
       #steps {
         font-family: "NanumSquare", system-ui, sans-serif;
@@ -186,7 +177,6 @@
 
         <form class="card form-card" id="recipeForm">
 
-          <!-- 레시피 제목 -->
           <div class="form-group">
             <label for="title">레시피 제목</label>
             <input
@@ -198,7 +188,6 @@
             />
           </div>
 
-          <!-- 카테고리 -->
           <div class="form-group">
             <span class="field-label">요리 카테고리 (1개 선택)</span>
             <div class="radio-grid">
@@ -210,13 +199,11 @@
             </div>
           </div>
 
-          <!-- 이미지 업로드 -->
           <div class="form-group">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
-          <!-- 재료 -->
           <div class="form-group">
             <label for="ingredients">재료</label>
             <textarea
@@ -228,7 +215,6 @@
             ></textarea>
           </div>
 
-          <!-- 조리 순서 -->
           <div class="form-group">
             <label for="steps">조리 순서</label>
             <textarea
