@@ -14,7 +14,6 @@
         border-radius: 16px;
       }
 
-      /* 모든 라벨 공통 */
       .field-label,
       .form-card label {
         display: block;
@@ -22,7 +21,6 @@
         margin-bottom: 8px;
       }
 
-      /* 입력 요소 스타일 */
       .form-card input[type='text'],
       .form-card input[type='file'],
       .form-card textarea {
@@ -44,6 +42,8 @@
       .form-group {
         margin-top: 20px;
       }
+
+      /* 첫 번째는 위 공백 제거 */
       .form-group:first-child {
         margin-top: 0;
       }
@@ -109,10 +109,9 @@
         box-shadow: none !important;
       }
 
-      #ingredientsRequired,
-      #ingredientsOptional,
-      .step-title-input,
-      .step-desc-input {
+      /* 텍스트 에어리어 폰트 */
+      #ingredients,
+      #steps {
         font-family: "NanumSquare", system-ui, sans-serif;
         font-size: 14px;
         line-height: 1.5;
@@ -266,6 +265,7 @@
         <h2 class="section-title">레시피 정보 입력</h2>
 
         <form class="card form-card" id="recipeForm">
+
           <!-- 레시피 제목 -->
           <div class="form-group">
             <label for="title">레시피 제목</label>
@@ -278,7 +278,6 @@
             />
           </div>
 
-          <!-- 카테고리 -->
           <div class="form-group">
             <span class="field-label">요리 카테고리 (1개 선택)</span>
             <div class="radio-grid">
@@ -290,13 +289,12 @@
             </div>
           </div>
 
-          <!-- 이미지 업로드 -->
           <div class="form-group">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
-          <!-- 필수 재료 -->
+          <!-- 재료 -->
           <div class="form-group">
             <label for="ingredientsRequired">필수 재료</label>
             <textarea
@@ -309,7 +307,7 @@
             <p class="small-hint">한 줄에 재료 하나씩 입력해주세요.</p>
           </div>
 
-          <!-- 선택 재료 -->
+          <!-- 조리 순서 -->
           <div class="form-group">
             <label for="ingredientsOptional">선택 재료</label>
             <textarea

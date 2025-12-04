@@ -10,7 +10,41 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+
+    <style>
+      /* 리뷰 텍스트 줄바꿈 처리 */
+      .review-text {
+        white-space: pre-wrap;
+        word-break: break-all;
+        color: #333;
+        margin: 8px 0;
+      }
+      /* 리뷰 리스트 아이템 스타일 (사진 참고) */
+      .review-card {
+        border-bottom: 1px solid #eee;
+        padding: 20px 0;
+      }
+      .review-card:last-child {
+        border-bottom: none;
+      }
+      .rv-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      .rv-nickname {
+        font-weight: bold;
+        font-size: 1rem;
+        color: #333;
+      }
+      .rv-date {
+        font-size: 0.8rem;
+        color: #999;
+      }
+    </style>
   </head>
+
   <body>
     <nav class="site-nav">
       <div class="container nav-inner">
@@ -19,6 +53,7 @@
             <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
           </a>
         </div>
+
         <div class="menu">
           <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
           <a href="11_인공띠용지능_menulist.html#all" class="active nav-link"
@@ -41,6 +76,7 @@
               height: 600px;
               object-fit: cover;
               border-radius: 12px;
+              background-color: #eee;
             "
           />
 
@@ -54,7 +90,11 @@
               <span>조리 시간: <strong id="recipe-time"></strong></span>
             </div>
 
-            <div id="recipe-rating" class="rating"></div>
+            <div
+              id="recipe-rating-summary"
+              class="rating"
+              style="margin-top: 15px; font-size: 1.1rem"
+            ></div>
 
             <div class="btn-row">
               <button class="btn-solid" id="btn-save">
@@ -84,25 +124,28 @@
         </div>
 
         <section class="card-box mt-80">
-          <h2 id="review-title" class="card-title-lg"></h2>
+          <h2 id="review-section-title" class="card-title-lg">리뷰 (0개)</h2>
 
           <div class="review-area">
             <div class="review-input-box">
               <textarea
+                id="review-content"
                 class="input-text"
                 placeholder="이 레시피에 대한 당신의 리뷰를 남겨주세요!"
               ></textarea>
 
               <div class="btn-row between">
-                <div class="rating-stars">
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
+                <div class="rating-stars" id="star-container">
+                  <i class="far fa-star" data-score="1"></i>
+                  <i class="far fa-star" data-score="2"></i>
+                  <i class="far fa-star" data-score="3"></i>
+                  <i class="far fa-star" data-score="4"></i>
+                  <i class="far fa-star" data-score="5"></i>
                 </div>
 
-                <button class="btn-solid">리뷰 등록</button>
+                <button class="btn-solid" id="btn-submit-review">
+                  리뷰 등록
+                </button>
               </div>
             </div>
 
@@ -118,119 +161,195 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const saveBtn = document.getElementById('btn-save');
-        const STORAGE_KEY = 'nn_saved_recipes';
+        // --- DOM 요소 ---
+        const reviewInput = document.getElementById('review-content');
+        const reviewListEl = document.getElementById('review-list');
+        const reviewSubmitBtn = document.getElementById('btn-submit-review');
+        const sectionTitle = document.getElementById('review-section-title');
+        const ratingSummaryEl = document.getElementById(
+          'recipe-rating-summary'
+        );
+        const starContainer = document.getElementById('star-container');
+        const starIcons = starContainer.querySelectorAll('i');
 
+        // --- 레시피 ID 확인 ---
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId =
-          urlParams.get('id') || urlParams.get('recipe') || 'unknown_recipe';
+          urlParams.get('id') || urlParams.get('recipe') || 'default_recipe';
+        const REVIEW_KEY = 'nn_reviews_' + recipeId;
 
-        function setSavedState(isSaved) {
-          if (!saveBtn) return;
-          if (isSaved) {
-            saveBtn.innerHTML = '<i class="fas fa-check"></i> 저장됨';
-          } else {
-            saveBtn.innerHTML = '<i class="fas fa-heart"></i> 저장하기';
-          }
-        }
+        // --- 상태 변수 ---
+        let currentSelectedRating = 0;
 
-        function isAlreadySaved(list) {
-          return list.some((item) => String(item.id) === String(recipeId));
-        }
+        // --- 별점 클릭 이벤트 ---
+        starIcons.forEach((star) => {
+          star.style.cursor = 'pointer';
+          star.addEventListener('click', function () {
+            currentSelectedRating = parseInt(this.getAttribute('data-score'));
+            updateStarVisuals(currentSelectedRating);
+          });
+        });
 
-        if (saveBtn) {
-          let savedRecipes = [];
-          try {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (raw) {
-              const parsed = JSON.parse(raw);
-              if (Array.isArray(parsed)) savedRecipes = parsed;
-            }
-          } catch (e) {
-            console.error('저장된 레시피 파싱 오류:', e);
-          }
-          setSavedState(isAlreadySaved(savedRecipes));
-
-          saveBtn.addEventListener('click', function () {
-            const titleEl = document.getElementById('recipe-title');
-            const categoryEl = document.getElementById('recipe-category');
-            const thumbEl = document.getElementById('thumb');
-            const ratingEl = document.getElementById('recipe-rating');
-
-            const title = titleEl
-              ? titleEl.innerText.trim()
-              : '제목 없는 레시피';
-            const category = categoryEl ? categoryEl.innerText.trim() : '기타';
-            const subInfo = `${category} · 저장된 레시피`;
-            const thumbnail = thumbEl
-              ? thumbEl.getAttribute('src')
-              : '11_default.png';
-
-            let rating = 0;
-            let reviewCount = 0;
-            if (ratingEl) {
-              const dataRating = ratingEl.getAttribute('data-rating');
-              const dataReview = ratingEl.getAttribute('data-review-count');
-              if (dataRating) rating = Number(dataRating) || 0;
-              if (dataReview) reviewCount = Number(dataReview) || 0;
-            }
-
-            let list = [];
-            try {
-              const raw = localStorage.getItem(STORAGE_KEY);
-              if (raw) list = JSON.parse(raw);
-            } catch (e) {}
-
-            const idx = list.findIndex(
-              (item) => String(item.id) === String(recipeId)
-            );
-
-            if (idx !== -1) {
-              list.splice(idx, 1);
-              alert('저장이 취소되었습니다.');
-              setSavedState(false);
+        function updateStarVisuals(score) {
+          starIcons.forEach((icon, index) => {
+            if (index < score) {
+              icon.classList.remove('far');
+              icon.classList.add('fas');
+              icon.style.color = '#FFB800';
             } else {
-              const recipeData = {
-                id: recipeId,
-                title: title,
-                subInfo: subInfo,
-                link:
-                  '11_인공띠용지능_recipe.html?id=' +
-                  encodeURIComponent(String(recipeId)),
-                thumbnail: thumbnail,
-                rating: rating,
-                review_count: reviewCount,
-              };
-              list.push(recipeData);
-              alert('레시피가 저장되었습니다!');
-              setSavedState(true);
+              icon.classList.remove('fas');
+              icon.classList.add('far');
+              icon.style.color = '#ccc';
             }
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
           });
         }
 
-        const shareBtn = document.getElementById('btn-share');
+        // --- 데이터 로드/저장 ---
+        function loadReviews() {
+          try {
+            const data = localStorage.getItem(REVIEW_KEY);
+            return data ? JSON.parse(data) : [];
+          } catch (e) {
+            return [];
+          }
+        }
 
-        if (shareBtn) {
-          shareBtn.addEventListener('click', function () {
-            const currentUrl = window.location.href;
+        function saveReviews(reviews) {
+          localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
+        }
 
-            navigator.clipboard
-              .writeText(currentUrl)
-              .then(() => {
-                alert(
-                  '레시피 주소가 복사되었습니다! 🔗\n친구들에게 공유해보세요.'
-                );
-              })
-              .catch((err) => {
-                console.error('클립보드 복사 실패:', err);
-                alert(
-                  '주소 복사에 실패했습니다. URL을 직접 복사해주세요.\n' +
-                    currentUrl
-                );
-              });
+        // --- [핵심] 상단 요약 정보 업데이트 (첫번째 사진 관련) ---
+        function updateTopSummary(reviews) {
+          const totalCount = reviews.length;
+          let average = 0;
+
+          if (totalCount > 0) {
+            const sum = reviews.reduce((acc, curr) => acc + curr.rating, 0);
+            average = (sum / totalCount).toFixed(1); // 소수점 첫째자리까지
+          }
+
+          // 별점 HTML 생성 (평균 점수 기준)
+          let starsHtml = '';
+          for (let i = 1; i <= 5; i++) {
+            if (i <= Math.round(average)) {
+              starsHtml += '<i class="fas fa-star" style="color:#FFB800"></i>';
+            } else {
+              starsHtml += '<i class="far fa-star" style="color:#ccc"></i>';
+            }
+          }
+
+          // 상단 요약 div에 꽂아넣기
+          ratingSummaryEl.innerHTML = `
+                ${starsHtml}
+                <span style="color: #666; font-size: 0.95rem; margin-left: 8px; font-weight: normal;">
+                    (${average}점 / ${totalCount}개 리뷰)
+                </span>
+            `;
+
+          // 하단 리뷰 섹션 제목도 업데이트
+          sectionTitle.textContent = `리뷰 (${totalCount}개)`;
+        }
+
+        // --- [핵심] 리뷰 리스트 렌더링 (두번째 사진 스타일 적용) ---
+        function renderReviews() {
+          const reviews = loadReviews();
+
+          // 상단 요약 정보도 같이 갱신
+          updateTopSummary(reviews);
+
+          reviewListEl.innerHTML = '';
+
+          if (reviews.length === 0) {
+            reviewListEl.innerHTML =
+              '<p class="no-review-msg" style="color:#777; padding: 30px 0; text-align:center;">첫 번째 리뷰의 주인공이 되어보세요! 🍳</p>';
+            return;
+          }
+
+          // 최신순 정렬
+          const sortedReviews = [...reviews].reverse();
+
+          sortedReviews.forEach((rev) => {
+            // 별점 생성
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+              starsHtml +=
+                i < rev.rating
+                  ? '<i class="fas fa-star" style="color:#FFB800; font-size: 0.8rem;"></i>'
+                  : '<i class="far fa-star" style="color:#ccc; font-size: 0.8rem;"></i>';
+            }
+
+            // 요소 생성
+            const item = document.createElement('div');
+            item.className = 'review-card'; // CSS 클래스 적용
+
+            // 두 번째 사진과 똑같은 구조로 HTML 조립
+            item.innerHTML = `
+              <div class="rv-header">
+                <span class="rv-nickname"></span>
+                <span class="rv-stars">${starsHtml}</span>
+              </div>
+              <div class="review-text"></div>
+              <div class="rv-date">${rev.date}</div>
+            `;
+
+            // 텍스트 안전하게 넣기 (XSS 방지)
+            item.querySelector('.rv-nickname').textContent = rev.nickname;
+            item.querySelector('.review-text').textContent = rev.text;
+
+            reviewListEl.appendChild(item);
           });
         }
+
+        // --- 리뷰 등록 로직 ---
+        reviewSubmitBtn.addEventListener('click', function () {
+          const text = reviewInput.value.trim();
+
+          if (!text) {
+            alert('리뷰 내용을 입력해주세요!');
+            return;
+          }
+          if (currentSelectedRating === 0) {
+            alert('별점을 선택해주세요!');
+            return;
+          }
+
+          let nickname = localStorage.getItem('nn_nickname');
+          if (!nickname) {
+            // 임시 닉네임 생성 (실제 구현 시 로그인 정보 사용)
+            nickname = 'Haein_Cook';
+            localStorage.setItem('nn_nickname', nickname);
+          }
+
+          const today = new Date();
+          const dateString =
+            today.getFullYear() +
+            '-' +
+            String(today.getMonth() + 1).padStart(2, '0') +
+            '-' +
+            String(today.getDate()).padStart(2, '0');
+
+          const newReview = {
+            id: Date.now(),
+            nickname: nickname,
+            text: text,
+            rating: currentSelectedRating,
+            date: dateString,
+          };
+
+          const currentReviews = loadReviews();
+          currentReviews.push(newReview);
+          saveReviews(currentReviews);
+
+          renderReviews(); // 화면 갱신 (상단 점수, 리스트 모두)
+
+          // 입력창 초기화
+          reviewInput.value = '';
+          currentSelectedRating = 0;
+          updateStarVisuals(0);
+        });
+
+        // --- 초기 실행 ---
+        renderReviews();
       });
     </script>
   </body>

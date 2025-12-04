@@ -211,78 +211,82 @@
     <script>
       const rankingList = document.getElementById('rankingList');
       const categorySelect = document.getElementById('categorySelect');
-
-      let allRecipes = []; // 전역으로 저장해서 필터할 때 사용
+      let allRecipes = [];
 
       fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
           allRecipes = data.recipes;
 
-          // 각 레시피에 가상 조회수 넣기
-          allRecipes.forEach((item) => {
-            const randomViews =
-              Math.floor(Math.random() * (600 - 300 + 1)) + 300;
-            item.virtual_views = randomViews;
-          });
-
-          // 기본: 전체에서 TOP 5 렌더링
+          // 처음 로딩 시 전체 랭킹 보여주기
           renderRanking('all');
         })
         .catch((err) => console.error('데이터를 불러오는 중 오류:', err));
 
       // -------------------------------------
-      // ★ 카테고리 필터링 + TOP5 렌더링 함수
+      // ★ 랭킹 렌더링 함수
       // -------------------------------------
       function renderRanking(category) {
         rankingList.innerHTML = '';
-
         let targetList = allRecipes;
 
+        // 1. 카테고리 필터링
         if (category !== 'all') {
-          targetList = allRecipes.filter((r) => r.category === category);
+          targetList = allRecipes.filter(
+            (r) => r.category && r.category.trim() === category
+          );
         }
 
-        // ★ JSON의 views 기준으로 정렬
+        // 2. 정렬 기준: review_count (높은 순)
         const sortedTop5 = targetList
-          .sort((a, b) => b.views - a.views)
+          .sort((a, b) => b.review_count - a.review_count)
           .slice(0, 5);
 
+        // 데이터가 없을 때 처리
+        if (sortedTop5.length === 0) {
+          rankingList.innerHTML = `<div style="text-align:center; padding:30px; color:#888;">랭킹 정보가 없어요. 😢</div>`;
+          return;
+        }
+
+        // 3. 카드 생성
         sortedTop5.forEach((item, index) => {
           const rank = index + 1;
           const card = document.createElement('a');
-          const formattedViews = item.views.toLocaleString(); // ★ JSON 데이터 사용
+
+          // 숫자는 review_count 데이터를 가져오지만...
+          const formattedCount = item.review_count
+            ? item.review_count.toLocaleString()
+            : 0;
 
           card.href = `11_인공띠용지능_recipe.html?id=${item.id}`;
           card.className = 'rank-card';
 
           card.innerHTML = `
-      <div class="rank-number rank-${rank}">
-        ${rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank}
-      </div>
+        <div class="rank-number rank-${rank}">
+          ${rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank}
+        </div>
 
-      <img src="${item.thumbnail}" class="rank-card-image" alt="${
+        <img src="${item.thumbnail}" class="rank-card-image" alt="${
             item.title
           }" />
 
-      <div class="rank-info">
-        <h2 class="rank-title">${item.title}</h2>
-        <p class="rank-description">${item.summary}</p>
-      </div>
+        <div class="rank-info">
+          <h2 class="rank-title">${item.title}</h2>
+          <p class="rank-description">${item.summary}</p>
+        </div>
 
-      <div class="rank-meta">
-        <div class="rank-rating">★ ${item.rating}</div>
-        <p class="rank-views">조회수 ${formattedViews}회</p>
-      </div>
-    `;
-
+        <div class="rank-meta">
+          <div class="rank-rating">★ ${item.rating}</div>
+          <p class="rank-views">조회수 ${formattedCount}회</p>
+        </div>
+      `;
           rankingList.appendChild(card);
         });
       }
 
+      // 카테고리 변경 시 재렌더링
       categorySelect.addEventListener('change', (e) => {
-        const selected = e.target.value;
-        renderRanking(selected);
+        renderRanking(e.target.value);
       });
     </script>
 
