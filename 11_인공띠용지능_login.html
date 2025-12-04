@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>냠냠노트 - 로그인</title>
+  <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
+
+  <style>
+    .login-wrapper {
+      max-width: 420px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 40px 36px;
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .login-input {
+      width: 100%;
+      height: 48px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+
+    .login-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(145,107,70,0.25);
+      outline: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 50px;
+      border-radius: 12px;
+      background: var(--primary-color);
+      color: #fff;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      font-size: 17px;
+      margin-top: 6px;
+      transition: 0.2s;
+    }
+
+    .login-btn:hover {
+      background: #ac8d6f;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .signup-link span {
+      color: var(--primary-color);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- 로고 -->
+  <div style="text-align:center; margin-top:50px;">
+    <img src="11_logo.png" style="height:65px;" alt="냠냠노트 로고">
+  </div>
+
+
+  <!-- 로그인 박스 -->
+  <div class="login-wrapper">
+
+    <h2 style="margin-bottom:22px; font-weight:800; color:var(--text);">로그인</h2>
+
+    <input type="text" id="loginId" class="login-input" placeholder="아이디">
+    <input type="password" id="loginPw" class="login-input" placeholder="비밀번호">
+
+    <button id="loginBtn" class="login-btn">로그인</button>
+
+    <p class="signup-link">
+      아직 계정이 없으신가요?
+      <span onclick="location.href='11_인공띠용지능_signup.html'">회원가입 하기 →</span>
+    </p>
+  </div>
+
+
+<script>
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    const id = loginId.value.trim();
+    const pw = loginPw.value.trim();
+
+    let users = JSON.parse(localStorage.getItem("users")) || {};
+
+    if (!users[id]) {
+      alert("존재하지 않는 아이디입니다.");
+      return;
+    }
+
+    if (users[id].password !== pw) {
+      alert("비밀번호가 올바르지 않습니다.");
+      return;
+    }
+
+    localStorage.setItem("currentUser", id);
+    alert("로그인 성공!");
+    location.href = "11_인공띠용지능_mypage.html";
+  });
+</script>
+
+</body>
+</html>
+
