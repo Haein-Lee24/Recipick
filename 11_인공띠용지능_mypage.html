@@ -43,44 +43,51 @@
   </head>
   <body>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const savedNickname = localStorage.getItem("nn_nickname");
-        const savedUsername = localStorage.getItem("nn_username");
+      /* ------------------------------
+         🔥 로그인한 사용자 정보 불러오기
+      ------------------------------ */
+      document.addEventListener("DOMContentLoaded", () => {
+        const currentUser = localStorage.getItem("currentUser"); // 현재 로그인 유저
+        const users = JSON.parse(localStorage.getItem("users")) || {};
+        const userInfo = users[currentUser];
+
+        // 로그인 상태 체크 → 비로그인 시 로그인 페이지로 보냄
+        if (!currentUser || !userInfo) {
+          alert("로그인이 필요한 페이지입니다.");
+          location.href = "11_인공띠용지능_login.html";
+          return;
+        }
+
+        // 닉네임 / 아이디 표시
+        document.querySelector(".profile-name").textContent = userInfo.nickname;
+        document.querySelector(".profile-id").textContent = "@" + currentUser;
+
+        // --- 아래는 기존 프로필 편집에서 저장된 이미지/소개글 반영 ---
         const savedBio = localStorage.getItem("nn_bio");
         const savedProfileImg = localStorage.getItem("nn_profile_img");
         const savedBgImg = localStorage.getItem("nn_bg_img");
 
-        if (savedNickname) {
-          document.querySelector(".profile-name").textContent = savedNickname;
-        }
-        if (savedUsername) {
-          document.querySelector(".profile-id").textContent = savedUsername;
-        }
-        if (savedBio) {
-          document.querySelector(".profile-bio").textContent = savedBio;
-        }
-        if (savedProfileImg) {
-          document.querySelector('.profile-box img').src = savedProfileImg;
-        }
-        if (savedBgImg) {
-          document.querySelector('.profile-cover').style.backgroundImage = `url('${savedBgImg}')`;
-        }
+        if (savedBio) document.querySelector(".profile-bio").textContent = savedBio;
+        if (savedProfileImg)
+          document.querySelector(".profile-box img").src = savedProfileImg;
+        if (savedBgImg)
+          document.querySelector(".profile-cover").style.backgroundImage =
+            `url('${savedBgImg}')`;
 
+        // 로그아웃 버튼 기능
         const logoutBtn = document.querySelector('a[href="#logout"]');
         if (logoutBtn) {
-          logoutBtn.addEventListener("click", function (e) {
+          logoutBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            const confirmLogout = confirm("정말 로그아웃 하시겠습니까?");
-            if (confirmLogout) {
+            if (confirm("정말 로그아웃 하시겠습니까?")) {
               alert("로그아웃 되었습니다.");
-              window.location.href = "11_인공띠용지능_main.html";
+              localStorage.removeItem("currentUser");
+              location.href = "11_인공띠용지능_main.html";
             }
           });
         }
-
-        
       });
-  </script>
+    </script>
     <nav class="site-nav">
   <div class="container nav-top-center">
     <div class="nav-center-box">
