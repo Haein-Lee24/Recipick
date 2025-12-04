@@ -142,19 +142,21 @@
         margin-top: 20px;
       }
 
-      /* 단계 UI */
+      /* ===== 조리 과정 영역 디자인 통일 ===== */
       .steps-wrapper {
-        border-radius: 12px;
-        background: #faf7f0;
-        padding: 12px 14px;
+        /* 예전: 노란 배경 + 패딩
+           → 폼이랑 통일하려고 배경/패딩 제거 */
+        padding: 0;
+        background: transparent;
       }
 
       .step-item {
         background: #fff;
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 10px 12px;
         border: 1px solid var(--border);
         margin-bottom: 10px;
+        box-sizing: border-box;
       }
 
       .step-header {
@@ -176,6 +178,7 @@
         padding: 8px 10px;
         border-radius: 8px;
         border: 1px solid var(--border);
+        background: #fff;
       }
 
       .step-desc-input {
@@ -186,11 +189,12 @@
         border: 1px solid var(--border);
         padding: 8px 10px;
         box-sizing: border-box;
+        background: #fff;
       }
 
       .step-actions {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         margin-top: 4px;
       }
@@ -339,7 +343,6 @@
               </div>
 
               <button type="button" id="addStepBtn">+ 단계 추가</button>
-              <!-- ✅ 단계 안내 문구는 제거 -->
             </div>
           </div>
 
