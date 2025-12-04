@@ -1,12 +1,51 @@
 {
   "following": [
-    { "id": "yuna_food", "name": "유나의 요리일기", "img": "11_profile1.png" },
-    { "id": "min_recipe", "name": "민's 레시피", "img": "11_profile2.png" },
-    { "id": "chef_dan", "name": "단셰프", "img": "11_profile3.png" }
+    { "id": "cook_jisoo", "name": "지수의 집밥노트", "img": "11_followprofile.jpg" },
+    { "id": "sweet_jisoo", "name": "지수의 스윗홈레시피", "img": "11_followprofile.jpg" },
+
+    { "id": "haein_kitchen", "name": "해인의 주방일지", "img": "11_followprofile.jpg" },
+    { "id": "haein_cookbook", "name": "해인쿠킹북", "img": "11_followprofile.jpg" },
+
+    { "id": "yeonwoo_diet", "name": "연우의 다이어트레시피", "img": "11_followprofile.jpg" },
+    { "id": "yeonwoo_meal", "name": "연우의 오늘의 한 끼", "img": "11_followprofile.jpg" },
+
+    { "id": "dahyi_food", "name": "다희의 맛있는 연구소", "img": "11_followprofile.jpg" },
+    { "id": "dahyi_daily", "name": "다희의 데일리쿠킹", "img": "11_followprofile.jpg" },
+
+    { "id": "chae_hyun_cook", "name": "채현의 요리로그", "img": "11_followprofile.jpg" },
+    { "id": "chaehyun_table", "name": "채현의 식탁", "img": "11_followprofile.jpg" },
+
+    { "id": "tomato_boy", "name": "토마토소년", "img": "11_followprofile.jpg" },
+    { "id": "mango_girl", "name": "망고걸", "img": "11_followprofile.jpg" },
+    { "id": "bread_master", "name": "빵마스터", "img": "11_followprofile.jpg" },
+    { "id": "noodle_king", "name": "면요리왕", "img": "11_followprofile.jpg" },
+    { "id": "salad_fairy", "name": "샐러드요정", "img": "11_followprofile.jpg" }
   ],
+
   "follower": [
-    { "id": "jjong_cook", "name": "쫑이네 부엌", "img": "11_profile4.png" },
-    { "id": "hana_eats", "name": "하나의 집밥", "img": "11_profile5.png" },
-    { "id": "real_foodie", "name": "리얼푸디", "img": "11_profile6.png" }
+    { "id": "jjong_cook", "name": "쫑이네 부엌", "img": "11_followprofile.jpg" },
+    { "id": "hana_eats", "name": "하나의 집밥", "img": "11_followprofile.jpgg" },
+    { "id": "real_foodie", "name": "리얼푸디", "img": "11_followprofile.jpgg" },
+
+    { "id": "jisoo_home", "name": "지수의 홈메이드", "img": "11_followprofile.jpg" },
+    { "id": "cooking_jisoo", "name": "쿠킹지수", "img": "11_followprofile.jpg" },
+
+    { "id": "haein_homemeal", "name": "해인의 홈쿠킹", "img": "11_followprofile.jpg" },
+    { "id": "haein_dailycook", "name": "해인의 데일리요리", "img": "11_followprofile.jpg" },
+
+    { "id": "yeonwoo_family", "name": "연우네 집밥", "img": "11_followprofile.jpg" },
+    { "id": "yeonwoo_recipe", "name": "연우레시피북", "img": "11_followprofile.jpg" },
+
+    { "id": "dahyi_meal", "name": "다희의 한상차림", "img": "11_followprofile.jpg" },
+    { "id": "dahyi_kitchen", "name": "다희's 키친", "img": "11_followprofile.jpg" },
+
+    { "id": "chae_cooking", "name": "채현의 쿠킹클럽", "img": "11_followprofile.jpg" },
+    { "id": "chaehyun_foodlab", "name": "채현의 푸드랩", "img": "11_followprofile.jpg" },
+
+    { "id": "lunch_maker", "name": "점심메이커", "img": "11_followprofile.jpg" },
+    { "id": "coffee_cat", "name": "커피고양이", "img": "11_followprofile.jpgg" },
+    { "id": "home_cook", "name": "홈쿡러버", "img": "11_followprofile.jpg" },
+    { "id": "midnightchef", "name": "미드나잇셰프", "img": "11_followprofile.jpg" },
+    { "id": "green_plate", "name": "그린플레이트", "img": "11_followprofile.jpg" }
   ]
 }
