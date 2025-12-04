@@ -115,31 +115,39 @@
     -------------------------------- -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // 1. 로그인 유저 정보 로드
         const currentUser = localStorage.getItem("currentUser");
         const users = JSON.parse(localStorage.getItem("users")) || {};
         const userInfo = users[currentUser];
 
+        // 2. 로그인 확인
         if (!currentUser || !userInfo) {
           alert("로그인이 필요한 페이지입니다.");
           location.href = "11_인공띠용지능_login.html";
           return;
         }
 
+        // 3. 프로필 정보 렌더링
         document.querySelector(".profile-name").textContent = userInfo.nickname;
         document.querySelector(".profile-id").textContent = "@" + currentUser;
 
+        // 4. 프로필 소개 / 이미지 / 배경 이미지 유지
         const savedBio = localStorage.getItem("nn_bio");
         const savedProfileImg = localStorage.getItem("nn_profile_img");
         const savedBgImg = localStorage.getItem("nn_bg_img");
 
-        if (savedBio) document.querySelector(".profile-bio").textContent = savedBio;
-        if (savedProfileImg)
+        if (savedBio) {
+          document.querySelector(".profile-bio").textContent = savedBio;
+        }
+        if (savedProfileImg) {
           document.querySelector(".profile-box img").src = savedProfileImg;
-        if (savedBgImg)
+        }
+        if (savedBgImg) {
           document.querySelector(".profile-cover").style.backgroundImage =
             `url('${savedBgImg}')`;
+        }
 
-        // 로그아웃 처리
+        // 5. 로그아웃 기능
         const logoutBtn = document.querySelector('a[href="#logout"]');
         if (logoutBtn) {
           logoutBtn.addEventListener("click", (e) => {
@@ -153,6 +161,7 @@
         }
       });
     </script>
+
 
     <!-- 네비게이션 -->
     <nav class="site-nav">

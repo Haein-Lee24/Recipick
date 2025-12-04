@@ -208,6 +208,12 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+        // 🔹 로그인 유저 정보 (currentUser + users[currentUser]) 사용
+        const currentUser = localStorage.getItem('currentUser');
+        const users = JSON.parse(localStorage.getItem('users')) || {};
+        const currentUserInfo =
+          currentUser && users[currentUser] ? users[currentUser] : null;
+
         const reviewInput = document.getElementById('review-content');
         const reviewListEl = document.getElementById('review-list');
         const reviewSubmitBtn = document.getElementById('btn-submit-review');
@@ -229,6 +235,7 @@
         const SAVED_KEY = 'nn_saved_recipes';
         const RECENT_KEY = 'nn_recent_recipes';
 
+        // 🔹 최근 본 레시피 기록
         setTimeout(() => {
           let recent = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
 
@@ -249,6 +256,9 @@
           localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
         }, 300);
 
+        // =======================
+        //   저장 레시피 처리
+        // =======================
         function loadSavedList() {
           try {
             const data = localStorage.getItem(SAVED_KEY);
@@ -302,6 +312,9 @@
           alert('링크가 복사되었어요! 친구에게 공유해보세요 😊');
         });
 
+        // =======================
+        //   별점 선택 UI
+        // =======================
         let currentSelectedRating = 0;
 
         starIcons.forEach((star) => {
@@ -326,6 +339,9 @@
           });
         }
 
+        // =======================
+        //   리뷰 로컬스토리지
+        // =======================
         function loadReviews() {
           try {
             const data = localStorage.getItem(REVIEW_KEY);
@@ -358,11 +374,11 @@
           }
 
           ratingSummaryEl.innerHTML = `
-                  ${starsHtml}
-                  <span style="color: #666; font-size: 0.95rem; margin-left: 8px;">
-                    (${average}점 / ${totalCount}개 리뷰)
-                  </span>
-                `;
+            ${starsHtml}
+            <span style="color: #666; font-size: 0.95rem; margin-left: 8px;">
+              (${average}점 / ${totalCount}개 리뷰)
+            </span>
+          `;
 
           sectionTitle.textContent = `리뷰 (${totalCount}개)`;
         }
@@ -375,9 +391,9 @@
 
           if (reviews.length === 0) {
             reviewListEl.innerHTML = `
-                    <p class="no-review-msg" style="color:#777; padding: 30px 0; text-align:center;">
-                      첫 번째 리뷰의 주인공이 되어보세요! 🍳
-                    </p>`;
+              <p class="no-review-msg" style="color:#777; padding: 30px 0; text-align:center;">
+                첫 번째 리뷰의 주인공이 되어보세요! 🍳
+              </p>`;
             return;
           }
 
@@ -396,13 +412,13 @@
             item.className = 'review-card';
 
             item.innerHTML = `
-                    <div class="rv-header">
-                      <span class="rv-nickname"></span>
-                      <span class="rv-stars">${starsHtml}</span>
-                    </div>
-                    <div class="review-text"></div>
-                    <div class="rv-date">${rev.date}</div>
-                  `;
+              <div class="rv-header">
+                <span class="rv-nickname"></span>
+                <span class="rv-stars">${starsHtml}</span>
+              </div>
+              <div class="review-text"></div>
+              <div class="rv-date">${rev.date}</div>
+            `;
 
             item.querySelector('.rv-nickname').textContent = rev.nickname;
             item.querySelector('.review-text').textContent = rev.text;
@@ -411,6 +427,9 @@
           });
         }
 
+        // =======================
+        //   리뷰 등록 버튼
+        // =======================
         reviewSubmitBtn.addEventListener('click', function () {
           const text = reviewInput.value.trim();
 
@@ -423,19 +442,23 @@
             return;
           }
 
-          let nickname = localStorage.getItem('nn_nickname');
-          if (!nickname) {
-            nickname = 'Haein_Cook';
-            localStorage.setItem('nn_nickname', nickname);
+          // 🔹 nn_nickname 사용 X, currentUser 기반으로 닉네임 결정
+          let nickname;
+          if (currentUserInfo && currentUserInfo.nickname) {
+            // 로그인 + 닉네임 있는 경우: 닉네임만 사용
+            nickname = currentUserInfo.nickname;
+          } else if (currentUser) {
+            // 아이디만 있는 이상한 상태면 아이디로 표시
+            nickname = '@' + currentUser;
+          } else {
+            // 로그인 안 한 경우
+            nickname = '익명 요리사';
           }
 
           const today = new Date();
-          const dateStr = `
-                  ${today.getFullYear()}-${String(
+          const dateStr = `${today.getFullYear()}-${String(
             today.getMonth() + 1
-          ).padStart(2, '0')}-
-                  ${String(today.getDate()).padStart(2, '0')}
-                `.trim();
+          ).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
           const newReview = {
             id: Date.now(),
@@ -455,9 +478,12 @@
           currentSelectedRating = 0;
           updateStarVisuals(0);
         });
+
+        // 초기 렌더링
         updateSaveButton();
         renderReviews();
       });
     </script>
+
   </body>
 </html>

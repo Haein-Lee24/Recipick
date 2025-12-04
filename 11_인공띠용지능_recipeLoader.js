@@ -380,10 +380,22 @@ function setupReviewSystem(recipe) {
   const reviewInput = document.querySelector('.input-text');
   const reviewList = document.getElementById('review-list');
   const reviewTitle = document.getElementById('review-title');
-  const nickname = (localStorage.getItem('nn_nickname') || '').trim();
-  const username = (localStorage.getItem('nn_username') || '').trim();
+  
+  const currentUser = localStorage.getItem('currentUser');
+  const users = JSON.parse(localStorage.getItem('users') || '{}');
 
-  const userName = nickname || username || '익명 사용자';
+  let userName = '익명 사용자';
+
+  if (currentUser && users[currentUser]) {
+    const info = users[currentUser];
+
+    if (info.nickname && info.nickname.trim()) {
+      userName = info.nickname.trim();
+    } else {
+      userName = '@' + currentUser;
+    }
+  }
+
 
   const recipeId = String(recipe.id);
 
