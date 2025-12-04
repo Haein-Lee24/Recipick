@@ -326,21 +326,16 @@
     }
 
 
-    // --- 초기화 ---
-    document.addEventListener("DOMContentLoaded", function () {
-      const userNameEl = document.querySelector(".profile-name");
-      const userName = userNameEl ? userNameEl.textContent.trim() : "";
-      if (userName) {
-        localStorage.setItem("nn_username", userName);
-      }
 
-      let myRecipes = loadLocalRecipes();
-      renderMyRecipeCount(myRecipes);
-      renderMyRecipesGrid(myRecipes);
+document.addEventListener("DOMContentLoaded", function () {
+  let myRecipes = loadLocalRecipes();
+  renderMyRecipeCount(myRecipes);
+  renderMyRecipesGrid(myRecipes);
 
-      renderSavedList();
-      renderRecentList();
-    });
+  renderSavedList();
+  renderRecentList();
+});
+
   </script>
 
   <script>
