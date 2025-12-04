@@ -1,3 +1,5 @@
+// 11_인공띠용지능_recipe.js (레시피 상세 페이지용)
+
 const LOCAL_RECIPES_KEY = 'nn_recipes';
 const RECENT_RECIPES_KEY = 'nn_recent_recipes';
 const REVIEWS_KEY = 'nn_recipe_reviews';
@@ -18,11 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const recipe = allRecipes.find((r) => String(r.id) === recipeIdStr);
 
       if (!recipe) {
-        alert(
-          '준비 중인 레시피거나 데이터를 찾을 수 없습니다. (ID: ' +
-            recipeIdStr +
-            ')'
-        );
+        alert('준비 중인 레시피거나 데이터를 찾을 수 없습니다. (ID: ' + recipeIdStr + ')');
         window.history.back();
         return;
       }
@@ -104,6 +102,7 @@ function savePersistedReviews(map) {
 /**
  * register.js에서 저장한 "내 레시피"를
  * 상세 페이지에서 쓰기 좋은 통일된 구조로 바꿔주는 함수
+ * (✅ 선택 재료까지 제대로 반영)
  */
 function normalizeLocalRecipe(r) {
   // ---------- 1) 필수 재료 ----------
@@ -112,7 +111,13 @@ function normalizeLocalRecipe(r) {
     // 새 구조: { name, amount } 배열
     required = r.ingredientsRequired.map((ing) => ({
       name: ing.name || '',
-      amount: ing.amount || '',
+      amount: ing.amount || ''
+    }));
+  } else if (Array.isArray(r.ingredients_required)) {
+    // 이미 정규화된 구조로 저장된 경우
+    required = r.ingredients_required.map((ing) => ({
+      name: ing.name || '',
+      amount: ing.amount || ''
     }));
   } else if (typeof r.ingredients === 'string') {
     // 예전 구조: 통짜 문자열
@@ -122,21 +127,24 @@ function normalizeLocalRecipe(r) {
       .filter((s) => s.length > 0)
       .map((name) => ({
         name,
-        amount: '',
+        amount: ''
       }));
   }
 
   // ---------- 2) 선택 재료 ----------
   let optional = [];
   if (Array.isArray(r.ingredientsOptional)) {
-    // 새 구조
+    // 새 구조: { name, amount } 배열
     optional = r.ingredientsOptional.map((ing) => ({
       name: ing.name || '',
-      amount: ing.amount || '',
+      amount: ing.amount || ''
     }));
   } else if (Array.isArray(r.ingredients_optional)) {
-    // 혹시 옛날에 ingredients_optional 로 저장한 적이 있다면
-    optional = r.ingredients_optional;
+    // 혹시 예전에 ingredients_optional 로 저장된 경우
+    optional = r.ingredients_optional.map((ing) => ({
+      name: ing.name || '',
+      amount: ing.amount || ''
+    }));
   }
 
   // ---------- 3) 조리 과정 ----------
@@ -146,7 +154,7 @@ function normalizeLocalRecipe(r) {
     // ✅ 새 구조: { title, description } 배열
     steps = r.stepsDetail.map((s, idx) => ({
       title: (s.title && s.title.trim()) || `단계 ${idx + 1}`,
-      desc: (s.description || '').trim(),
+      desc: (s.description || '').trim()
     }));
   } else if (Array.isArray(r.steps)) {
     // 이미 { title, desc } 형태의 배열인 경우
@@ -156,14 +164,11 @@ function normalizeLocalRecipe(r) {
     const blocks = r.steps.split(/\n\s*\n/); // 빈 줄 기준으로 블럭 나누기
 
     blocks.forEach((block, idx) => {
-      const lines = block
-        .split('\n')
-        .map((s) => s.trim())
-        .filter(Boolean);
+      const lines = block.split('\n').map((s) => s.trim()).filter(Boolean);
 
       if (lines.length === 0) return;
 
-      let titleLine = lines[0]; // 첫 줄
+      let titleLine = lines[0];                 // 첫 줄
       const descLine = lines.slice(1).join('\n'); // 나머지 줄
 
       // "1. 단계 1", "1 단계 1" 이런 앞부분 숫자/단계 제거
@@ -174,7 +179,7 @@ function normalizeLocalRecipe(r) {
 
       steps.push({
         title,
-        desc,
+        desc
       });
     });
   }
@@ -200,9 +205,7 @@ function normalizeLocalRecipe(r) {
 
     // 상세 페이지에서 사용하는 필드들
     ingredients_required: required,
-    ingredients_optional: Array.isArray(r.ingredients_optional)
-      ? r.ingredients_optional
-      : [],
+    ingredients_optional: optional,
     steps: steps,
   };
 }
@@ -222,8 +225,6 @@ function renderRecipe(recipe) {
   document.getElementById('recipe-title').textContent = title;
   document.getElementById('recipe-summary').textContent = summary;
   document.getElementById('recipe-category').textContent = category;
-  applyCategoryBadge(recipe.category);
-
   document.getElementById('recipe-difficulty').textContent = difficulty;
   document.getElementById('recipe-time').textContent = time;
 
@@ -293,7 +294,9 @@ function renderRecipe(recipe) {
         (step, i) => `
       <li class="list-item">
         <div class="list-text">
-          <div class="list-ttl">${i + 1}. ${step.title || `단계 ${i + 1}`}</div>
+          <div class="list-ttl">${i + 1}. ${
+          step.title || `단계 ${i + 1}`
+        }</div>
           <div class="list-sub">${step.desc || ''}</div>
         </div>
       </li>
@@ -342,7 +345,8 @@ function saveToRecent(recipe) {
     title: recipe.title || recipe.name,
     info: `${recipe.category || '기타'} · 리뷰 ${reviewCount}개`,
     link:
-      '11_인공띠용지능_recipe.html?id=' + encodeURIComponent(String(recipe.id)),
+      '11_인공띠용지능_recipe.html?id=' +
+      encodeURIComponent(String(recipe.id)),
     thumbnail: recipe.thumbnail || recipe.image || '11_default.png',
     rating: ratingValue,
     review_count: reviewCount,
@@ -469,13 +473,17 @@ function setupReviewSystem(recipe) {
       currentCount += 1;
       reviewTitle.textContent = `리뷰 (${currentCount}개)`;
 
+      // 🔹 상단 별점 / 리뷰 개수도 업데이트
       const ratingEl = document.getElementById('recipe-rating');
       if (ratingEl) {
-        const oldRating = Number(ratingEl.getAttribute('data-rating')) || 0;
-        let oldCount = Number(ratingEl.getAttribute('data-review-count')) || 0;
+        const oldRating =
+          Number(ratingEl.getAttribute('data-rating')) || 0;
+        let oldCount =
+          Number(ratingEl.getAttribute('data-review-count')) || 0;
 
         const newCount = oldCount + 1;
-        const newRating = (oldRating * oldCount + currentRating) / newCount;
+        const newRating =
+          (oldRating * oldCount + currentRating) / newCount;
         const rounded = Math.round(newRating * 10) / 10;
 
         const filledStars = '★'.repeat(Math.round(rounded));
@@ -488,27 +496,10 @@ function setupReviewSystem(recipe) {
         ratingEl.setAttribute('data-review-count', String(newCount));
       }
 
+      // 입력 초기화
       reviewInput.value = '';
       currentRating = 0;
       updateStars();
     });
-  }
-}
-function applyCategoryBadge(categoryName) {
-  const el = document.getElementById('recipe-category');
-
-  el.textContent = categoryName;
-  el.classList.add('category-badge');
-
-  const map = {
-    한식: 'badge-hansik',
-    중식: 'badge-jungsik',
-    양식: 'badge-yangsik',
-    디저트: 'badge-dessert',
-    음료: 'badge-beverage',
-  };
-
-  if (map[categoryName]) {
-    el.classList.add(map[categoryName]);
   }
 }
