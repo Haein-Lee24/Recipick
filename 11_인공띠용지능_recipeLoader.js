@@ -320,8 +320,11 @@ function setupReviewSystem(recipe) {
   const reviewInput = document.querySelector('.input-text');
   const reviewList = document.getElementById('review-list');
   const reviewTitle = document.getElementById('review-title');
-  const userName =
-    (localStorage.getItem('nn_username') || '').trim() || '익명 사용자';
+  const nickname = (localStorage.getItem('nn_nickname') || '').trim();
+  const username = (localStorage.getItem('nn_username') || '').trim();
+
+  const userName = nickname || username || '익명 사용자';
+
   const recipeId = String(recipe.id);
 
   let currentRating = 0;
