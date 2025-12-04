@@ -23,24 +23,24 @@
         margin-bottom: 80px;
       }
 
-      /* "전체보기" 버튼 디자인 */
       .view-all-btn-wrap {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 30px;
       }
-
       .view-all-btn {
-        display: inline-block;
-        padding: 12px 24px;
-        background: var(--primary-color);
-        color: #fff;
-        border-radius: 999px;
-        font-size: 14px;
+        padding: 8px 14px;
+        background: #fff6e6;
+        color: var(--primary-color);
+        font-size: 13px;
         font-weight: 700;
+        border-radius: 18px;
+        border: 1.5px solid #e7d6bd;
+        transition: 0.25s;
       }
-
       .view-all-btn:hover {
-        background: #a48c58;
+        background: #ffeac2;
+        border-color: #d3b892;
+        color: var(--primary-color);
       }
     </style>
   </head>
@@ -50,43 +50,42 @@
     <!--           상단 네비게이션       -->
     <!-- =============================== -->
     <nav class="site-nav">
-  <div class="container nav-top-center">
-    <div class="nav-center-box">
-      <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
-        <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
-      </a>
-      <div class="nav-search">
-        <input
-          type="text"
-          placeholder="재료명으로 레시피 검색"
-          class="nav-search-input"
-        />
-        <button class="nav-search-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
-            <line
-              x1="16.5"
-              y1="16.5"
-              x2="21"
-              y2="21"
-              stroke="white"
-              stroke-width="2"
+      <div class="container nav-top-center">
+        <div class="nav-center-box">
+          <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
+          </a>
+          <div class="nav-search">
+            <input
+              type="text"
+              placeholder="재료명으로 레시피 검색"
+              class="nav-search-input"
             />
-          </svg>
-        </button>
+            <button class="nav-search-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
+                <line
+                  x1="16.5"
+                  y1="16.5"
+                  x2="21"
+                  y2="21"
+                  stroke="white"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="nav-menu-bar">
-    <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-    <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
-    <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-    <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
-    <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
-  </div>
-</nav>
-
+      <div class="nav-menu-bar">
+        <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+        <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
+        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+      </div>
+    </nav>
 
     <!-- =============================== -->
     <!--       카테고리 기반 섹션 구조    -->
@@ -107,7 +106,7 @@
     <!--      JS - 레시피 목록 로딩      -->
     <!-- =============================== -->
     <script>
-      const RECIPES_KEY = "nn_recipes";
+      const RECIPES_KEY = 'nn_recipes';
 
       /* 렌더링할 카테고리 목록 */
       const categories = [
@@ -222,31 +221,29 @@
     </script>
 
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const navInput = document.querySelector(".nav-search-input");
-    const navBtn = document.querySelector(".nav-search-btn");
+      document.addEventListener('DOMContentLoaded', () => {
+        const navInput = document.querySelector('.nav-search-input');
+        const navBtn = document.querySelector('.nav-search-btn');
 
-    if (!navInput || !navBtn) return;
+        if (!navInput || !navBtn) return;
 
-    navBtn.addEventListener("click", () => {
-      const kw = navInput.value.trim();
-      if (!kw) {
-        alert("검색어를 입력해주세요!");
-        return;
-      }
+        navBtn.addEventListener('click', () => {
+          const kw = navInput.value.trim();
+          if (!kw) {
+            alert('검색어를 입력해주세요!');
+            return;
+          }
 
-      location.href =
-        "11_인공띠용지능_search.html?keyword=" +
-        encodeURIComponent(kw);
-    });
+          location.href =
+            '11_인공띠용지능_search.html?keyword=' + encodeURIComponent(kw);
+        });
 
-    navInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        navBtn.click();
-      }
-    });
-  });
-</script>
-
+        navInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            navBtn.click();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
