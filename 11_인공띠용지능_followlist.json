@@ -1,0 +1,12 @@
+{
+  "following": [
+    { "id": "yuna_food", "name": "유나의 요리일기", "img": "11_profile1.png" },
+    { "id": "min_recipe", "name": "민's 레시피", "img": "11_profile2.png" },
+    { "id": "chef_dan", "name": "단셰프", "img": "11_profile3.png" }
+  ],
+  "follower": [
+    { "id": "jjong_cook", "name": "쫑이네 부엌", "img": "11_profile4.png" },
+    { "id": "hana_eats", "name": "하나의 집밥", "img": "11_profile5.png" },
+    { "id": "real_foodie", "name": "리얼푸디", "img": "11_profile6.png" }
+  ]
+}
