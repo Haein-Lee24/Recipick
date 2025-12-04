@@ -8,7 +8,6 @@
   </head>
 
   <body>
-    <!-- ✅ 메인 페이지와 동일한 네비 -->
     <nav class="site-nav">
   <div class="container nav-top-center">
     <div class="nav-center-box">
@@ -41,11 +40,6 @@
   </div>
 </nav>
 
-
-    <!-- ----------------------------- -->
-    <!--           MAIN                -->
-    <!-- ----------------------------- -->
-
     <main class="page-pad">
       <div id="ranking" class="container">
         <header class="hero center">
@@ -66,9 +60,6 @@
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <script>
-      // -----------------------------
-      // URL에서 검색어 추출
-      // -----------------------------
       const params = new URLSearchParams(window.location.search);
       const keyword = (params.get("keyword") || "").trim();
 
@@ -84,9 +75,6 @@
       const resultCountEl = document.getElementById("result-count");
       const resultBox = document.getElementById("search-result");
 
-      // -----------------------------
-      // 레시피 JSON 로드
-      // -----------------------------
       fetch("11_인공띠용지능_recipes.json")
         .then((res) => res.json())
         .then((data) => {
@@ -105,9 +93,6 @@
             return;
           }
 
-          // -----------------------------
-          // 검색 결과 카드 렌더링 (순위 제거)
-          // -----------------------------
           resultBox.innerHTML = found
             .map((item) => {
               const rating = item.rating ?? 0;
@@ -140,7 +125,6 @@
             .join("");
         });
 
-      // 검색 필터 함수
       function filterRecipes(recipes, keyword) {
         if (!keyword) return recipes;
         const lower = keyword.toLowerCase();
@@ -160,9 +144,7 @@
         });
       }
 
-      // -----------------------------
-      // 네비바 검색 (메인 동일)
-      // -----------------------------
+
       const navInput = document.querySelector(".nav-search-input");
       const navBtn = document.querySelector(".nav-search-btn");
 
