@@ -14,6 +14,7 @@
         border-radius: 16px;
       }
 
+      /* 라벨 공통 */
       .field-label,
       .form-card label {
         display: block;
@@ -21,6 +22,7 @@
         margin-bottom: 8px;
       }
 
+      /* 입력 요소 공통 스타일 + 폰트 통일 */
       .form-card input[type='text'],
       .form-card input[type='file'],
       .form-card textarea {
@@ -32,6 +34,11 @@
         background: #fff;
         box-sizing: border-box;
         margin: 0;
+
+        /* ✅ 입력 폰트 전부 나눔스퀘어로 통일 */
+        font-family: "NanumSquare", system-ui, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
       }
 
       .form-card textarea {
@@ -109,14 +116,17 @@
         box-shadow: none !important;
       }
 
-      /* 텍스트 에어리어 폰트 */
-      #ingredients,
-      #steps {
+      /* 재료/단계 입력칸 폰트 확실히 통일 */
+      #ingredientsRequired,
+      #ingredientsOptional,
+      .step-title-input,
+      .step-desc-input {
         font-family: "NanumSquare", system-ui, sans-serif;
         font-size: 14px;
         line-height: 1.5;
       }
 
+      /* placeholder 폰트도 통일 */
       #ingredientsRequired::placeholder,
       #ingredientsOptional::placeholder,
       .step-title-input::placeholder,
@@ -166,7 +176,6 @@
         padding: 8px 10px;
         border-radius: 8px;
         border: 1px solid var(--border);
-        font-size: 13px;
       }
 
       .step-desc-input {
@@ -265,7 +274,6 @@
         <h2 class="section-title">레시피 정보 입력</h2>
 
         <form class="card form-card" id="recipeForm">
-
           <!-- 레시피 제목 -->
           <div class="form-group">
             <label for="title">레시피 제목</label>
@@ -278,6 +286,7 @@
             />
           </div>
 
+          <!-- 카테고리 -->
           <div class="form-group">
             <span class="field-label">요리 카테고리 (1개 선택)</span>
             <div class="radio-grid">
@@ -289,12 +298,13 @@
             </div>
           </div>
 
+          <!-- 이미지 업로드 -->
           <div class="form-group">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
-          <!-- 재료 -->
+          <!-- 필수 재료 -->
           <div class="form-group">
             <label for="ingredientsRequired">필수 재료</label>
             <textarea
@@ -307,21 +317,21 @@
             <p class="small-hint">한 줄에 재료 하나씩 입력해주세요.</p>
           </div>
 
-          <!-- 조리 순서 -->
+          <!-- 선택 재료 -->
           <div class="form-group">
             <label for="ingredientsOptional">선택 재료</label>
             <textarea
               id="ingredientsOptional"
               name="ingredientsOptional"
               rows="3"
-              placeholder="예: 파마산 치즈 &#10파슬리 "
+              placeholder="예: 파마산 치즈 약간&#10파슬리 약간"
             ></textarea>
             <p class="small-hint">없으면 비워도 됩니다.</p>
           </div>
 
           <!-- 조리 과정 (단계별) -->
           <div class="form-group">
-            <label>조리 과정 </label>
+            <label>조리 과정</label>
 
             <div class="steps-wrapper" id="stepsWrapper">
               <div id="stepList">
@@ -329,9 +339,7 @@
               </div>
 
               <button type="button" id="addStepBtn">+ 단계 추가</button>
-              <p class="small-hint">
-                단계 제목과 설명을 입력해주세요. (예: 제목 - 재료 준비 / 설명 - 스파게티면, 소스, 치즈를 준비합니다.)
-              </p>
+              <!-- ✅ 단계 안내 문구는 제거 -->
             </div>
           </div>
 

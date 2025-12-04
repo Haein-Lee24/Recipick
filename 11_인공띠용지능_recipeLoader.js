@@ -1,3 +1,5 @@
+// 11_인공띠용지능_recipe.js (레시피 상세 페이지용)
+
 const LOCAL_RECIPES_KEY = 'nn_recipes';
 const RECENT_RECIPES_KEY = 'nn_recent_recipes';
 const REVIEWS_KEY = 'nn_recipe_reviews';
@@ -100,6 +102,7 @@ function savePersistedReviews(map) {
 /**
  * register.js에서 저장한 "내 레시피"를
  * 상세 페이지에서 쓰기 좋은 통일된 구조로 바꿔주는 함수
+ * (✅ 선택 재료까지 제대로 반영)
  */
 function normalizeLocalRecipe(r) {
   // ---------- 1) 필수 재료 ----------
@@ -107,6 +110,12 @@ function normalizeLocalRecipe(r) {
   if (Array.isArray(r.ingredientsRequired)) {
     // 새 구조: { name, amount } 배열
     required = r.ingredientsRequired.map((ing) => ({
+      name: ing.name || '',
+      amount: ing.amount || ''
+    }));
+  } else if (Array.isArray(r.ingredients_required)) {
+    // 이미 정규화된 구조로 저장된 경우
+    required = r.ingredients_required.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
@@ -125,14 +134,17 @@ function normalizeLocalRecipe(r) {
   // ---------- 2) 선택 재료 ----------
   let optional = [];
   if (Array.isArray(r.ingredientsOptional)) {
-    // 새 구조
+    // 새 구조: { name, amount } 배열
     optional = r.ingredientsOptional.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   } else if (Array.isArray(r.ingredients_optional)) {
-    // 혹시 옛날에 ingredients_optional 로 저장한 적이 있다면
-    optional = r.ingredients_optional;
+    // 혹시 예전에 ingredients_optional 로 저장된 경우
+    optional = r.ingredients_optional.map((ing) => ({
+      name: ing.name || '',
+      amount: ing.amount || ''
+    }));
   }
 
   // ---------- 3) 조리 과정 ----------
@@ -156,7 +168,7 @@ function normalizeLocalRecipe(r) {
 
       if (lines.length === 0) return;
 
-      let titleLine = lines[0];          // 첫 줄
+      let titleLine = lines[0];                 // 첫 줄
       const descLine = lines.slice(1).join('\n'); // 나머지 줄
 
       // "1. 단계 1", "1 단계 1" 이런 앞부분 숫자/단계 제거
@@ -193,7 +205,7 @@ function normalizeLocalRecipe(r) {
 
     // 상세 페이지에서 사용하는 필드들
     ingredients_required: required,
-    ingredients_optional: Array.isArray(r.ingredients_optional) ? r.ingredients_optional : [],
+    ingredients_optional: optional,
     steps: steps,
   };
 }

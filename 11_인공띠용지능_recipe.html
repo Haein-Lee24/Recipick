@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" id="top">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,14 +12,12 @@
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
 
     <style>
-      /* 리뷰 텍스트 줄바꿈 처리 */
       .review-text {
         white-space: pre-wrap;
         word-break: break-all;
         color: #333;
         margin: 8px 0;
       }
-      /* 리뷰 리스트 아이템 스타일 (사진 참고) */
       .review-card {
         border-bottom: 1px solid #eee;
         padding: 20px 0;
@@ -41,6 +39,52 @@
       .rv-date {
         font-size: 0.8rem;
         color: #999;
+      }
+      .btn-solid.saved {
+        background: #4caf50 !important;
+        border-color: #4caf50 !important;
+      }
+
+      .category-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-radius: 17px;
+        margin-right: 5px;
+        border: 1.8px solid transparent;
+        background: #ffffffaa;
+        backdrop-filter: blur(4px);
+      }
+
+      .badge-hansik {
+        color: #2f6b4f;
+        border-color: #2f6b4f;
+        background-color: #e6f3ec;
+      }
+
+      .badge-jungsik {
+        color: #c62828;
+        border-color: #c62828;
+        background-color: #fdecea;
+      }
+
+      .badge-yangsik {
+        color: #3f51b5;
+        border-color: #3f51b5;
+        background-color: #e7e8f8;
+      }
+
+      .badge-dessert {
+        color: #ba68c8;
+        border-color: #ba68c8;
+        background-color: #f6ebf9;
+      }
+
+      .badge-beverage {
+        color: #4fc3f7;
+        border-color: #4fc3f7;
+        background-color: #e8f7ff;
       }
     </style>
   </head>
@@ -85,7 +129,8 @@
             <p id="recipe-summary" class="mt-20"></p>
 
             <div class="mt-20">
-              <span id="recipe-category" class="badge-green"></span>
+              <span id="recipe-category"></span>
+
               <span>난이도: <strong id="recipe-difficulty"></strong></span>
               <span>조리 시간: <strong id="recipe-time"></strong></span>
             </div>
@@ -157,11 +202,12 @@
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
+    <script src="11_인공띠용지능_menulist-data.js"></script>
+
     <script src="11_인공띠용지능_recipeLoader.js"></script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        // --- DOM 요소 ---
         const reviewInput = document.getElementById('review-content');
         const reviewListEl = document.getElementById('review-list');
         const reviewSubmitBtn = document.getElementById('btn-submit-review');
@@ -172,16 +218,92 @@
         const starContainer = document.getElementById('star-container');
         const starIcons = starContainer.querySelectorAll('i');
 
-        // --- 레시피 ID 확인 ---
+        const btnSave = document.getElementById('btn-save');
+        const btnShare = document.getElementById('btn-share');
+
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId =
           urlParams.get('id') || urlParams.get('recipe') || 'default_recipe';
-        const REVIEW_KEY = 'nn_reviews_' + recipeId;
 
-        // --- 상태 변수 ---
+        const REVIEW_KEY = 'nn_reviews_' + recipeId;
+        const SAVED_KEY = 'nn_saved_recipes';
+        const RECENT_KEY = 'nn_recent_recipes';
+
+        setTimeout(() => {
+          let recent = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+
+          const obj = {
+            id: recipeId,
+            title: document.getElementById('recipe-title').textContent,
+            summary: document.getElementById('recipe-summary').textContent,
+            thumbnail: document.getElementById('thumb').src,
+            rating: 0,
+            review_count: 0,
+            link: `11_인공띠용지능_recipe.html?id=${recipeId}`,
+          };
+
+          recent = recent.filter((item) => item.id !== recipeId);
+          recent.unshift(obj);
+          if (recent.length > 20) recent = recent.slice(0, 20);
+
+          localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
+        }, 300);
+
+        function loadSavedList() {
+          try {
+            const data = localStorage.getItem(SAVED_KEY);
+            return data ? JSON.parse(data) : [];
+          } catch {
+            return [];
+          }
+        }
+
+        function saveSavedList(list) {
+          localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+        }
+
+        function updateSaveButton() {
+          const savedList = loadSavedList();
+          const isSaved = savedList.some((item) => item.id === recipeId);
+
+          if (isSaved) {
+            btnSave.innerHTML = '<i class="fas fa-check"></i> 저장됨';
+            btnSave.classList.add('saved');
+          } else {
+            btnSave.innerHTML = '<i class="fas fa-heart"></i> 저장하기';
+            btnSave.classList.remove('saved');
+          }
+        }
+
+        btnSave.addEventListener('click', () => {
+          let list = loadSavedList();
+          const exists = list.some((item) => item.id === recipeId);
+
+          if (exists) {
+            list = list.filter((item) => item.id !== recipeId);
+          } else {
+            const obj = {
+              id: recipeId,
+              title: document.getElementById('recipe-title').textContent,
+              summary: document.getElementById('recipe-summary').textContent,
+              thumbnail: document.getElementById('thumb').src,
+              rating: 0,
+              review_count: 0,
+              link: `11_인공띠용지능_recipe.html?id=${recipeId}`,
+            };
+            list.unshift(obj);
+          }
+
+          saveSavedList(list);
+          updateSaveButton();
+        });
+
+        btnShare.addEventListener('click', () => {
+          alert('링크가 복사되었어요! 친구에게 공유해보세요 😊');
+        });
+
         let currentSelectedRating = 0;
 
-        // --- 별점 클릭 이벤트 ---
         starIcons.forEach((star) => {
           star.style.cursor = 'pointer';
           star.addEventListener('click', function () {
@@ -204,12 +326,11 @@
           });
         }
 
-        // --- 데이터 로드/저장 ---
         function loadReviews() {
           try {
             const data = localStorage.getItem(REVIEW_KEY);
             return data ? JSON.parse(data) : [];
-          } catch (e) {
+          } catch {
             return [];
           }
         }
@@ -218,17 +339,15 @@
           localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
         }
 
-        // --- [핵심] 상단 요약 정보 업데이트 (첫번째 사진 관련) ---
         function updateTopSummary(reviews) {
           const totalCount = reviews.length;
           let average = 0;
 
           if (totalCount > 0) {
             const sum = reviews.reduce((acc, curr) => acc + curr.rating, 0);
-            average = (sum / totalCount).toFixed(1); // 소수점 첫째자리까지
+            average = (sum / totalCount).toFixed(1);
           }
 
-          // 별점 HTML 생성 (평균 점수 기준)
           let starsHtml = '';
           for (let i = 1; i <= 5; i++) {
             if (i <= Math.round(average)) {
@@ -238,61 +357,53 @@
             }
           }
 
-          // 상단 요약 div에 꽂아넣기
           ratingSummaryEl.innerHTML = `
-                ${starsHtml}
-                <span style="color: #666; font-size: 0.95rem; margin-left: 8px; font-weight: normal;">
+                  ${starsHtml}
+                  <span style="color: #666; font-size: 0.95rem; margin-left: 8px;">
                     (${average}점 / ${totalCount}개 리뷰)
-                </span>
-            `;
+                  </span>
+                `;
 
-          // 하단 리뷰 섹션 제목도 업데이트
           sectionTitle.textContent = `리뷰 (${totalCount}개)`;
         }
 
-        // --- [핵심] 리뷰 리스트 렌더링 (두번째 사진 스타일 적용) ---
         function renderReviews() {
           const reviews = loadReviews();
-
-          // 상단 요약 정보도 같이 갱신
           updateTopSummary(reviews);
 
           reviewListEl.innerHTML = '';
 
           if (reviews.length === 0) {
-            reviewListEl.innerHTML =
-              '<p class="no-review-msg" style="color:#777; padding: 30px 0; text-align:center;">첫 번째 리뷰의 주인공이 되어보세요! 🍳</p>';
+            reviewListEl.innerHTML = `
+                    <p class="no-review-msg" style="color:#777; padding: 30px 0; text-align:center;">
+                      첫 번째 리뷰의 주인공이 되어보세요! 🍳
+                    </p>`;
             return;
           }
 
-          // 최신순 정렬
-          const sortedReviews = [...reviews].reverse();
+          const sorted = [...reviews].reverse();
 
-          sortedReviews.forEach((rev) => {
-            // 별점 생성
+          sorted.forEach((rev) => {
             let starsHtml = '';
             for (let i = 0; i < 5; i++) {
               starsHtml +=
                 i < rev.rating
-                  ? '<i class="fas fa-star" style="color:#FFB800; font-size: 0.8rem;"></i>'
-                  : '<i class="far fa-star" style="color:#ccc; font-size: 0.8rem;"></i>';
+                  ? '<i class="fas fa-star" style="color:#FFB800; font-size:0.8rem;"></i>'
+                  : '<i class="far fa-star" style="color:#ccc; font-size:0.8rem;"></i>';
             }
 
-            // 요소 생성
             const item = document.createElement('div');
-            item.className = 'review-card'; // CSS 클래스 적용
+            item.className = 'review-card';
 
-            // 두 번째 사진과 똑같은 구조로 HTML 조립
             item.innerHTML = `
-              <div class="rv-header">
-                <span class="rv-nickname"></span>
-                <span class="rv-stars">${starsHtml}</span>
-              </div>
-              <div class="review-text"></div>
-              <div class="rv-date">${rev.date}</div>
-            `;
+                    <div class="rv-header">
+                      <span class="rv-nickname"></span>
+                      <span class="rv-stars">${starsHtml}</span>
+                    </div>
+                    <div class="review-text"></div>
+                    <div class="rv-date">${rev.date}</div>
+                  `;
 
-            // 텍스트 안전하게 넣기 (XSS 방지)
             item.querySelector('.rv-nickname').textContent = rev.nickname;
             item.querySelector('.review-text').textContent = rev.text;
 
@@ -300,7 +411,6 @@
           });
         }
 
-        // --- 리뷰 등록 로직 ---
         reviewSubmitBtn.addEventListener('click', function () {
           const text = reviewInput.value.trim();
 
@@ -315,40 +425,37 @@
 
           let nickname = localStorage.getItem('nn_nickname');
           if (!nickname) {
-            // 임시 닉네임 생성 (실제 구현 시 로그인 정보 사용)
             nickname = 'Haein_Cook';
             localStorage.setItem('nn_nickname', nickname);
           }
 
           const today = new Date();
-          const dateString =
-            today.getFullYear() +
-            '-' +
-            String(today.getMonth() + 1).padStart(2, '0') +
-            '-' +
-            String(today.getDate()).padStart(2, '0');
+          const dateStr = `
+                  ${today.getFullYear()}-${String(
+            today.getMonth() + 1
+          ).padStart(2, '0')}-
+                  ${String(today.getDate()).padStart(2, '0')}
+                `.trim();
 
           const newReview = {
             id: Date.now(),
-            nickname: nickname,
-            text: text,
+            nickname,
+            text,
             rating: currentSelectedRating,
-            date: dateString,
+            date: dateStr,
           };
 
-          const currentReviews = loadReviews();
-          currentReviews.push(newReview);
-          saveReviews(currentReviews);
+          const reviews = loadReviews();
+          reviews.push(newReview);
+          saveReviews(reviews);
 
-          renderReviews(); // 화면 갱신 (상단 점수, 리스트 모두)
+          renderReviews();
 
-          // 입력창 초기화
           reviewInput.value = '';
           currentSelectedRating = 0;
           updateStarVisuals(0);
         });
-
-        // --- 초기 실행 ---
+        updateSaveButton();
         renderReviews();
       });
     </script>
