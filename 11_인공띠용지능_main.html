@@ -1,349 +1,246 @@
 <!DOCTYPE html>
 <html lang="ko" id="top">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>냠냠노트 - 메인 페이지</title>
-    <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
-    <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const hasLoggedIn = localStorage.getItem("hasLoggedInBefore");
-
-    if (!hasLoggedIn) {
-      // 로그인한 적이 없는 사용자 → 로그인 페이지로 강제 이동
-      location.href = "11_인공띠용지능_login.html";
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>냠냠노트 - 프로필 수정</title>
+  <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
+  <style>
+    .hero {
+      margin-bottom: 14px !important;
+      border: 1px solid var(--border); 
     }
+  
+    .form-card {
+      padding: 36px 32px 52px;
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+
+    .form-card label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .form-card input[type='text'],
+    .form-card input[type='file'],
+    .form-card textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      background: #fff;
+      font-family: 'NanumSquare', sans-serif;
+      font-size: 15px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+
+    .form-card input:focus,
+    .form-card textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(111, 90, 44, 0.1);
+    }
+
+    .form-card textarea {
+      resize: none;
+    }
+
+    .background-box {
+      height: 140px;
+      border-radius: 12px;
+      background: url('11_background.png') center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    
+    .bg-text-label {
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #333; 
+      padding: 6px 16px; 
+      border-radius: 10px; 
+      font-weight: 800;
+      font-size: 14px; 
+      backdrop-filter: blur(4px);
+    }
+
+    .profile-img-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .profile-preview {
+      width: 80px; 
+      height: 80px; 
+      border-radius: 50%; 
+      object-fit: cover;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .card.no-hover:hover {
+      transform: none !important;
+      box-shadow: var(--shadow) !important;
+      cursor: default !important;
+    }
+
+    
+
+  </style>
+</head>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    
+    const form = document.querySelector("form");
+    const profileInput = document.getElementById("profile_image");
+    const profilePreview = document.querySelector('img[alt="프로필 이미지 수정"]');
+    const bgInput = document.getElementById("background_image");
+    const bgPreview = document.querySelector(".background-box");
+    
+
+    if(localStorage.getItem('nn_nickname')) {
+        document.getElementById('nickname').value = localStorage.getItem('nn_nickname');
+    }
+    if(localStorage.getItem('nn_username')) {
+        document.getElementById('username').value = localStorage.getItem('nn_username');
+    }
+    if(localStorage.getItem('nn_bio')) {
+        document.getElementById('bio').value = localStorage.getItem('nn_bio');
+    }
+
+
+    profileInput.addEventListener("change", function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profilePreview.src = e.target.result; 
+          localStorage.setItem("nn_profile_img_temp", e.target.result); 
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+
+    bgInput.addEventListener("change", function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          bgPreview.style.backgroundImage = `url('${e.target.result}')`;
+          
+
+          localStorage.setItem("nn_bg_img_temp", e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); 
+      
+      const nickname = document.getElementById("nickname").value;
+      const username = document.getElementById("username").value;
+      const bio = document.getElementById("bio").value;
+
+      localStorage.setItem("nn_nickname", nickname);
+      localStorage.setItem("nn_username", username);
+      localStorage.setItem("nn_bio", bio);
+
+
+      const tempProfile = localStorage.getItem("nn_profile_img_temp");
+      const tempBg = localStorage.getItem("nn_bg_img_temp");
+      
+      if (tempProfile) localStorage.setItem("nn_profile_img", tempProfile);
+      if (tempBg) localStorage.setItem("nn_bg_img", tempBg);
+
+      localStorage.removeItem("nn_profile_img_temp");
+      localStorage.removeItem("nn_bg_img_temp");
+
+      alert("프로필이 성공적으로 저장되었습니다!");
+      window.location.href = "11_인공띠용지능_mypage.html"; 
+    });
   });
 </script>
-
-    <style>
-      .hero-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #fffaf2;
-        border-radius: 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        margin: 40px auto;
-        overflow: hidden;
-        max-width: 1100px;
-        padding: 40px 60px;
-      }
-
-      .hero-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        gap: 40px;
-      }
-
-      .hero-text-wrap {
-        flex: 1;
-      }
-
-      .hero-subtitle {
-        color: #916b46;
-        font-weight: 700;
-        font-size: 1rem;
-        margin-bottom: 8px;
-      }
-
-      .hero-title-new {
-        font-size: 2.8rem;
-        font-weight: 800;
-        color: #47331b;
-        margin-bottom: 20px;
-      }
-
-      .brand-line {
-        color: #47331b;
-      }
-
-      .hero-description {
-        color: #555;
-        line-height: 1.6;
-        margin-bottom: 24px;
-      }
-
-      .hero-buttons {
-        display: flex;
-        gap: 12px;
-      }
-
-      .hero-btn {
-        display: inline-block;
-        padding: 10px 22px;
-        border-radius: 12px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.3s ease;
-      }
-
-      .hero-btn-primary {
-        background: #916b46;
-        color: #fff;
-      }
-
-      .hero-btn-primary:hover {
-        background: #ac8d6f;
-      }
-
-      .hero-btn-secondary {
-        background: #f6e8c9;
-        color: #916b46;
-        border: 1.5px solid #e2c97a;
-      }
-
-      .hero-btn-secondary:hover {
-        background: #ecdeb5;
-      }
-
-      .hero-visual {
-        flex: 1;
-        text-align: center;
-      }
-
-      .hero-visual-img {
-        width: 100%;
-        max-width: 500px;
-        border-radius: 16px;
-        border: 1px solid #e4d8b4;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        height: 580px;
-        object-fit: cover;
-        transition: opacity 0.4s ease-in-out;
-      }
-
-      @media (max-width: 768px) {
-        .hero-section {
-          flex-direction: column;
-          padding: 30px 20px;
-        }
-
-        .hero-content {
-          flex-direction: column;
-          text-align: center;
-        }
-
-        .hero-visual-img {
-          margin-top: 20px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <nav class="site-nav">
-      <div class="container nav-top-center">
-        <div class="nav-center-box">
-          <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
-            <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
-          </a>
-          <div class="nav-search">
-            <input
-              type="text"
-              placeholder="재료명으로 레시피 검색"
-              class="nav-search-input"
-            />
-            <button class="nav-search-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
-                <line
-                  x1="16.5"
-                  y1="16.5"
-                  x2="21"
-                  y2="21"
-                  stroke="white"
-                  stroke-width="2"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <div class="logo-area">
+        <a href="11_인공띠용지능_main.html">
+          <img src="11_logo.png" alt="냠냠노트 로고" class="logo">
+        </a>
       </div>
-      <div class="nav-menu-bar">
-        <a class="active nav-link" href="11_인공띠용지능_main.html">홈</a>
+      <div class="menu" role="navigation">
+        <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
         <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
         <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
         <a class="nav-link" href="11_인공띠용지능_rank.html#ranking">랭킹</a>
-        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+        <a class="active nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <main class="container page-pad">
-      <section class="hero-section" aria-label="메인 배너">
-        <div class="hero-content">
-          <div class="hero-text-wrap">
-            <p class="hero-subtitle">맛과 영양을 고려한 맞춤형 식단</p>
-            <h1 class="hero-title-new">
-              Today's <span class="brand-line">menu</span>
-            </h1>
-            <p class="hero-description">
-              냠냠노트는 쉽고 맛있는 레시피를 제공하여,<br />
-              누구나 만족하는 특별한 요리를 완성할 수 있도록 돕습니다.
-            </p>
-            <div class="hero-buttons">
-              <a
-                href="11_인공띠용지능_menulist.html"
-                class="hero-btn hero-btn-primary"
-                >레시피 보러가기</a
-              >
-              <a
-                href="11_인공띠용지능_register.html"
-                class="hero-btn hero-btn-secondary"
-                >나만의 레시피 등록</a
-              >
-            </div>
-          </div>
-          <div class="hero-visual">
-            <img
-              id="hero-carousel"
-              src="11_banner.jpg"
-              alt="요리 이미지"
-              class="hero-visual-img"
-            />
-          </div>
+ <main class="page-pad">
+  <div class="container">
+    
+    <header class="hero center">
+      <h1 class="mt-0">프로필 수정하기</h1>
+      <p style="font-size: 14px; color: var(--muted)">
+        변경 후 하단의 <strong>저장하기</strong> 버튼을 눌러주세요.
+      </p>
+    </header>
+
+    <form action="#" method="post" enctype="multipart/form-data" class="card no-hover form-card">
+
+      <div class="mt-0">
+        <label>프로필 이미지 변경</label>
+        <div class="profile-img-row">
+          <img src="11_circle_h_icon.png" alt="프로필 이미지 수정" class="profile-preview">
+          <input id="profile_image" name="profile_image" type="file" accept="image/*">
         </div>
-      </section>
+      </div>
 
-<h2 class="section-title">카테고리별 레시피 탐색</h2>
-<div class="cat-grid" aria-label="레시피 카테고리">
-
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=korean">
-    <img src="11_kimchi.jpg" alt="한식 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>한식</span>
-    </div>
-  </a>
-
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=western">
-    <img src="11_pasta.jpg" alt="양식 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>양식</span>
-    </div>
-  </a>
-
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=chinese">
-    <img src="11_chinese.png" alt="중식 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>중식</span>
-    </div>
-  </a>
-
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=dessert">
-    <img src="11_snack.jpg" alt="디저트 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>디저트</span>
-    </div>
-  </a>
-
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=drink">
-    <img src="11_drink.png" alt="음료 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>음료</span>
-    </div>
-  </a>
-
-</div>
-
-      <section class="mt-60" aria-label="추천 레시피">
-        <h2 class="section-title">오늘의 추천 레시피</h2>
-
-        <div id="recommend-list" class="card-grid"></div>
-
-        <div class="center mt-20">
-          <a href="11_인공띠용지능_menulist.html" class="more-btn">더보기 →</a>
+      <div class="mt-20">
+        <label>배경 이미지 변경</label>
+        <div class="background-box">
+            <span class="bg-text-label">현재 배경 이미지</span>
         </div>
-      </section>
-    </main>
+        <input id="background_image" name="background_image" type="file" accept="image/*">
+      </div>
 
-    <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
+      <div class="mt-20">
+        <label for="nickname">닉네임</label>
+        <input id="nickname" name="nickname" type="text" required value="Haein_Cook">
+      </div>
 
-    <script>
+      <div class="mt-20">
+        <label for="username">사용자 아이디</label>
+        <input id="username" name="username" type="text" required value="@haein_cook">
+      </div>
 
-  async function loadRecipes() {
-    const response = await fetch("11_인공띠용지능_recipes.json");
-    const data = await response.json();
-    return data.recipes;
-  }
+      <div class="mt-20">
+        <label for="bio">자기소개</label>
+        <textarea id="bio" name="bio" rows="4" required placeholder="나를 소개하는 한 문장을 적어보세요."></textarea>
+      </div>
 
+      <div class="center" style="margin-top:40px;">
+        <button type="submit" class="btn-solid" style="min-width: 200px; height: 50px; font-size: 16px;">저장하기</button>
+      </div>
 
-  function getRandomRecipes(list, count) {
-    return [...list].sort(() => Math.random() - 0.5).slice(0, count);
-  }
-
-
-  async function renderRandomRecipes() {
-    const target = document.getElementById("recommend-list");
-    const recipes = await loadRecipes();
-    const selected = getRandomRecipes(recipes, 4);
-
-    target.innerHTML = selected
-      .map(
-        (r) => `
-        <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
-          <img src="${r.thumbnail}" class="thumb" alt="${r.title}">
-          <p class="card-title">${r.title}</p>
-          <div class="rating">★ ${r.rating}</div>
-        </a>
-      `
-      )
-      .join("");
-  }
-
-  renderRandomRecipes();
-</script>
-
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const navInput = document.querySelector(".nav-search-input");
-        const navBtn = document.querySelector(".nav-search-btn");
-
-        if (!navInput || !navBtn) return; 
-
-        navBtn.addEventListener("click", () => {
-          const kw = navInput.value.trim();
-          if (!kw) {
-            alert("검색어를 입력해주세요!");
-            return;
-          }
-
-          location.href =
-            "11_인공띠용지능_search.html?keyword=" +
-            encodeURIComponent(kw);
-        });
-
-        navInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            navBtn.click();
-          }
-        });
-      });
-  </script>
-
-  <script>
-    const carouselImages = [
-      '11_banner.jpg',
-      '11_banner2.jpg',
-      '11_banner3.jpg',
-      '11_banner4.jpg',
-    ];
-    let currentIndex = 0;
-    const carouselImg = document.getElementById('hero-carousel');
-
-    function changeCarousel() {
-      currentIndex = (currentIndex + 1) % carouselImages.length;
-      carouselImg.style.opacity = 0;
-      setTimeout(() => {
-        carouselImg.src = carouselImages[currentIndex];
-        carouselImg.style.opacity = 1;
-      }, 300);
-    }
-
-    setInterval(changeCarousel, 3000);
-  </script>
-  
-  </body>
+    </form>
+  </div>
+</main>
+</body>
 </html>
