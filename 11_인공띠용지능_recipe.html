@@ -10,7 +10,41 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+
+    <style>
+      /* 리뷰 텍스트 줄바꿈 처리 */
+      .review-text {
+        white-space: pre-wrap;
+        word-break: break-all;
+        color: #333;
+        margin: 8px 0;
+      }
+      /* 리뷰 리스트 아이템 스타일 (사진 참고) */
+      .review-card {
+        border-bottom: 1px solid #eee;
+        padding: 20px 0;
+      }
+      .review-card:last-child {
+        border-bottom: none;
+      }
+      .rv-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      .rv-nickname {
+        font-weight: bold;
+        font-size: 1rem;
+        color: #333;
+      }
+      .rv-date {
+        font-size: 0.8rem;
+        color: #999;
+      }
+    </style>
   </head>
+
   <body>
     <nav class="site-nav">
       <div class="container nav-inner">
@@ -19,6 +53,7 @@
             <img src="11_logo.png" alt="냠냠노트 로고" class="logo-img" />
           </a>
         </div>
+
         <div class="menu">
           <a href="11_인공띠용지능_main.html" class="nav-link">홈</a>
           <a href="11_인공띠용지능_menulist.html#all" class="active nav-link"
@@ -41,6 +76,7 @@
               height: 600px;
               object-fit: cover;
               border-radius: 12px;
+              background-color: #eee;
             "
           />
 
@@ -54,7 +90,11 @@
               <span>조리 시간: <strong id="recipe-time"></strong></span>
             </div>
 
-            <div id="recipe-rating" class="rating"></div>
+            <div
+              id="recipe-rating-summary"
+              class="rating"
+              style="margin-top: 15px; font-size: 1.1rem"
+            ></div>
 
             <div class="btn-row">
               <button class="btn-solid" id="btn-save">
@@ -84,25 +124,28 @@
         </div>
 
         <section class="card-box mt-80">
-          <h2 id="review-title" class="card-title-lg"></h2>
+          <h2 id="review-section-title" class="card-title-lg">리뷰 (0개)</h2>
 
           <div class="review-area">
             <div class="review-input-box">
               <textarea
+                id="review-content"
                 class="input-text"
                 placeholder="이 레시피에 대한 당신의 리뷰를 남겨주세요!"
               ></textarea>
 
               <div class="btn-row between">
-                <div class="rating-stars">
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
+                <div class="rating-stars" id="star-container">
+                  <i class="far fa-star" data-score="1"></i>
+                  <i class="far fa-star" data-score="2"></i>
+                  <i class="far fa-star" data-score="3"></i>
+                  <i class="far fa-star" data-score="4"></i>
+                  <i class="far fa-star" data-score="5"></i>
                 </div>
 
-                <button class="btn-solid">리뷰 등록</button>
+                <button class="btn-solid" id="btn-submit-review">
+                  리뷰 등록
+                </button>
               </div>
             </div>
 
@@ -118,126 +161,38 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const saveBtn = document.getElementById('btn-save');
-        const STORAGE_KEY = 'nn_saved_recipes';
+        // --- DOM 요소 ---
+        const reviewInput = document.getElementById('review-content');
+        const reviewListEl = document.getElementById('review-list');
+        const reviewSubmitBtn = document.getElementById('btn-submit-review');
+        const sectionTitle = document.getElementById('review-section-title');
+        const ratingSummaryEl = document.getElementById(
+          'recipe-rating-summary'
+        );
+        const starContainer = document.getElementById('star-container');
+        const starIcons = starContainer.querySelectorAll('i');
 
+        // --- 레시피 ID 확인 ---
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId =
-          urlParams.get('id') || urlParams.get('recipe') || 'unknown_recipe';
+          urlParams.get('id') || urlParams.get('recipe') || 'default_recipe';
+        const REVIEW_KEY = 'nn_reviews_' + recipeId;
 
-        function setSavedState(isSaved) {
-          if (!saveBtn) return;
-          if (isSaved) {
-            saveBtn.innerHTML = '<i class="fas fa-check"></i> 저장됨';
-            saveBtn.classList.add('active');
-          } else {
-            saveBtn.innerHTML = '<i class="fas fa-heart"></i> 저장하기';
-            saveBtn.classList.remove('active');
-          }
-        }
-
-        function isAlreadySaved(list) {
-          return list.some((item) => String(item.id) === String(recipeId));
-        }
-
-        if (saveBtn) {
-          let savedRecipes = [];
-          try {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (raw) {
-              const parsed = JSON.parse(raw);
-              if (Array.isArray(parsed)) savedRecipes = parsed;
-            }
-          } catch (e) {
-            console.error('저장된 레시피 파싱 오류:', e);
-          }
-          setSavedState(isAlreadySaved(savedRecipes));
-
-          saveBtn.addEventListener('click', function () {
-            const titleEl = document.getElementById('recipe-title');
-            const categoryEl = document.getElementById('recipe-category');
-            const thumbEl = document.getElementById('thumb');
-            const ratingEl = document.getElementById('recipe-rating');
-
-            const title = titleEl
-              ? titleEl.innerText.trim()
-              : '제목 없는 레시피';
-            const category = categoryEl ? categoryEl.innerText.trim() : '기타';
-            const subInfo = `${category} · 저장된 레시피`;
-            const thumbnail = thumbEl
-              ? thumbEl.getAttribute('src')
-              : '11_default.png';
-
-            // 저장 시점의 평점 정보 저장 (옵션)
-            let rating = 0;
-            if (ratingEl) {
-              rating = parseFloat(ratingEl.getAttribute('data-rating')) || 0;
-            }
-
-            let list = [];
-            try {
-              const raw = localStorage.getItem(STORAGE_KEY);
-              if (raw) list = JSON.parse(raw);
-            } catch (e) {}
-
-            const idx = list.findIndex(
-              (item) => String(item.id) === String(recipeId)
-            );
-
-            if (idx !== -1) {
-              list.splice(idx, 1);
-              alert('저장이 취소되었습니다.');
-              setSavedState(false);
-            } else {
-              const recipeData = {
-                id: recipeId,
-                title: title,
-                subInfo: subInfo,
-                link:
-                  '11_인공띠용지능_recipe.html?id=' +
-                  encodeURIComponent(String(recipeId)),
-                thumbnail: thumbnail,
-                rating: rating,
-                review_count: 0,
-              };
-              list.push(recipeData);
-              alert('레시피가 저장되었습니다!');
-              setSavedState(true);
-            }
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-          });
-        }
-
-        // =========================================
-        // 2. 리뷰 시스템 (수정됨: 닉네임 연동 + 빈 메시지 삭제)
-        // =========================================
-
-        const reviewInput = document.querySelector(
-          '.review-input-box textarea'
-        );
-        const reviewListEl = document.getElementById('review-list');
-        const ratingBox = document.getElementById('recipe-rating');
-        const reviewSubmitBtn = document.querySelector(
-          '.review-input-box .btn-solid'
-        );
-
-        // 별점 요소들
-        const starIcons = document.querySelectorAll('.rating-stars i');
+        // --- 상태 변수 ---
         let currentSelectedRating = 0;
 
-        // (1) 별점 클릭 이벤트
-        starIcons.forEach((star, index) => {
+        // --- 별점 클릭 이벤트 ---
+        starIcons.forEach((star) => {
           star.style.cursor = 'pointer';
-          star.addEventListener('click', () => {
-            currentSelectedRating = index + 1;
+          star.addEventListener('click', function () {
+            currentSelectedRating = parseInt(this.getAttribute('data-score'));
             updateStarVisuals(currentSelectedRating);
           });
         });
 
-        // (2) 별점 시각적 업데이트
         function updateStarVisuals(score) {
-          starIcons.forEach((icon, idx) => {
-            if (idx < score) {
+          starIcons.forEach((icon, index) => {
+            if (index < score) {
               icon.classList.remove('far');
               icon.classList.add('fas');
               icon.style.color = '#FFB800';
@@ -249,134 +204,152 @@
           });
         }
 
-        // (3) 상단 평점 표시 업데이트
-        let totalReviewCount = 0;
-        let currentAverageRating = 0.0;
-
-        if (ratingBox) {
-          const initialRating =
-            parseFloat(ratingBox.getAttribute('data-rating')) || 0;
-          const initialCount =
-            parseInt(ratingBox.getAttribute('data-review-count')) || 0;
-
-          currentAverageRating = initialRating;
-          totalReviewCount = initialCount;
-          updateHeaderDisplay();
+        // --- 데이터 로드/저장 ---
+        function loadReviews() {
+          try {
+            const data = localStorage.getItem(REVIEW_KEY);
+            return data ? JSON.parse(data) : [];
+          } catch (e) {
+            return [];
+          }
         }
 
-        function updateHeaderDisplay() {
-          if (!ratingBox) return;
-          const displayRating = currentAverageRating.toFixed(1);
-
-          ratingBox.innerHTML = `
-            <span style="color:#FFB800; font-size: 1.2rem;">⭐ ${displayRating}</span> / 5 
-            <span style="color:#777; font-size:14px; margin-left:5px;">(${totalReviewCount}개의 리뷰)</span>
-        `;
-
-          ratingBox.setAttribute('data-rating', displayRating);
-          ratingBox.setAttribute('data-review-count', totalReviewCount);
+        function saveReviews(reviews) {
+          localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
         }
 
-        // (4) 리뷰 등록 버튼 클릭 (핵심 수정 부분!)
-        if (reviewSubmitBtn) {
-          reviewSubmitBtn.addEventListener('click', function () {
-            const text = reviewInput.value.trim();
+        // --- [핵심] 상단 요약 정보 업데이트 (첫번째 사진 관련) ---
+        function updateTopSummary(reviews) {
+          const totalCount = reviews.length;
+          let average = 0;
 
-            if (currentSelectedRating === 0) {
-              alert('별점을 선택해주세요! ⭐');
-              return;
+          if (totalCount > 0) {
+            const sum = reviews.reduce((acc, curr) => acc + curr.rating, 0);
+            average = (sum / totalCount).toFixed(1); // 소수점 첫째자리까지
+          }
+
+          // 별점 HTML 생성 (평균 점수 기준)
+          let starsHtml = '';
+          for (let i = 1; i <= 5; i++) {
+            if (i <= Math.round(average)) {
+              starsHtml += '<i class="fas fa-star" style="color:#FFB800"></i>';
+            } else {
+              starsHtml += '<i class="far fa-star" style="color:#ccc"></i>';
             }
-            if (!text) {
-              alert('리뷰 내용을 입력해주세요! 📝');
-              return;
-            }
+          }
 
-            // [수정 1] "아직 리뷰가 없습니다" 메시지 삭제 로직
-            // 보통 'no-review-msg' 클래스를 쓰거나 텍스트로 확인
-            const emptyMsg = document.querySelector('.no-review-msg');
-            if (emptyMsg) {
-              emptyMsg.remove(); // 해당 요소 삭제
-            } else if (
-              reviewListEl.innerText.includes('없습니다') ||
-              reviewListEl.innerText.includes('첫 리뷰')
-            ) {
-              // 클래스가 없을 경우 텍스트를 감지해서 목록을 비움
-              reviewListEl.innerHTML = '';
-            }
+          // 상단 요약 div에 꽂아넣기
+          ratingSummaryEl.innerHTML = `
+                ${starsHtml}
+                <span style="color: #666; font-size: 0.95rem; margin-left: 8px; font-weight: normal;">
+                    (${average}점 / ${totalCount}개 리뷰)
+                </span>
+            `;
 
-            // [수정 2] 마이페이지 닉네임 가져오기
-            // 저장된 닉네임이 없으면 '익명의 미식가' 사용
-            const myNickname =
-              localStorage.getItem('nn_nickname') || '익명의 미식가 🥄';
+          // 하단 리뷰 섹션 제목도 업데이트
+          sectionTitle.textContent = `리뷰 (${totalCount}개)`;
+        }
 
-            // 평점 계산 로직
-            const oldTotalScore = currentAverageRating * totalReviewCount;
-            totalReviewCount += 1;
-            currentAverageRating =
-              (oldTotalScore + currentSelectedRating) / totalReviewCount;
-            updateHeaderDisplay();
+        // --- [핵심] 리뷰 리스트 렌더링 (두번째 사진 스타일 적용) ---
+        function renderReviews() {
+          const reviews = loadReviews();
 
-            // 새 리뷰 HTML 생성
-            const newReview = document.createElement('div');
-            newReview.classList.add('review-item');
-            newReview.style.borderBottom = '1px solid #eee';
-            newReview.style.padding = '15px 0';
+          // 상단 요약 정보도 같이 갱신
+          updateTopSummary(reviews);
 
-            const today = new Date().toISOString().split('T')[0];
+          reviewListEl.innerHTML = '';
 
-            let starString = '';
+          if (reviews.length === 0) {
+            reviewListEl.innerHTML =
+              '<p class="no-review-msg" style="color:#777; padding: 30px 0; text-align:center;">첫 번째 리뷰의 주인공이 되어보세요! 🍳</p>';
+            return;
+          }
+
+          // 최신순 정렬
+          const sortedReviews = [...reviews].reverse();
+
+          sortedReviews.forEach((rev) => {
+            // 별점 생성
+            let starsHtml = '';
             for (let i = 0; i < 5; i++) {
-              if (i < currentSelectedRating)
-                starString +=
-                  '<i class="fas fa-star" style="color:#FFB800"></i>';
-              else
-                starString += '<i class="far fa-star" style="color:#ccc"></i>';
+              starsHtml +=
+                i < rev.rating
+                  ? '<i class="fas fa-star" style="color:#FFB800; font-size: 0.8rem;"></i>'
+                  : '<i class="far fa-star" style="color:#ccc; font-size: 0.8rem;"></i>';
             }
 
-            newReview.innerHTML = `
-            <div class="review-header" style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                <span style="font-weight:bold;">${myNickname}</span> <span style="color:#999; font-size:0.9rem;">${today}</span>
-            </div>
-            <div class="review-stars" style="margin-bottom:8px;">
-                ${starString} <span style="font-weight:bold; margin-left:5px;">${currentSelectedRating}점</span>
-            </div>
-            <p class="review-text" style="color:#333; line-height:1.5;">${text.replace(
-              /\n/g,
-              '<br>'
-            )}</p>
-        `;
+            // 요소 생성
+            const item = document.createElement('div');
+            item.className = 'review-card'; // CSS 클래스 적용
 
-            reviewListEl.prepend(newReview);
+            // 두 번째 사진과 똑같은 구조로 HTML 조립
+            item.innerHTML = `
+              <div class="rv-header">
+                <span class="rv-nickname"></span>
+                <span class="rv-stars">${starsHtml}</span>
+              </div>
+              <div class="review-text"></div>
+              <div class="rv-date">${rev.date}</div>
+            `;
 
-            // 입력창 초기화
-            reviewInput.value = '';
-            currentSelectedRating = 0;
-            updateStarVisuals(0);
+            // 텍스트 안전하게 넣기 (XSS 방지)
+            item.querySelector('.rv-nickname').textContent = rev.nickname;
+            item.querySelector('.review-text').textContent = rev.text;
 
-            alert('소중한 리뷰가 등록되었습니다!');
+            reviewListEl.appendChild(item);
           });
         }
 
-        // =========================================
-        // 3. 공유하기 기능
-        // =========================================
-        const shareBtn = document.getElementById('btn-share');
-        if (shareBtn) {
-          shareBtn.addEventListener('click', function () {
-            const currentUrl = window.location.href;
-            navigator.clipboard
-              .writeText(currentUrl)
-              .then(() => {
-                alert(
-                  '레시피 주소가 복사되었습니다! 🔗\n친구들에게 공유해보세요.'
-                );
-              })
-              .catch((err) => {
-                console.error('클립보드 복사 실패:', err);
-                alert('주소 복사에 실패했습니다.');
-              });
-          });
-        }
+        // --- 리뷰 등록 로직 ---
+        reviewSubmitBtn.addEventListener('click', function () {
+          const text = reviewInput.value.trim();
+
+          if (!text) {
+            alert('리뷰 내용을 입력해주세요!');
+            return;
+          }
+          if (currentSelectedRating === 0) {
+            alert('별점을 선택해주세요!');
+            return;
+          }
+
+          let nickname = localStorage.getItem('nn_nickname');
+          if (!nickname) {
+            // 임시 닉네임 생성 (실제 구현 시 로그인 정보 사용)
+            nickname = 'Haein_Cook';
+            localStorage.setItem('nn_nickname', nickname);
+          }
+
+          const today = new Date();
+          const dateString =
+            today.getFullYear() +
+            '-' +
+            String(today.getMonth() + 1).padStart(2, '0') +
+            '-' +
+            String(today.getDate()).padStart(2, '0');
+
+          const newReview = {
+            id: Date.now(),
+            nickname: nickname,
+            text: text,
+            rating: currentSelectedRating,
+            date: dateString,
+          };
+
+          const currentReviews = loadReviews();
+          currentReviews.push(newReview);
+          saveReviews(currentReviews);
+
+          renderReviews(); // 화면 갱신 (상단 점수, 리스트 모두)
+
+          // 입력창 초기화
+          reviewInput.value = '';
+          currentSelectedRating = 0;
+          updateStarVisuals(0);
+        });
+
+        // --- 초기 실행 ---
+        renderReviews();
       });
     </script>
   </body>
