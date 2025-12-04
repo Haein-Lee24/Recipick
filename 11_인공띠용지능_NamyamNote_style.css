@@ -633,14 +633,16 @@ footer {
   height: 44px;
   padding: 0 16px;
   box-sizing: border-box;
-  background: #f6e8c9;
-  color: #916b46;
+  background: #916b46;
+  color: #fff;
   border: 1px solid #e2c97a;
   box-shadow: var(--shadow);
   transition: opacity 0.2s;
 }
 
-.btn-solid:hover { opacity: 0.92; }
+.btn-solid:hover { opacity: 0.92;
+  background: #ac8d6f;
+ }
 
 .btn-warn:hover {
   color: #916b46;
@@ -651,17 +653,17 @@ footer {
   display: inline-block;
   font-size: 13px;
   font-weight: 700;
-  background: #f6e8c9;
-  color: var(--yellow-deep);
   padding: 6px 14px;
   border-radius: 999px;
+  background: #f6e8c9;
+  color: var(--yellow-deep);
   border: 1px solid #e5d4a5;
   transition: background-color 0.2s, color 0.2s;
 }
 
 .badge:hover {
-  background: var(--yellow-deep);
-  color: #fff;
+  color: #916b46;
+  background: #ecdeb5;
 }
 
 .list-v {
