@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>냠냠노트 - 메인 페이지</title>
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hasLoggedIn = localStorage.getItem("hasLoggedInBefore");
+
+    if (!hasLoggedIn) {
+      // 로그인한 적이 없는 사용자 → 로그인 페이지로 강제 이동
+      location.href = "11_인공띠용지능_login.html";
+    }
+  });
+</script>
+
     <style>
       .hero-section {
         display: flex;

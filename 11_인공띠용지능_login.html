@@ -108,6 +108,8 @@
       return;
     }
 
+    localStorage.setItem("hasLoggedInBefore", "true");
+
     localStorage.setItem("currentUser", id);
     alert("로그인 성공!");
     location.href = "11_인공띠용지능_mypage.html";
