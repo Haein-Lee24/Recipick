@@ -1106,3 +1106,8 @@ footer {
   color: #fff;
   border-color: var(--primary-color);
 }
+.recipe-meta {
+  margin-top: 0;
+  font-size: 13px;
+  color: #777;
+}
