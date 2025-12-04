@@ -50,31 +50,79 @@ function loadAllRecipes() {
     });
 }
 
+/**
+ * register.js에서 저장한 "내 레시피"를
+ * 상세 페이지에서 쓰기 좋은 통일된 구조로 바꿔주는 함수
+ */
 function normalizeLocalRecipe(r) {
+  // ---------- 1) 필수 재료 ----------
   let required = [];
-  if (typeof r.ingredients === 'string') {
+  if (Array.isArray(r.ingredientsRequired)) {
+    // 새 구조: { name, amount } 배열
+    required = r.ingredientsRequired.map((ing) => ({
+      name: ing.name || '',
+      amount: ing.amount || ''
+    }));
+  } else if (typeof r.ingredients === 'string') {
+    // 예전 구조: 통짜 문자열
     required = r.ingredients
       .split(/[,\n]/)
       .map((s) => s.trim())
       .filter((s) => s.length > 0)
       .map((name) => ({
         name,
-        amount: '',
+        amount: ''
       }));
   }
 
+  // ---------- 2) 선택 재료 ----------
+  let optional = [];
+  if (Array.isArray(r.ingredientsOptional)) {
+    // 새 구조
+    optional = r.ingredientsOptional.map((ing) => ({
+      name: ing.name || '',
+      amount: ing.amount || ''
+    }));
+  } else if (Array.isArray(r.ingredients_optional)) {
+    // 혹시 옛날에 ingredients_optional 로 저장한 적이 있다면
+    optional = r.ingredients_optional;
+  }
+
+  // ---------- 3) 조리 과정 ----------
   let steps = [];
-  if (typeof r.steps === 'string') {
-    steps = r.steps
-      .split(/\n+/)
-      .map((s) => s.trim())
-      .filter((s) => s.length > 0)
-      .map((desc, idx) => ({
-        title: `단계 ${idx + 1}`,
-        desc,
-      }));
+
+  if (Array.isArray(r.stepsDetail)) {
+    // ✅ 새 구조: { title, description } 배열
+    steps = r.stepsDetail.map((s, idx) => ({
+      title: (s.title && s.title.trim()) || `단계 ${idx + 1}`,
+      desc: (s.description || '').trim()
+    }));
   } else if (Array.isArray(r.steps)) {
+    // 이미 { title, desc } 형태의 배열인 경우
     steps = r.steps;
+  } else if (typeof r.steps === 'string' && r.steps.trim()) {
+    // 예전 문자열 구조: "제목\n설명\n\n제목\n설명..." 형태 또는 그냥 줄 나열
+    const blocks = r.steps.split(/\n\s*\n/); // 빈 줄 기준으로 블럭 나누기
+
+    blocks.forEach((block, idx) => {
+      const lines = block.split('\n').map((s) => s.trim()).filter(Boolean);
+
+      if (lines.length === 0) return;
+
+      let titleLine = lines[0];          // 첫 줄
+      const descLine = lines.slice(1).join('\n'); // 나머지 줄
+
+      // "1. 단계 1", "1 단계 1" 이런 앞부분 숫자/단계 제거
+      titleLine = titleLine.replace(/^\d+\s*\.?\s*(단계)?\s*/u, '').trim();
+
+      const title = titleLine || `단계 ${idx + 1}`;
+      const desc = descLine || '';
+
+      steps.push({
+        title,
+        desc
+      });
+    });
   }
 
   const ratingValue = r.rating ?? 0;
@@ -95,9 +143,11 @@ function normalizeLocalRecipe(r) {
     review_count: reviewCount,
     reviews: reviews,
     views: r.views || 0,
+
+    // 상세 페이지에서 사용하는 필드들
     ingredients_required: required,
-    ingredients_optional: Array.isArray(r.ingredients_optional) ? r.ingredients_optional : [],
-    steps: steps,
+    ingredients_optional: optional,
+    steps: steps
   };
 }
 

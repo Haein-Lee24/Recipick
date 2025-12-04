@@ -33,23 +33,17 @@
         outline: none;
         background: #fff;
         box-sizing: border-box;
-
-        /* 🔥 기본 margin 제거 (간격이 들쭉날쭉해지는 원인 제거) */
         margin: 0;
       }
 
-      /* textarea는 스크롤만 */
       .form-card textarea {
         resize: none;
         overflow-y: auto;
       }
 
-      /* 각 요소 간 간격 통일 */
       .form-group {
-        margin-top: 20px; /* 🔥 원하는 통일 간격 */
+        margin-top: 20px;
       }
-
-      /* 첫 번째는 위 공백 제거 */
       .form-group:first-child {
         margin-top: 0;
       }
@@ -107,7 +101,6 @@
         text-align: center;
       }
 
-      /* 호버 비활성 */
       .card.form-card {
         transition: none !important;
       }
@@ -116,16 +109,19 @@
         box-shadow: none !important;
       }
 
-      /* 텍스트 에어리어 폰트 */
-      #ingredients,
-      #steps {
+      #ingredientsRequired,
+      #ingredientsOptional,
+      .step-title-input,
+      .step-desc-input {
         font-family: "NanumSquare", system-ui, sans-serif;
         font-size: 14px;
         line-height: 1.5;
       }
 
-      #ingredients::placeholder,
-      #steps::placeholder {
+      #ingredientsRequired::placeholder,
+      #ingredientsOptional::placeholder,
+      .step-title-input::placeholder,
+      .step-desc-input::placeholder {
         font-family: "NanumSquare", system-ui, sans-serif;
       }
 
@@ -136,42 +132,127 @@
       .section-title {
         margin-top: 20px;
       }
+
+      /* 단계 UI */
+      .steps-wrapper {
+        border-radius: 12px;
+        background: #faf7f0;
+        padding: 12px 14px;
+      }
+
+      .step-item {
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        margin-bottom: 10px;
+      }
+
+      .step-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+
+      .step-number {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--primary-color);
+        min-width: 40px;
+      }
+
+      .step-title-input {
+        flex: 1;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        font-size: 13px;
+      }
+
+      .step-desc-input {
+        margin-top: 6px;
+        width: 100%;
+        min-height: 52px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        padding: 8px 10px;
+        box-sizing: border-box;
+      }
+
+      .step-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 4px;
+      }
+
+      .remove-step-btn {
+        border: none;
+        background: none;
+        font-size: 12px;
+        color: var(--muted);
+        cursor: pointer;
+        padding: 0;
+      }
+
+      #addStepBtn {
+        margin-top: 10px;
+        font-size: 13px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px dashed var(--primary-color);
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .small-hint {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 4px;
+      }
     </style>
   </head>
 
   <body>
     <nav class="site-nav">
-  <div class="container nav-top-center">
-    <div class="nav-center-box">
-      <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
-        <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
-      </a>
+      <div class="container nav-top-center">
+        <div class="nav-center-box">
+          <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
+          </a>
 
-      <div class="nav-search">
-        <input
-          type="text"
-          placeholder="재료명으로 레시피 검색"
-          class="nav-search-input"
-        />
-        <button class="nav-search-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
-            <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2" />
-          </svg>
-        </button>
+          <div class="nav-search">
+            <input
+              type="text"
+              placeholder="재료명으로 레시피 검색"
+              class="nav-search-input"
+            />
+            <button class="nav-search-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
+                <line
+                  x1="16.5"
+                  y1="16.5"
+                  x2="21"
+                  y2="21"
+                  stroke="white"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="nav-menu-bar">
-    <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
-    <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
-    <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
-    <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
-    <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
-  </div>
-</nav>
-
+      <div class="nav-menu-bar">
+        <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
+        <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
+        <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
+        <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
+        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+      </div>
+    </nav>
 
     <main class="page-pad">
       <div class="container">
@@ -185,7 +266,6 @@
         <h2 class="section-title">레시피 정보 입력</h2>
 
         <form class="card form-card" id="recipeForm">
-
           <!-- 레시피 제목 -->
           <div class="form-group">
             <label for="title">레시피 제목</label>
@@ -216,28 +296,45 @@
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
-          <!-- 재료 -->
+          <!-- 필수 재료 -->
           <div class="form-group">
-            <label for="ingredients">재료</label>
+            <label for="ingredientsRequired">필수 재료</label>
             <textarea
-              id="ingredients"
-              name="ingredients"
+              id="ingredientsRequired"
+              name="ingredientsRequired"
               rows="4"
-              placeholder="예: 스파게티면 200g, 생크림 1컵, 베이컨 3줄..."
+              placeholder="예: 스파게티면 200g&#10생크림 1컵&#10베이컨 3줄"
               required
             ></textarea>
+            <p class="small-hint">한 줄에 재료 하나씩 입력해주세요.</p>
           </div>
 
-          <!-- 조리 순서 -->
+          <!-- 선택 재료 -->
           <div class="form-group">
-            <label for="steps">조리 순서</label>
+            <label for="ingredientsOptional">선택 재료</label>
             <textarea
-              id="steps"
-              name="steps"
-              rows="6"
-              placeholder="1) 면을 삶는다.&#10;2) 베이컨과 마늘을 볶는다.&#10;3) 생크림을 넣고 졸인다."
-              required
+              id="ingredientsOptional"
+              name="ingredientsOptional"
+              rows="3"
+              placeholder="예: 파마산 치즈 &#10파슬리 "
             ></textarea>
+            <p class="small-hint">없으면 비워도 됩니다.</p>
+          </div>
+
+          <!-- 조리 과정 (단계별) -->
+          <div class="form-group">
+            <label>조리 과정 </label>
+
+            <div class="steps-wrapper" id="stepsWrapper">
+              <div id="stepList">
+                <!-- JS에서 기본 1개 단계가 자동으로 들어감 -->
+              </div>
+
+              <button type="button" id="addStepBtn">+ 단계 추가</button>
+              <p class="small-hint">
+                단계 제목과 설명을 입력해주세요. (예: 제목 - 재료 준비 / 설명 - 스파게티면, 소스, 치즈를 준비합니다.)
+              </p>
+            </div>
           </div>
 
           <div class="form-actions">
@@ -254,32 +351,33 @@
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
+    <!-- 레시피 등록 로직 -->
     <script src="11_인공띠용지능_register.js"></script>
 
+    <!-- 상단 검색창 -->
     <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const navInput = document.querySelector(".nav-search-input");
-  const navBtn = document.querySelector(".nav-search-btn");
+      document.addEventListener("DOMContentLoaded", () => {
+        const navInput = document.querySelector(".nav-search-input");
+        const navBtn = document.querySelector(".nav-search-btn");
 
-  if (!navInput || !navBtn) return;
+        if (!navInput || !navBtn) return;
 
-  navBtn.addEventListener("click", () => {
-    const kw = navInput.value.trim();
-    if (!kw) {
-      alert("검색어를 입력해주세요!");
-      return;
-    }
+        navBtn.addEventListener("click", () => {
+          const kw = navInput.value.trim();
+          if (!kw) {
+            alert("검색어를 입력해주세요!");
+            return;
+          }
 
-    location.href =
-      "11_인공띠용지능_search.html?keyword=" +
-      encodeURIComponent(kw);
-  });
+          location.href =
+            "11_인공띠용지능_search.html?keyword=" +
+            encodeURIComponent(kw);
+        });
 
-  navInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") navBtn.click();
-  });
-});
-</script>
-
+        navInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") navBtn.click();
+        });
+      });
+    </script>
   </body>
 </html>

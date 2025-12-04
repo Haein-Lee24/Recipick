@@ -4,14 +4,17 @@ const RECIPES_KEY = "nn_recipes";      // 등록된 모든 레시피
 const DRAFT_KEY   = "nn_recipe_draft"; // 임시저장
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form           = document.getElementById("recipeForm");
-  const titleInput     = document.getElementById("title");
-  const ingInput       = document.getElementById("ingredients");
-  const stepsInput     = document.getElementById("steps");
-  const imageInput     = document.getElementById("image");
-  const draftTimeEl    = document.getElementById("draftTime");
-  const saveDraftBtn   = document.getElementById("saveDraftBtn");
+  const form         = document.getElementById("recipeForm");
+  const titleInput   = document.getElementById("title");
+  const reqIngInput  = document.getElementById("ingredientsRequired");
+  const optIngInput  = document.getElementById("ingredientsOptional");
+  const imageInput   = document.getElementById("image");
+  const draftTimeEl  = document.getElementById("draftTime");
+  const saveDraftBtn = document.getElementById("saveDraftBtn");
   const categoryRadios = document.querySelectorAll("input[name='category']");
+
+  const stepListEl   = document.getElementById("stepList");
+  const addStepBtn   = document.getElementById("addStepBtn");
 
   // --------- 수정 모드 여부 체크 (editId 파라미터) ---------
   let isEdit = false;
@@ -28,15 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function getSelectedCategory() {
     const checked = Array.from(categoryRadios).find(r => r.checked);
     return checked ? checked.value : "";
-  }
-
-  function collectFormData() {
-    return {
-      title:       titleInput.value.trim(),
-      ingredients: ingInput.value.trim(),
-      steps:       stepsInput.value.trim(),
-      category:    getSelectedCategory()
-    };
   }
 
   function formatDate(date) {
@@ -62,7 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const raw = localStorage.getItem(RECIPES_KEY);
     if (!raw) return [];
     try {
-      return JSON.parse(raw);
+      const list = JSON.parse(raw);
+      return Array.isArray(list) ? list : [];
     } catch {
       return [];
     }
@@ -70,6 +65,165 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function saveRecipes(list) {
     localStorage.setItem(RECIPES_KEY, JSON.stringify(list));
+  }
+
+  // ---------------- 재료 파싱 / 단계 수집 ----------------
+  // "스파게티면 200g" → { name: "스파게티면", amount: "200g" }
+  function parseIngredients(text) {
+    return text
+      .split("\n")
+      .map(line => line.trim())
+      .filter(line => line.length > 0)
+      .map(line => {
+        const parts = line.split(" ");
+        const name = parts.shift() || "";
+        const amount = parts.join(" ");
+        return { name, amount };
+      });
+  }
+
+  // 제목에서 "1.", "1 단계", "1. 단계", "1단계", "1.단계" 같은 패턴 제거
+  function cleanStepTitle(raw) {
+    if (!raw) return "";
+    let t = raw.trim();
+    // 숫자 + (선택) 점 + (선택) '단계' + (선택) 점 + 공백 제거
+    t = t.replace(/^\d+\s*(?:\.?\s*단계)?\.?\s*/u, "");
+    return t.trim();
+  }
+
+  // 단계 UI 하나 생성
+  function createStepItem(index, data) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "step-item";
+
+    const header = document.createElement("div");
+    header.className = "step-header";
+
+    const numSpan = document.createElement("span");
+    numSpan.className = "step-number";
+    numSpan.textContent = (index + 1) + ". 단계";
+
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.className = "step-title-input";
+    titleInput.placeholder = "예: 재료 준비 (숫자 없이)";
+    titleInput.value = data?.title || "";
+
+    header.appendChild(numSpan);
+    header.appendChild(titleInput);
+
+    const descTextarea = document.createElement("textarea");
+    descTextarea.className = "step-desc-input";
+    descTextarea.placeholder = "예: 고기를 양념합니다.";
+    descTextarea.rows = 2;
+    descTextarea.value = data?.description || "";
+
+    const actions = document.createElement("div");
+    actions.className = "step-actions";
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "remove-step-btn";
+    removeBtn.textContent = "단계 삭제";
+
+    removeBtn.addEventListener("click", () => {
+      if (stepListEl.children.length <= 1) {
+        alert("최소 1개 이상의 단계가 필요합니다.");
+        return;
+      }
+      stepListEl.removeChild(wrapper);
+      renumberSteps();
+    });
+
+    actions.appendChild(removeBtn);
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(descTextarea);
+    wrapper.appendChild(actions);
+
+    return wrapper;
+  }
+
+  function renumberSteps() {
+    Array.from(stepListEl.children).forEach((item, idx) => {
+      const numSpan = item.querySelector(".step-number");
+      if (numSpan) numSpan.textContent = (idx + 1) + ". 단계";
+    });
+  }
+
+  function addStep(data) {
+    const stepItem = createStepItem(stepListEl.children.length, data);
+    stepListEl.appendChild(stepItem);
+    renumberSteps();
+  }
+
+  function collectSteps() {
+    const steps = [];
+    const items = stepListEl.querySelectorAll(".step-item");
+    items.forEach((item) => {
+      const titleEl = item.querySelector(".step-title-input");
+      const descEl  = item.querySelector(".step-desc-input");
+      const rawTitle = (titleEl?.value || "").trim();
+      const title = cleanStepTitle(rawTitle);      // 숫자/단계 제거
+      const description = (descEl?.value || "").trim();
+      if (title || description) {
+        steps.push({ title, description });
+      }
+    });
+    return steps;
+  }
+
+  // 레시피 폼 값 모으기
+  function collectFormData() {
+    const title    = titleInput.value.trim();
+    const category = getSelectedCategory();
+
+    const reqText  = reqIngInput.value.trim();
+    const optText  = optIngInput.value.trim();
+
+    const reqList  = parseIngredients(reqText);
+    const optList  = parseIngredients(optText);
+    const stepsArr = collectSteps();
+
+    // 필수 재료만 옛날용 문자열에 넣기
+    const ingredientsPlain = reqText;
+
+    // 단계 문자열: "제목\n설명" 형식, 숫자 없이
+    const stepsPlain = stepsArr
+      .map((s) => {
+        const titleLine = (s.title || "").trim();
+        const descLine  = (s.description || "").trim();
+        if (titleLine && descLine) {
+          return `${titleLine}\n${descLine}`;
+        } else {
+          return titleLine || descLine;
+        }
+      })
+      .join("\n\n")
+      .trim();
+
+    return {
+      title,
+      category,
+
+      ingredientsRequiredText: reqText,
+      ingredientsOptionalText: optText,
+      ingredientsRequired: reqList,
+      ingredientsOptional: optList,
+
+      stepsDetail: stepsArr,
+      ingredientsPlain,
+      stepsPlain
+    };
+  }
+
+  // ---------------- 단계 UI 기본 1개 생성 ----------------
+  if (stepListEl) {
+    addStep();
+  }
+
+  if (addStepBtn) {
+    addStepBtn.addEventListener("click", () => addStep());
   }
 
   // ---------------- 수정 모드일 때: 기존 레시피 채워넣기 ----------------
@@ -81,15 +235,49 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("수정할 레시피를 찾을 수 없습니다.");
     } else {
       titleInput.value = target.title || "";
-      ingInput.value   = target.ingredients || "";
-      stepsInput.value = target.steps || "";
 
+      // 카테고리
       if (target.category) {
         categoryRadios.forEach(r => {
           r.checked = (r.value === target.category);
         });
       }
 
+      // 필수/선택 재료
+      if (Array.isArray(target.ingredientsRequired)) {
+        reqIngInput.value = target.ingredientsRequired
+          .map(ing => (ing.amount ? `${ing.name} ${ing.amount}` : ing.name))
+          .join("\n");
+      } else if (typeof target.ingredients === "string") {
+        reqIngInput.value = target.ingredients;
+      }
+
+      if (Array.isArray(target.ingredientsOptional)) {
+        optIngInput.value = target.ingredientsOptional
+          .map(ing => (ing.amount ? `${ing.name} ${ing.amount}` : ing.name))
+          .join("\n");
+      } else if (typeof target.ingredientsOptionalText === "string") {
+        optIngInput.value = target.ingredientsOptionalText;
+      }
+
+      // 단계
+      let stepData = [];
+      if (Array.isArray(target.stepsDetail)) {
+        stepData = target.stepsDetail;
+      } else if (typeof target.steps === "string" && target.steps.trim()) {
+        stepData = [{ title: "", description: target.steps.trim() }];
+      }
+
+      if (stepListEl) {
+        stepListEl.innerHTML = "";
+        if (stepData.length) {
+          stepData.forEach(s => addStep(s));
+        } else {
+          addStep();
+        }
+      }
+
+      // 이미지
       originalImageDataUrl = target.image || "";
     }
 
@@ -106,12 +294,40 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       try {
         const draft = JSON.parse(raw);
-        if (draft.title)       titleInput.value = draft.title;
-        if (draft.ingredients) ingInput.value   = draft.ingredients;
-        if (draft.steps)       stepsInput.value = draft.steps;
+
+        if (draft.title)     titleInput.value = draft.title;
         if (draft.category) {
           categoryRadios.forEach(r => r.checked = (r.value === draft.category));
         }
+
+        if (draft.ingredientsRequiredText) {
+          reqIngInput.value = draft.ingredientsRequiredText;
+        } else if (draft.ingredients) {
+          reqIngInput.value = draft.ingredients;
+        }
+
+        if (draft.ingredientsOptionalText) {
+          optIngInput.value = draft.ingredientsOptionalText;
+        }
+
+        let stepsDraft = [];
+        if (Array.isArray(draft.stepsDetail)) {
+          stepsDraft = draft.stepsDetail;
+        } else if (Array.isArray(draft.steps)) {
+          stepsDraft = draft.steps;
+        } else if (typeof draft.steps === "string" && draft.steps.trim()) {
+          stepsDraft = [{ title: "", description: draft.steps.trim() }];
+        }
+
+        if (stepListEl) {
+          stepListEl.innerHTML = "";
+          if (stepsDraft.length) {
+            stepsDraft.forEach(s => addStep(s));
+          } else {
+            addStep();
+          }
+        }
+
         updateDraftTime(draft.savedAt || null);
       } catch {
         updateDraftTime(null);
@@ -122,12 +338,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------- 임시저장 버튼 (신규 작성 때만) ----------------
   if (!isEdit && saveDraftBtn) {
     saveDraftBtn.addEventListener("click", () => {
-      const data = collectFormData();
-      data.imageName = imageInput.files[0]?.name || "";
-      data.savedAt   = Date.now();
+      const info = collectFormData();
+      const draft = {
+        title: info.title,
+        category: info.category,
+        ingredientsRequiredText: info.ingredientsRequiredText,
+        ingredientsOptionalText: info.ingredientsOptionalText,
+        stepsDetail: info.stepsDetail,
+        imageName: imageInput.files[0]?.name || "",
+        savedAt: Date.now()
+      };
 
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
-      updateDraftTime(data.savedAt);
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      updateDraftTime(draft.savedAt);
       alert("임시저장되었습니다!");
     });
   }
@@ -150,7 +373,6 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       reader.readAsDataURL(file);
     } else {
-      // 이미지 새로 안 골랐으면: 신규는 "", 수정은 기존 이미지 유지
       const img = isEdit ? originalImageDataUrl : "";
       handleSubmit(img);
     }
@@ -161,6 +383,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const raw  = localStorage.getItem(RECIPES_KEY);
     const list = raw ? JSON.parse(raw) : [];
 
+    if (!info.title) {
+      alert("레시피 제목을 입력해주세요.");
+      return;
+    }
+    if (!info.category) {
+      alert("카테고리를 선택해주세요.");
+      return;
+    }
+    if (!info.ingredientsRequired.length) {
+      alert("필수 재료를 한 개 이상 입력해주세요.");
+      return;
+    }
+    if (!info.stepsDetail.length) {
+      alert("조리 과정을 한 단계 이상 입력해주세요.");
+      return;
+    }
+
     if (isEdit) {
       // ---------- 기존 레시피 수정 ----------
       const idx = list.findIndex(r => String(r.id) === String(editId));
@@ -170,11 +409,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const target = list[idx];
-      target.title       = info.title;
-      target.category    = info.category;
-      target.ingredients = info.ingredients;
-      target.steps       = info.steps;
-      target.image       = imageDataUrl; // 새 이미지 or 기존 이미지 유지
+      target.title    = info.title;
+      target.category = info.category;
+      target.image    = imageDataUrl;
+
+      // 새 구조
+      target.ingredientsRequired = info.ingredientsRequired;
+      target.ingredientsOptional = info.ingredientsOptional;
+      target.stepsDetail         = info.stepsDetail;
+
+      // 텍스트 필드도 저장 (상세 페이지 호환)
+      target.ingredientsRequiredText  = info.ingredientsRequiredText;
+      target.ingredientsOptionalText  = info.ingredientsOptionalText;
+
+      // 기존 페이지 호환용 문자열 필드
+      target.ingredients = info.ingredientsPlain;
+      target.steps       = info.stepsPlain;
 
       saveRecipes(list);
 
@@ -185,12 +435,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const now = Date.now();
 
       const newRecipe = {
-        id:         now,
-        title:      info.title,
-        category:   info.category,
-        image:      imageDataUrl,
-        ingredients: info.ingredients,
-        steps:       info.steps,
+        id:        now,
+        title:     info.title,
+        category:  info.category,
+        image:     imageDataUrl,
+
+        // 새 구조
+        ingredientsRequired: info.ingredientsRequired,
+        ingredientsOptional: info.ingredientsOptional,
+        stepsDetail:         info.stepsDetail,
+
+        // 텍스트 필드 (상세 페이지용)
+        ingredientsRequiredText: info.ingredientsRequiredText,
+        ingredientsOptionalText: info.ingredientsOptionalText,
+
+        // 기존 구조(문자열)도 함께 저장
+        ingredients: info.ingredientsPlain,
+        steps:       info.stepsPlain,
+
         views:     0,
         rating:    0,
         createdAt: now
@@ -199,14 +461,16 @@ document.addEventListener("DOMContentLoaded", () => {
       list.push(newRecipe);
       saveRecipes(list);
 
-      // 임시저장 제거 + 폼 리셋
       localStorage.removeItem(DRAFT_KEY);
       updateDraftTime(null);
       form.reset();
 
+      if (stepListEl) {
+        stepListEl.innerHTML = "";
+        addStep();
+      }
+
       alert("레시피가 등록되었습니다!");
-      // 필요하면 여기서 자동 이동도 가능
-      // window.location.href = "11_인공띠용지능_recipe_manage.html";
     }
   }
 });
