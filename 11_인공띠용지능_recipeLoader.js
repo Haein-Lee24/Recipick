@@ -1,5 +1,6 @@
 const LOCAL_RECIPES_KEY = 'nn_recipes';
 const RECENT_RECIPES_KEY = 'nn_recent_recipes';
+const REVIEWS_KEY = 'nn_recipe_reviews';
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -46,8 +47,54 @@ function loadAllRecipes() {
       }
 
       const localRecipes = localRaw.map((r) => normalizeLocalRecipe(r));
-      return [...baseRecipes, ...localRecipes];
+      const combined = [...baseRecipes, ...localRecipes];
+
+      // 🔹 localStorage에 저장된 리뷰를 레시피에 합쳐서 반영
+      const reviewsMap = loadPersistedReviews();
+      combined.forEach((r) => {
+        const id = String(r.id);
+        const stored = Array.isArray(reviewsMap[id]) ? reviewsMap[id] : null;
+
+        if (stored && stored.length > 0) {
+          const baseReviews = Array.isArray(r.reviews) ? r.reviews : [];
+          const merged = [...baseReviews, ...stored];
+
+          r.reviews = merged;
+          const sum = merged.reduce(
+            (acc, rv) => acc + (Number(rv.rating) || 0),
+            0
+          );
+          const avg = merged.length > 0 ? sum / merged.length : 0;
+
+          r.rating = Number(avg.toFixed(1));
+          r.review_count = merged.length;
+        }
+      });
+
+      return combined;
     });
+}
+
+// 🔹 리뷰를 보관하는 map 불러오기 { [recipeId]: [review, ...] }
+function loadPersistedReviews() {
+  try {
+    const raw = localStorage.getItem(REVIEWS_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch (e) {
+    console.error('리뷰 데이터 파싱 오류:', e);
+    return {};
+  }
+}
+
+// 🔹 리뷰 map 저장
+function savePersistedReviews(map) {
+  try {
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(map));
+  } catch (e) {
+    console.error('리뷰 저장 오류:', e);
+  }
 }
 
 function normalizeLocalRecipe(r) {
@@ -96,7 +143,9 @@ function normalizeLocalRecipe(r) {
     reviews: reviews,
     views: r.views || 0,
     ingredients_required: required,
-    ingredients_optional: Array.isArray(r.ingredients_optional) ? r.ingredients_optional : [],
+    ingredients_optional: Array.isArray(r.ingredients_optional)
+      ? r.ingredients_optional
+      : [],
     steps: steps,
   };
 }
@@ -121,17 +170,23 @@ function renderRecipe(recipe) {
 
   const ratingEl = document.getElementById('recipe-rating');
   if (ratingEl) {
-    const filledStars = '★'.repeat(Math.round(ratingValue));
-    const emptyStars = '☆'.repeat(5 - Math.round(ratingValue));
-    ratingEl.innerHTML = `${filledStars}${emptyStars} (${ratingValue}점 / ${reviewCount}개 리뷰)`;
-    ratingEl.setAttribute('data-rating', ratingValue);
+    const rounded = Math.round(ratingValue * 10) / 10;
+    const filledStars = '★'.repeat(Math.round(rounded));
+    const emptyStars = '☆'.repeat(5 - Math.round(rounded));
+    ratingEl.innerHTML = `${filledStars}${emptyStars} (${rounded.toFixed(
+      1
+    )}점 / ${reviewCount}개 리뷰)`;
+    ratingEl.setAttribute('data-rating', rounded);
     ratingEl.setAttribute('data-review-count', reviewCount);
   }
 
   const reqList = document.getElementById('ingredients-required');
-  const requiredItems = Array.isArray(recipe.ingredients_required) ? recipe.ingredients_required : [];
+  const requiredItems = Array.isArray(recipe.ingredients_required)
+    ? recipe.ingredients_required
+    : [];
   if (requiredItems.length === 0) {
-    reqList.innerHTML = '<li class="list-item muted">등록된 필수 재료가 없습니다.</li>';
+    reqList.innerHTML =
+      '<li class="list-item muted">등록된 필수 재료가 없습니다.</li>';
   } else {
     reqList.innerHTML = requiredItems
       .map(
@@ -148,7 +203,9 @@ function renderRecipe(recipe) {
   }
 
   const optList = document.getElementById('ingredients-optional');
-  const optionalItems = Array.isArray(recipe.ingredients_optional) ? recipe.ingredients_optional : [];
+  const optionalItems = Array.isArray(recipe.ingredients_optional)
+    ? recipe.ingredients_optional
+    : [];
   if (optionalItems.length === 0) {
     optList.innerHTML = `<li class="list-item muted">선택 재료 없음</li>`;
   } else {
@@ -169,14 +226,17 @@ function renderRecipe(recipe) {
   const stepList = document.getElementById('recipe-steps');
   const steps = Array.isArray(recipe.steps) ? recipe.steps : [];
   if (steps.length === 0) {
-    stepList.innerHTML = '<li class="list-item muted">등록된 조리 과정이 없습니다.</li>';
+    stepList.innerHTML =
+      '<li class="list-item muted">등록된 조리 과정이 없습니다.</li>';
   } else {
     stepList.innerHTML = steps
       .map(
         (step, i) => `
       <li class="list-item">
         <div class="list-text">
-          <div class="list-ttl">${i + 1}. ${step.title || `단계 ${i + 1}`}</div>
+          <div class="list-ttl">${i + 1}. ${
+          step.title || `단계 ${i + 1}`
+        }</div>
           <div class="list-sub">${step.desc || ''}</div>
         </div>
       </li>
@@ -190,7 +250,8 @@ function renderRecipe(recipe) {
   reviewTitleEl.textContent = `리뷰 (${reviewCount}개)`;
 
   if (reviewCount === 0) {
-    reviewListEl.innerHTML = '<p class="my-recipes card-sub muted">아직 등록된 리뷰가 없습니다.</p>';
+    reviewListEl.innerHTML =
+      '<p class="my-recipes card-sub muted">아직 등록된 리뷰가 없습니다.</p>';
   } else {
     reviewListEl.innerHTML = reviews
       .map(
@@ -198,7 +259,9 @@ function renderRecipe(recipe) {
       <article class="card">
         <div class="bar between">
           <span class="card-title">${r.user}</span>
-          <span class="rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+          <span class="rating">${'★'.repeat(r.rating)}${'☆'.repeat(
+          5 - r.rating
+        )}</span>
         </div>
         <p class="my-recipes card-sub">${r.text}</p>
         <span class="my-recipes card-sub right">${r.date}</span>
@@ -221,7 +284,9 @@ function saveToRecent(recipe) {
     id: recipe.id,
     title: recipe.title || recipe.name,
     info: `${recipe.category || '기타'} · 리뷰 ${reviewCount}개`,
-    link: '11_인공띠용지능_recipe.html?id=' + encodeURIComponent(String(recipe.id)),
+    link:
+      '11_인공띠용지능_recipe.html?id=' +
+      encodeURIComponent(String(recipe.id)),
     thumbnail: recipe.thumbnail || recipe.image || '11_default.png',
     rating: ratingValue,
     review_count: reviewCount,
@@ -238,10 +303,13 @@ function saveToRecent(recipe) {
     console.error('최근 레시피 파싱 오류:', e);
   }
 
-  recentList = recentList.filter((item) => String(item.id) !== String(recipe.id));
+  recentList = recentList.filter(
+    (item) => String(item.id) !== String(recipe.id)
+  );
   recentList.unshift(newRecord);
 
-  if (recentList.length > MAX_ITEMS) recentList = recentList.slice(0, MAX_ITEMS);
+  if (recentList.length > MAX_ITEMS)
+    recentList = recentList.slice(0, MAX_ITEMS);
 
   localStorage.setItem(RECENT_RECIPES_KEY, JSON.stringify(recentList));
 }
@@ -252,7 +320,9 @@ function setupReviewSystem(recipe) {
   const reviewInput = document.querySelector('.input-text');
   const reviewList = document.getElementById('review-list');
   const reviewTitle = document.getElementById('review-title');
-  const userName = (localStorage.getItem('nn_username') || '').trim() || '익명 사용자';
+  const userName =
+    (localStorage.getItem('nn_username') || '').trim() || '익명 사용자';
+  const recipeId = String(recipe.id);
 
   let currentRating = 0;
 
@@ -296,29 +366,74 @@ function setupReviewSystem(recipe) {
       }
 
       const today = new Date();
-      const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+      const dateStr = `${today.getFullYear()}.${String(
+        today.getMonth() + 1
+      ).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+
+      const reviewObj = {
+        user: userName,
+        rating: currentRating,
+        text,
+        date: dateStr,
+      };
 
       const newReviewHtml = `
         <article class="card">
           <div class="bar between">
             <span class="card-title">${userName}</span>
-            <span class="rating">${'★'.repeat(currentRating)}${'☆'.repeat(5 - currentRating)}</span>
+            <span class="rating">${'★'.repeat(currentRating)}${'☆'.repeat(
+        5 - currentRating
+      )}</span>
           </div>
           <p class="my-recipes card-sub">${text}</p>
           <span class="my-recipes card-sub right">${dateStr}</span>
         </article>
       `;
 
+      // 리스트 맨 앞에 새 리뷰 추가
       reviewList.insertAdjacentHTML('afterbegin', newReviewHtml);
 
+      // "아직 등록된 리뷰가 없습니다." 메시지 제거
       const emptyMsg = reviewList.querySelector('.muted');
       if (emptyMsg) emptyMsg.remove();
 
+      // 🔹 localStorage에 리뷰 저장
+      const map = loadPersistedReviews();
+      const list = Array.isArray(map[recipeId]) ? map[recipeId] : [];
+      list.unshift(reviewObj);
+      map[recipeId] = list;
+      savePersistedReviews(map);
+
+      // 🔹 리뷰 제목 개수 +1
       const currentCountMatch = reviewTitle.textContent.match(/\d+/);
       let currentCount = currentCountMatch ? Number(currentCountMatch[0]) : 0;
       currentCount += 1;
       reviewTitle.textContent = `리뷰 (${currentCount}개)`;
 
+      // 🔹 상단 별점 / 리뷰 개수도 업데이트
+      const ratingEl = document.getElementById('recipe-rating');
+      if (ratingEl) {
+        const oldRating =
+          Number(ratingEl.getAttribute('data-rating')) || 0;
+        let oldCount =
+          Number(ratingEl.getAttribute('data-review-count')) || 0;
+
+        const newCount = oldCount + 1;
+        const newRating =
+          (oldRating * oldCount + currentRating) / newCount;
+        const rounded = Math.round(newRating * 10) / 10;
+
+        const filledStars = '★'.repeat(Math.round(rounded));
+        const emptyStars = '☆'.repeat(5 - Math.round(rounded));
+
+        ratingEl.innerHTML = `${filledStars}${emptyStars} (${rounded.toFixed(
+          1
+        )}점 / ${newCount}개 리뷰)`;
+        ratingEl.setAttribute('data-rating', String(rounded));
+        ratingEl.setAttribute('data-review-count', String(newCount));
+      }
+
+      // 입력 초기화
       reviewInput.value = '';
       currentRating = 0;
       updateStars();
