@@ -33,7 +33,6 @@
 
     <main class="page-pad">
       <div class="container">
-        <!-- 🟠 여기부터 JSON으로 채워짐 -->
         <section class="hero">
           <img
             id="thumb"
@@ -58,11 +57,11 @@
             <div id="recipe-rating" class="rating"></div>
 
             <div class="btn-row">
-              <!-- 저장하기 버튼 활성화(해인) -->
               <button class="btn-solid" id="btn-save">
                 <i class="fas fa-heart"></i> 저장하기
               </button>
-              <button class="btn-outline">
+
+              <button class="btn-outline" id="btn-share">
                 <i class="fas fa-share-alt"></i> 공유
               </button>
             </div>
@@ -116,21 +115,18 @@
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <script src="11_인공띠용지능_recipeLoader.js"></script>
-    <!--저장버튼 활성화 (해인, 수정 버전) -->
+
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const saveBtn = document.getElementById("btn-save");
-        if (!saveBtn) return;
+      document.addEventListener('DOMContentLoaded', function () {
+        const saveBtn = document.getElementById('btn-save');
+        const STORAGE_KEY = 'nn_saved_recipes';
 
-        const STORAGE_KEY = "nn_saved_recipes";
-
-        // 현재 페이지 URL에서 레시피 ID 파싱
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId =
-          urlParams.get("id") || urlParams.get("recipe") || "unknown_recipe";
+          urlParams.get('id') || urlParams.get('recipe') || 'unknown_recipe';
 
-        // 버튼 상태 업데이트 함수
         function setSavedState(isSaved) {
+          if (!saveBtn) return;
           if (isSaved) {
             saveBtn.innerHTML = '<i class="fas fa-check"></i> 저장됨';
           } else {
@@ -138,99 +134,104 @@
           }
         }
 
-        // localStorage에서 현재 레시피가 저장되어 있는지 확인
         function isAlreadySaved(list) {
           return list.some((item) => String(item.id) === String(recipeId));
         }
 
-        // 1. 기존 저장 목록 불러오기
-        let savedRecipes = [];
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (raw) {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) {
-              savedRecipes = parsed;
-            }
-          }
-        } catch (e) {
-          console.error("저장된 레시피 파싱 오류:", e);
-        }
-
-        // 2. 처음 로딩 시 버튼 상태 반영
-        setSavedState(isAlreadySaved(savedRecipes));
-
-        // 3. 클릭 시 저장/취소 토글
-        saveBtn.addEventListener("click", function () {
-          const titleEl = document.getElementById("recipe-title");
-          const categoryEl = document.getElementById("recipe-category");
-          const thumbEl = document.getElementById("thumb");
-          const ratingEl = document.getElementById("recipe-rating");
-
-          const title = titleEl ? titleEl.innerText.trim() : "제목 없는 레시피";
-          const category = categoryEl
-            ? categoryEl.innerText.trim()
-            : "기타";
-          const subInfo = `${category} · 저장된 레시피`;
-
-          // 👉 썸네일 src
-          const thumbnail = thumbEl
-            ? thumbEl.getAttribute("src")
-            : "11_default.png";
-
-          // 👉 평점 / 리뷰 개수는 recipeLoader.js에서 심어둔 data-* 속성 사용
-          let rating = 0;
-          let reviewCount = 0;
-          if (ratingEl) {
-            const dataRating = ratingEl.getAttribute("data-rating");
-            const dataReview = ratingEl.getAttribute("data-review-count");
-            if (dataRating) rating = Number(dataRating) || 0;
-            if (dataReview) reviewCount = Number(dataReview) || 0;
-          }
-
-          // 다시 최신 목록 읽기
-          let list = [];
+        if (saveBtn) {
+          let savedRecipes = [];
           try {
             const raw = localStorage.getItem(STORAGE_KEY);
             if (raw) {
               const parsed = JSON.parse(raw);
-              if (Array.isArray(parsed)) list = parsed;
+              if (Array.isArray(parsed)) savedRecipes = parsed;
             }
           } catch (e) {
-            console.error("저장 목록 재파싱 오류:", e);
+            console.error('저장된 레시피 파싱 오류:', e);
           }
+          setSavedState(isAlreadySaved(savedRecipes));
 
-          const idx = list.findIndex(
-            (item) => String(item.id) === String(recipeId)
-          );
+          saveBtn.addEventListener('click', function () {
+            const titleEl = document.getElementById('recipe-title');
+            const categoryEl = document.getElementById('recipe-category');
+            const thumbEl = document.getElementById('thumb');
+            const ratingEl = document.getElementById('recipe-rating');
 
-          if (idx !== -1) {
-            // 이미 있으면 삭제
-            list.splice(idx, 1);
-            alert("저장이 취소되었습니다.");
-            setSavedState(false);
-          } else {
-            // 👉 썸네일 / 평점 / 리뷰수까지 다 같이 저장
-            const recipeData = {
-              id: recipeId,
-              title: title,
-              subInfo: subInfo,
-              link:
-                "11_인공띠용지능_recipe.html?id=" +
-                encodeURIComponent(String(recipeId)),
-              thumbnail: thumbnail,
-              rating: rating,
-              review_count: reviewCount,
-            };
-            list.push(recipeData);
-            alert("레시피가 저장되었습니다!");
-            setSavedState(true);
-          }
+            const title = titleEl
+              ? titleEl.innerText.trim()
+              : '제목 없는 레시피';
+            const category = categoryEl ? categoryEl.innerText.trim() : '기타';
+            const subInfo = `${category} · 저장된 레시피`;
+            const thumbnail = thumbEl
+              ? thumbEl.getAttribute('src')
+              : '11_default.png';
 
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-        });
+            let rating = 0;
+            let reviewCount = 0;
+            if (ratingEl) {
+              const dataRating = ratingEl.getAttribute('data-rating');
+              const dataReview = ratingEl.getAttribute('data-review-count');
+              if (dataRating) rating = Number(dataRating) || 0;
+              if (dataReview) reviewCount = Number(dataReview) || 0;
+            }
+
+            let list = [];
+            try {
+              const raw = localStorage.getItem(STORAGE_KEY);
+              if (raw) list = JSON.parse(raw);
+            } catch (e) {}
+
+            const idx = list.findIndex(
+              (item) => String(item.id) === String(recipeId)
+            );
+
+            if (idx !== -1) {
+              list.splice(idx, 1);
+              alert('저장이 취소되었습니다.');
+              setSavedState(false);
+            } else {
+              const recipeData = {
+                id: recipeId,
+                title: title,
+                subInfo: subInfo,
+                link:
+                  '11_인공띠용지능_recipe.html?id=' +
+                  encodeURIComponent(String(recipeId)),
+                thumbnail: thumbnail,
+                rating: rating,
+                review_count: reviewCount,
+              };
+              list.push(recipeData);
+              alert('레시피가 저장되었습니다!');
+              setSavedState(true);
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+          });
+        }
+
+        const shareBtn = document.getElementById('btn-share');
+
+        if (shareBtn) {
+          shareBtn.addEventListener('click', function () {
+            const currentUrl = window.location.href;
+
+            navigator.clipboard
+              .writeText(currentUrl)
+              .then(() => {
+                alert(
+                  '레시피 주소가 복사되었습니다! 🔗\n친구들에게 공유해보세요.'
+                );
+              })
+              .catch((err) => {
+                console.error('클립보드 복사 실패:', err);
+                alert(
+                  '주소 복사에 실패했습니다. URL을 직접 복사해주세요.\n' +
+                    currentUrl
+                );
+              });
+          });
+        }
       });
     </script>
-
   </body>
 </html>
