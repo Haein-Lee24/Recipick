@@ -75,7 +75,6 @@
       const resultCountEl = document.getElementById("result-count");
       const resultBox     = document.getElementById("search-result");
 
-      // ---------------- localStorage 레시피 불러오기 ----------------
       function loadRecipes() {
         const raw = localStorage.getItem(RECIPES_KEY);
         if (!raw) return [];
@@ -88,7 +87,6 @@
 
       const recipes = loadRecipes();
 
-      // ---------------- 필터링 ----------------
       function filterRecipes(list, keyword) {
         if (!keyword) return list;
 
@@ -108,13 +106,12 @@
       const found = filterRecipes(recipes, keyword);
       resultCountEl.textContent = found.length;
 
-      // ---------------- 결과 출력 ----------------
       if (found.length === 0) {
         resultBox.innerHTML = `
           <div class="card-box mt-20 center">
-            <p class="card-title-lg">"${keyword}"에 대한 검색 결과가 없습니다.</p>
+            <p class="card-title-lg">"${keyword}"에 대한 검색 결과가 없습니다。</p>
             <p style="font-size:14px; color:var(--muted); margin-top:8px;">
-              다른 재료명이나 요리 이름으로 다시 검색해보세요.
+              다른 재료명이나 요리 이름으로 다시 검색해보세요。
             </p>
           </div>`;
       } else {
@@ -137,7 +134,6 @@
           .join("");
       }
 
-      // ---------------- 검색창 이벤트 ----------------
       navBtn.addEventListener("click", () => {
         const kw = navInput.value.trim();
         if (!kw) return alert("검색어를 입력해주세요!");
