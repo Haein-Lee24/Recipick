@@ -150,32 +150,6 @@
     });
   </script>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const navInput = document.querySelector(".nav-search-input");
-    const navBtn = document.querySelector(".nav-search-btn");
-
-    if (!navInput || !navBtn) return; 
-
-    navBtn.addEventListener("click", () => {
-      const kw = navInput.value.trim();
-      if (!kw) {
-        alert("검색어를 입력해주세요!");
-        return;
-      }
-
-      location.href =
-        "11_인공띠용지능_search.html?keyword=" +
-        encodeURIComponent(kw);
-    });
-
-    navInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        navBtn.click();
-      }
-    });
-  });
-</script>
 
 
     <script>
