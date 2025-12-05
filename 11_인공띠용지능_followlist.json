@@ -24,8 +24,8 @@
 
   "follower": [
     { "id": "jjong_cook", "name": "쫑이네 부엌", "img": "11_followprofile.jpg" },
-    { "id": "hana_eats", "name": "하나의 집밥", "img": "11_followprofile.jpgg" },
-    { "id": "real_foodie", "name": "리얼푸디", "img": "11_followprofile.jpgg" },
+    { "id": "hana_eats", "name": "하나의 집밥", "img": "11_followprofile.jpg" },
+    { "id": "real_foodie", "name": "리얼푸디", "img": "11_followprofile.jpg" },
 
     { "id": "jisoo_home", "name": "지수의 홈메이드", "img": "11_followprofile.jpg" },
     { "id": "cooking_jisoo", "name": "쿠킹지수", "img": "11_followprofile.jpg" },
@@ -43,7 +43,7 @@
     { "id": "chaehyun_foodlab", "name": "채현의 푸드랩", "img": "11_followprofile.jpg" },
 
     { "id": "lunch_maker", "name": "점심메이커", "img": "11_followprofile.jpg" },
-    { "id": "coffee_cat", "name": "커피고양이", "img": "11_followprofile.jpgg" },
+    { "id": "coffee_cat", "name": "커피고양이", "img": "11_followprofile.jpg" },
     { "id": "home_cook", "name": "홈쿡러버", "img": "11_followprofile.jpg" },
     { "id": "midnightchef", "name": "미드나잇셰프", "img": "11_followprofile.jpg" },
     { "id": "green_plate", "name": "그린플레이트", "img": "11_followprofile.jpg" }

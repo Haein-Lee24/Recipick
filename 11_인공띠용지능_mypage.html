@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>냠냠노트 - 마이페이지</title>
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
+
     <style>
       .follow {
         display: flex;
@@ -45,9 +46,16 @@
         text-align: center;
       }
 
-      /* ---------------------
-          ⬇ 팔로우 팝업 CSS
-      ---------------------- */
+      .profile-cover {
+        width: 100%;
+        height: 140px;
+        background: #ddd;
+        background-size: cover;
+        background-position: center;
+        border-radius: 12px;
+      }
+
+      /* 팔로우 팝업 */
       #follow-popup {
         display: none;
         position: fixed;
@@ -68,12 +76,6 @@
         border-radius: 16px;
         padding: 20px;
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-      }
-
-      #follow-popup h2 {
-        font-size: 20px;
-        margin-bottom: 12px;
-        text-align: center;
       }
 
       #follow-list {
@@ -97,22 +99,15 @@
         border-radius: 50%;
         object-fit: cover;
       }
-
-      .popup-close {
-        margin-top: 12px;
-        text-align: center;
-        padding: 8px 0;
-        background: #555;
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-      }
     </style>
   </head>
-  <body>
 
+  <body>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        /** --------------------
+         * LOGIN CHECK
+         * --------------------- **/
         const currentUser = localStorage.getItem("currentUser");
         const users = JSON.parse(localStorage.getItem("users")) || {};
         const userInfo = users[currentUser];
@@ -123,27 +118,36 @@
           return;
         }
 
-        document.querySelector(".profile-name").textContent = userInfo.nickname;
-        document.querySelector(".profile-id").textContent = "@" + currentUser;
+        /** --------------------
+         * 프로필 데이터 반영
+         * --------------------- **/
+        document.querySelector(".profile-name").textContent =
+          userInfo.nickname || "닉네임";
 
-        const savedBio = localStorage.getItem("nn_bio");
-        const savedProfileImg = localStorage.getItem("nn_profile_img");
-        const savedBgImg = localStorage.getItem("nn_bg_img");
+        document.querySelector(".profile-id").textContent =
+          "@" + currentUser;
 
-        if (savedBio) {
-          document.querySelector(".profile-bio").textContent = savedBio;
+        document.querySelector(".profile-bio").textContent =
+          userInfo.bio || "안녕하세요!";
+
+        // 프로필 이미지
+        if (userInfo.profileImg) {
+          document.querySelector(".profile-box img").src =
+            userInfo.profileImg;
         }
-        if (savedProfileImg) {
-          document.querySelector(".profile-box img").src = savedProfileImg;
-        }
-        if (savedBgImg) {
+
+        // 배경 이미지
+        if (userInfo.backgroundImg) {
           document.querySelector(".profile-cover").style.backgroundImage =
-            `url('${savedBgImg}')`;
+            `url('${userInfo.backgroundImg}')`;
         }
 
-        const logoutBtn = document.querySelector('a[href="#logout"]');
-        if (logoutBtn) {
-          logoutBtn.addEventListener("click", (e) => {
+        /** --------------------
+         * 로그아웃
+         * --------------------- **/
+        document
+          .querySelector('a[href="#logout"]')
+          .addEventListener("click", (e) => {
             e.preventDefault();
             if (confirm("정말 로그아웃 하시겠습니까?")) {
               localStorage.removeItem("currentUser");
@@ -151,13 +155,14 @@
               location.href = "11_인공띠용지능_main.html";
             }
           });
-        }
       });
     </script>
+
+    <!-- NAV -->
     <nav class="site-nav">
       <div class="container nav-top-center">
         <div class="nav-center-box">
-          <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
+          <a href="11_인공띠용지능_main.html">
             <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
           </a>
 
@@ -169,13 +174,7 @@
             />
             <button class="nav-search-btn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <circle
-                  cx="11"
-                  cy="11"
-                  r="7"
-                  stroke="white"
-                  stroke-width="2"
-                />
+                <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
                 <line
                   x1="16.5"
                   y1="16.5"
@@ -195,10 +194,11 @@
         <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
         <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
         <a class="nav-link" href="11_인공띠용지능_rank.html">랭킹</a>
-        <a class="nav-link" href="11_인공띠용지능_mypage.html">마이페이지</a>
+        <a class="nav-link active" href="11_인공띠용지능_mypage.html">마이페이지</a>
       </div>
     </nav>
 
+    <!-- MAIN -->
     <main class="container page-pad">
       <section class="profile-header">
         <div class="profile-cover" role="img"></div>
@@ -211,10 +211,12 @@
               style="width: 100%; height: 100%"
             />
           </div>
+
           <div>
             <h1 class="profile-name">닉네임</h1>
             <p class="profile-id">@id</p>
             <p class="profile-bio">안녕하세요!</p>
+
             <div style="margin-top: 20px">
               <a href="11_인공띠용지능_edit-profile.html" class="btn-outline">
                 프로필 수정
@@ -239,6 +241,7 @@
         </div>
       </section>
 
+      <!-- 저장한 / 최근 본 레시피 영역 (기존 유지) -->
       <section class="grid-2" style="gap: 24px; margin-top: 80px">
         <div class="card-box">
           <div class="bar" style="justify-content: space-between">
@@ -257,13 +260,11 @@
         </div>
       </section>
 
-      <section
-        class="card-box"
-        style="margin-top: 80px"
-        id="myrecipe-section"
-      >
+      <!-- 내가 등록한 레시피 영역 -->
+      <section class="card-box" style="margin-top: 80px" id="myrecipe-section">
         <div class="bar" style="justify-content: space-between">
           <h3 class="card-title-lg">내가 등록한 레시피</h3>
+
           <div class="btn-row">
             <a href="11_인공띠용지능_register.html" class="btn-solid">
               새 레시피 등록
@@ -283,9 +284,10 @@
         </a>
       </div>
 
-      <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
+      <a href="#top" class="to-top">맨 위로 ↑</a>
     </main>
 
+    <!-- 팔로우 팝업 -->
     <div id="follow-popup">
       <div class="popup-box">
         <h2 id="popup-title">목록</h2>
@@ -293,11 +295,11 @@
         <div class="popup-close">닫기</div>
       </div>
     </div>
-    <script>
-      const LOCAL_RECIPES_KEY = "nn_recipes";
-      const SAVED_RECIPES_KEY = "nn_saved_recipes";
-      const RECENT_RECIPES_KEY = "nn_recent_recipes";
 
+    <!-- 레시피 렌더링 & 팔로우 로직 (기존 유지) -->
+    <script>
+      /** 내 레시피 관련 함수들 */
+      const LOCAL_RECIPES_KEY = "nn_recipes";
       function loadLocalRecipes() {
         try {
           const raw = localStorage.getItem(LOCAL_RECIPES_KEY);
@@ -311,22 +313,15 @@
       }
 
       function renderMyRecipeCount(list) {
-        const count = list.length;
-        const followNums = document.querySelectorAll(".follow-num");
-        if (followNums.length > 0) {
-          followNums[0].textContent = count;
-        }
+        document.querySelectorAll(".follow-num")[0].textContent = list.length;
       }
 
       function renderMyRecipesGrid(list) {
-        const grid =
-          document.getElementById("my-recipes-grid") ||
-          document.querySelector(".card-grid.my-recipes");
-        if (!grid) return;
+        const grid = document.getElementById("my-recipes-grid");
 
         if (list.length === 0) {
           grid.innerHTML =
-            '<p class="card-sub muted">아직 등록한 레시피가 없습니다. 상단의 "새 레시피 등록" 버튼으로 첫 레시피를 만들어보세요!</p>';
+            '<p class="card-sub muted">아직 등록한 레시피가 없습니다.</p>';
           return;
         }
 
@@ -335,14 +330,14 @@
             const title = r.title || "제목 없는 레시피";
             const category = r.category || "기타";
             const views = r.views || 0;
-            const thumb = r.image || r.thumbnail || "11_default.png";
+            const thumb = r.image || "11_default.png";
             const link =
               "11_인공띠용지능_recipe.html?id=" +
               encodeURIComponent(String(r.id));
 
             return `
               <a href="${link}" class="card">
-                <img src="${thumb}" alt="${title}" class="thumb" />
+                <img src="${thumb}" class="thumb"/>
                 <div>
                   <p class="card-title">${title}</p>
                   <p class="card-sub">${category} · 조회수 ${views}</p>
@@ -353,126 +348,95 @@
           .join("");
       }
 
+      /** 저장한 / 최근 본 레시피 렌더 */
       function renderSavedList() {
-        const savedListContainer = document.getElementById("saved-list");
-        if (!savedListContainer) return;
+        const box = document.getElementById("saved-list");
+        const list = JSON.parse(localStorage.getItem("nn_saved_recipes")) || [];
 
-        const savedRecipes =
-          JSON.parse(localStorage.getItem(SAVED_RECIPES_KEY)) || [];
-
-        if (savedRecipes.length === 0) {
-          savedListContainer.innerHTML =
+        if (list.length === 0) {
+          box.innerHTML =
             '<li style="padding:20px; text-align:center; color:#999;">저장된 레시피가 없습니다.</li>';
-        } else {
-          const MAX_ITEMS = 3;
-          const preview = savedRecipes.slice(0, MAX_ITEMS);
-
-          savedListContainer.innerHTML = preview
-            .map(
-              (recipe) => `
-              <li>
-                <a href="${recipe.link}" class="list-item">
-                  <div class="list-text">
-                    <p class="list-ttl">${recipe.title}</p>
-                    <p class="list-sub">${recipe.subInfo || ""}</p>
-                  </div>
-                </a>
-              </li>
-            `
-            )
-            .join("");
+          return;
         }
+
+        const preview = list.slice(0, 3);
+        box.innerHTML = preview
+          .map(
+            (r) => `
+          <li>
+            <a href="${r.link}" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">${r.title}</p>
+                <p class="list-sub">${r.subInfo || ""}</p>
+              </div>
+            </a>
+          </li>`
+          )
+          .join("");
       }
+
+        async function loadFollowCount() {
+    try {
+      const res = await fetch("11_인공띠용지능_followlist.json");
+      const data = await res.json();
+
+      const nums = document.querySelectorAll(".follow-num");
+      if (nums.length >= 3) {
+        nums[1].textContent = (data.following || []).length;
+        nums[2].textContent = (data.follower || []).length;
+      }
+    } catch (err) {
+      console.error("팔로우 숫자 로드 실패:", err);
+    }
+  }
 
       function renderRecentList() {
-        const recentListContainer = document.getElementById("recent-list");
-        if (!recentListContainer) return;
+        const box = document.getElementById("recent-list");
+        const list = JSON.parse(localStorage.getItem("nn_recent_recipes")) || [];
 
-        const recentRecipes =
-          JSON.parse(localStorage.getItem(RECENT_RECIPES_KEY)) || [];
-
-        if (recentRecipes.length === 0) {
-          recentListContainer.innerHTML =
+        if (list.length === 0) {
+          box.innerHTML =
             '<li style="padding:20px; text-align:center; color:#999;">최근 본 레시피가 없습니다.</li>';
-        } else {
-          const MAX_ITEMS = 3;
-          const preview = recentRecipes.slice(0, MAX_ITEMS);
-
-          recentListContainer.innerHTML = preview
-            .map(
-              (recipe) => `
-              <li>
-                <a href="${recipe.link}" class="list-item">
-                  <div class="list-text">
-                    <p class="list-ttl">${recipe.title}</p>
-                    <p class="list-sub">${recipe.info || ""}</p>
-                  </div>
-                </a>
-              </li>
-            `
-            )
-            .join("");
+          return;
         }
+
+        const preview = list.slice(0, 3);
+        box.innerHTML = preview
+          .map(
+            (r) => `
+          <li>
+            <a href="${r.link}" class="list-item">
+              <div class="list-text">
+                <p class="list-ttl">${r.title}</p>
+                <p class="list-sub">${r.info || ""}</p>
+              </div>
+            </a>
+          </li>`
+          )
+          .join("");
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        let myRecipes = loadLocalRecipes();
+      /** 페이지 로드 시 실행 */
+      document.addEventListener("DOMContentLoaded", () => {
+        const myRecipes = loadLocalRecipes();
         renderMyRecipeCount(myRecipes);
         renderMyRecipesGrid(myRecipes);
         renderSavedList();
         renderRecentList();
+
+        loadFollowCount();
       });
     </script>
-    <script>
-      async function loadFollowCounts() {
-        try {
-          const res = await fetch("11_인공띠용지능_followlist.json");
-          const data = await res.json();
 
-          const followingCount = data.following ? data.following.length : 0;
-          const followerCount = data.follower ? data.follower.length : 0;
-
-          const nums = document.querySelectorAll(".follow-num");
-          if (nums.length >= 3) {
-            nums[1].textContent = followingCount;  
-            nums[2].textContent = followerCount;   
-          }
-        } catch (err) {
-          console.error("팔로우 숫자 로딩 실패:", err);
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", loadFollowCounts);
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const navInput = document.querySelector(".nav-search-input");
-        const navBtn = document.querySelector(".nav-search-btn");
-
-        if (!navInput || !navBtn) return;
-
-        navBtn.addEventListener("click", () => {
-          const kw = navInput.value.trim();
-          if (!kw) {
-            alert("검색어를 입력해주세요!");
-            return;
-          }
-
-          location.href =
-            "11_인공띠용지능_search.html?keyword=" +
-            encodeURIComponent(kw);
-        });
-
-        navInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") navBtn.click();
-        });
-      });
-    </script>
+    <!-- 팔로우 목록 팝업 -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const popup = document.getElementById("follow-popup");
         const popupTitle = document.getElementById("popup-title");
         const followListBox = document.getElementById("follow-list");
         const popupClose = document.querySelector(".popup-close");
+
+        
 
         async function loadFollowList(type) {
           try {
@@ -486,42 +450,44 @@
             followListBox.innerHTML = list
               .map(
                 (u) => `
-                <div class="follow-item">
-                  <img src="${u.img || '11_followprofile.jpg'}"
-                       onerror="this.src='11_followprofile.jpg'" />
-                  <div>
-                    <strong>${u.name}</strong><br/>
-                    <span style="color:#777;">@${u.id}</span>
-                  </div>
-                </div>`
+            <div class="follow-item">
+              <img src="${u.img || '11_followprofile.jpg'}" />
+              <div>
+                <strong>${u.name}</strong><br/>
+                <span style="color:#777">@${u.id}</span>
+              </div>
+            </div>`
               )
               .join("");
 
             popup.style.display = "flex";
           } catch (err) {
-            console.error(err);
-            alert("팔로우 정보를 불러오지 못했어요.");
+            alert("팔로우 정보를 불러오지 못했습니다.");
           }
         }
+
         document
           .getElementById("btn-following")
           .addEventListener("click", () => loadFollowList("following"));
+
         document
           .getElementById("btn-follower")
           .addEventListener("click", () => loadFollowList("follower"));
+
         popupClose.addEventListener("click", () => {
           popup.style.display = "none";
         });
+
         popup.addEventListener("click", (e) => {
           if (e.target === popup) popup.style.display = "none";
         });
+
         document
           .getElementById("btn-myrecipe")
           .addEventListener("click", () => {
-            const target = document.getElementById("myrecipe-section");
-            if (target) {
-              target.scrollIntoView({ behavior: "smooth" });
-            }
+            document
+              .getElementById("myrecipe-section")
+              .scrollIntoView({ behavior: "smooth" });
           });
       });
     </script>

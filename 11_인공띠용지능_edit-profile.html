@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>냠냠노트 - 프로필 수정</title>
+
   <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css">
+
   <style>
     .hero {
       margin-bottom: 14px !important;
@@ -96,74 +98,84 @@
     }
   </style>
 </head>
+
+<body>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // 현재 로그인한 사용자
+    const currentUser = localStorage.getItem("currentUser");
+    let users = JSON.parse(localStorage.getItem("users")) || {};
 
+    if (!currentUser || !users[currentUser]) {
+      alert("로그인이 필요한 페이지입니다.");
+      location.href = "11_인공띠용지능_login.html";
+      return;
+    }
+
+    const userInfo = users[currentUser];
+
+    // 요소 선택
     const form = document.querySelector("form");
     const profileInput = document.getElementById("profile_image");
     const profilePreview = document.querySelector('img[alt="프로필 이미지 수정"]');
     const bgInput = document.getElementById("background_image");
     const bgPreview = document.querySelector(".background-box");
 
-    if(localStorage.getItem('nn_nickname')) {
-        document.getElementById('nickname').value = localStorage.getItem('nn_nickname');
-    }
-    if(localStorage.getItem('nn_username')) {
-        document.getElementById('username').value = localStorage.getItem('nn_username');
-    }
-    if(localStorage.getItem('nn_bio')) {
-        document.getElementById('bio').value = localStorage.getItem('nn_bio');
+    // 초기 값 채우기
+    document.getElementById("nickname").value = userInfo.nickname || "";
+    document.getElementById("username").value = currentUser; // 아이디는 고정
+    document.getElementById("bio").value = userInfo.bio || "";
+
+    if (userInfo.profileImg) profilePreview.src = userInfo.profileImg;
+    if (userInfo.backgroundImg) {
+      bgPreview.style.backgroundImage = `url('${userInfo.backgroundImg}')`;
     }
 
+    // 프로필 이미지 미리보기
     profileInput.addEventListener("change", function (e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
           profilePreview.src = e.target.result;
-          localStorage.setItem("nn_profile_img_temp", e.target.result);
+          userInfo.profileImg = e.target.result;
         };
         reader.readAsDataURL(file);
       }
     });
 
+    // 배경 이미지 미리보기
     bgInput.addEventListener("change", function (e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-          bgPreview.style.backgroundImage = url('${e.target.result}');
-          localStorage.setItem("nn_bg_img_temp", e.target.result);
+          bgPreview.style.backgroundImage = `url('${e.target.result}')`;
+          userInfo.backgroundImg = e.target.result;
         };
         reader.readAsDataURL(file);
       }
     });
 
+    // 저장 버튼
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const nickname = document.getElementById("nickname").value;
-      const username = document.getElementById("username").value;
-      const bio = document.getElementById("bio").value;
+      // 값 저장
+      userInfo.nickname = document.getElementById("nickname").value;
+      userInfo.bio = document.getElementById("bio").value;
 
-      localStorage.setItem("nn_nickname", nickname);
-      localStorage.setItem("nn_username", username);
-      localStorage.setItem("nn_bio", bio);
+      // 업데이트 적용
+      users[currentUser] = userInfo;
+      localStorage.setItem("users", JSON.stringify(users));
 
-      const tempProfile = localStorage.getItem("nn_profile_img_temp");
-      const tempBg = localStorage.getItem("nn_bg_img_temp");
-
-      if (tempProfile) localStorage.setItem("nn_profile_img", tempProfile);
-      if (tempBg) localStorage.setItem("nn_bg_img", tempBg);
-
-      localStorage.removeItem("nn_profile_img_temp");
-      localStorage.removeItem("nn_bg_img_temp");
-
-      alert("프로필이 성공적으로 저장되었습니다!");
+      alert("프로필이 저장되었습니다!");
       window.location.href = "11_인공띠용지능_mypage.html";
     });
   });
 </script>
+
 <nav class="site-nav">
   <div class="container nav-inner">
     <div class="logo-area">
@@ -171,7 +183,7 @@
         <img src="11_logo.png" alt="냠냠노트 로고" class="logo">
       </a>
     </div>
-    <div class="menu" role="navigation">
+    <div class="menu">
       <a class="nav-link" href="11_인공띠용지능_main.html">홈</a>
       <a class="nav-link" href="11_인공띠용지능_menulist.html">레시피</a>
       <a class="nav-link" href="11_인공띠용지능_register.html">등록</a>
@@ -186,9 +198,7 @@
 
     <header class="hero center">
       <h1 class="mt-0">프로필 수정하기</h1>
-      <p style="font-size: 14px; color: var(--muted)">
-        변경 후 하단의 <strong>저장하기</strong> 버튼을 눌러주세요.
-      </p>
+      <p style="font-size: 14px; color: var(--muted)">변경 후 하단의 <strong>저장하기</strong> 버튼을 눌러주세요.</p>
     </header>
 
     <form action="#" method="post" enctype="multipart/form-data" class="card no-hover form-card">
@@ -211,25 +221,28 @@
 
       <div class="mt-20">
         <label for="nickname">닉네임</label>
-        <input id="nickname" name="nickname" type="text" required value="Haein_Cook">
+        <input id="nickname" name="nickname" type="text" required>
       </div>
 
       <div class="mt-20">
-        <label for="username">사용자 아이디</label>
-        <input id="username" name="username" type="text" required value="@haein_cook">
+        <label for="username">사용자 아이디 (수정 불가)</label>
+        <input id="username" name="username" type="text" readonly style="background:#f5f5f5;">
       </div>
 
       <div class="mt-20">
         <label for="bio">자기소개</label>
-        <textarea id="bio" name="bio" rows="4" required placeholder="나를 소개하는 한 문장을 적어보세요."></textarea>
+        <textarea id="bio" name="bio" rows="4" placeholder="나를 소개하는 한 문장을 적어보세요."></textarea>
       </div>
 
       <div class="center" style="margin-top:40px;">
-        <button type="submit" class="btn-solid" style="min-width: 200px; height: 50px; font-size: 16px;">저장하기</button>
+        <button type="submit" class="btn-solid" style="min-width: 200px; height: 50px; font-size: 16px;">
+          저장하기
+        </button>
       </div>
 
     </form>
   </div>
 </main>
+
 </body>
 </html>
