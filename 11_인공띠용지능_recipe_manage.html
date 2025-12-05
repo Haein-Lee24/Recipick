@@ -33,9 +33,8 @@
       }
 
       #ranking .rank-card:hover {
-        transform: none !important;
-        box-shadow: var(--shadow) !important;
-        cursor: default;
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
       }
 
       #ranking .rank-card-image {
@@ -260,27 +259,20 @@
           )}" />
 
             <div class="rank-info">
-              <p class="recipe-meta" style="margin-bottom:4px;">
-                ID: ${escapeHTML(r.id)}${
-            r.createdAt
-              ? ` · 등록일: ${new Date(r.createdAt)
-                  .toLocaleDateString('ko-KR')
-                  .replace(/\./g, '.')
-                  .replace(/\s/g, '')}`
-              : ''
-          }${
-            typeof r.views === 'number'
-              ? ` · 조회수 ${escapeHTML(r.views)}`
-              : ''
-          }
-              </p>
-              <p style="font-weight:700; margin-bottom:2px;">
+              <p style="font-weight:700; margin-bottom:4px; font-size:15px;">
                 ${escapeHTML(r.title)}
               </p>
+
               <p style="font-size:13px; color:var(--muted);">
-                카테고리: ${escapeHTML(r.category || '미지정')}
+                ${ r.createdAt 
+                    ? new Date(r.createdAt)
+                        .toLocaleDateString('ko-KR')
+                        .replace(/\./g,'.')
+                        .replace(/\s/g,'')
+                    : '' }
               </p>
             </div>
+
 
             <div class="rank-meta">
               <div class="manage-actions">
