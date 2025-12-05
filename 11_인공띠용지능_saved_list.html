@@ -88,8 +88,9 @@
 
         if (saved.length === 0) {
           listEl.innerHTML = `
-            <div class="card-box mt-20 center">
-              <p class="card-title-lg">저장한 레시피가 없습니다.</p>
+            <div class="card-box mt-20 center"
+            style="display:flex; align-items:center; justify-content:center; min-height:120px;">
+              <p style="font-size:18px; font-weight:800; margin:0;">저장한 레시피가 없습니다.</p>
             </div>`;
           return;
         }
