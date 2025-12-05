@@ -16,6 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const stepListEl   = document.getElementById("stepList");
   const addStepBtn   = document.getElementById("addStepBtn");
 
+  // --------- ★ 현재 로그인한 사용자 정보 읽기 ---------
+  const currentUserId = localStorage.getItem("currentUser");
+  const users = JSON.parse(localStorage.getItem("users") || "{}");
+
+  let currentUserName = "냠냠이"; // 로그인 안 되어 있으면 기본값
+
+  if (currentUserId && users[currentUserId]) {
+    const info = users[currentUserId];
+
+    if (info.nickname && info.nickname.trim()) {
+      currentUserName = info.nickname.trim();   // 닉네임 우선
+    } else {
+      currentUserName = "@" + currentUserId;    // 닉네임 없으면 아이디
+    }
+  }
+  // ---------------------------------------------------
+
   // --------- 수정 모드 여부 체크 (editId 파라미터) ---------
   let isEdit = false;
   let editId = null;
@@ -86,8 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function cleanStepTitle(raw) {
     if (!raw) return "";
     let t = raw.trim();
-    // 앞쪽의 숫자 + (단계) + 기호들을 전부 날림
-    // 예) "1. 단계 재료 준비", "1단계 재료 준비", "2) 재료 준비" 등
     t = t.replace(/^\d+\s*(단계)?\s*[\.\)\-:]?\s*/u, "");
     return t.trim();
   }
@@ -107,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const titleInput = document.createElement("input");
     titleInput.type = "text";
     titleInput.className = "step-title-input";
-    // ✅ placeholder 문구 변경
     titleInput.placeholder = "예: 재료 준비";
     titleInput.value = data?.title || "";
 
@@ -116,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const descTextarea = document.createElement("textarea");
     descTextarea.className = "step-desc-input";
-    // ✅ placeholder 문구 변경
     descTextarea.placeholder = "예: 파스타면과 소스를 준비합니다.";
     descTextarea.rows = 2;
     descTextarea.value = data?.description || "";
@@ -167,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const titleEl = item.querySelector(".step-title-input");
       const descEl  = item.querySelector(".step-desc-input");
       const rawTitle = (titleEl?.value || "").trim();
-      const title = cleanStepTitle(rawTitle);      // ✅ 숫자/단계 제거
+      const title = cleanStepTitle(rawTitle);
       const description = (descEl?.value || "").trim();
       if (title || description) {
         steps.push({ title, description });
@@ -188,10 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const optList  = parseIngredients(optText);
     const stepsArr = collectSteps();
 
-    // 필수 재료만 옛날용 문자열에 넣기
     const ingredientsPlain = reqText;
 
-    // 단계 문자열: "제목\n설명" 형식, 숫자 없이
     const stepsPlain = stepsArr
       .map((s) => {
         const titleLine = (s.title || "").trim();
@@ -239,14 +250,12 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       titleInput.value = target.title || "";
 
-      // 카테고리
       if (target.category) {
         categoryRadios.forEach(r => {
           r.checked = (r.value === target.category);
         });
       }
 
-      // 필수/선택 재료
       if (Array.isArray(target.ingredientsRequired)) {
         reqIngInput.value = target.ingredientsRequired
           .map(ing => (ing.amount ? `${ing.name} ${ing.amount}` : ing.name))
@@ -263,7 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
         optIngInput.value = target.ingredientsOptionalText;
       }
 
-      // 단계
       let stepData = [];
       if (Array.isArray(target.stepsDetail)) {
         stepData = target.stepsDetail;
@@ -280,11 +288,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // 이미지
       originalImageDataUrl = target.image || "";
     }
 
-    // 수정 모드에서는 임시저장 UI 숨기기
     if (draftTimeEl)  draftTimeEl.style.display  = "none";
     if (saveDraftBtn) saveDraftBtn.style.display = "none";
   } else {
@@ -429,6 +435,8 @@ document.addEventListener("DOMContentLoaded", () => {
       target.ingredients = info.ingredientsPlain;
       target.steps       = info.stepsPlain;
 
+      // 작성자(authorName, authorId)는 수정해도 그대로 두기
+
       saveRecipes(list);
 
       alert("레시피가 수정되었습니다!");
@@ -442,6 +450,10 @@ document.addEventListener("DOMContentLoaded", () => {
         title:     info.title,
         category:  info.category,
         image:     imageDataUrl,
+
+        // ★ 작성자 정보 추가
+        authorId:   currentUserId || null,
+        authorName: currentUserName,
 
         // 새 구조
         ingredientsRequired: info.ingredientsRequired,

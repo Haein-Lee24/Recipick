@@ -51,7 +51,6 @@ function loadAllRecipes() {
       const localRecipes = localRaw.map((r) => normalizeLocalRecipe(r));
       const combined = [...baseRecipes, ...localRecipes];
 
-
       const reviewsMap = loadPersistedReviews();
       combined.forEach((r) => {
         const id = String(r.id);
@@ -89,7 +88,6 @@ function loadPersistedReviews() {
   }
 }
 
-
 function savePersistedReviews(map) {
   try {
     localStorage.setItem(REVIEWS_KEY, JSON.stringify(map));
@@ -98,23 +96,19 @@ function savePersistedReviews(map) {
   }
 }
 
-
 function normalizeLocalRecipe(r) {
   let required = [];
   if (Array.isArray(r.ingredientsRequired)) {
-    
     required = r.ingredientsRequired.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   } else if (Array.isArray(r.ingredients_required)) {
-  
     required = r.ingredients_required.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   } else if (typeof r.ingredients === 'string') {
-  
     required = r.ingredients
       .split(/[,\n]/)
       .map((s) => s.trim())
@@ -125,45 +119,38 @@ function normalizeLocalRecipe(r) {
       }));
   }
 
-  
   let optional = [];
   if (Array.isArray(r.ingredientsOptional)) {
-
     optional = r.ingredientsOptional.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   } else if (Array.isArray(r.ingredients_optional)) {
-
     optional = r.ingredients_optional.map((ing) => ({
       name: ing.name || '',
       amount: ing.amount || ''
     }));
   }
 
- 
   let steps = [];
 
   if (Array.isArray(r.stepsDetail)) {
- 
     steps = r.stepsDetail.map((s, idx) => ({
       title: (s.title && s.title.trim()) || `단계 ${idx + 1}`,
       desc: (s.description || '').trim()
     }));
   } else if (Array.isArray(r.steps)) {
-   
     steps = r.steps;
   } else if (typeof r.steps === 'string' && r.steps.trim()) {
-  
-    const blocks = r.steps.split(/\n\s*\n/); 
+    const blocks = r.steps.split(/\n\s*\n/);
 
     blocks.forEach((block, idx) => {
       const lines = block.split('\n').map((s) => s.trim()).filter(Boolean);
 
       if (lines.length === 0) return;
 
-      let titleLine = lines[0];                 
-      const descLine = lines.slice(1).join('\n'); 
+      let titleLine = lines[0];
+      const descLine = lines.slice(1).join('\n');
 
       titleLine = titleLine.replace(/^\d+\s*\.?\s*(단계)?\s*/u, '').trim();
 
@@ -181,6 +168,13 @@ function normalizeLocalRecipe(r) {
   const reviews = Array.isArray(r.reviews) ? r.reviews : [];
   const reviewCount = reviews.length;
 
+  // 🔹 작성자 이름 정리
+  const authorName =
+    r.authorName ||
+    r.author ||
+    r.writer ||
+    '냠냠이';
+
   return {
     id: String(r.id),
     title: r.title || '제목 없는 레시피',
@@ -196,7 +190,9 @@ function normalizeLocalRecipe(r) {
     reviews: reviews,
     views: r.views || 0,
 
-  
+    // 🔹 작성자 정보
+    author: authorName,
+
     ingredients_required: required,
     ingredients_optional: optional,
     steps: steps,
@@ -213,6 +209,7 @@ function renderRecipe(recipe) {
   const ratingValue = Number(recipe.rating) || 0;
   const reviews = Array.isArray(recipe.reviews) ? recipe.reviews : [];
   const reviewCount = reviews.length;
+  const authorName = recipe.authorName || recipe.author || '냠냠이';
 
   document.getElementById('thumb').src = thumbSrc;
   document.getElementById('recipe-title').textContent = title;
@@ -220,6 +217,12 @@ function renderRecipe(recipe) {
   document.getElementById('recipe-category').textContent = category;
   document.getElementById('recipe-difficulty').textContent = difficulty;
   document.getElementById('recipe-time').textContent = time;
+
+  // 🔹 작성자 이름 표시
+  const authorEl = document.getElementById('recipe-author');
+  if (authorEl) {
+    authorEl.textContent = authorName;
+  }
 
   const ratingEl = document.getElementById('recipe-rating');
   if (ratingEl) {
@@ -285,6 +288,8 @@ function renderRecipe(recipe) {
     stepList.innerHTML = steps
       .map(
         (step, i) => `
+
+
       <li class="list-item">
         <div class="list-text">
           <div class="list-ttl">${i + 1}. ${
@@ -389,9 +394,7 @@ function setupReviewSystem(recipe) {
     }
   }
 
-
   const recipeId = String(recipe.id);
-
   let currentRating = 0;
 
   stars.forEach((star, index) => {
@@ -458,21 +461,17 @@ function setupReviewSystem(recipe) {
         </article>
       `;
 
-
       reviewList.insertAdjacentHTML('afterbegin', newReviewHtml);
 
-      
       const emptyMsg = reviewList.querySelector('.muted');
       if (emptyMsg) emptyMsg.remove();
 
-      
       const map = loadPersistedReviews();
       const list = Array.isArray(map[recipeId]) ? map[recipeId] : [];
       list.unshift(reviewObj);
       map[recipeId] = list;
       savePersistedReviews(map);
 
-     
       const currentCountMatch = reviewTitle.textContent.match(/\d+/);
       let currentCount = currentCountMatch ? Number(currentCountMatch[0]) : 0;
       currentCount += 1;
@@ -500,7 +499,6 @@ function setupReviewSystem(recipe) {
         ratingEl.setAttribute('data-review-count', String(newCount));
       }
 
-    
       reviewInput.value = '';
       currentRating = 0;
       updateStars();

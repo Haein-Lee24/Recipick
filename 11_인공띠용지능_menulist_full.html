@@ -219,14 +219,14 @@
 
             if (type === "views") {
               fullList.sort((a, b) => {
-                const A = a.review_count ? Number(a.review_count) : Number(a.views || 0);
-                const B = b.review_count ? Number(b.review_count) : Number(b.views || 0);
+                const A = Number(a.views || 0);
+                const B = Number(b.views || 0);
                 return B - A;
               });
             }
 
             if (type === "rating") {
-              fullList.sort((a, b) => Number(b.rating) - Number(a.rating));
+              fullList.sort((a, b) => Number(b.rating || 0) - Number(a.rating || 0));
             }
 
             renderCards();
@@ -238,8 +238,18 @@
                 const href = `11_인공띠용지능_recipe.html?id=${r.id}`;
                 const thumb = r.thumbnail || r.image || getDefaultImage(r.category);
 
-                const meta = `작성자: ${r.author || "냠냠이"} · 조회수 ${r.review_count || 0}`;
-                const rating = `★ ${Number(r.rating).toFixed(1)}`;
+                const author =
+                  r.authorName ||
+                  r.author ||
+                  r.writer ||
+                  "냠냠이";
+
+                const reviewCount = Number(r.review_count || 0);
+                const views = Number(r.views || 0);
+                const ratingNum = Number(r.rating || 0);
+
+                const meta = `작성자: ${author} · 조회수 ${views}`;
+                const rating = `★ ${ratingNum.toFixed(1)} / 리뷰 ${reviewCount}개`;
 
                 return makeCardHTML(r.title, thumb, meta, rating, href);
               })
