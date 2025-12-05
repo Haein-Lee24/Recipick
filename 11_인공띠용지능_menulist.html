@@ -45,7 +45,7 @@
     </style>
   </head>
 
-  <body>
+  <body id="top">
     <nav class="site-nav">
       <div class="container nav-top-center">
         <div class="nav-center-box">
@@ -106,57 +106,70 @@
       ];
 
       /* ----------------------------------------
-        ⭐ 리뷰 별점 평균 불러오기
+        ⭐ 리뷰 목록 불러오기
+      ---------------------------------------- */
+      function getReviews(id) {
+        return JSON.parse(localStorage.getItem("nn_reviews_" + id) || "[]");
+      }
+
+      /* ----------------------------------------
+        ⭐ 리뷰 평균 별점 (리뷰 없으면 0.0)
       ---------------------------------------- */
       function getAverageRating(id) {
-        const key = "nn_reviews_" + id;
-        const reviews = JSON.parse(localStorage.getItem(key) || "[]");
-
+        const reviews = getReviews(id);
         if (reviews.length === 0) return 0;
-
         const sum = reviews.reduce((acc, r) => acc + Number(r.rating), 0);
-        return (sum / reviews.length).toFixed(1);
+        return sum / reviews.length;
       }
 
       /* ----------------------------------------
-        ⭐ 리뷰 개수 불러오기
+        ⭐ 리뷰 개수 (유저 레시피 조회수로 사용)
       ---------------------------------------- */
       function getReviewCount(id) {
-        const key = "nn_reviews_" + id;
-        const reviews = JSON.parse(localStorage.getItem(key) || "[]");
-        return reviews.length;
+        return getReviews(id).length;
       }
 
       /* ----------------------------------------
-        JSON + localStorage 레시피 불러오기
+        JSON + localStorage 레시피 합치기
+        - JSON: review_count = 파일에 있던 값 그대로
+        - 유저 레시피: review_count = 리뷰 개수
       ---------------------------------------- */
       function loadAllRecipes() {
         return fetch("11_인공띠용지능_recipes.json")
           .then((res) => res.json())
           .then((data) => {
-            const baseRecipes = data.recipes || [];
+            const base = data.recipes || [];
 
+            // ✅ JSON 기본 레시피
+            const jsonRecipes = base.map((r) => ({
+              id: r.id,
+              title: r.title,
+              category: r.category,
+              thumbnail: r.thumbnail || r.image || "11_default.png",
+              review_count:
+                typeof r.review_count === "number" ? r.review_count : 0,
+              source: "json",
+            }));
+
+            // ✅ 유저 등록 레시피
+            let userRecipes = [];
             const raw = localStorage.getItem(RECIPES_KEY);
-            let storedRecipes = [];
-
             if (raw) {
               try {
                 const parsed = JSON.parse(raw);
-
-                storedRecipes = parsed.map((r) => ({
+                userRecipes = parsed.map((r) => ({
                   id: r.id,
                   title: r.title,
                   category: r.category,
                   thumbnail: r.image || "11_default.png",
-                  review_count: getReviewCount(r.id),
-                  rating: getAverageRating(r.id),
+                  source: "user",
                 }));
               } catch (e) {
                 console.error("localStorage 파싱 오류:", e);
               }
             }
 
-            return [...baseRecipes, ...storedRecipes];
+            return [...jsonRecipes, ...userRecipes];
           });
       }
 
@@ -164,46 +177,61 @@
         카테고리 렌더링
       ---------------------------------------- */
       loadAllRecipes()
-        .then((allRecipes) => {
+        .then((all) => {
           categories.forEach((cat) => {
-            renderSection(cat.id, cat.name, allRecipes);
+            renderSection(cat.id, cat.name, all);
           });
         })
         .catch((err) => console.error("데이터 로딩 실패:", err));
 
-      function renderSection(catId, catName, recipes) {
-        const container = document.getElementById(catId);
+      function renderSection(secId, secName, recipes) {
+        const container = document.getElementById(secId);
 
         const filtered = recipes
-          .filter((r) => r.category === catName)
-          .map((r) => ({
-            ...r,
-            rating: getAverageRating(r.id),
-            review_count: getReviewCount(r.id),
-          }));
+          .filter((r) => r.category === secName)
+          .map((r) => {
+            const avg = getAverageRating(r.id); // ⭐ 항상 최신 별점
+            const reviewLen = getReviewCount(r.id);
+
+            // 👀 조회수: JSON이면 원래 review_count, 유저 레시피면 리뷰 개수
+            const viewCount =
+              r.source === "json"
+                ? (typeof r.review_count === "number" ? r.review_count : 0)
+                : reviewLen;
+
+            return {
+              ...r,
+              rating: avg,
+              review_count: viewCount,
+            };
+          });
 
         if (filtered.length === 0) {
           container.style.display = "none";
           return;
         }
 
-        const previewList = filtered.slice(0, 4);
+        const preview = filtered.slice(0, 4);
 
         let html = `
           <h2 class="section-title" style="margin-top:0;">
-            ${catName} 레시피 <span>(총 ${filtered.length}개)</span>
+            ${secName} 레시피 <span>(총 ${filtered.length}개)</span>
           </h2>
           <div class="card-grid">
         `;
 
-        previewList.forEach((r) => {
+        preview.forEach((r) => {
+          const ratingText = isNaN(r.rating)
+            ? "0.0"
+            : Number(r.rating).toFixed(1);
+
           html += `
             <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
               <img src="${r.thumbnail}" alt="${r.title}" class="thumb" />
               <div class="card-body">
                 <p class="card-title">${r.title}</p>
-                <p class="recipe-meta">조회수: ${r.review_count}</p>
-                <div class="rating">★ ${r.rating}</div>
+                <p class="recipe-meta">조회수 ${r.review_count}</p>
+                <div class="rating">★ ${ratingText}</div>
               </div>
             </a>
           `;
@@ -212,8 +240,8 @@
         html += `
           </div>
           <div class="view-all-btn-wrap">
-            <a href="11_인공띠용지능_menulist_full.html?category=${catId}" class="view-all-btn">
-              ${catName} 레시피 전체보기 >
+            <a href="11_인공띠용지능_menulist_full.html?category=${secId}" class="view-all-btn">
+              ${secName} 레시피 전체보기 >
             </a>
           </div>
         `;
