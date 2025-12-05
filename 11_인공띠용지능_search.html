@@ -61,89 +61,92 @@
 
     <script>
       const RECIPES_KEY = "nn_recipes";
-      const JSON_PATH   = "11_인공띠용지능_recipes.json";
+      const JSON_PATH = "11_인공띠용지능_recipes.json";
 
-      const params      = new URLSearchParams(window.location.search);
-      const keywordRaw  = (params.get("keyword") || "").trim();
-      const keyword     = keywordRaw.toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+      const keywordRaw = (params.get("keyword") || "").trim();
+      const keyword = keywordRaw.toLowerCase();
 
       const navInput = document.querySelector(".nav-search-input");
-      const navBtn   = document.querySelector(".nav-search-btn");
+      const navBtn = document.querySelector(".nav-search-btn");
       if (navInput) navInput.value = keywordRaw;
 
       document.getElementById("keyword-text").textContent =
         keywordRaw ? `"${keywordRaw}"` : "전체";
 
       const resultCountEl = document.getElementById("result-count");
-      const resultBox     = document.getElementById("search-result");
+      const resultBox = document.getElementById("search-result");
 
+      /* 🔸 리뷰 정보만 기준으로 별점/리뷰 수 계산 */
+      function getReviewStats(id) {
+        const key = "nn_reviews_" + id;
+        try {
+          const raw = localStorage.getItem(key);
+          if (!raw) {
+            return { avg: 0, count: 0 };
+          }
+          const list = JSON.parse(raw);
+          if (!Array.isArray(list) || list.length === 0) {
+            return { avg: 0, count: 0 };
+          }
+          const sum = list.reduce((acc, cur) => acc + (cur.rating || 0), 0);
+          const avg = sum / list.length;
+          return { avg, count: list.length };
+        } catch (e) {
+          console.error("리뷰 파싱 오류:", e);
+          return { avg: 0, count: 0 };
+        }
+      }
+
+      /* 로컬 저장 레시피 */
       function loadLocalRecipes() {
         try {
           const raw = localStorage.getItem(RECIPES_KEY);
           if (!raw) return [];
           const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) return parsed;
-          return [];
+          return Array.isArray(parsed) ? parsed : [];
         } catch (e) {
           console.error("로컬 레시피 파싱 오류:", e);
           return [];
         }
       }
 
+      /* JSON 레시피 */
       function loadJsonRecipes() {
         return fetch(JSON_PATH)
-          .then(res => {
-            if (!res.ok) {
-              throw new Error("JSON 로드 실패: " + res.status);
-            }
+          .then((res) => {
+            if (!res.ok) throw new Error("JSON 로드 실패");
             return res.json();
           })
-          .then(data => {
-            if (data && Array.isArray(data.recipes)) {
-              return data.recipes;
-            }
-            return [];
-          })
-          .catch(e => {
+          .then((data) => (Array.isArray(data.recipes) ? data.recipes : []))
+          .catch((e) => {
             console.error("JSON 레시피 로딩 오류:", e);
             return [];
           });
       }
-    
+
+      /* 재료 텍스트 뽑기 (검색용) */
       function getIngredientText(recipe) {
-        let names = [];
+        const result = [];
 
-        if (Array.isArray(recipe.ingredients_required)) {
-          recipe.ingredients_required.forEach(ing => {
-            if (ing && ing.name) names.push(String(ing.name));
-          });
-        }
-        if (Array.isArray(recipe.ingredients_optional)) {
-          recipe.ingredients_optional.forEach(ing => {
-            if (ing && ing.name) names.push(String(ing.name));
-          });
-        }
+        const req = recipe.ingredients_required || recipe.ingredientsRequired;
+        const opt = recipe.ingredients_optional || recipe.ingredientsOptional;
 
-        if (Array.isArray(recipe.ingredientsRequired)) {
-          recipe.ingredientsRequired.forEach(ing => {
-            if (ing && ing.name) names.push(String(ing.name));
-          });
+        if (Array.isArray(req)) {
+          req.forEach((ing) => ing?.name && result.push(String(ing.name)));
         }
-        if (Array.isArray(recipe.ingredientsOptional)) {
-          recipe.ingredientsOptional.forEach(ing => {
-            if (ing && ing.name) names.push(String(ing.name));
-          });
+        if (Array.isArray(opt)) {
+          opt.forEach((ing) => ing?.name && result.push(String(ing.name)));
         }
 
-  
         if (typeof recipe.ingredients === "string") {
-          names.push(recipe.ingredients);
+          result.push(recipe.ingredients);
         }
 
-        return names
-          .join(", ")
-          .toLowerCase();
+        return result.join(", ").toLowerCase();
       }
+
+      /* 키워드로 필터링 */
       function filterRecipes(list, keyword) {
         if (!keyword) return list;
 
@@ -151,29 +154,27 @@
           const t = (r.title || "").toLowerCase();
           const c = (r.category || "").toLowerCase();
           const s = (r.summary || "").toLowerCase();
-          const ingText = getIngredientText(r);
+          const ing = getIngredientText(r);
 
           return (
             t.includes(keyword) ||
             c.includes(keyword) ||
             s.includes(keyword) ||
-            ingText.includes(keyword)
+            ing.includes(keyword)
           );
         });
       }
 
-
-      function renderSearchResult(found, keywordText) {
+      /* 검색 결과 렌더링 */
+      function renderSearchResult(found) {
         resultCountEl.textContent = found.length;
 
         if (found.length === 0) {
           resultBox.innerHTML = `
             <div class="card-box mt-20 center">
-              <p class="card-title-lg">"${
-                keywordText || ""
-              }"에 대한 검색 결과가 없습니다。</p>
+              <p class="card-title-lg">"${keywordRaw}"에 대한 검색 결과가 없습니다.</p>
               <p style="font-size:14px; color:var(--muted); margin-top:8px;">
-                다른 재료명이나 요리 이름으로 다시 검색해보세요。
+                다른 재료명이나 요리 이름으로 다시 검색해보세요.
               </p>
             </div>`;
           return;
@@ -181,22 +182,24 @@
 
         resultBox.innerHTML = found
           .map((r) => {
-            const imgSrc =
-              r.image ||
-              r.thumbnail ||
-              "11_default.png";
+            const idStr = String(r.id);
+            const link = `11_인공띠용지능_recipe.html?id=${encodeURIComponent(
+              idStr
+            )}`;
 
-            const views =
-              typeof r.views === "number" ? r.views : 0;
+            const thumb = r.thumbnail || r.image || "11_default.png";
 
-            const rating =
-              r.rating != null ? r.rating : 0;
+            const { avg, count } = getReviewStats(idStr);
+            const ratingText = avg.toFixed(1); // 리뷰 없으면 0.0
+            const views = r.review_count ?? r.views ?? 0;
 
             return `
-              <a href="11_인공띠용지능_recipe.html?id=${encodeURIComponent(
-                r.id
-              )}" class="rank-card">
-                <img src="${imgSrc}" class="rank-card-image" alt="${r.title || ""}" />
+              <a href="${link}" class="rank-card">
+                <img
+                  src="${thumb}"
+                  class="rank-card-image"
+                  alt="${r.title || "레시피 이미지"}"
+                />
 
                 <div class="rank-info">
                   <h2 class="rank-title">${r.title || "제목 없는 레시피"}</h2>
@@ -204,8 +207,8 @@
                 </div>
 
                 <div class="rank-meta">
-                  <div class="rank-rating">★ ${rating}</div>
-                  <p class="rank-views">조회수 ${views}개</p>
+                  <div class="rank-rating">★ ${ratingText}</div>
+                  <p class="rank-views">리뷰 ${count}개 · 조회수 ${views}</p>
                 </div>
               </a>
             `;
@@ -213,6 +216,7 @@
           .join("");
       }
 
+      /* 초기 검색 실행 */
       (async function initSearch() {
         try {
           const [jsonRecipes, localRecipes] = await Promise.all([
@@ -220,34 +224,33 @@
             Promise.resolve(loadLocalRecipes()),
           ]);
 
-          const map = {};
-
+          const merged = {};
           jsonRecipes.forEach((r) => {
             if (!r || r.id == null) return;
-            map[String(r.id)] = r;
+            merged[String(r.id)] = r;
           });
-
           localRecipes.forEach((r) => {
             if (!r || r.id == null) return;
-            map[String(r.id)] = r;
+            merged[String(r.id)] = r;
           });
 
-          const allRecipes = Object.values(map);
-
+          const allRecipes = Object.values(merged);
           const found = filterRecipes(allRecipes, keyword);
-          renderSearchResult(found, keywordRaw);
+
+          renderSearchResult(found);
         } catch (e) {
           console.error("검색 초기화 오류:", e);
           resultBox.innerHTML = `
             <div class="card-box mt-20 center">
               <p class="card-title-lg">검색 중 오류가 발생했습니다.</p>
               <p style="font-size:14px; color:var(--muted); margin-top:8px;">
-                잠시 후 다시 시도해 주세요。
+                잠시 후 다시 시도해 주세요.
               </p>
             </div>`;
         }
       })();
 
+      /* 상단 검색창 동작 */
       if (navBtn && navInput) {
         navBtn.addEventListener("click", () => {
           const kw = navInput.value.trim();
@@ -265,6 +268,5 @@
         });
       }
     </script>
-
   </body>
 </html>

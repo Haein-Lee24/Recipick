@@ -261,39 +261,63 @@
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
 
     <script>
-
+  // JSON에서 기본 레시피 목록 불러오기
   async function loadRecipes() {
     const response = await fetch("11_인공띠용지능_recipes.json");
     const data = await response.json();
     return data.recipes;
   }
 
+  // ⭐ 특정 레시피의 리뷰 목록 불러오기 (recipe.html과 같은 키 사용)
+  function loadReviews(recipeId) {
+    const key = "nn_reviews_" + recipeId;
+    try {
+      const data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
+  }
 
+  // ⭐ 평균 별점 계산 (menulist에서 쓰는 원리랑 동일)
+  function getAverageRating(recipeId) {
+    const reviews = loadReviews(recipeId);
+    if (reviews.length === 0) return 0;
+
+    const sum = reviews.reduce((acc, r) => acc + Number(r.rating), 0);
+    return sum / reviews.length; // 숫자 그대로 반환
+  }
+
+  // 랜덤 N개 추출
   function getRandomRecipes(list, count) {
     return [...list].sort(() => Math.random() - 0.5).slice(0, count);
   }
 
-
+  // ⭐ 메인 추천 레시피 렌더링
   async function renderRandomRecipes() {
     const target = document.getElementById("recommend-list");
     const recipes = await loadRecipes();
     const selected = getRandomRecipes(recipes, 4);
 
     target.innerHTML = selected
-      .map(
-        (r) => `
-        <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
-          <img src="${r.thumbnail}" class="thumb" alt="${r.title}">
-          <p class="card-title">${r.title}</p>
-          <div class="rating">★ ${r.rating}</div>
-        </a>
-      `
-      )
+      .map((r) => {
+        const avg = getAverageRating(r.id);        // 리뷰 기반 평균
+        const displayRating = `★ ${avg.toFixed(1)}`; // 0이면 ★ 0.0
+
+        return `
+          <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
+            <img src="${r.thumbnail}" class="thumb" alt="${r.title}">
+            <p class="card-title">${r.title}</p>
+            <div class="rating">${displayRating}</div>
+          </a>
+        `;
+      })
       .join("");
   }
 
   renderRandomRecipes();
 </script>
+
 
 
     <script>

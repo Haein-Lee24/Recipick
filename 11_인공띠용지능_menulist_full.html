@@ -28,17 +28,6 @@
         width: 100%;
       }
 
-      .section-title {
-        border-bottom: none !important;
-      }
-
-      .header-controls {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
       .back-btn {
         padding: 8px 20px;
         background: #eee;
@@ -101,10 +90,8 @@
       <div class="header-area">
         <h2 id="full-title" class="section-title">로딩 중...</h2>
 
-        <div class="header-controls">
-          <a href="11_인공띠용지능_menulist.html" class="back-btn">
-            ← 카테고리별 목록으로
-          </a>
+        <div class="header-controls" style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+          <a href="11_인공띠용지능_menulist.html" class="back-btn">← 카테고리별 목록으로</a>
 
           <div class="sort-area">
             <label for="sort-select">정렬:</label>
@@ -134,39 +121,53 @@
 
       const STORAGE_KEY = "nn_recipes";
 
+      /* ⭐ 리뷰 평균 */
+      function getAverageRating(id) {
+        const key = "nn_reviews_" + id;
+        const reviews = JSON.parse(localStorage.getItem(key) || "[]");
+
+        if (reviews.length === 0) return 0;
+        const sum = reviews.reduce((acc, r) => acc + Number(r.rating), 0);
+        return Number(sum / reviews.length).toFixed(1);
+      }
+
+      /* ⭐ 리뷰 개수 */
+      function getReviewCount(id) {
+        const key = "nn_reviews_" + id;
+        const reviews = JSON.parse(localStorage.getItem(key) || "[]");
+        return reviews.length;
+      }
+
+      /* 기본 이미지 */
       function getDefaultImage(korCategory) {
         switch (korCategory) {
-          case "한식":
-            return "11_kimchi.jpg";
-          case "양식":
-            return "11_pasta.jpg";
-          case "중식":
-            return "11_chinese.png";
-          case "디저트":
-            return "11_snack.jpg";
-          case "음료":
-            return "11_drink.png";
-          default:
-            return "11_pasta.jpg";
+          case "한식": return "11_kimchi.jpg";
+          case "양식": return "11_pasta.jpg";
+          case "중식": return "11_chinese.png";
+          case "디저트": return "11_snack.jpg";
+          case "음료": return "11_drink.png";
+          default: return "11_pasta.jpg";
         }
       }
 
+      /* localStorage 사용자 레시피 */
       function loadUserRecipes(targetName, isDessertMode) {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
           if (!raw) return [];
+
           const all = JSON.parse(raw);
 
           return all.filter((u) => {
             if (isDessertMode) return u.category === "디저트" || u.category === "간식";
             return u.category === targetName;
           });
-        } catch (e) {
-          console.error("유저 레시피 파싱 오류:", e);
+        } catch {
           return [];
         }
       }
 
+      /* 카드 HTML 템플릿 */
       function makeCardHTML(title, thumbnail, metaText, ratingText, href) {
         return `
           <a href="${href}" class="card">
@@ -180,15 +181,15 @@
         `;
       }
 
+      /* JSON + localStorage 불러오기 */
       fetch("11_인공띠용지능_recipes.json")
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           const titleEl = document.getElementById("full-title");
           const listEl = document.getElementById("full-list");
           const sortSelect = document.getElementById("sort-select");
 
           const targetName = categoryMap[currentCategory];
-
           if (!targetName) {
             titleEl.innerText = "잘못된 카테고리입니다.";
             return;
@@ -196,62 +197,47 @@
 
           const isDessertMode = currentCategory === "dessert";
 
-          const jsonRecipes = data.recipes.filter((r) => {
+          const jsonRecipes = data.recipes.filter(r => {
             if (isDessertMode) return r.category === "디저트" || r.category === "간식";
             return r.category === targetName;
           });
 
           const userRecipes = loadUserRecipes(targetName, isDessertMode);
 
-          let fullList = [...jsonRecipes, ...userRecipes];
+          /* ⭐ JSON + localStorage 합친 뒤 리뷰 적용 */
+          let fullList = [...jsonRecipes, ...userRecipes].map(r => ({
+            ...r,
+            rating: getAverageRating(r.id),
+            review_count: getReviewCount(r.id)
+          }));
 
           titleEl.innerText = `전체 ${targetName} 레시피 (총 ${fullList.length}개)`;
 
-          if (fullList.length === 0) {
-            listEl.innerHTML = "<p>등록된 레시피가 없습니다.</p>";
-            return;
-          }
-
+          /* 정렬 */
           function sortList(type) {
             if (type === "name") {
               fullList.sort((a, b) => a.title.localeCompare(b.title, "ko-KR"));
             }
-
             if (type === "views") {
-              fullList.sort((a, b) => {
-                const A = Number(a.views || 0);
-                const B = Number(b.views || 0);
-                return B - A;
-              });
+              fullList.sort((a, b) => b.review_count - a.review_count);
             }
-
             if (type === "rating") {
-              fullList.sort((a, b) => Number(b.rating || 0) - Number(a.rating || 0));
+              fullList.sort((a, b) => b.rating - a.rating);
             }
 
             renderCards();
           }
 
+          /* 렌더링 */
           function renderCards() {
             listEl.innerHTML = fullList
-              .map((r) => {
+              .map(r => {
                 const href = `11_인공띠용지능_recipe.html?id=${r.id}`;
                 const thumb = r.thumbnail || r.image || getDefaultImage(r.category);
+                const meta = `조회수 ${r.review_count}`;
+                const ratingText = `★ ${Number(r.rating).toFixed(1)}`;
 
-                const author =
-                  r.authorName ||
-                  r.author ||
-                  r.writer ||
-                  "냠냠이";
-
-                const reviewCount = Number(r.review_count || 0);
-                const views = Number(r.views || 0);
-                const ratingNum = Number(r.rating || 0);
-
-                const meta = `작성자: ${author} · 조회수 ${views}`;
-                const rating = `★ ${ratingNum.toFixed(1)} / 리뷰 ${reviewCount}개`;
-
-                return makeCardHTML(r.title, thumb, meta, rating, href);
+                return makeCardHTML(r.title, thumb, meta, ratingText, href);
               })
               .join("");
           }
@@ -261,8 +247,7 @@
           sortSelect.addEventListener("change", () => {
             sortList(sortSelect.value);
           });
-        })
-        .catch((err) => console.error("로딩 실패:", err));
+        });
     </script>
 
     <script>
@@ -270,15 +255,9 @@
         const navInput = document.querySelector(".nav-search-input");
         const navBtn = document.querySelector(".nav-search-btn");
 
-        if (!navInput || !navBtn) return;
-
         navBtn.addEventListener("click", () => {
           const kw = navInput.value.trim();
-          if (!kw) {
-            alert("검색어를 입력해주세요!");
-            return;
-          }
-
+          if (!kw) return alert("검색어를 입력해주세요!");
           location.href =
             "11_인공띠용지능_search.html?keyword=" + encodeURIComponent(kw);
         });
