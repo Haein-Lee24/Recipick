@@ -47,7 +47,6 @@
       background: #ac8d6f;
     }
 
-    /* 프로필 / 배경 이미지 입력용 스타일 */
     .profile-img-row {
       display: flex;
       align-items: center;
@@ -104,11 +103,9 @@
   <div class="signup-wrapper">
     <h2 style="margin-bottom:22px; font-weight:800;">회원가입</h2>
 
-    <!-- 아이디 / 비밀번호 / 닉네임 -->
     <input type="text" id="signupId" class="signup-input" placeholder="아이디">
     <input type="password" id="signupPw" class="signup-input" placeholder="비밀번호">
     <input type="text" id="signupNick" class="signup-input" placeholder="닉네임">
-    <!-- 자기소개 추가 -->
     <div style="margin-bottom:18px; text-align:left;">
       <span class="field-label">자기소개 (선택)</span>
       <textarea id="signupBio" 
@@ -126,8 +123,6 @@
       ></textarea>
     </div>
 
-
-    <!-- 프로필 이미지 (선택) -->
     <div style="margin-top:10px; margin-bottom:18px; text-align:left;">
       <span class="field-label">프로필 이미지 (선택)</span>
       <div class="profile-img-row">
@@ -136,7 +131,6 @@
       </div>
     </div>
 
-    <!-- 배경 이미지 (선택) -->
     <div style="margin-bottom:18px; text-align:left;">
       <span class="field-label">배경 이미지 (선택)</span>
       <div class="background-box">
@@ -150,7 +144,7 @@
   </div>
 
 <script>
-  // 선택한 이미지를 저장해둘 임시 변수
+  
   let profileImgData = null;
   let bgImgData = null;
 
@@ -159,33 +153,33 @@
   const profilePreview = document.querySelector(".profile-preview");
   const bgPreview = document.querySelector(".background-box");
 
-  // 프로필 이미지 미리보기 + 데이터 저장
+  
   profileInput.addEventListener("change", function (e) {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = function (ev) {
-      profileImgData = ev.target.result;      // dataURL 저장
-      profilePreview.src = profileImgData;    // 미리보기 교체
+      profileImgData = ev.target.result;      
+      profilePreview.src = profileImgData;    
     };
     reader.readAsDataURL(file);
   });
 
-  // 배경 이미지 미리보기 + 데이터 저장
+  
   bgInput.addEventListener("change", function (e) {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = function (ev) {
-      bgImgData = ev.target.result;                         // dataURL 저장
+      bgImgData = ev.target.result;                         
       bgPreview.style.backgroundImage = `url('${bgImgData}')`;
     };
     reader.readAsDataURL(file);
   });
 
-  // 회원가입 버튼
+
   document.getElementById("signupBtn").addEventListener("click", () => {
     const id = signupId.value.trim();
     const pw = signupPw.value.trim();
@@ -204,11 +198,11 @@
       return;
     }
 
-    // 회원 정보 저장 (edit-profile에서 쓰는 키들과 맞춤)
+  
     users[id] = {
       password: pw,
       nickname: nick,
-      bio: bio,                   // 자기소개는 나중에 edit-profile에서 수정
+      bio: bio,                   
       profileImg: profileImgData,
       backgroundImg: bgImgData,
       liked: [],
