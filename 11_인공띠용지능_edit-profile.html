@@ -81,7 +81,6 @@
       align-items: center;
       gap: 20px;
     }
-
     .profile-preview {
       width: 80px;
       height: 80px;
@@ -89,6 +88,7 @@
       object-fit: cover;
       border: 1px solid var(--border);
       flex-shrink: 0;
+      overflow: hidden; 
     }
 
     .card.no-hover:hover {
@@ -103,7 +103,6 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // 현재 로그인한 사용자
     const currentUser = localStorage.getItem("currentUser");
     let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -115,16 +114,14 @@
 
     const userInfo = users[currentUser];
 
-    // 요소 선택
     const form = document.querySelector("form");
     const profileInput = document.getElementById("profile_image");
     const profilePreview = document.querySelector('img[alt="프로필 이미지 수정"]');
     const bgInput = document.getElementById("background_image");
     const bgPreview = document.querySelector(".background-box");
 
-    // 초기 값 채우기
     document.getElementById("nickname").value = userInfo.nickname || "";
-    document.getElementById("username").value = currentUser; // 아이디는 고정
+    document.getElementById("username").value = currentUser;
     document.getElementById("bio").value = userInfo.bio || "";
 
     if (userInfo.profileImg) profilePreview.src = userInfo.profileImg;
@@ -132,7 +129,6 @@
       bgPreview.style.backgroundImage = `url('${userInfo.backgroundImg}')`;
     }
 
-    // 프로필 이미지 미리보기
     profileInput.addEventListener("change", function (e) {
       const file = e.target.files[0];
       if (file) {
@@ -145,7 +141,6 @@
       }
     });
 
-    // 배경 이미지 미리보기
     bgInput.addEventListener("change", function (e) {
       const file = e.target.files[0];
       if (file) {
@@ -158,15 +153,13 @@
       }
     });
 
-    // 저장 버튼
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // 값 저장
       userInfo.nickname = document.getElementById("nickname").value;
       userInfo.bio = document.getElementById("bio").value;
 
-      // 업데이트 적용
       users[currentUser] = userInfo;
       localStorage.setItem("users", JSON.stringify(users));
 

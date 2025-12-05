@@ -46,6 +46,7 @@
         text-align: center;
       }
 
+
       .profile-cover {
         width: 100%;
         height: 140px;
@@ -55,7 +56,23 @@
         border-radius: 12px;
       }
 
-      /* 팔로우 팝업 */
+      .profile-avatar {
+        margin-top: -43px;
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        overflow: hidden;          
+        border: 1px solid var(--border);
+      }
+
+      .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;         
+        display: block;
+      }
+
+
       #follow-popup {
         display: none;
         position: fixed;
@@ -99,15 +116,13 @@
         border-radius: 50%;
         object-fit: cover;
       }
+
     </style>
   </head>
 
   <body>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        /** --------------------
-         * LOGIN CHECK
-         * --------------------- **/
         const currentUser = localStorage.getItem("currentUser");
         const users = JSON.parse(localStorage.getItem("users")) || {};
         const userInfo = users[currentUser];
@@ -118,9 +133,7 @@
           return;
         }
 
-        /** --------------------
-         * 프로필 데이터 반영
-         * --------------------- **/
+ 
         document.querySelector(".profile-name").textContent =
           userInfo.nickname || "닉네임";
 
@@ -130,21 +143,16 @@
         document.querySelector(".profile-bio").textContent =
           userInfo.bio || "안녕하세요!";
 
-        // 프로필 이미지
         if (userInfo.profileImg) {
           document.querySelector(".profile-box img").src =
             userInfo.profileImg;
         }
 
-        // 배경 이미지
         if (userInfo.backgroundImg) {
           document.querySelector(".profile-cover").style.backgroundImage =
             `url('${userInfo.backgroundImg}')`;
         }
 
-        /** --------------------
-         * 로그아웃
-         * --------------------- **/
         document
           .querySelector('a[href="#logout"]')
           .addEventListener("click", (e) => {
@@ -158,7 +166,6 @@
       });
     </script>
 
-    <!-- NAV -->
     <nav class="site-nav">
       <div class="container nav-top-center">
         <div class="nav-center-box">
@@ -198,13 +205,13 @@
       </div>
     </nav>
 
-    <!-- MAIN -->
+
     <main class="container page-pad">
       <section class="profile-header">
         <div class="profile-cover" role="img"></div>
 
         <div class="profile-box">
-          <div style="margin-top: -43px; width: 88px; height: 88px">
+          <div class="profile-avatar">
             <img
               src="11_circle_h_icon.png"
               alt="프로필 이미지"
@@ -241,7 +248,6 @@
         </div>
       </section>
 
-      <!-- 저장한 / 최근 본 레시피 영역 (기존 유지) -->
       <section class="grid-2" style="gap: 24px; margin-top: 80px">
         <div class="card-box">
           <div class="bar" style="justify-content: space-between">
@@ -260,7 +266,6 @@
         </div>
       </section>
 
-      <!-- 내가 등록한 레시피 영역 -->
       <section class="card-box" style="margin-top: 80px" id="myrecipe-section">
         <div class="bar" style="justify-content: space-between">
           <h3 class="card-title-lg">내가 등록한 레시피</h3>
@@ -287,7 +292,7 @@
       <a href="#top" class="to-top">맨 위로 ↑</a>
     </main>
 
-    <!-- 팔로우 팝업 -->
+
     <div id="follow-popup">
       <div class="popup-box">
         <h2 id="popup-title">목록</h2>
@@ -296,9 +301,7 @@
       </div>
     </div>
 
-    <!-- 레시피 렌더링 & 팔로우 로직 (기존 유지) -->
     <script>
-      /** 내 레시피 관련 함수들 */
       const LOCAL_RECIPES_KEY = "nn_recipes";
       function loadLocalRecipes() {
         try {
@@ -348,7 +351,6 @@
           .join("");
       }
 
-      /** 저장한 / 최근 본 레시피 렌더 */
       function renderSavedList() {
         const box = document.getElementById("saved-list");
         const list = JSON.parse(localStorage.getItem("nn_saved_recipes")) || [];
@@ -416,7 +418,6 @@
           .join("");
       }
 
-      /** 페이지 로드 시 실행 */
       document.addEventListener("DOMContentLoaded", () => {
         const myRecipes = loadLocalRecipes();
         renderMyRecipeCount(myRecipes);
@@ -428,7 +429,7 @@
       });
     </script>
 
-    <!-- 팔로우 목록 팝업 -->
+    
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const popup = document.getElementById("follow-popup");
