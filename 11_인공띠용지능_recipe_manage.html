@@ -297,31 +297,39 @@
       document.addEventListener('DOMContentLoaded', renderList);
 
       document.getElementById('manageList').addEventListener('click', function (e) {
-        const target = e.target;
-        if (
-          !target.classList.contains('btn-edit') &&
-          !target.classList.contains('btn-delete')
-        )
-          return;
+  const target = e.target;
 
-        const card = target.closest('.rank-card');
-        if (!card) return;
+  if (target.classList.contains('btn-edit') || target.classList.contains('btn-delete')) {
+    const card = target.closest('.rank-card');
+    if (!card) return;
 
-        const id = card.getAttribute('data-id');
-        let list = loadRecipes();
+    const id = card.getAttribute('data-id');
+    let list = loadRecipes();
 
-        if (target.classList.contains('btn-edit')) {
-          const url = '11_인공띠용지능_register.html?editId=' + encodeURIComponent(id);
-          window.location.href = url;
-        }
+    if (target.classList.contains('btn-edit')) {
+      const url = '11_인공띠용지능_register.html?editId=' + encodeURIComponent(id);
+      window.location.href = url;
+    }
 
-        if (target.classList.contains('btn-delete')) {
-          list = list.filter((r) => String(r.id) !== String(id));
-          saveRecipes(list);
-          alert('레시피가 삭제되었습니다.');
-          renderList();
-        }
-      });
+    if (target.classList.contains('btn-delete')) {
+      list = list.filter((r) => String(r.id) !== String(id));
+      saveRecipes(list);
+      alert('레시피가 삭제되었습니다.');
+      renderList();
+    }
+
+    return; 
+  }
+
+  const card = e.target.closest('.rank-card');
+  if (!card) return;
+
+  const id = card.getAttribute('data-id');
+  if (!id) return;
+
+  window.location.href = `11_인공띠용지능_recipe.html?id=${encodeURIComponent(id)}`;
+});
+
     </script>
   </body>
 </html>
