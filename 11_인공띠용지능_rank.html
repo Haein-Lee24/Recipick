@@ -90,6 +90,29 @@
         font-size: 13px;
         color: var(--muted);
       }
+
+      @media (max-width: 520px) {
+        .rank-card {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .rank-card-image {
+          width: 100%;
+          height: 160px;
+        }
+        .rank-meta {
+          width: 100%;
+          text-align: left;
+        }
+        .rank-number {
+          margin-bottom: 8px;
+        }
+      }
+
+      .section-title {
+        margin-top: 20px;
+      }
     </style>
   </head>
 
@@ -99,12 +122,16 @@
     <nav class="site-nav">
       <div class="container nav-top-center">
         <div class="nav-center-box">
-          <a href="11_인공띠용지능_main.html">
-            <img src="11_logo.png" class="logo" />
+          <a href="11_인공띠용지능_main.html" aria-label="냠냠노트 홈">
+            <img src="11_logo.png" alt="냠냠노트 로고" class="logo" />
           </a>
 
           <div class="nav-search">
-            <input type="text" placeholder="재료명으로 레시피 검색" class="nav-search-input" />
+            <input
+              type="text"
+              placeholder="재료명으로 레시피 검색"
+              class="nav-search-input"
+            />
             <button class="nav-search-btn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
@@ -136,100 +163,157 @@
         <header class="hero center">
           <h1 class="mt-0">주간 인기 레시피 랭킹</h1>
           <p style="font-size: 14px; color: var(--muted)">
-            최근 7일간의 조회수를 기반으로 선정되었습니다.
+            최근 7일간의 조회수와 평점을 기반으로 선정되었습니다.
           </p>
         </header>
 
         <h2 class="section-title">TOP 5 랭킹</h2>
+        <div class="category-filter" style="margin: 16px 0">
+          <label
+            for="categorySelect"
+            style="font-weight: 700; margin-right: 8px"
+          >
+            카테고리 선택:
+          </label>
+          <select
+            id="categorySelect"
+            style="padding: 8px 12px; border-radius: 8px"
+          >
+            <option value="all">전체</option>
+            <option value="한식">한식</option>
+            <option value="양식">양식</option>
+            <option value="중식">중식</option>
+            <option value="음료">음료</option>
+            <option value="디저트">디저트</option>
+          </select>
+        </div>
 
         <div id="rankingList" class="ranking-list mt-20"></div>
+
+        <div class="card-box mt-60 center">
+          <p class="card-title-lg">더 많은 레시피가 궁금하신가요?</p>
+          <a href="11_인공띠용지능_menulist.html#all" class="more-btn mt-20">
+            전체 레시피 목록 보러가기
+          </a>
+        </div>
       </div>
     </main>
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <script>
-      const rankingList = document.getElementById("rankingList");
-      let baseRecipes = [];
+      const rankingList = document.getElementById('rankingList');
+      const categorySelect = document.getElementById('categorySelect');
 
-      fetch("11_인공띠용지능_recipes.json")
-        .then((res) => res.json())
-        .then((data) => {
-          baseRecipes = data.recipes;
-          renderRanking();
-        });
+      let allRecipes = [];
 
-      // ⭐ 리뷰 평균 계산
-      function getAvgRating(id) {
-        const rev = JSON.parse(localStorage.getItem("nn_reviews_" + id) || "[]");
-        if (!rev.length) return 0;
-        return rev.reduce((a, b) => a + Number(b.rating), 0) / rev.length;
-      }
+function getReviews(id) {
+  return JSON.parse(localStorage.getItem("nn_reviews_" + id) || "[]");
+}
 
-      // ⭐ 리뷰 수 = 조회수
-      function getReviewCount(id) {
-        const rev = JSON.parse(localStorage.getItem("nn_reviews_" + id) || "[]");
-        return rev.length;
-      }
+function getAvgRating(id) {
+  const r = getReviews(id);
+  if (r.length === 0) return 0.0;
+  const avg = r.reduce((a, b) => a + Number(b.rating), 0) / r.length;
+  return avg.toFixed(1);
+}
 
-      function renderRanking() {
-        rankingList.innerHTML = "";
+function getReviewCount(id) {
+  return getReviews(id).length;
+}
 
-        const updated = baseRecipes.map((r) => ({
-          ...r,
-          rating: getAvgRating(r.id),
-          review_count: r.review_count, // ⭐ JSON 조회수 그대로 사용
-        }));
+// JSON 불러오기
+fetch("11_인공띠용지능_recipes.json")
+  .then(res => res.json())
+  .then(data => {
+    // JSON 기본 레시피
+    allRecipes = data.recipes.map(r => ({
+      ...r,
+      rating: getAvgRating(r.id),
+      review_count: r.review_count   // JSON의 조회수 유지
+    }));
 
-        const top5 = updated
-          .sort((a, b) => b.review_count - a.review_count)
-          .slice(0, 5);
+    // 사용자 등록 레시피도 ranking에 포함시키려면 여기 push하면 됨 (원하면 말해)
+    renderRanking("all");
+  });
 
-        top5.forEach((item, i) => {
-          const card = document.createElement("a");
-          card.href = `11_인공띠용지능_recipe.html?id=${item.id}`;
-          card.className = "rank-card";
+// ⭐ TOP5 렌더링
+function renderRanking(category) {
+  rankingList.innerHTML = "";
 
-          card.innerHTML = `
-            <div class="rank-number rank-${i + 1}">
-              ${i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}
-            </div>
+  let list = allRecipes;
 
-            <img src="${item.thumbnail}" class="rank-card-image" />
+  if (category !== "all") {
+    list = list.filter(r => r.category === category);
+  }
 
-            <div class="rank-info">
-              <h2 class="rank-title">${item.title}</h2>
-              <p class="rank-description">${item.summary}</p>
-            </div>
+  // ⭐ review_count 높은 순으로 정렬
+  list = list
+    .map(r => ({
+      ...r,
+      rating: getAvgRating(r.id),
+      review_count: r.review_count || getReviewCount(r.id)
+    }))
+    .sort((a, b) => b.review_count - a.review_count)
+    .slice(0, 5);
 
-            <div class="rank-meta">
-              <div class="rank-rating">★ ${item.rating.toFixed(1)}</div>
-              <p class="rank-views">조회수 ${item.review_count}회</p>
-            </div>
-          `;
+  list.forEach((item, index) => {
+    const rank = index + 1;
+    const rating = getAvgRating(item.id);
+    const views = item.review_count || 0;
 
-          rankingList.appendChild(card);
-        });
-      }
+    const medal =
+      rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank;
+
+    const card = `
+      <a class="rank-card" href="11_인공띠용지능_recipe.html?id=${item.id}">
+        <div class="rank-number rank-${rank}">${medal}</div>
+        <img class="rank-card-image" src="${item.thumbnail}" />
+
+        <div class="rank-info">
+          <h2 class="rank-title">${item.title}</h2>
+          <p class="rank-description">${item.summary}</p>
+        </div>
+
+        <div class="rank-meta">
+          <div class="rank-rating">★ ${rating}</div>
+          <p class="rank-views">조회수 ${views}회</p>
+        </div>
+      </a>
+    `;
+    rankingList.insertAdjacentHTML("beforeend", card);
+  });
+}
+
+
+      // 카테고리 변경 시 재렌더링
+      categorySelect.addEventListener('change', (e) => {
+        renderRanking(e.target.value);
+      });
     </script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const input = document.querySelector(".nav-search-input");
-        const btn = document.querySelector(".nav-search-btn");
+      document.addEventListener('DOMContentLoaded', () => {
+        const navInput = document.querySelector('.nav-search-input');
+        const navBtn = document.querySelector('.nav-search-btn');
 
-        btn.addEventListener("click", () => {
-          const kw = input.value.trim();
-          if (!kw) return alert("검색어를 입력해주세요!");
+        if (!navInput || !navBtn) return;
+
+        navBtn.addEventListener('click', () => {
+          const kw = navInput.value.trim();
+          if (!kw) {
+            alert('검색어를 입력해주세요!');
+            return;
+          }
+
           location.href =
-            "11_인공띠용지능_search.html?keyword=" + encodeURIComponent(kw);
+            '11_인공띠용지능_search.html?keyword=' + encodeURIComponent(kw);
         });
 
-        input.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") btn.click();
+        navInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') navBtn.click();
         });
       });
     </script>
   </body>
 </html>
-
