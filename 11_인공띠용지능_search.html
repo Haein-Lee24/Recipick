@@ -24,7 +24,14 @@
             <button class="nav-search-btn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" />
-                <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2" />
+                <line
+                  x1="16.5"
+                  y1="16.5"
+                  x2="21"
+                  y2="21"
+                  stroke="white"
+                  stroke-width="2"
+                />
               </svg>
             </button>
           </div>
@@ -43,9 +50,7 @@
     <main class="page-pad">
       <div id="ranking" class="container">
         <header class="hero center">
-          <h1 class="mt-0">
-            <span id="keyword-text"></span> 검색 결과
-          </h1>
+          <h1 class="mt-0"><span id="keyword-text"></span> 검색 결과</h1>
           <p style="font-size: 14px; color: var(--muted)">
             총 <span id="result-count">0</span>개의 레시피를 찾았어요.
           </p>
@@ -60,26 +65,26 @@
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <script>
-      const RECIPES_KEY = "nn_recipes";
-      const JSON_PATH = "11_인공띠용지능_recipes.json";
+      const RECIPES_KEY = 'nn_recipes';
+      const JSON_PATH = '11_인공띠용지능_recipes.json';
 
       const params = new URLSearchParams(window.location.search);
-      const keywordRaw = (params.get("keyword") || "").trim();
+      const keywordRaw = (params.get('keyword') || '').trim();
       const keyword = keywordRaw.toLowerCase();
 
-      const navInput = document.querySelector(".nav-search-input");
-      const navBtn = document.querySelector(".nav-search-btn");
+      const navInput = document.querySelector('.nav-search-input');
+      const navBtn = document.querySelector('.nav-search-btn');
       if (navInput) navInput.value = keywordRaw;
 
-      document.getElementById("keyword-text").textContent =
-        keywordRaw ? `"${keywordRaw}"` : "전체";
+      document.getElementById('keyword-text').textContent = keywordRaw
+        ? `"${keywordRaw}"`
+        : '전체';
 
-      const resultCountEl = document.getElementById("result-count");
-      const resultBox = document.getElementById("search-result");
+      const resultCountEl = document.getElementById('result-count');
+      const resultBox = document.getElementById('search-result');
 
-      /* 🔸 리뷰 정보만 기준으로 별점/리뷰 수 계산 */
       function getReviewStats(id) {
-        const key = "nn_reviews_" + id;
+        const key = 'nn_reviews_' + id;
         try {
           const raw = localStorage.getItem(key);
           if (!raw) {
@@ -93,12 +98,11 @@
           const avg = sum / list.length;
           return { avg, count: list.length };
         } catch (e) {
-          console.error("리뷰 파싱 오류:", e);
+          console.error('리뷰 파싱 오류:', e);
           return { avg: 0, count: 0 };
         }
       }
 
-      /* 로컬 저장 레시피 */
       function loadLocalRecipes() {
         try {
           const raw = localStorage.getItem(RECIPES_KEY);
@@ -106,26 +110,24 @@
           const parsed = JSON.parse(raw);
           return Array.isArray(parsed) ? parsed : [];
         } catch (e) {
-          console.error("로컬 레시피 파싱 오류:", e);
+          console.error('로컬 레시피 파싱 오류:', e);
           return [];
         }
       }
 
-      /* JSON 레시피 */
       function loadJsonRecipes() {
         return fetch(JSON_PATH)
           .then((res) => {
-            if (!res.ok) throw new Error("JSON 로드 실패");
+            if (!res.ok) throw new Error('JSON 로드 실패');
             return res.json();
           })
           .then((data) => (Array.isArray(data.recipes) ? data.recipes : []))
           .catch((e) => {
-            console.error("JSON 레시피 로딩 오류:", e);
+            console.error('JSON 레시피 로딩 오류:', e);
             return [];
           });
       }
 
-      /* 재료 텍스트 뽑기 (검색용) */
       function getIngredientText(recipe) {
         const result = [];
 
@@ -139,21 +141,20 @@
           opt.forEach((ing) => ing?.name && result.push(String(ing.name)));
         }
 
-        if (typeof recipe.ingredients === "string") {
+        if (typeof recipe.ingredients === 'string') {
           result.push(recipe.ingredients);
         }
 
-        return result.join(", ").toLowerCase();
+        return result.join(', ').toLowerCase();
       }
 
-      /* 키워드로 필터링 */
       function filterRecipes(list, keyword) {
         if (!keyword) return list;
 
         return list.filter((r) => {
-          const t = (r.title || "").toLowerCase();
-          const c = (r.category || "").toLowerCase();
-          const s = (r.summary || "").toLowerCase();
+          const t = (r.title || '').toLowerCase();
+          const c = (r.category || '').toLowerCase();
+          const s = (r.summary || '').toLowerCase();
           const ing = getIngredientText(r);
 
           return (
@@ -165,7 +166,6 @@
         });
       }
 
-      /* 검색 결과 렌더링 */
       function renderSearchResult(found) {
         resultCountEl.textContent = found.length;
 
@@ -187,7 +187,7 @@
               idStr
             )}`;
 
-            const thumb = r.thumbnail || r.image || "11_default.png";
+            const thumb = r.thumbnail || r.image || '11_default.png';
 
             const { avg, count } = getReviewStats(idStr);
             const ratingText = avg.toFixed(1); // 리뷰 없으면 0.0
@@ -198,12 +198,12 @@
                 <img
                   src="${thumb}"
                   class="rank-card-image"
-                  alt="${r.title || "레시피 이미지"}"
+                  alt="${r.title || '레시피 이미지'}"
                 />
 
                 <div class="rank-info">
-                  <h2 class="rank-title">${r.title || "제목 없는 레시피"}</h2>
-                  <p class="rank-description">${r.category || "기타"}</p>
+                  <h2 class="rank-title">${r.title || '제목 없는 레시피'}</h2>
+                  <p class="rank-description">${r.category || '기타'}</p>
                 </div>
 
                 <div class="rank-meta">
@@ -213,10 +213,9 @@
               </a>
             `;
           })
-          .join("");
+          .join('');
       }
 
-      /* 초기 검색 실행 */
       (async function initSearch() {
         try {
           const [jsonRecipes, localRecipes] = await Promise.all([
@@ -239,7 +238,7 @@
 
           renderSearchResult(found);
         } catch (e) {
-          console.error("검색 초기화 오류:", e);
+          console.error('검색 초기화 오류:', e);
           resultBox.innerHTML = `
             <div class="card-box mt-20 center">
               <p class="card-title-lg">검색 중 오류가 발생했습니다.</p>
@@ -250,21 +249,19 @@
         }
       })();
 
-      /* 상단 검색창 동작 */
       if (navBtn && navInput) {
-        navBtn.addEventListener("click", () => {
+        navBtn.addEventListener('click', () => {
           const kw = navInput.value.trim();
           if (!kw) {
-            alert("검색어를 입력해주세요!");
+            alert('검색어를 입력해주세요!');
             return;
           }
           location.href =
-            "11_인공띠용지능_search.html?keyword=" +
-            encodeURIComponent(kw);
+            '11_인공띠용지능_search.html?keyword=' + encodeURIComponent(kw);
         });
 
-        navInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") navBtn.click();
+        navInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') navBtn.click();
         });
       }
     </script>

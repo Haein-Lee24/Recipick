@@ -13,16 +13,12 @@
         background: #fff;
         border-radius: 16px;
       }
-
-      /* 라벨 공통 */
       .field-label,
       .form-card label {
         display: block;
         font-weight: 700;
         margin-bottom: 8px;
       }
-
-      /* 입력 요소 공통 스타일 + 폰트 통일 */
       .form-card input[type='text'],
       .form-card input[type='file'],
       .form-card textarea {
@@ -34,8 +30,6 @@
         background: #fff;
         box-sizing: border-box;
         margin: 0;
-
-        /* ✅ 입력 폰트 전부 나눔스퀘어로 통일 */
         font-family: "NanumSquare", system-ui, sans-serif;
         font-size: 14px;
         line-height: 1.5;
@@ -49,8 +43,6 @@
       .form-group {
         margin-top: 20px;
       }
-
-      /* 첫 번째는 위 공백 제거 */
       .form-group:first-child {
         margin-top: 0;
       }
@@ -116,7 +108,6 @@
         box-shadow: none !important;
       }
 
-      /* 재료/단계 입력칸 폰트 확실히 통일 */
       #ingredientsRequired,
       #ingredientsOptional,
       .step-title-input,
@@ -126,7 +117,6 @@
         line-height: 1.5;
       }
 
-      /* placeholder 폰트도 통일 */
       #ingredientsRequired::placeholder,
       #ingredientsOptional::placeholder,
       .step-title-input::placeholder,
@@ -142,7 +132,6 @@
         margin-top: 20px;
       }
 
-      /* ===== 조리 과정 영역 디자인 통일 ===== */
       .steps-wrapper {
         padding: 0;
         background: transparent;
@@ -276,7 +265,6 @@
         <h2 class="section-title">레시피 정보 입력</h2>
 
         <form class="card form-card" id="recipeForm">
-          <!-- 레시피 제목 -->
           <div class="form-group">
             <label for="title">레시피 제목</label>
             <input
@@ -288,7 +276,6 @@
             />
           </div>
 
-          <!-- 카테고리 -->
           <div class="form-group">
             <span class="field-label">요리 카테고리 (1개 선택)</span>
             <div class="radio-grid">
@@ -300,13 +287,11 @@
             </div>
           </div>
 
-          <!-- 이미지 업로드 -->
           <div class="form-group">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
           </div>
 
-          <!-- 필수 재료 -->
           <div class="form-group">
             <label for="ingredientsRequired">필수 재료</label>
             <textarea
@@ -319,7 +304,6 @@
             <p class="small-hint">한 줄에 재료 하나씩 입력해주세요.</p>
           </div>
 
-          <!-- 선택 재료 -->
           <div class="form-group">
             <label for="ingredientsOptional">선택 재료</label>
             <textarea
@@ -331,13 +315,11 @@
             <p class="small-hint">없으면 비워도 됩니다.</p>
           </div>
 
-          <!-- 조리 과정 (단계별) -->
           <div class="form-group">
             <label>조리 과정</label>
 
             <div class="steps-wrapper" id="stepsWrapper">
               <div id="stepList">
-                <!-- JS에서 기본 1개 단계가 자동으로 들어감 -->
               </div>
 
               <button type="button" id="addStepBtn">+ 단계 추가</button>
@@ -357,11 +339,8 @@
     </main>
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
-
-    <!-- 레시피 등록 로직 -->
     <script src="11_인공띠용지능_register.js"></script>
 
-    <!-- 상단 검색창 -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const navInput = document.querySelector(".nav-search-input");

@@ -162,7 +162,10 @@
             카테고리 선택:
           </label>
 
-          <select id="categorySelect" style="padding: 8px 12px; border-radius: 8px">
+          <select
+            id="categorySelect"
+            style="padding: 8px 12px; border-radius: 8px"
+          >
             <option value="all">전체</option>
             <option value="한식">한식</option>
             <option value="양식">양식</option>
@@ -185,22 +188,15 @@
 
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
-    <!-- ==============================
-        ⭐ 랭킹 페이지 핵심 스크립트
-        ============================= -->
     <script>
-      const rankingList = document.getElementById("rankingList");
-      const categorySelect = document.getElementById("categorySelect");
+      const rankingList = document.getElementById('rankingList');
+      const categorySelect = document.getElementById('categorySelect');
 
       let allRecipes = [];
 
-      /* ---------------------------
-        ⭐ 리뷰 데이터 불러오기
-      --------------------------- */
       function getReviews(id) {
-        return JSON.parse(localStorage.getItem("nn_reviews_" + id) || "[]");
+        return JSON.parse(localStorage.getItem('nn_reviews_' + id) || '[]');
       }
-
       function getAvgRating(id) {
         const reviews = getReviews(id);
         if (reviews.length === 0) return 0.0;
@@ -211,46 +207,37 @@
       function getReviewCount(id) {
         return getReviews(id).length;
       }
-
-      /* ---------------------------
-        ⭐ JSON + 사용자 레시피 로드
-      --------------------------- */
-      fetch("11_인공띠용지능_recipes.json")
+      fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
           const jsonList = data.recipes.map((r) => ({
             ...r,
-            rating: getAvgRating(r.id), // ⭐ 리뷰 기반
-            review_count: r.review_count, // ⭐ JSON 조회수 유지
+            rating: getAvgRating(r.id),
+            review_count: r.review_count,
           }));
 
-          // localStorage 사용자 레시피도 포함 가능 (원하면 알려줘)
-
           allRecipes = [...jsonList];
-          renderRanking("all");
+          renderRanking('all');
         });
 
-      /* ---------------------------
-        ⭐ TOP5 정렬 + 렌더링
-      --------------------------- */
       function renderRanking(category) {
-        rankingList.innerHTML = "";
+        rankingList.innerHTML = '';
 
         let filtered = allRecipes;
 
-        if (category !== "all") {
+        if (category !== 'all') {
           filtered = allRecipes.filter((r) => r.category === category);
         }
 
-        // 최신 리뷰/조회수 다시 계산 적용
         filtered = filtered.map((r) => ({
           ...r,
           rating: getAvgRating(r.id),
           review_count: r.review_count ?? getReviewCount(r.id),
         }));
 
-        // ⭐ 조회수 높은 순
-        const top5 = filtered.sort((a, b) => b.review_count - a.review_count).slice(0, 5);
+        const top5 = filtered
+          .sort((a, b) => b.review_count - a.review_count)
+          .slice(0, 5);
 
         if (top5.length === 0) {
           rankingList.innerHTML = `
@@ -262,7 +249,8 @@
 
         top5.forEach((item, index) => {
           const rank = index + 1;
-          const medal = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank;
+          const medal =
+            rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank;
           const rating = item.rating;
           const views = item.review_count;
 
@@ -284,39 +272,35 @@
             </a>
           `;
 
-          rankingList.insertAdjacentHTML("beforeend", cardHTML);
+          rankingList.insertAdjacentHTML('beforeend', cardHTML);
         });
       }
 
-      /* ---------------------------
-        ⭐ 카테고리 변경 이벤트
-      --------------------------- */
-      categorySelect.addEventListener("change", (e) => {
+      categorySelect.addEventListener('change', (e) => {
         renderRanking(e.target.value);
       });
     </script>
 
-    <!-- 검색창 -->
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const navInput = document.querySelector(".nav-search-input");
-        const navBtn = document.querySelector(".nav-search-btn");
+      document.addEventListener('DOMContentLoaded', () => {
+        const navInput = document.querySelector('.nav-search-input');
+        const navBtn = document.querySelector('.nav-search-btn');
 
         if (!navInput || !navBtn) return;
 
-        navBtn.addEventListener("click", () => {
+        navBtn.addEventListener('click', () => {
           const kw = navInput.value.trim();
           if (!kw) {
-            alert("검색어를 입력해주세요!");
+            alert('검색어를 입력해주세요!');
             return;
           }
 
           location.href =
-            "11_인공띠용지능_search.html?keyword=" + encodeURIComponent(kw);
+            '11_인공띠용지능_search.html?keyword=' + encodeURIComponent(kw);
         });
 
-        navInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") navBtn.click();
+        navInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') navBtn.click();
         });
       });
     </script>

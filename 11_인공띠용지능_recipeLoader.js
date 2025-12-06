@@ -20,7 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const recipe = allRecipes.find((r) => String(r.id) === recipeIdStr);
 
       if (!recipe) {
-        alert('준비 중인 레시피거나 데이터를 찾을 수 없습니다. (ID: ' + recipeIdStr + ')');
+        alert(
+          '준비 중인 레시피거나 데이터를 찾을 수 없습니다. (ID: ' +
+            recipeIdStr +
+            ')'
+        );
         window.history.back();
         return;
       }
@@ -101,12 +105,12 @@ function normalizeLocalRecipe(r) {
   if (Array.isArray(r.ingredientsRequired)) {
     required = r.ingredientsRequired.map((ing) => ({
       name: ing.name || '',
-      amount: ing.amount || ''
+      amount: ing.amount || '',
     }));
   } else if (Array.isArray(r.ingredients_required)) {
     required = r.ingredients_required.map((ing) => ({
       name: ing.name || '',
-      amount: ing.amount || ''
+      amount: ing.amount || '',
     }));
   } else if (typeof r.ingredients === 'string') {
     required = r.ingredients
@@ -115,7 +119,7 @@ function normalizeLocalRecipe(r) {
       .filter((s) => s.length > 0)
       .map((name) => ({
         name,
-        amount: ''
+        amount: '',
       }));
   }
 
@@ -123,12 +127,12 @@ function normalizeLocalRecipe(r) {
   if (Array.isArray(r.ingredientsOptional)) {
     optional = r.ingredientsOptional.map((ing) => ({
       name: ing.name || '',
-      amount: ing.amount || ''
+      amount: ing.amount || '',
     }));
   } else if (Array.isArray(r.ingredients_optional)) {
     optional = r.ingredients_optional.map((ing) => ({
       name: ing.name || '',
-      amount: ing.amount || ''
+      amount: ing.amount || '',
     }));
   }
 
@@ -137,7 +141,7 @@ function normalizeLocalRecipe(r) {
   if (Array.isArray(r.stepsDetail)) {
     steps = r.stepsDetail.map((s, idx) => ({
       title: (s.title && s.title.trim()) || `단계 ${idx + 1}`,
-      desc: (s.description || '').trim()
+      desc: (s.description || '').trim(),
     }));
   } else if (Array.isArray(r.steps)) {
     steps = r.steps;
@@ -145,7 +149,10 @@ function normalizeLocalRecipe(r) {
     const blocks = r.steps.split(/\n\s*\n/);
 
     blocks.forEach((block, idx) => {
-      const lines = block.split('\n').map((s) => s.trim()).filter(Boolean);
+      const lines = block
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean);
 
       if (lines.length === 0) return;
 
@@ -159,7 +166,7 @@ function normalizeLocalRecipe(r) {
 
       steps.push({
         title,
-        desc
+        desc,
       });
     });
   }
@@ -168,12 +175,7 @@ function normalizeLocalRecipe(r) {
   const reviews = Array.isArray(r.reviews) ? r.reviews : [];
   const reviewCount = reviews.length;
 
-  // 🔹 작성자 이름 정리
-  const authorName =
-    r.authorName ||
-    r.author ||
-    r.writer ||
-    '냠냠이';
+  const authorName = r.authorName || r.author || r.writer || '냠냠이';
 
   return {
     id: String(r.id),
@@ -189,8 +191,6 @@ function normalizeLocalRecipe(r) {
     review_count: reviewCount,
     reviews: reviews,
     views: r.views || 0,
-
-    // 🔹 작성자 정보
     author: authorName,
 
     ingredients_required: required,
@@ -218,7 +218,6 @@ function renderRecipe(recipe) {
   document.getElementById('recipe-difficulty').textContent = difficulty;
   document.getElementById('recipe-time').textContent = time;
 
-  // 🔹 작성자 이름 표시
   const authorEl = document.getElementById('recipe-author');
   if (authorEl) {
     authorEl.textContent = authorName;
@@ -292,9 +291,7 @@ function renderRecipe(recipe) {
 
       <li class="list-item">
         <div class="list-text">
-          <div class="list-ttl">${i + 1}. ${
-          step.title || `단계 ${i + 1}`
-        }</div>
+          <div class="list-ttl">${i + 1}. ${step.title || `단계 ${i + 1}`}</div>
           <div class="list-sub">${step.desc || ''}</div>
         </div>
       </li>
@@ -343,8 +340,7 @@ function saveToRecent(recipe) {
     title: recipe.title || recipe.name,
     info: `${recipe.category || '기타'} · 리뷰 ${reviewCount}개`,
     link:
-      '11_인공띠용지능_recipe.html?id=' +
-      encodeURIComponent(String(recipe.id)),
+      '11_인공띠용지능_recipe.html?id=' + encodeURIComponent(String(recipe.id)),
     thumbnail: recipe.thumbnail || recipe.image || '11_default.png',
     rating: ratingValue,
     review_count: reviewCount,
@@ -378,7 +374,7 @@ function setupReviewSystem(recipe) {
   const reviewInput = document.querySelector('.input-text');
   const reviewList = document.getElementById('review-list');
   const reviewTitle = document.getElementById('review-title');
-  
+
   const currentUser = localStorage.getItem('currentUser');
   const users = JSON.parse(localStorage.getItem('users') || '{}');
 
@@ -479,14 +475,11 @@ function setupReviewSystem(recipe) {
 
       const ratingEl = document.getElementById('recipe-rating');
       if (ratingEl) {
-        const oldRating =
-          Number(ratingEl.getAttribute('data-rating')) || 0;
-        let oldCount =
-          Number(ratingEl.getAttribute('data-review-count')) || 0;
+        const oldRating = Number(ratingEl.getAttribute('data-rating')) || 0;
+        let oldCount = Number(ratingEl.getAttribute('data-review-count')) || 0;
 
         const newCount = oldCount + 1;
-        const newRating =
-          (oldRating * oldCount + currentRating) / newCount;
+        const newRating = (oldRating * oldCount + currentRating) / newCount;
         const rounded = Math.round(newRating * 10) / 10;
 
         const filledStars = '★'.repeat(Math.round(rounded));

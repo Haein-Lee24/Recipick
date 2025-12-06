@@ -121,41 +121,37 @@
 
     <script>
       const params = new URLSearchParams(window.location.search);
-      const currentCategory = params.get("category");
+      const currentCategory = params.get('category');
 
       const categoryMap = {
-        korean: "한식",
-        western: "양식",
-        chinese: "중식",
-        dessert: "디저트",
-        drink: "음료",
+        korean: '한식',
+        western: '양식',
+        chinese: '중식',
+        dessert: '디저트',
+        drink: '음료',
       };
 
-      const STORAGE_KEY = "nn_recipes";
+      const STORAGE_KEY = 'nn_recipes';
 
       function getDefaultImage(cat) {
         switch (cat) {
-          case "한식":
-            return "11_kimchi.jpg";
-          case "양식":
-            return "11_pasta.jpg";
-          case "중식":
-            return "11_chinese.png";
-          case "디저트":
-            return "11_snack.jpg";
-          case "음료":
-            return "11_drink.png";
+          case '한식':
+            return '11_kimchi.jpg';
+          case '양식':
+            return '11_pasta.jpg';
+          case '중식':
+            return '11_chinese.png';
+          case '디저트':
+            return '11_snack.jpg';
+          case '음료':
+            return '11_drink.png';
           default:
-            return "11_pasta.jpg";
+            return '11_pasta.jpg';
         }
       }
 
-      /* ----------------------------
-          ⭐ 리뷰/별점 관련 공통함수
-      ------------------------------ */
-
       function getReviews(id) {
-        return JSON.parse(localStorage.getItem("nn_reviews_" + id) || "[]");
+        return JSON.parse(localStorage.getItem('nn_reviews_' + id) || '[]');
       }
 
       function getAvgRating(id) {
@@ -176,7 +172,7 @@
           const all = JSON.parse(raw);
           return all.filter((u) => {
             if (isDessertMode)
-              return u.category === "디저트" || u.category === "간식";
+              return u.category === '디저트' || u.category === '간식';
             return u.category === targetName;
           });
         } catch {
@@ -197,28 +193,24 @@
         `;
       }
 
-      /* ----------------------------
-          ⭐ 메인 렌더링
-      ------------------------------ */
-
-      fetch("11_인공띠용지능_recipes.json")
+      fetch('11_인공띠용지능_recipes.json')
         .then((res) => res.json())
         .then((data) => {
-          const titleEl = document.getElementById("full-title");
-          const listEl = document.getElementById("full-list");
-          const sortSelect = document.getElementById("sort-select");
+          const titleEl = document.getElementById('full-title');
+          const listEl = document.getElementById('full-list');
+          const sortSelect = document.getElementById('sort-select');
 
           const targetName = categoryMap[currentCategory];
           if (!targetName) {
-            titleEl.innerText = "잘못된 카테고리입니다.";
+            titleEl.innerText = '잘못된 카테고리입니다.';
             return;
           }
 
-          const isDessertMode = currentCategory === "dessert";
+          const isDessertMode = currentCategory === 'dessert';
 
           const jsonRecipes = data.recipes.filter((r) => {
             if (isDessertMode)
-              return r.category === "디저트" || r.category === "간식";
+              return r.category === '디저트' || r.category === '간식';
             return r.category === targetName;
           });
 
@@ -235,26 +227,24 @@
               review_count: isUserRecipe
                 ? getReviewCount(r.id)
                 : r.review_count,
-              authorName: r.authorName || "냠냠이",
+              authorName: r.authorName || '냠냠이',
             };
           });
 
           titleEl.innerText = `전체 ${targetName} 레시피 (총 ${fullList.length}개)`;
 
           function ratingText(r) {
-            return "★ " + (r.rating?.toFixed(1) || "0.0");
+            return '★ ' + (r.rating?.toFixed(1) || '0.0');
           }
 
           function sortList(type) {
-            if (type === "name") {
-              fullList.sort((a, b) =>
-                a.title.localeCompare(b.title, "ko-KR")
-              );
+            if (type === 'name') {
+              fullList.sort((a, b) => a.title.localeCompare(b.title, 'ko-KR'));
             }
-            if (type === "views") {
+            if (type === 'views') {
               fullList.sort((a, b) => b.review_count - a.review_count);
             }
-            if (type === "rating") {
+            if (type === 'rating') {
               fullList.sort((a, b) => b.rating - a.rating);
             }
             render();
@@ -268,46 +258,39 @@
                   r.thumbnail || r.image || getDefaultImage(r.category);
 
                 const meta = `작성자: ${r.authorName} · 조회수 ${r.review_count}`;
-                return makeCardHTML(
-                  r.title,
-                  thumb,
-                  meta,
-                  ratingText(r),
-                  href
-                );
+                return makeCardHTML(r.title, thumb, meta, ratingText(r), href);
               })
-              .join("");
+              .join('');
           }
 
-          sortList("name");
+          sortList('name');
 
-          sortSelect.addEventListener("change", () => {
+          sortSelect.addEventListener('change', () => {
             sortList(sortSelect.value);
           });
         });
     </script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const navInput = document.querySelector(".nav-search-input");
-        const navBtn = document.querySelector(".nav-search-btn");
+      document.addEventListener('DOMContentLoaded', () => {
+        const navInput = document.querySelector('.nav-search-input');
+        const navBtn = document.querySelector('.nav-search-btn');
 
         if (!navInput || !navBtn) return;
 
-        navBtn.addEventListener("click", () => {
+        navBtn.addEventListener('click', () => {
           const kw = navInput.value.trim();
           if (!kw) {
-            alert("검색어를 입력해주세요!");
+            alert('검색어를 입력해주세요!');
             return;
           }
 
           location.href =
-            "11_인공띠용지능_search.html?keyword=" +
-            encodeURIComponent(kw);
+            '11_인공띠용지능_search.html?keyword=' + encodeURIComponent(kw);
         });
 
-        navInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") navBtn.click();
+        navInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') navBtn.click();
         });
       });
     </script>

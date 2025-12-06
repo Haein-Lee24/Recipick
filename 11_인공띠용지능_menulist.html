@@ -95,26 +95,19 @@
     <a href="#top" class="to-top">맨 위로 ↑</a>
 
     <script>
-      const RECIPES_KEY = "nn_recipes";
+      const RECIPES_KEY = 'nn_recipes';
 
       const categories = [
-        { id: "korean", name: "한식" },
-        { id: "western", name: "양식" },
-        { id: "chinese", name: "중식" },
-        { id: "dessert", name: "디저트" },
-        { id: "drink", name: "음료" },
+        { id: 'korean', name: '한식' },
+        { id: 'western', name: '양식' },
+        { id: 'chinese', name: '중식' },
+        { id: 'dessert', name: '디저트' },
+        { id: 'drink', name: '음료' },
       ];
-
-      /* ----------------------------------------
-        ⭐ 리뷰 목록 불러오기
-      ---------------------------------------- */
       function getReviews(id) {
-        return JSON.parse(localStorage.getItem("nn_reviews_" + id) || "[]");
+        return JSON.parse(localStorage.getItem('nn_reviews_' + id) || '[]');
       }
 
-      /* ----------------------------------------
-        ⭐ 리뷰 평균 별점 (리뷰 없으면 0.0)
-      ---------------------------------------- */
       function getAverageRating(id) {
         const reviews = getReviews(id);
         if (reviews.length === 0) return 0;
@@ -122,36 +115,26 @@
         return sum / reviews.length;
       }
 
-      /* ----------------------------------------
-        ⭐ 리뷰 개수 (유저 레시피 조회수로 사용)
-      ---------------------------------------- */
       function getReviewCount(id) {
         return getReviews(id).length;
       }
 
-      /* ----------------------------------------
-        JSON + localStorage 레시피 합치기
-        - JSON: review_count = 파일에 있던 값 그대로
-        - 유저 레시피: review_count = 리뷰 개수
-      ---------------------------------------- */
       function loadAllRecipes() {
-        return fetch("11_인공띠용지능_recipes.json")
+        return fetch('11_인공띠용지능_recipes.json')
           .then((res) => res.json())
           .then((data) => {
             const base = data.recipes || [];
 
-            // ✅ JSON 기본 레시피
             const jsonRecipes = base.map((r) => ({
               id: r.id,
               title: r.title,
               category: r.category,
-              thumbnail: r.thumbnail || r.image || "11_default.png",
+              thumbnail: r.thumbnail || r.image || '11_default.png',
               review_count:
-                typeof r.review_count === "number" ? r.review_count : 0,
-              source: "json",
+                typeof r.review_count === 'number' ? r.review_count : 0,
+              source: 'json',
             }));
 
-            // ✅ 유저 등록 레시피
             let userRecipes = [];
             const raw = localStorage.getItem(RECIPES_KEY);
             if (raw) {
@@ -161,11 +144,11 @@
                   id: r.id,
                   title: r.title,
                   category: r.category,
-                  thumbnail: r.image || "11_default.png",
-                  source: "user",
+                  thumbnail: r.image || '11_default.png',
+                  source: 'user',
                 }));
               } catch (e) {
-                console.error("localStorage 파싱 오류:", e);
+                console.error('localStorage 파싱 오류:', e);
               }
             }
 
@@ -173,16 +156,13 @@
           });
       }
 
-      /* ----------------------------------------
-        카테고리 렌더링
-      ---------------------------------------- */
       loadAllRecipes()
         .then((all) => {
           categories.forEach((cat) => {
             renderSection(cat.id, cat.name, all);
           });
         })
-        .catch((err) => console.error("데이터 로딩 실패:", err));
+        .catch((err) => console.error('데이터 로딩 실패:', err));
 
       function renderSection(secId, secName, recipes) {
         const container = document.getElementById(secId);
@@ -190,13 +170,14 @@
         const filtered = recipes
           .filter((r) => r.category === secName)
           .map((r) => {
-            const avg = getAverageRating(r.id); // ⭐ 항상 최신 별점
+            const avg = getAverageRating(r.id);
             const reviewLen = getReviewCount(r.id);
 
-            // 👀 조회수: JSON이면 원래 review_count, 유저 레시피면 리뷰 개수
             const viewCount =
-              r.source === "json"
-                ? (typeof r.review_count === "number" ? r.review_count : 0)
+              r.source === 'json'
+                ? typeof r.review_count === 'number'
+                  ? r.review_count
+                  : 0
                 : reviewLen;
 
             return {
@@ -207,7 +188,7 @@
           });
 
         if (filtered.length === 0) {
-          container.style.display = "none";
+          container.style.display = 'none';
           return;
         }
 
@@ -222,7 +203,7 @@
 
         preview.forEach((r) => {
           const ratingText = isNaN(r.rating)
-            ? "0.0"
+            ? '0.0'
             : Number(r.rating).toFixed(1);
 
           html += `
@@ -251,25 +232,25 @@
     </script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const navInput = document.querySelector(".nav-search-input");
-        const navBtn = document.querySelector(".nav-search-btn");
+      document.addEventListener('DOMContentLoaded', () => {
+        const navInput = document.querySelector('.nav-search-input');
+        const navBtn = document.querySelector('.nav-search-btn');
 
         if (!navInput || !navBtn) return;
 
-        navBtn.addEventListener("click", () => {
+        navBtn.addEventListener('click', () => {
           const kw = navInput.value.trim();
           if (!kw) {
-            alert("검색어를 입력해주세요!");
+            alert('검색어를 입력해주세요!');
             return;
           }
 
           location.href =
-            "11_인공띠용지능_search.html?keyword=" + encodeURIComponent(kw);
+            '11_인공띠용지능_search.html?keyword=' + encodeURIComponent(kw);
         });
 
-        navInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") navBtn.click();
+        navInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') navBtn.click();
         });
       });
     </script>

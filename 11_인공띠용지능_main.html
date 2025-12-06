@@ -6,15 +6,14 @@
     <title>냠냠노트 - 메인 페이지</title>
     <link rel="stylesheet" href="11_인공띠용지능_NamyamNote_style.css" />
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const hasLoggedIn = localStorage.getItem("hasLoggedInBefore");
+      document.addEventListener('DOMContentLoaded', () => {
+        const hasLoggedIn = localStorage.getItem('hasLoggedInBefore');
 
-    if (!hasLoggedIn) {
-      // 로그인한 적이 없는 사용자 → 로그인 페이지로 강제 이동
-      location.href = "11_인공띠용지능_login.html";
-    }
-  });
-</script>
+        if (!hasLoggedIn) {
+          location.href = '11_인공띠용지능_login.html';
+        }
+      });
+    </script>
 
     <style>
       .hero-section {
@@ -207,45 +206,58 @@
         </div>
       </section>
 
-<h2 class="section-title">카테고리별 레시피 탐색</h2>
-<div class="cat-grid" aria-label="레시피 카테고리">
+      <h2 class="section-title">카테고리별 레시피 탐색</h2>
+      <div class="cat-grid" aria-label="레시피 카테고리">
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist_full.html?category=korean"
+        >
+          <img src="11_kimchi.jpg" alt="한식 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>한식</span>
+          </div>
+        </a>
 
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=korean">
-    <img src="11_kimchi.jpg" alt="한식 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>한식</span>
-    </div>
-  </a>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist_full.html?category=western"
+        >
+          <img src="11_pasta.jpg" alt="양식 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>양식</span>
+          </div>
+        </a>
 
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=western">
-    <img src="11_pasta.jpg" alt="양식 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>양식</span>
-    </div>
-  </a>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist_full.html?category=chinese"
+        >
+          <img src="11_chinese.png" alt="중식 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>중식</span>
+          </div>
+        </a>
 
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=chinese">
-    <img src="11_chinese.png" alt="중식 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>중식</span>
-    </div>
-  </a>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist_full.html?category=dessert"
+        >
+          <img src="11_snack.jpg" alt="디저트 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>디저트</span>
+          </div>
+        </a>
 
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=dessert">
-    <img src="11_snack.jpg" alt="디저트 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>디저트</span>
-    </div>
-  </a>
-
-  <a class="cat-card" href="11_인공띠용지능_menulist_full.html?category=drink">
-    <img src="11_drink.png" alt="음료 이미지" />
-    <div class="cat-overlay">
-      <span class="cat-btn"><span class="cat-emoji"></span>음료</span>
-    </div>
-  </a>
-
-</div>
+        <a
+          class="cat-card"
+          href="11_인공띠용지능_menulist_full.html?category=drink"
+        >
+          <img src="11_drink.png" alt="음료 이미지" />
+          <div class="cat-overlay">
+            <span class="cat-btn"><span class="cat-emoji"></span>음료</span>
+          </div>
+        </a>
+      </div>
 
       <section class="mt-60" aria-label="추천 레시피">
         <h2 class="section-title">오늘의 추천 레시피</h2>
@@ -261,113 +273,104 @@
     <a href="#top" class="to-top" aria-label="맨 위로 이동">맨 위로 ↑</a>
 
     <script>
-  // JSON에서 기본 레시피 목록 불러오기
-  async function loadRecipes() {
-    const response = await fetch("11_인공띠용지능_recipes.json");
-    const data = await response.json();
-    return data.recipes;
-  }
+      async function loadRecipes() {
+        const response = await fetch('11_인공띠용지능_recipes.json');
+        const data = await response.json();
+        return data.recipes;
+      }
 
-  // ⭐ 특정 레시피의 리뷰 목록 불러오기 (recipe.html과 같은 키 사용)
-  function loadReviews(recipeId) {
-    const key = "nn_reviews_" + recipeId;
-    try {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : [];
-    } catch {
-      return [];
-    }
-  }
+      function loadReviews(recipeId) {
+        const key = 'nn_reviews_' + recipeId;
+        try {
+          const data = localStorage.getItem(key);
+          return data ? JSON.parse(data) : [];
+        } catch {
+          return [];
+        }
+      }
 
-  // ⭐ 평균 별점 계산 (menulist에서 쓰는 원리랑 동일)
-  function getAverageRating(recipeId) {
-    const reviews = loadReviews(recipeId);
-    if (reviews.length === 0) return 0;
+      function getAverageRating(recipeId) {
+        const reviews = loadReviews(recipeId);
+        if (reviews.length === 0) return 0;
 
-    const sum = reviews.reduce((acc, r) => acc + Number(r.rating), 0);
-    return sum / reviews.length; // 숫자 그대로 반환
-  }
+        const sum = reviews.reduce((acc, r) => acc + Number(r.rating), 0);
+        return sum / reviews.length;
+      }
 
-  // 랜덤 N개 추출
-  function getRandomRecipes(list, count) {
-    return [...list].sort(() => Math.random() - 0.5).slice(0, count);
-  }
+      function getRandomRecipes(list, count) {
+        return [...list].sort(() => Math.random() - 0.5).slice(0, count);
+      }
 
-  // ⭐ 메인 추천 레시피 렌더링
-  async function renderRandomRecipes() {
-    const target = document.getElementById("recommend-list");
-    const recipes = await loadRecipes();
-    const selected = getRandomRecipes(recipes, 4);
+      async function renderRandomRecipes() {
+        const target = document.getElementById('recommend-list');
+        const recipes = await loadRecipes();
+        const selected = getRandomRecipes(recipes, 4);
 
-    target.innerHTML = selected
-      .map((r) => {
-        const avg = getAverageRating(r.id);        // 리뷰 기반 평균
-        const displayRating = `★ ${avg.toFixed(1)}`; // 0이면 ★ 0.0
+        target.innerHTML = selected
+          .map((r) => {
+            const avg = getAverageRating(r.id);
+            const displayRating = `★ ${avg.toFixed(1)}`;
 
-        return `
+            return `
           <a href="11_인공띠용지능_recipe.html?id=${r.id}" class="card">
             <img src="${r.thumbnail}" class="thumb" alt="${r.title}">
             <p class="card-title">${r.title}</p>
             <div class="rating">${displayRating}</div>
           </a>
         `;
-      })
-      .join("");
-  }
+          })
+          .join('');
+      }
 
-  renderRandomRecipes();
-</script>
-
-
+      renderRandomRecipes();
+    </script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const navInput = document.querySelector(".nav-search-input");
-        const navBtn = document.querySelector(".nav-search-btn");
+      document.addEventListener('DOMContentLoaded', () => {
+        const navInput = document.querySelector('.nav-search-input');
+        const navBtn = document.querySelector('.nav-search-btn');
 
-        if (!navInput || !navBtn) return; 
+        if (!navInput || !navBtn) return;
 
-        navBtn.addEventListener("click", () => {
+        navBtn.addEventListener('click', () => {
           const kw = navInput.value.trim();
           if (!kw) {
-            alert("검색어를 입력해주세요!");
+            alert('검색어를 입력해주세요!');
             return;
           }
 
           location.href =
-            "11_인공띠용지능_search.html?keyword=" +
-            encodeURIComponent(kw);
+            '11_인공띠용지능_search.html?keyword=' + encodeURIComponent(kw);
         });
 
-        navInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
+        navInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
             navBtn.click();
           }
         });
       });
-  </script>
+    </script>
 
-  <script>
-    const carouselImages = [
-      '11_banner.jpg',
-      '11_banner2.jpg',
-      '11_banner3.jpg',
-      '11_banner4.jpg',
-    ];
-    let currentIndex = 0;
-    const carouselImg = document.getElementById('hero-carousel');
+    <script>
+      const carouselImages = [
+        '11_banner.jpg',
+        '11_banner2.jpg',
+        '11_banner3.jpg',
+        '11_banner4.jpg',
+      ];
+      let currentIndex = 0;
+      const carouselImg = document.getElementById('hero-carousel');
 
-    function changeCarousel() {
-      currentIndex = (currentIndex + 1) % carouselImages.length;
-      carouselImg.style.opacity = 0;
-      setTimeout(() => {
-        carouselImg.src = carouselImages[currentIndex];
-        carouselImg.style.opacity = 1;
-      }, 300);
-    }
+      function changeCarousel() {
+        currentIndex = (currentIndex + 1) % carouselImages.length;
+        carouselImg.style.opacity = 0;
+        setTimeout(() => {
+          carouselImg.src = carouselImages[currentIndex];
+          carouselImg.style.opacity = 1;
+        }, 300);
+      }
 
-    setInterval(changeCarousel, 3000);
-  </script>
-  
+      setInterval(changeCarousel, 3000);
+    </script>
   </body>
 </html>
