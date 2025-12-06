@@ -1072,9 +1072,6 @@ footer {
   justify-content: space-between;
   align-items: center;
 }
-/* ------------------------------- */
-/*   카테고리 pill 버튼 스타일     */
-/* ------------------------------- */
 
 .category-tabs {
   display: flex;
@@ -1112,7 +1109,6 @@ footer {
   color: #777;
 }
 
-/* 팔로우 카운트 영역 */
 .follow {
   display: flex;
   align-items: center;
@@ -1145,7 +1141,6 @@ footer {
   font-size: 13px;
 }
 
-/* 팔로우 팝업 공통 */
 #follow-popup {
   display: none;
   position: fixed;
