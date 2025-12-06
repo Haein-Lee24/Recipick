@@ -345,6 +345,18 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        const currentUser = localStorage.getItem("currentUser");
+        const users = JSON.parse(localStorage.getItem("users")) || {};
+        const userInfo = users[currentUser];
+
+        if (!currentUser || !userInfo) {
+          alert("로그인이 필요한 페이지입니다.");
+          location.href = "11_인공띠용지능_login.html";
+          return;
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
         const navInput = document.querySelector(".nav-search-input");
         const navBtn = document.querySelector(".nav-search-btn");
 
@@ -366,6 +378,8 @@
           if (e.key === "Enter") navBtn.click();
         });
       });
+
+
     </script>
   </body>
 </html>
