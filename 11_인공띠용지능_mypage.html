@@ -97,13 +97,25 @@
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
       }
 
-      #follow-popup .popup-close {
-        margin-top: 16px;   
-        text-align: center;
-        padding: 10px 0;
+      
+
+      .popup-close-btn {
+        width: 100%;
+        padding: 14px 0;
+        margin-top: 16px;
+        background: #8B5E3C;   /* 갈색 계열 */
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
         cursor: pointer;
-        color: #333;
+        display: block;
       }
+
+      .popup-close-btn:hover {
+       background: #6E462C;  /* 더 어두운 갈색 */
+      }
+
 
       #follow-list {
         max-height: 350px;
@@ -336,7 +348,8 @@
       <div class="popup-box">
         <h2 id="popup-title">목록</h2>
         <div id="follow-list"></div>
-        <div class="popup-close">닫기</div>
+        <div class="popup-close">
+        <button class="popup-close-btn">닫기</button>
       </div>
     </div>
 
@@ -474,7 +487,7 @@
         const popup = document.getElementById("follow-popup");
         const popupTitle = document.getElementById("popup-title");
         const followListBox = document.getElementById("follow-list");
-        const popupClose = document.querySelector(".popup-close");
+        const popupClose = document.querySelector(".popup-close-btn");
 
         
 
