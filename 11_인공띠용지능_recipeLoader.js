@@ -212,7 +212,24 @@ function renderRecipe(recipe) {
   document.getElementById('thumb').src = thumbSrc;
   document.getElementById('recipe-title').textContent = title;
   document.getElementById('recipe-summary').textContent = summary;
-  document.getElementById('recipe-category').textContent = category;
+
+  const categoryEl = document.getElementById('recipe-category');
+  let badgeClass = 'category-badge';
+  if (category === '한식') {
+    badgeClass += ' badge-hansik';
+  } else if (category === '중식' || category === '정식') {
+    badgeClass += ' badge-jungsik';
+  } else if (category === '양식') {
+    badgeClass += ' badge-yangsik';
+  } else if (category === '디저트' || category === '간식') {
+    badgeClass += ' badge-dessert';
+  } else if (category === '음료') {
+    badgeClass += ' badge-beverage';
+  } else {
+    badgeClass += ' badge-hansik';
+  }
+  categoryEl.innerHTML = `<span class="${badgeClass}">${category}</span>`;
+
   document.getElementById('recipe-difficulty').textContent = difficulty;
   document.getElementById('recipe-time').textContent = time;
 

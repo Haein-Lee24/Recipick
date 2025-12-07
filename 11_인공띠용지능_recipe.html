@@ -54,37 +54,37 @@
         margin-right: 5px;
         border: 1.8px solid transparent;
         background: #ffffffaa;
-        backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px) !important;
       }
 
       .badge-hansik {
         color: #2f6b4f;
         border-color: #2f6b4f;
-        background-color: #e6f3ec;
+        background-color: #e6f3ec !important;
       }
 
       .badge-jungsik {
         color: #c62828;
         border-color: #c62828;
-        background-color: #fdecea;
+        background-color: #fdecea !important;
       }
 
       .badge-yangsik {
         color: #3f51b5;
         border-color: #3f51b5;
-        background-color: #e7e8f8;
+        background-color: #e7e8f8 !important;
       }
 
       .badge-dessert {
         color: #ba68c8;
         border-color: #ba68c8;
-        background-color: #f6ebf9;
+        background-color: #f6ebf9 !important;
       }
 
       .badge-beverage {
         color: #4fc3f7;
         border-color: #4fc3f7;
-        background-color: #e8f7ff;
+        background-color: #e8f7ff !important;
       }
     </style>
   </head>
@@ -272,7 +272,6 @@
           localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
         }, 300);
 
-
         function loadSavedList() {
           try {
             const data = localStorage.getItem(SAVED_KEY);
@@ -435,7 +434,6 @@
           });
         }
 
-
         reviewSubmitBtn.addEventListener('click', function () {
           const text = reviewInput.value.trim();
 
@@ -450,13 +448,10 @@
 
           let nickname;
           if (currentUserInfo && currentUserInfo.nickname) {
-          
             nickname = currentUserInfo.nickname;
           } else if (currentUser) {
-            
             nickname = '@' + currentUser;
           } else {
-          
             nickname = '익명 요리사';
           }
 
@@ -484,7 +479,6 @@
           updateStarVisuals(0);
         });
 
-      
         updateSaveButton();
         renderReviews();
       });
