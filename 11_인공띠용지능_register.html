@@ -21,7 +21,8 @@
       }
       .form-card input[type='text'],
       .form-card input[type='file'],
-      .form-card textarea {
+      .form-card textarea,
+      .form-card select { /* ← 추가: select도 같은 스타일 적용 */
         width: 100%;
         padding: 12px 14px;
         border: 1px solid var(--border);
@@ -51,6 +52,15 @@
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
         gap: 8px;
+      }
+
+      .difficulty-time-row {       /* ← 추가: 난이도/시간 한 줄 배치용 */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .difficulty-time-col {
+        flex: 1 1 180px;
       }
 
       .form-actions {
@@ -210,7 +220,6 @@
         color: var(--muted);
         margin-top: 4px ;
       }
-
     </style>
   </head>
 
@@ -288,6 +297,34 @@
             </div>
           </div>
 
+          <!-- ↓↓↓ 여기부터 난이도 / 조리 시간 입력 추가 ↓↓↓ -->
+          <div class="form-group">
+            <div class="difficulty-time-row">
+              <div class="difficulty-time-col">
+                <label for="difficulty">난이도</label>
+                <select id="difficulty" name="difficulty" required>
+                  <option value="">난이도를 선택해주세요</option>
+                  <option value="쉬움 (★☆☆)">쉬움 (★☆☆)</option>
+                  <option value="중 (★★☆)">중 (★★☆)</option>
+                  <option value="어려움 (★★★)">어려움 (★★★)</option>
+                </select>
+              </div>
+
+              <div class="difficulty-time-col">
+                <label for="time">조리 시간</label>
+                <input
+                  id="time"
+                  name="time"
+                  type="text"
+                  placeholder="예: 30분"
+                  required
+                />
+              </div>
+            </div>
+            <p class="small-hint">상세 페이지에 표시될 난이도와 조리 시간을 입력하세요.</p>
+          </div>
+          <!-- ↑↑↑ 여기까지 추가 ↑↑↑ -->
+
           <div class="form-group">
             <label for="image">대표 이미지 업로드</label>
             <input id="image" name="image" type="file" accept="image/*" required />
@@ -321,8 +358,7 @@
             <label>조리 과정</label>
 
             <div class="steps-wrapper" id="stepsWrapper">
-              <div id="stepList">
-              </div>
+              <div id="stepList"></div>
 
               <button type="button" id="addStepBtn">+ 단계 추가</button>
             </div>
@@ -378,8 +414,6 @@
           if (e.key === "Enter") navBtn.click();
         });
       });
-
-
     </script>
   </body>
 </html>
