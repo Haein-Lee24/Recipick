@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveDraftBtn = document.getElementById('saveDraftBtn');
   const categoryRadios = document.querySelectorAll("input[name='category']");
 
+  const difficultySelect = document.getElementById('difficulty'); // ★ 난이도
+  const timeInput = document.getElementById('time');              // ★ 조리시간
+
   const stepListEl = document.getElementById('stepList');
   const addStepBtn = document.getElementById('addStepBtn');
   const currentUserId = localStorage.getItem('currentUser');
@@ -179,9 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     return steps;
   }
+
+  // ★ 폼에서 한 번에 데이터 수집
   function collectFormData() {
     const title = titleInput.value.trim();
     const category = getSelectedCategory();
+
+    const difficulty = (difficultySelect?.value || '').trim();
+    const time = (timeInput?.value || '').trim();
 
     const reqText = reqIngInput.value.trim();
     const optText = optIngInput.value.trim();
@@ -208,6 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return {
       title,
       category,
+      difficulty,
+      time,
 
       ingredientsRequiredText: reqText,
       ingredientsOptionalText: optText,
@@ -220,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+  // 초기 단계 1개
   if (stepListEl) {
     addStep();
   }
@@ -228,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addStepBtn.addEventListener('click', () => addStep());
   }
 
+  // ----------------- 수정 모드 -----------------
   if (isEdit) {
     const list = loadRecipes();
     const target = list.find((r) => String(r.id) === String(editId));
@@ -241,6 +253,14 @@ document.addEventListener('DOMContentLoaded', () => {
         categoryRadios.forEach((r) => {
           r.checked = r.value === target.category;
         });
+      }
+
+      // ★ 난이도 / 조리시간 채워주기
+      if (difficultySelect && target.difficulty) {
+        difficultySelect.value = target.difficulty;
+      }
+      if (timeInput) {
+        timeInput.value = target.time || '';
       }
 
       if (Array.isArray(target.ingredientsRequired)) {
@@ -281,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (draftTimeEl) draftTimeEl.style.display = 'none';
     if (saveDraftBtn) saveDraftBtn.style.display = 'none';
   } else {
+    // ----------------- 새 등록 + 임시저장 불러오기 -----------------
     (function loadDraft() {
       const raw = localStorage.getItem(DRAFT_KEY);
       if (!raw) {
@@ -295,6 +316,14 @@ document.addEventListener('DOMContentLoaded', () => {
           categoryRadios.forEach(
             (r) => (r.checked = r.value === draft.category)
           );
+        }
+
+        // ★ 난이도 / 조리시간 임시저장 불러오기
+        if (difficultySelect && draft.difficulty) {
+          difficultySelect.value = draft.difficulty;
+        }
+        if (timeInput && draft.time) {
+          timeInput.value = draft.time;
         }
 
         if (draft.ingredientsRequiredText) {
@@ -332,12 +361,15 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
   }
 
+  // ----------------- 임시저장 버튼 -----------------
   if (!isEdit && saveDraftBtn) {
     saveDraftBtn.addEventListener('click', () => {
       const info = collectFormData();
       const draft = {
         title: info.title,
         category: info.category,
+        difficulty: info.difficulty, // ★ 난이도 저장
+        time: info.time,             // ★ 시간 저장
         ingredientsRequiredText: info.ingredientsRequiredText,
         ingredientsOptionalText: info.ingredientsOptionalText,
         stepsDetail: info.stepsDetail,
@@ -351,6 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ----------------- 폼 제출 -----------------
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -386,6 +419,14 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('카테고리를 선택해주세요.');
       return;
     }
+    if (!info.difficulty) {
+      alert('난이도를 선택해주세요.');
+      return;
+    }
+    if (!info.time) {
+      alert('조리 시간을 입력해주세요.');
+      return;
+    }
     if (!info.ingredientsRequired.length) {
       alert('필수 재료를 한 개 이상 입력해주세요.');
       return;
@@ -405,6 +446,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = list[idx];
       target.title = info.title;
       target.category = info.category;
+      target.difficulty = info.difficulty; // ★ 수정 시 반영
+      target.time = info.time;             // ★ 수정 시 반영
       target.image = imageDataUrl;
 
       target.ingredientsRequired = info.ingredientsRequired;
@@ -428,6 +471,8 @@ document.addEventListener('DOMContentLoaded', () => {
         id: now,
         title: info.title,
         category: info.category,
+        difficulty: info.difficulty, // ★ 새 레시피에 난이도
+        time: info.time,             // ★ 새 레시피에 조리시간
         image: imageDataUrl,
         authorId: currentUserId || null,
         authorName: currentUserName,
