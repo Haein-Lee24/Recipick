@@ -152,19 +152,18 @@
         if (!keyword) return list;
 
         return list.filter((r) => {
-          const t = (r.title || '').toLowerCase();
-          const c = (r.category || '').toLowerCase();
-          const s = (r.summary || '').toLowerCase();
-          const ing = getIngredientText(r);
+          const title = (r.title || '').toLowerCase();
+
+          
+          const ing = getIngredientText(r); 
 
           return (
-            t.includes(keyword) ||
-            c.includes(keyword) ||
-            s.includes(keyword) ||
-            ing.includes(keyword)
+            title.includes(keyword) ||
+            ing.includes(keyword) 
           );
         });
       }
+
 
       function renderSearchResult(found) {
         resultCountEl.textContent = found.length;
