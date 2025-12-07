@@ -1,5 +1,3 @@
-// 11_인공띠용지능_recipe.js (레시피 상세 페이지용)
-
 const LOCAL_RECIPES_KEY = 'nn_recipes';
 const RECENT_RECIPES_KEY = 'nn_recent_recipes';
 const REVIEWS_KEY = 'nn_recipe_reviews';
